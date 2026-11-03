@@ -96,6 +96,31 @@ function responder(pregunta) {
   }
 
   if (intent === "priorizacion") {
+    const idx = (KB.indicadores || {}).indice_priorizacion;
+    if (idx && idx.ranking && idx.ranking.length) {
+      const top3 = idx.ranking.slice(0, 3);
+      const comps = (idx.componentes || []).join(" + ");
+      const grafico = {
+        tipo: "bar",
+        titulo: `Índice de priorización en salud por comuna · Medellín ${idx.anio}`,
+        etiqueta_eje: "Índice (0–100, mayor = más prioritario)",
+        labels: idx.ranking.map((x) => x.nombre),
+        valores: idx.ranking.map((x) => x.indice),
+        resaltar: idx.ranking.map((_, i) => i < 3),
+      };
+      return {
+        encontrado: true,
+        respuesta_directa: `Según el índice multivariable de priorización en salud (${comps}, normalizados 0-100), los tres territorios a priorizar son: ${top3.map((x) => x.nombre).join(", ")} (índice: ${top3.map((x) => x.indice).join(", ")}).`,
+        evidencia: top3.map((x) => ({ indicador: "índice de priorización",
+          valor: x.indice, anio: idx.anio, territorio: x.nombre,
+          fuente: idx.fuente || "MEData" })),
+        interpretacion: "El índice combina dos dimensiones de salud por comuna (mortalidad y salud mental), cada una normalizada; un valor alto refleja prioridad en más de un indicador, no en uno solo.",
+        recomendacion: "Concentrar intervenciones intersectoriales en los territorios de mayor índice y monitorear ambos componentes.",
+        limitaciones: "El índice combina solo indicadores de salud medidos por comuna (MEData). El PM2.5 (SIATA) es por estación y se reporta como contexto ambiental aparte, no dentro del índice. Asociación, no causalidad.",
+        grafico: grafico,
+      };
+    }
+    // Fallback: priorización por mortalidad si no hay índice.
     const top3 = r.slice(0, 3);
     return {
       encontrado: true,

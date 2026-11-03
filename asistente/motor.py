@@ -133,6 +133,34 @@ class MotorAsistente:
                 limitaciones="Asociación, no causalidad; influye la estructura de edad.")
 
         if intent == "priorizacion":
+            idx = self.kb.get("indicadores", {}).get("indice_priorizacion")
+            if idx and idx.get("ranking"):
+                top3 = idx["ranking"][:3]
+                comps = " + ".join(idx.get("componentes", []))
+                nombres = ", ".join(r["nombre"] for r in top3)
+                return Respuesta(
+                    respuesta_directa=(
+                        f"Según el índice multivariable de priorización en salud "
+                        f"({comps}, normalizados 0-100), los tres territorios a "
+                        f"priorizar son: {nombres} "
+                        f"(índice: {', '.join(str(r['indice']) for r in top3)})."),
+                    evidencia=[{"indicador": "índice de priorización",
+                                "valor": r["indice"], "anio": idx.get("anio"),
+                                "territorio": r["nombre"],
+                                "fuente": idx.get("fuente", "MEData")} for r in top3],
+                    interpretacion=(
+                        "El índice combina dos dimensiones de salud por comuna "
+                        "(mortalidad y salud mental), cada una normalizada; un valor "
+                        "alto refleja prioridad en más de un indicador, no en uno solo."),
+                    recomendacion=("Concentrar intervenciones intersectoriales en los "
+                                   "territorios de mayor índice y monitorear ambos "
+                                   "componentes."),
+                    limitaciones=(
+                        "El índice combina solo indicadores de salud medidos por "
+                        "comuna (MEData). El PM2.5 (SIATA) es por estación y se "
+                        "reporta como contexto ambiental aparte, no dentro del índice. "
+                        "Asociación, no causalidad."))
+            # Fallback: priorización por mortalidad si no hay índice.
             top3 = ranking[:3]
             ev = [{"indicador": "tasa de mortalidad", "valor": r["tasa"],
                    "anio": 2022, "territorio": r["nombre"],

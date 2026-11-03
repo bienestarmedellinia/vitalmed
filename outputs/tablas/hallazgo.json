@@ -44,5 +44,163 @@
       1743.16,
       1325.6
     ]
+  },
+  "indice_priorizacion": {
+    "descripcion": "Índice multivariable de priorización en salud por comuna: promedio de la mortalidad general y el intento de suicidio (tasas por 100.000 hab.), cada indicador normalizado 0-100 (min-max). Mayor = más prioritario.",
+    "fuente": "MEData - Secretaría de Salud de Medellín",
+    "anio": 2022,
+    "componentes": [
+      "mortalidad general",
+      "intento de suicidio"
+    ],
+    "ranking": [
+      {
+        "comuna": 10,
+        "nombre": "La Candelaria",
+        "indice": 100.0,
+        "n_mortalidad": 100.0,
+        "n_suicidio": 100.0
+      },
+      {
+        "comuna": 11,
+        "nombre": "Laureles Estadio",
+        "indice": 62.2,
+        "n_mortalidad": 77.5,
+        "n_suicidio": 47.0
+      },
+      {
+        "comuna": 3,
+        "nombre": "Manrique",
+        "indice": 61.0,
+        "n_mortalidad": 33.9,
+        "n_suicidio": 88.2
+      },
+      {
+        "comuna": 15,
+        "nombre": "Guayabal",
+        "indice": 59.6,
+        "n_mortalidad": 42.1,
+        "n_suicidio": 77.0
+      },
+      {
+        "comuna": 8,
+        "nombre": "Villa Hermosa",
+        "indice": 58.2,
+        "n_mortalidad": 32.6,
+        "n_suicidio": 83.8
+      },
+      {
+        "comuna": 4,
+        "nombre": "Aranjuez",
+        "indice": 57.6,
+        "n_mortalidad": 43.5,
+        "n_suicidio": 71.6
+      },
+      {
+        "comuna": 9,
+        "nombre": "Buenos Aires",
+        "indice": 54.8,
+        "n_mortalidad": 30.8,
+        "n_suicidio": 78.8
+      },
+      {
+        "comuna": 12,
+        "nombre": "La América",
+        "indice": 53.7,
+        "n_mortalidad": 59.5,
+        "n_suicidio": 47.9
+      },
+      {
+        "comuna": 6,
+        "nombre": "Doce de Octubre",
+        "indice": 52.5,
+        "n_mortalidad": 23.3,
+        "n_suicidio": 81.7
+      },
+      {
+        "comuna": 14,
+        "nombre": "El Poblado",
+        "indice": 47.0,
+        "n_mortalidad": 37.1,
+        "n_suicidio": 57.0
+      },
+      {
+        "comuna": 5,
+        "nombre": "Castilla",
+        "indice": 46.8,
+        "n_mortalidad": 34.6,
+        "n_suicidio": 59.1
+      },
+      {
+        "comuna": 16,
+        "nombre": "Belén",
+        "indice": 44.6,
+        "n_mortalidad": 44.9,
+        "n_suicidio": 44.3
+      },
+      {
+        "comuna": 2,
+        "nombre": "Santa Cruz",
+        "indice": 44.4,
+        "n_mortalidad": 27.2,
+        "n_suicidio": 61.6
+      },
+      {
+        "comuna": 1,
+        "nombre": "Popular",
+        "indice": 42.2,
+        "n_mortalidad": 22.7,
+        "n_suicidio": 61.6
+      },
+      {
+        "comuna": 7,
+        "nombre": "Robledo",
+        "indice": 42.0,
+        "n_mortalidad": 18.6,
+        "n_suicidio": 65.3
+      },
+      {
+        "comuna": 70,
+        "nombre": "Corregimiento de Altavista",
+        "indice": 36.6,
+        "n_mortalidad": 14.5,
+        "n_suicidio": 58.7
+      },
+      {
+        "comuna": 13,
+        "nombre": "San Javier",
+        "indice": 35.4,
+        "n_mortalidad": 28.0,
+        "n_suicidio": 42.7
+      },
+      {
+        "comuna": 80,
+        "nombre": "Corregimiento de San Antonio de Prado",
+        "indice": 34.5,
+        "n_mortalidad": 15.6,
+        "n_suicidio": 53.4
+      },
+      {
+        "comuna": 90,
+        "nombre": "Corregimiento de Santa Elena",
+        "indice": 28.3,
+        "n_mortalidad": 0.0,
+        "n_suicidio": 56.6
+      },
+      {
+        "comuna": 60,
+        "nombre": "Corregimiento de San Cristóbal",
+        "indice": 20.2,
+        "n_mortalidad": 10.1,
+        "n_suicidio": 30.4
+      },
+      {
+        "comuna": 50,
+        "nombre": "Corregimiento de San Sebastián de Palmitas",
+        "indice": 9.4,
+        "n_mortalidad": 18.8,
+        "n_suicidio": 0.0
+      }
+    ]
   }
 }

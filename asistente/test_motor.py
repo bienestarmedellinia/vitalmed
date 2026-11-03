@@ -44,6 +44,18 @@ def test_priorizacion_3():
                   r.encontrado and len(r.evidencia) == 3, str(r.evidencia))
 
 
+def test_indice_multivariable():
+    """Si el KB trae el índice, la priorización debe usarlo (no solo mortalidad)."""
+    idx = M.kb.get("indicadores", {}).get("indice_priorizacion")
+    if not idx or not idx.get("ranking"):
+        print("[SKIP] índice multivariable no está en el KB (aún)")
+        return True
+    r = M.responder("¿Cuáles 3 territorios priorizar con el presupuesto?")
+    return _check("priorizacion usa el índice multivariable",
+                  r.encontrado and "índice multivariable" in r.respuesta_directa
+                  and "SIATA" in r.limitaciones, r.respuesta_directa)
+
+
 def test_tendencia():
     r = M.responder("¿Cómo varió la mortalidad entre 2012 y 2022?")
     return _check("tendencia reporta +44.6%",
@@ -74,6 +86,7 @@ def test_no_pii():
 
 def main() -> int:
     tests = [test_ranking_top, test_ranking_bottom, test_priorizacion_3,
+             test_indice_multivariable,
              test_tendencia, test_fuentes, test_desconocida_no_inventa, test_no_pii]
     if not M.kb:
         print("ERROR: no hay knowledge_base.json. Ejecuta scripts/07_construir_kb.py")

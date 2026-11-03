@@ -61,6 +61,47 @@ def cargar_salud(nombre: str, prefijo_casos: str) -> pd.DataFrame:
     return largo
 
 
+def _norm_minmax(s: pd.Series) -> pd.Series:
+    """Normaliza una serie a 0-100 (min-max). Si no hay rango, devuelve 0."""
+    lo, hi = s.min(), s.max()
+    if hi == lo:
+        return pd.Series([0.0] * len(s), index=s.index)
+    return (s - lo) / (hi - lo) * 100
+
+
+def _indice_priorizacion(mort: pd.DataFrame) -> pd.DataFrame | None:
+    """Índice multivariable de priorización en salud por comuna (año ref).
+
+    Combina dos indicadores MEData por comuna, ambos del año de referencia:
+      - mortalidad general (tasa)
+      - intento de suicidio (tasa)   -> salud mental
+    Normaliza cada uno a 0-100 (min-max) y promedia. Mayor = más prioritario.
+    Si la segunda capa no está disponible, retorna None (no se inventa índice).
+    """
+    f_sui = RAW / "medata" / "intento_suicidio.csv"
+    if not f_sui.exists():
+        log("intento_suicidio.csv no disponible: se omite índice multivariable")
+        return None
+    sui = cargar_salud("intento_suicidio", "casos")
+    sui_ref = sui[sui["anio"] == ANIO_REF][["comuna", "tasa"]].rename(
+        columns={"tasa": "tasa_suicidio"})
+    mort_ref = mort[mort["anio"] == ANIO_REF][
+        ["comuna", "nombre", "tasa"]].rename(columns={"tasa": "tasa_mortalidad"})
+
+    df = mort_ref.merge(sui_ref, on="comuna", how="inner")
+    if df.empty:
+        log("sin intersección de comunas para el índice; se omite")
+        return None
+
+    df["n_mortalidad"] = _norm_minmax(df["tasa_mortalidad"]).round(1)
+    df["n_suicidio"] = _norm_minmax(df["tasa_suicidio"]).round(1)
+    df["indice"] = ((df["n_mortalidad"] + df["n_suicidio"]) / 2).round(1)
+    df = df.sort_values("indice", ascending=False).reset_index(drop=True)
+    df["ranking"] = df.index + 1
+    return df[["ranking", "comuna", "nombre", "tasa_mortalidad",
+               "tasa_suicidio", "n_mortalidad", "n_suicidio", "indice"]]
+
+
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
 
@@ -84,8 +125,22 @@ def main() -> int:
     if len(t_ini) and len(t_fin) and float(t_ini.iloc[0]):
         var_pct = (float(t_fin.iloc[0]) / float(t_ini.iloc[0]) - 1) * 100
 
-    # Tabla analítica publicable
+    # ── Tabla analítica publicable (ranking de mortalidad) ──
     ref.to_csv(OUT / "analisis_mortalidad_comuna.csv", index=False, encoding="utf-8")
+
+    # ── Índice multivariable de priorización en salud por comuna ──
+    # Combina dos indicadores de salud pública (misma fuente MEData, mismo
+    # nivel territorial = comuna) normalizados min-max a 0-100 y promediados.
+    # Mayor índice = mayor prioridad de intervención. Honesto: solo se
+    # combinan dimensiones realmente medidas por comuna (NO se mete PM2.5,
+    # que es por estación; eso se reporta como contexto ambiental aparte).
+    indice = _indice_priorizacion(mort)
+    if indice is not None:
+        indice.to_csv(OUT / "indice_priorizacion_comuna.csv",
+                      index=False, encoding="utf-8")
+        log(f"índice de priorización: {len(indice)} comunas "
+            f"(top: {indice.iloc[0]['nombre']} = "
+            f"{indice.iloc[0]['indice']})")
 
     hallazgo = {
         "evento": "mortalidad general",
@@ -112,6 +167,23 @@ def main() -> int:
             "tasas": [round(float(t), 2) for t in serie_top["tasa"].tolist()],
         },
     }
+    if indice is not None:
+        hallazgo["indice_priorizacion"] = {
+            "descripcion": ("Índice multivariable de priorización en salud por "
+                            "comuna: promedio de la mortalidad general y el intento "
+                            "de suicidio (tasas por 100.000 hab.), cada indicador "
+                            "normalizado 0-100 (min-max). Mayor = más prioritario."),
+            "fuente": "MEData - Secretaría de Salud de Medellín",
+            "anio": ANIO_REF,
+            "componentes": ["mortalidad general", "intento de suicidio"],
+            "ranking": [
+                {"comuna": int(r.comuna), "nombre": str(r.nombre),
+                 "indice": round(float(r.indice), 1),
+                 "n_mortalidad": round(float(r.n_mortalidad), 1),
+                 "n_suicidio": round(float(r.n_suicidio), 1)}
+                for r in indice.itertuples()
+            ],
+        }
     (OUT / "hallazgo.json").write_text(
         json.dumps(hallazgo, indent=2, ensure_ascii=False), encoding="utf-8")
 

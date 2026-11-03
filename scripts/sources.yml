@@ -91,5 +91,7 @@ medata:
     8: varicela
     9: violencia_genero
   # Capas priorizadas para el análisis de salud y bienestar.
-  capas_prioritarias: [3, 4]   # mortalidad y natalidad
+  capas_prioritarias: [2, 3, 4]   # intento_suicidio, mortalidad y natalidad
+  # La capa 2 (intento_suicidio) se usa como segundo indicador de salud mental
+  # en el índice multivariable de priorización por comuna (ver 05_analizar.py).
   campo_territorial: "comuna"

@@ -51,9 +51,14 @@ def main() -> int:
     # ── Hallazgo principal ──
     hallazgo_f = TAB / "hallazgo.json"
     if hallazgo_f.exists():
-        kb["indicadores"]["hallazgo_mortalidad"] = json.loads(
-            hallazgo_f.read_text(encoding="utf-8"))
+        hallazgo = json.loads(hallazgo_f.read_text(encoding="utf-8"))
+        kb["indicadores"]["hallazgo_mortalidad"] = hallazgo
         log("hallazgo.json incorporado")
+        # Acceso directo al índice multivariable (si el análisis lo generó).
+        if "indice_priorizacion" in hallazgo:
+            kb["indicadores"]["indice_priorizacion"] = hallazgo["indice_priorizacion"]
+            log(f"índice de priorización: "
+                f"{len(hallazgo['indice_priorizacion']['ranking'])} comunas")
 
     # ── Ranking de mortalidad por comuna (año de referencia) ──
     mort_f = TAB / "analisis_mortalidad_comuna.csv"
