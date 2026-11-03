@@ -1,0 +1,78 @@
+# ─────────────────────────────────────────────────────────────
+# Manifiesto de fuentes oficiales — Medellín, Bienestar Basado en Datos
+# Todas las URLs fueron verificadas en el portal oficial (nov 2026).
+# El pipeline descarga EXCLUSIVAMENTE desde estas URLs (datos reales).
+# ─────────────────────────────────────────────────────────────
+
+ecv:
+  descripcion: >
+    Encuesta de Calidad de Vida de Medellín. Microdatos a nivel de persona,
+    representativos para 16 comunas y 5 corregimientos.
+  licencia: "Datos abiertos - Alcaldía de Medellín"
+  pagina_oficial: "https://www.medellin.gov.co/es/centro-documental/encuesta-calidad-de-vida/"
+  variable_territorial:   # llave de integración por año
+    "2022": "p_006"
+    "2023": "P_007"
+    "2024": "A.7"
+    "2025": "A.7"
+  archivos:
+    "2025":
+      base:        "https://www.medellin.gov.co/es/wp-content/uploads/2022/08/ECV_2025.xlsx"
+      diccionario: "https://www.medellin.gov.co/es/wp-content/uploads/2022/08/Diccionario-de-Datos-2025.xlsx"
+      ficha:       "https://www.medellin.gov.co/es/wp-content/uploads/2022/08/Ficha-Tecnica-ECV2025.xlsx"
+      instructivo: "https://www.medellin.gov.co/es/wp-content/uploads/2022/08/Instructivo-filtros-bases-de-datos-ECV-2025.xlsx"
+      formato: xlsx
+    "2024":
+      base:        "https://www.medellin.gov.co/es/wp-content/uploads/2025/04/ECV_2024.xlsx"
+      diccionario: "https://www.medellin.gov.co/es/wp-content/uploads/2025/04/Diccionario-de-datos-ECV-2024.xlsx"
+      ficha:       "https://www.medellin.gov.co/es/wp-content/uploads/2025/04/Ficha-Tecnica-ECV-2024.xlsx"
+      formato: xlsx
+    "2023":
+      base:        "https://www.medellin.gov.co/es/wp-content/uploads/2022/08/Viviendas-Hogares-Personas_ECV-2023.csv"
+      diccionario: "https://www.medellin.gov.co/es/wp-content/uploads/2022/08/Diccionario-de-Datos-Encuesta-Calidad-de-Vida-2023.xlsx"
+      instructivo: "https://www.medellin.gov.co/es/wp-content/uploads/2022/08/Instructivo-filtros-bases-de-datos-ECV-2023.xlsx"
+      formato: csv
+      csv_sep: ";"
+    # 2022: la página principal NO expone enlace directo al archivo;
+    # apunta a una subpágina. Se usa como año de respaldo. El equipo
+    # debe confirmar la URL directa desde:
+    # https://www.medellin.gov.co/es/centro-documental/encuesta-de-calidad-de-vida-2022/
+    "2022":
+      base: null
+      instructivo: "https://www.medellin.gov.co/es/wp-content/uploads/2022/08/Instructivo-filtros-bases-de-datos-ECV-2022.xlsx"
+      formato: csv
+      csv_sep: ";"
+      nota: "URL directa pendiente de confirmar; año de respaldo."
+
+siata:
+  descripcion: >
+    Datos validados de calidad del aire del Valle de Aburrá (archivos
+    mensuales ZIP). Variable prioritaria: PM2.5.
+  licencia: "SIATA - Sistema de Alerta Temprana de Medellín y el Valle de Aburrá"
+  repositorio: "https://siata.gov.co/IDEAM/"
+  # Patrón de URL confirmado: DatosValidados_<mes><anio>.zip
+  patron_url: "https://siata.gov.co/IDEAM/DatosValidados_{mes}{anio}.zip"
+  meses:
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
+  # Rango a descargar (configurable). Mantener corto para el runner.
+  anios: [2024, 2025]
+
+medata:
+  descripcion: >
+    Portal de datos abiertos de Medellín. Requisito OBLIGATORIO: integrar al
+    menos un conjunto de MEData. Candidato: afiliados régimen contributivo.
+  licencia: "Creative Commons Atribución-CompartirIgual 4.0"
+  ficha: "https://medata.app.medellin.gov.co/node/16534"
+  # Completar con la URL de descarga directa del conjunto elegido.
+  base: null

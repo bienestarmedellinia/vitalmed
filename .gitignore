@@ -1,0 +1,30 @@
+# ─────────────────────────────────────────────────────────────
+# Datos crudos: NO se versionan (microdatos a nivel de persona).
+# El pipeline los descarga desde la fuente oficial en cada ejecución.
+# Regla Hackathon: "los datos o un script que los descargue desde la
+# fuente. Sin datos personales."
+# ─────────────────────────────────────────────────────────────
+data/raw/
+*.xlsx
+*.xls
+*.csv
+*.zip
+!outputs/tablas/*.csv          # las tablas AGREGADAS (sin PII) sí se publican
+
+# Resultados intermedios voluminosos
+data/processed/*.parquet
+data/processed/*.csv
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+*.egg-info/
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.log

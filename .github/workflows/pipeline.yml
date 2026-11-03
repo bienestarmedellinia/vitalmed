@@ -1,0 +1,48 @@
+name: pipeline-ecv
+
+# El pipeline corre en los runners de GitHub (NO en la Raspberry Pi).
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:        # ejecución manual desde la pestaña Actions
+  schedule:
+    - cron: "0 7 1 * *"     # día 1 de cada mes (datos SIATA mensuales)
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 1) Descargar datos desde fuentes oficiales
+        run: python scripts/01_descargar.py
+
+      - name: 2) Validar consistencia (llave territorial)
+        run: python scripts/03_validar.py
+
+      - name: 3) Limpiar y homologar
+        run: python scripts/02_limpiar.py
+
+      - name: 4) Integrar (tabla agregada por territorio)
+        run: python scripts/04_integrar.py
+
+      - name: Publicar resultados como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados-ecv
+          path: |
+            outputs/tablas/
+            data/raw/_manifiesto_descarga.json
+          if-no-files-found: warn
