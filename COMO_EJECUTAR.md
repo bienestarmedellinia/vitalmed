@@ -35,14 +35,26 @@ Ejemplos de preguntas:
 
 ## Opción C · Asistente en tu computador Windows (1 doble clic)
 
-1. Descarga el proyecto (botón verde **Code → Download ZIP** en GitHub) y
-   descomprímelo.
-2. Entra a la carpeta y haz **doble clic en `EJECUTAR_ASISTENTE.bat`**.
-3. La primera vez instala lo necesario y abre el asistente en tu navegador.
-   - Si te dice que falta Python, instálalo desde python.org marcando
-     *"Add Python to PATH"* y vuelve a dar doble clic.
+1. En GitHub, botón verde **Code → Download ZIP**. Descomprime el archivo.
+2. Abre la carpeta descomprimida. Dentro verás `EJECUTAR_ASISTENTE.bat`
+   junto a las carpetas `asistente` y `outputs`.
+3. Haz **doble clic en `EJECUTAR_ASISTENTE.bat`**. Se abre una ventana negra
+   que te guía paso a paso y abre el asistente en el navegador.
 
-No necesitas escribir comandos.
+**¿Funcionó?** Si en el navegador ves el título "Medellín Bienestar AI" y
+puedes escribir una pregunta, está listo.
+
+### Si algo falla (solución rápida)
+
+| Lo que ves | Qué hacer |
+|------------|-----------|
+| "No se encontró Python" | Instala Python desde python.org y marca *"Add Python to PATH"*. Vuelve a dar doble clic. |
+| Se abre la Microsoft Store | Cierra la Store. Instala Python desde python.org (no desde la Store). |
+| "Falta knowledge_base.json" | Descargaste el ZIP incompleto. Vuelve a descargarlo completo. |
+| "No se pudieron instalar las dependencias" | Revisa tu internet, o usa la **Opción B** (web, no instala nada). |
+| La ventana negra se cierra sola | Abre `cmd`, arrastra el `.bat` dentro y pulsa Enter para ver el mensaje. |
+
+> Si nada funciona, usa la **Opción B** (asistente web): no requiere instalar nada.
 
 ---
 
@@ -52,6 +64,9 @@ En la pestaña **Actions** del repositorio → workflow **pipeline-ecv** →
 **Run workflow**. Verás los 8 pasos descargar los datos oficiales, validarlos,
 integrarlos, analizarlos y generar los resultados. Al terminar, descarga el
 artefacto **resultados-ecv**.
+
+**¿Funcionó?** Todos los pasos en verde y, en el paso 2, el texto
+"VALIDACIÓN OK: llave territorial consistente en todas las bases".
 
 > Nota: el pipeline descarga datos reales (~95 MB) y lee archivos grandes; por
 > eso corre en los servidores de GitHub y no requiere tu computador.
