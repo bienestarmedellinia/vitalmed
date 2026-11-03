@@ -58,6 +58,10 @@ class MotorAsistente:
     def _intencion(self, q: str) -> str:
         qn = _norm(q)
         # El orden importa: intenciones específicas antes que las genéricas.
+        if any(w in qn for w in ["aire", "contaminacion", "pm2.5", "pm25",
+                                 "pm 2.5", "particulas", "ambiental",
+                                 "calidad del aire", "polucion", "siata", "respirar"]):
+            return "ambiental"
         if any(w in qn for w in ["tres territorios", "3 territorios", "presupuesto",
                                  "intervenir", "invertir", "priorizar", "priorizacion"]):
             return "priorizacion"
@@ -161,6 +165,30 @@ class MotorAsistente:
                             "valor": f"{var}%", "territorio": top.get("nombre"),
                             "fuente": "MEData - Secretaría de Salud"}],
                 limitaciones="Un cambio de tasa no explica sus causas por sí solo.")
+
+        if intent == "ambiental":
+            pm = self.kb.get("indicadores", {}).get("pm25_siata")
+            if not pm or not pm.get("ranking"):
+                return Respuesta(
+                    "Aún no hay datos de PM2.5 (SIATA) en el knowledge base. "
+                    "Ejecuta el pipeline para incorporarlos.", encontrado=False)
+            top = pm["ranking"][0]
+            return Respuesta(
+                respuesta_directa=(
+                    f"En {pm['anio']}, la estación con mayor PM2.5 promedio fue "
+                    f"{top['estacion']} con {top['media_pm25']} µg/m³. "
+                    f"La medición de calidad del aire es por estación de monitoreo."),
+                evidencia=[{"indicador": "PM2.5 media anual",
+                            "valor": e["media_pm25"], "anio": pm["anio"],
+                            "territorio": "estación " + e["estacion"],
+                            "fuente": "SIATA"} for e in pm["ranking"][:5]],
+                interpretacion=("Mayor PM2.5 implica peor calidad del aire en el "
+                                "entorno de esa estación; puede asociarse a "
+                                "afecciones respiratorias."),
+                recomendacion=("Reforzar seguimiento y medidas preventivas en los "
+                               "periodos y zonas con mayor PM2.5."),
+                limitaciones=(pm.get("advertencia", "") + " Una asociación con la "
+                              "salud no implica causalidad sin un diseño adecuado."))
 
         if intent == "fuentes":
             fuentes = self.kb.get("fuentes", {})

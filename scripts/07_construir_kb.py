@@ -84,6 +84,27 @@ def main() -> int:
         }
         log(f"cobertura ECV: {len(por_terr)} territorios")
 
+    # ── PM2.5 por estación (SIATA, dimensión ambiental) ──
+    siata_f = TAB / "siata_pm25_estacion.csv"
+    if siata_f.exists():
+        df = pd.read_csv(siata_f)
+        anio_ref = int(df["anio"].max())
+        ref = (df[df["anio"] == anio_ref]
+               .sort_values("media_pm25", ascending=False))
+        kb["indicadores"]["pm25_siata"] = {
+            "unidad": "µg/m³ (media anual)",
+            "anio": anio_ref,
+            "nivel": "estación de monitoreo (NO comuna)",
+            "advertencia": ("SIATA mide por estación, no por comuna. No se atribuye "
+                            "PM2.5 a comunas sin un mapeo espacial validado."),
+            "ranking": [
+                {"estacion": str(r.estacion), "media_pm25": round(float(r.media_pm25), 2),
+                 "meses_validos": int(r.meses_validos)}
+                for r in ref.itertuples()
+            ],
+        }
+        log(f"PM2.5 SIATA: {len(ref)} estaciones (año {anio_ref})")
+
     salida = KB / "knowledge_base.json"
     contenido = json.dumps(kb, indent=2, ensure_ascii=False)
     salida.write_text(contenido, encoding="utf-8")

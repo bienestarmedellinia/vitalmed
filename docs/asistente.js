@@ -16,6 +16,9 @@ function detectarIntencion(q) {
   const qn = norm(q);
   const tiene = (arr) => arr.some((w) => qn.includes(w));
   // El orden importa: específicas antes que genéricas (idéntico a motor.py).
+  if (tiene(["aire", "contaminacion", "pm2.5", "pm25", "pm 2.5", "particulas",
+             "ambiental", "calidad del aire", "polucion", "siata", "respirar"]))
+    return "ambiental";
   if (tiene(["tres territorios", "3 territorios", "presupuesto",
              "intervenir", "invertir", "priorizar", "priorizacion"]))
     return "priorizacion";
@@ -133,6 +136,37 @@ function responder(pregunta) {
       evidencia: [{ indicador: "variación tasa mortalidad 2012-2022",
         valor: v + "%", territorio: top.nombre, fuente: "MEData - Secretaría de Salud" }],
       limitaciones: "Un cambio de tasa no explica sus causas por sí solo.",
+      grafico: grafico,
+    };
+  }
+
+  if (intent === "ambiental") {
+    const pm = (KB.indicadores || {}).pm25_siata;
+    if (!pm || !pm.ranking || pm.ranking.length === 0) {
+      return {
+        encontrado: false,
+        respuesta_directa: "Aún no hay datos de PM2.5 (SIATA) en el knowledge base. Ejecuta el pipeline para incorporarlos.",
+        evidencia: [],
+      };
+    }
+    const top = pm.ranking[0];
+    const grafico = {
+      tipo: "bar",
+      titulo: `PM2.5 promedio por estación · Medellín ${pm.anio}`,
+      etiqueta_eje: "PM2.5 (µg/m³, media anual)",
+      labels: pm.ranking.map((x) => x.estacion),
+      valores: pm.ranking.map((x) => x.media_pm25),
+      resaltar: pm.ranking.map((_, i) => i === 0),
+    };
+    return {
+      encontrado: true,
+      respuesta_directa: `En ${pm.anio}, la estación con mayor PM2.5 promedio fue ${top.estacion} con ${top.media_pm25} µg/m³. La medición de calidad del aire es por estación de monitoreo.`,
+      evidencia: pm.ranking.slice(0, 5).map((x) => ({
+        indicador: "PM2.5 media anual", valor: x.media_pm25, anio: pm.anio,
+        territorio: "estación " + x.estacion, fuente: "SIATA" })),
+      interpretacion: "Mayor PM2.5 implica peor calidad del aire en el entorno de esa estación; la exposición puede asociarse a afecciones respiratorias.",
+      recomendacion: "Reforzar seguimiento y medidas preventivas en los periodos y zonas con mayor PM2.5.",
+      limitaciones: pm.advertencia + " Además, una asociación con la salud no implica causalidad sin un diseño de estudio adecuado.",
       grafico: grafico,
     };
   }

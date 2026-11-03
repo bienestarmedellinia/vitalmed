@@ -46,6 +46,9 @@ jobs:
       - name: 6) Visualizar (gráficos PNG + diagrama del pipeline)
         run: python scripts/06_visualizar.py
 
+      - name: 6b) Procesar SIATA PM2.5 por estación (ambiental)
+        run: python scripts/08_siata.py
+
       - name: 7) Construir knowledge base del asistente (fase 2)
         run: python scripts/07_construir_kb.py
 
