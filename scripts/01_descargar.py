@@ -61,6 +61,55 @@ def descargar(url: str, destino: Path) -> dict:
     raise RuntimeError(f"No se pudo descargar {url}: {ultimo_error}")
 
 
+def descargar_arcgis(servicio: str, capa: int, destino: Path) -> dict:
+    """Descarga todos los registros de una capa ArcGIS (paginado) y los
+    guarda como CSV. El servicio requiere User-Agent de navegador."""
+    import csv
+
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    ua = {"User-Agent": ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                         "(KHTML, like Gecko) Chrome/120.0 Safari/537.36")}
+    base_q = f"{servicio}/{capa}/query"
+    offset, page, filas, campos = 0, 2000, [], None
+    while True:
+        params = {
+            "where": "1=1", "outFields": "*", "returnGeometry": "false",
+            "resultOffset": offset, "resultRecordCount": page, "f": "json",
+        }
+        r = requests.get(base_q, params=params, headers=ua, timeout=TIMEOUT)
+        r.raise_for_status()
+        data = r.json()
+        feats = data.get("features", [])
+        if campos is None:
+            campos = [f["name"] for f in data.get("fields", [])]
+        for feat in feats:
+            filas.append(feat.get("attributes", {}))
+        if len(feats) < page or not data.get("exceededTransferLimit", False):
+            if len(feats) < page:
+                break
+        offset += page
+        if offset > 100000:  # guarda de seguridad
+            break
+
+    if not filas:
+        raise RuntimeError(f"capa {capa}: sin registros")
+    if campos is None:
+        campos = list(filas[0].keys())
+
+    with open(destino, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=campos)
+        w.writeheader()
+        for row in filas:
+            w.writerow({k: row.get(k) for k in campos})
+
+    total = destino.stat().st_size
+    h = hashlib.sha256(destino.read_bytes()).hexdigest()
+    log(f"OK  {destino.name}  ({len(filas)} filas, {total/1e3:.0f} KB)")
+    return {"url": f"{base_q}?where=1=1&outFields=*&f=json",
+            "archivo": str(destino.relative_to(BASE)),
+            "bytes": total, "sha256": h, "filas": len(filas)}
+
+
 def main() -> int:
     cfg = yaml.safe_load(SOURCES.read_text(encoding="utf-8"))
     manifiesto = []
@@ -94,14 +143,22 @@ def main() -> int:
                 # Un mes puede no existir todavía; no es fatal.
                 log(f"SIATA {mes}{anio} no disponible: {e}")
 
-    # ── MEData (si hay URL) ──────────────────────────────────
+    # ── MEData: servicio ArcGIS de salud por comuna (obligatorio) ─
     md = cfg.get("medata", {})
-    if md.get("base"):
-        destino = RAW / "medata" / f"medata{Path(md['base']).suffix}"
-        manifiesto.append({"fuente": "medata", "tipo": "base",
-                           **descargar(md["base"], destino)})
+    servicio = md.get("servicio_rest")
+    if servicio:
+        capas = md.get("capas", {})
+        prioritarias = md.get("capas_prioritarias") or list(capas.keys())
+        for capa_id in prioritarias:
+            nombre = capas.get(capa_id, f"capa_{capa_id}")
+            destino = RAW / "medata" / f"{nombre}.csv"
+            try:
+                meta = descargar_arcgis(servicio, int(capa_id), destino)
+                manifiesto.append({"fuente": "medata", "tipo": nombre, **meta})
+            except RuntimeError as e:
+                log(f"MEData capa {capa_id} ({nombre}) fallo: {e}")
     else:
-        log("SKIP MEData: definir 'base' en sources.yml (requisito obligatorio)")
+        log("SKIP MEData: definir 'servicio_rest' en sources.yml (requisito obligatorio)")
 
     # Registro de procedencia (trazabilidad para el jurado)
     reg = RAW / "_manifiesto_descarga.json"

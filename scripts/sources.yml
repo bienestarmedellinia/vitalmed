@@ -34,15 +34,15 @@ ecv:
       formato: csv
       csv_sep: ";"
     # 2022: la página principal NO expone enlace directo al archivo;
-    # apunta a una subpágina. Se usa como año de respaldo. El equipo
-    # debe confirmar la URL directa desde:
+    # 2022: URLs directas confirmadas desde la subpágina oficial
     # https://www.medellin.gov.co/es/centro-documental/encuesta-de-calidad-de-vida-2022/
     "2022":
-      base: null
+      base:        "https://www.medellin.gov.co/es/wp-content/uploads/2023/01/Base-de-Datos-ECV2022.csv"
+      diccionario: "https://www.medellin.gov.co/es/wp-content/uploads/2023/01/Diccionario-de-Datos-ECV2022-1.xlsx"
+      serie:       "https://www.medellin.gov.co/es/wp-content/uploads/2023/01/Serie-Historica-Indicadores_24052023.xlsx"
       instructivo: "https://www.medellin.gov.co/es/wp-content/uploads/2022/08/Instructivo-filtros-bases-de-datos-ECV-2022.xlsx"
       formato: csv
       csv_sep: ";"
-      nota: "URL directa pendiente de confirmar; año de respaldo."
 
 siata:
   descripcion: >
@@ -70,9 +70,26 @@ siata:
 
 medata:
   descripcion: >
-    Portal de datos abiertos de Medellín. Requisito OBLIGATORIO: integrar al
-    menos un conjunto de MEData. Candidato: afiliados régimen contributivo.
-  licencia: "Creative Commons Atribución-CompartirIgual 4.0"
-  ficha: "https://medata.app.medellin.gov.co/node/16534"
-  # Completar con la URL de descarga directa del conjunto elegido.
-  base: null
+    Datos abiertos de Medellín (requisito OBLIGATORIO de la hackathon).
+    Se usa el servicio público de la Secretaría de Salud del Distrito de
+    Medellín "VC_Datos_Enfermedades": eventos de salud pública georreferenciados
+    POR COMUNA, series anuales de casos y tasas. Datos agregados (sin PII) y
+    desagregados por territorio, lo que permite integrarlos con la ECV por la
+    llave comuna/corregimiento.
+  licencia: "Datos abiertos - Alcaldía de Medellín / Secretaría de Salud"
+  servicio_rest: "https://www.medellin.gov.co/servidormapas/rest/services/salud_protec_soc/VC_Datos_Enfermedades/MapServer"
+  # El servicio requiere User-Agent de navegador. Cada capa se consulta vía /query.
+  capas:
+    0: dengue
+    1: hepatitis_a
+    2: intento_suicidio
+    3: mortalidad
+    4: natalidad
+    5: parotiditis
+    6: tosferina
+    7: tuberculosis_pulmonar
+    8: varicela
+    9: violencia_genero
+  # Capas priorizadas para el análisis de salud y bienestar.
+  capas_prioritarias: [3, 4]   # mortalidad y natalidad
+  campo_territorial: "comuna"
