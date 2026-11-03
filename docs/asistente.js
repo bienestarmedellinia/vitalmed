@@ -34,6 +34,24 @@ function ranking() {
   return (((KB || {}).indicadores || {}).mortalidad_2022 || {}).ranking || [];
 }
 
+/* Construye los datos de un gráfico de barras a partir del ranking.
+ * destacarIdx: índice a resaltar (o null). topN: si se da, resalta los primeros N. */
+function graficoRanking(rank, destacarIdx, topN) {
+  if (!rank || rank.length === 0) return null;
+  const labels = rank.map((x) => x.nombre);
+  const valores = rank.map((x) => x.tasa);
+  const resaltar = rank.map((_, i) =>
+    (topN != null ? i < topN : i === destacarIdx));
+  return {
+    tipo: "bar",
+    titulo: "Tasa de mortalidad por territorio · Medellín 2022",
+    etiqueta_eje: "Defunciones por 100.000 hab.",
+    labels: labels,
+    valores: valores,
+    resaltar: resaltar,
+  };
+}
+
 function responder(pregunta) {
   if (!KB) {
     return { respuesta_directa: "No se pudo cargar el knowledge base.",
@@ -58,6 +76,7 @@ function responder(pregunta) {
       interpretacion: "Una tasa alta indica mayor carga de mortalidad relativa a su población; conviene priorizar seguimiento en este territorio.",
       recomendacion: `Priorizar programas de promoción y prevención en ${t.nombre}, con indicadores de seguimiento.`,
       limitaciones: "La tasa de mortalidad general depende de la estructura de edad de la comuna; es asociación, no causalidad.",
+      grafico: graficoRanking(r, 0),
     };
   }
 
@@ -69,6 +88,7 @@ function responder(pregunta) {
       evidencia: [{ indicador: "tasa de mortalidad", valor: b.tasa, anio: 2022,
                     territorio: b.nombre, fuente: "MEData - Secretaría de Salud" }],
       limitaciones: "Asociación, no causalidad; influye la estructura de edad.",
+      grafico: graficoRanking(r, r.length - 1),
     };
   }
 
@@ -82,6 +102,7 @@ function responder(pregunta) {
       interpretacion: "Son los de mayor tasa de mortalidad del período.",
       recomendacion: "Distribuir intervenciones según necesidad y definir indicadores para evaluar resultados.",
       limitaciones: "Priorización por un solo indicador; un índice multivariable (social+ambiental) sería más robusto.",
+      grafico: graficoRanking(r, 0, 3),
     };
   }
 

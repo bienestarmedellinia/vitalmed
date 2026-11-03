@@ -60,6 +60,7 @@
     <p class="pie" id="estado">Cargando datos…</p>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="asistente.js"></script>
   <script>
     const SUGERIDAS = [
@@ -105,8 +106,36 @@
       }
       if (r.interpretacion) html += `<div class="bloque"><b>Interpretación:</b> ${esc(r.interpretacion)}</div>`;
       if (r.recomendacion) html += `<div class="bloque"><b>Recomendación:</b> ${esc(r.recomendacion)}</div>`;
+      if (r.grafico) html += `<div class="bloque"><canvas id="chart" height="260"></canvas></div>`;
       if (r.limitaciones) html += `<div class="limit">⚠️ Limitaciones: ${esc(r.limitaciones)}</div>`;
       div.innerHTML = html;
+      if (r.grafico) dibujarGrafico(r.grafico);
+    }
+
+    let _chart = null;
+    function dibujarGrafico(g) {
+      const ctx = document.getElementById("chart");
+      if (!ctx || typeof Chart === "undefined") return;
+      if (_chart) _chart.destroy();
+      const AZUL = "#1f4e79", NAR = "#d9731a";
+      const colores = g.resaltar.map((on) => (on ? NAR : AZUL));
+      _chart = new Chart(ctx, {
+        type: g.tipo,
+        data: {
+          labels: g.labels,
+          datasets: [{ label: g.etiqueta_eje, data: g.valores,
+                       backgroundColor: colores }],
+        },
+        options: {
+          indexAxis: "y",            // barras horizontales (histograma por territorio)
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            title: { display: true, text: g.titulo },
+          },
+          scales: { x: { title: { display: true, text: g.etiqueta_eje } } },
+        },
+      });
     }
 
     document.getElementById("q").addEventListener("keydown", (e) => {
