@@ -23,7 +23,35 @@
         "casos": 71
       },
       "brecha_veces": 4.58,
-      "variacion_pct_2012_2022_comuna_top": 44.6
+      "variacion_pct_2012_2022_comuna_top": 44.6,
+      "serie_temporal_comuna_top": {
+        "anios": [
+          2012,
+          2013,
+          2014,
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022
+        ],
+        "tasas": [
+          916.44,
+          925.89,
+          872.18,
+          1020.99,
+          1076.1,
+          1026.17,
+          1227.72,
+          1178.41,
+          1388.5,
+          1743.16,
+          1325.6
+        ]
+      }
     },
     "mortalidad_2022": {
       "unidad": "defunciones por 100.000 habitantes",

@@ -115,12 +115,25 @@ function responder(pregunta) {
                encontrado: false, evidencia: [] };
     }
     const signo = v >= 0 ? "aumentó" : "disminuyó";
+    const serie = h.serie_temporal_comuna_top;
+    let grafico = null;
+    if (serie && serie.anios && serie.anios.length) {
+      grafico = {
+        tipo: "line",
+        titulo: `Evolución de la tasa de mortalidad · ${top.nombre || ""} (${serie.anios[0]}–${serie.anios[serie.anios.length - 1]})`,
+        etiqueta_eje: "Defunciones por 100.000 hab.",
+        labels: serie.anios.map(String),
+        valores: serie.tasas,
+        resaltar: serie.anios.map(() => false),
+      };
+    }
     return {
       encontrado: true,
       respuesta_directa: `Entre 2012 y 2022, la tasa de mortalidad de ${top.nombre || "la comuna top"} ${signo} ${Math.abs(v)}%.`,
       evidencia: [{ indicador: "variación tasa mortalidad 2012-2022",
         valor: v + "%", territorio: top.nombre, fuente: "MEData - Secretaría de Salud" }],
       limitaciones: "Un cambio de tasa no explica sus causas por sí solo.",
+      grafico: grafico,
     };
   }
 

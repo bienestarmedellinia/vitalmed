@@ -118,22 +118,30 @@
       if (!ctx || typeof Chart === "undefined") return;
       if (_chart) _chart.destroy();
       const AZUL = "#1f4e79", NAR = "#d9731a";
-      const colores = g.resaltar.map((on) => (on ? NAR : AZUL));
+      const esLinea = g.tipo === "line";
+      const dataset = { label: g.etiqueta_eje, data: g.valores };
+      if (esLinea) {
+        dataset.borderColor = NAR;
+        dataset.backgroundColor = NAR;
+        dataset.tension = 0.25;
+        dataset.fill = false;
+        dataset.pointRadius = 4;
+      } else {
+        dataset.backgroundColor = g.resaltar.map((on) => (on ? NAR : AZUL));
+      }
       _chart = new Chart(ctx, {
         type: g.tipo,
-        data: {
-          labels: g.labels,
-          datasets: [{ label: g.etiqueta_eje, data: g.valores,
-                       backgroundColor: colores }],
-        },
+        data: { labels: g.labels, datasets: [dataset] },
         options: {
-          indexAxis: "y",            // barras horizontales (histograma por territorio)
+          indexAxis: esLinea ? "x" : "y",   // línea: vertical · barras: horizontal
           responsive: true,
           plugins: {
             legend: { display: false },
             title: { display: true, text: g.titulo },
           },
-          scales: { x: { title: { display: true, text: g.etiqueta_eje } } },
+          scales: esLinea
+            ? { y: { title: { display: true, text: g.etiqueta_eje } } }
+            : { x: { title: { display: true, text: g.etiqueta_eje } } },
         },
       });
     }

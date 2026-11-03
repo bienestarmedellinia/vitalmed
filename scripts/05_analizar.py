@@ -107,6 +107,10 @@ def main() -> int:
         "brecha_veces": round(float(brecha), 2),
         "variacion_pct_2012_2022_comuna_top": (
             round(var_pct, 1) if var_pct is not None else None),
+        "serie_temporal_comuna_top": {
+            "anios": [int(a) for a in serie_top["anio"].tolist()],
+            "tasas": [round(float(t), 2) for t in serie_top["tasa"].tolist()],
+        },
     }
     (OUT / "hallazgo.json").write_text(
         json.dumps(hallazgo, indent=2, ensure_ascii=False), encoding="utf-8")
