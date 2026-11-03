@@ -7,7 +7,7 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
    Incluye un asistente que responde preguntas con las cifras obtenidas.
 
 2. PROBARLO EN LÍNEA
-   Asistente web (sin instalar nada): [PEGAR ENLACE DE STREAMLIT CLOUD]
+   Asistente web (sin instalar nada): https://watabares.github.io/medellin-bienestar-datos/
    Pipeline: pestaña "Actions" del repo -> "pipeline-ecv" -> "Run workflow".
 
 3. ENTORNO

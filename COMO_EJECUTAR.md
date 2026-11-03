@@ -24,7 +24,7 @@ No requiere Windows, ni Python, ni comandos.
 
 Abre este enlace en cualquier navegador y escribe preguntas:
 
->  **[ PEGAR AQUÍ EL ENLACE DE STREAMLIT CLOUD ]**
+>  **https://watabares.github.io/medellin-bienestar-datos/**
 
 Ejemplos de preguntas:
 - ¿Qué comunas deberían recibir mayor atención en salud?
