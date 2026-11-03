@@ -38,11 +38,18 @@ jobs:
       - name: 4) Integrar (tabla agregada por territorio)
         run: python scripts/04_integrar.py
 
+      - name: 5) Analizar (hallazgo cuantificado por comuna)
+        run: python scripts/05_analizar.py
+
+      - name: 6) Visualizar (gráficos PNG + diagrama del pipeline)
+        run: python scripts/06_visualizar.py
+
       - name: Publicar resultados como artefacto
         uses: actions/upload-artifact@v4
         with:
           name: resultados-ecv
           path: |
             outputs/tablas/
+            outputs/graficos/
             data/raw/_manifiesto_descarga.json
           if-no-files-found: warn
