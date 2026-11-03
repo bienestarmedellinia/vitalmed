@@ -26,6 +26,10 @@ OUT = BASE / "outputs" / "tablas"
 ANIO_REF = 2022          # último año disponible en MEData salud
 ANIO_INI = 2012          # inicio de la serie
 
+# Territorios válidos: 16 comunas + 5 corregimientos. Excluye códigos
+# residuales de la fuente como 99 = "Sin información de comuna".
+TERRITORIOS_VALIDOS = set(range(1, 17)) | {50, 60, 70, 80, 90}
+
 
 def log(msg: str) -> None:
     print(f"[analizar] {msg}", flush=True)
@@ -39,6 +43,8 @@ def cargar_salud(nombre: str, prefijo_casos: str) -> pd.DataFrame:
     df["comuna"] = pd.to_numeric(df["comuna"], errors="coerce")
     df = df.dropna(subset=["comuna"])
     df["comuna"] = df["comuna"].astype(int)
+    # Mantener solo los 21 territorios oficiales (excluye 99 "Sin información").
+    df = df[df["comuna"].isin(TERRITORIOS_VALIDOS)].copy()
 
     registros = []
     for anio in range(ANIO_INI, ANIO_REF + 1):

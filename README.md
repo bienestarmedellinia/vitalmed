@@ -48,3 +48,25 @@ Actions. La RPi solo edita código y hace `git push`.
 ## Cómo ejecutarlo
 
 Ver `instrucciones.txt`.
+
+## Hallazgo principal
+
+> En 2022, **La Candelaria (comuna 10)** presentó la **mayor tasa de mortalidad
+> de Medellín: 1.325,6 defunciones por 100.000 habitantes**, equivalente a
+> **4,6 veces** la del territorio con menor tasa (corregimiento de Santa Elena,
+> 289,5). Entre 2012 y 2022 su tasa **aumentó +44,6%**.
+
+Fuente: MEData — Secretaría de Salud de Medellín (servicio `VC_Datos_Enfermedades`),
+datos agregados por comuna, sin datos personales. Los 21 territorios oficiales
+(16 comunas + 5 corregimientos); se excluye la categoría residual "Sin información".
+
+Artefactos generados por el pipeline (descargables desde la pestaña Actions):
+- `outputs/tablas/hallazgo.json` — la cifra principal para la ficha de entrega.
+- `outputs/tablas/analisis_mortalidad_comuna.csv` — ranking completo por comuna.
+- `outputs/graficos/ranking_mortalidad_2022.png` — ranking por comuna.
+- `outputs/graficos/evolucion_comuna_top.png` — serie temporal 2012–2022.
+- `outputs/graficos/pipeline.png` — diagrama del funcionamiento del pipeline.
+
+> Nota metodológica: una asociación territorial no implica causalidad. La tasa
+> de mortalidad general está influida por la estructura de edad de cada comuna
+> (p. ej. La Candelaria y Laureles tienen población más envejecida).
