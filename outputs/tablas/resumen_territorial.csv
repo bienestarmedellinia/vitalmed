@@ -1,0 +1,85 @@
+anio,territorio_cod,territorio_nombre,tipo_territorio,registros_encuestados
+2022,1,Popular,comuna,1648
+2022,2,Santa Cruz,comuna,1228
+2022,3,Manrique,comuna,1949
+2022,4,Aranjuez,comuna,1729
+2022,5,Castilla,comuna,1379
+2022,6,Doce de Octubre,comuna,2000
+2022,7,Robledo,comuna,2122
+2022,8,Villa Hermosa,comuna,1758
+2022,9,Buenos Aires,comuna,1651
+2022,10,La Candelaria,comuna,894
+2022,11,Laureles-Estadio,comuna,1041
+2022,12,La América,comuna,877
+2022,13,San Javier,comuna,1644
+2022,14,El Poblado,comuna,1041
+2022,15,Guayabal,comuna,682
+2022,16,Belén,comuna,2134
+2022,50,Palmitas,corregimiento,90
+2022,60,San Cristóbal,corregimiento,1497
+2022,70,Altavista,corregimiento,487
+2022,80,San Antonio de Prado,corregimiento,1218
+2022,90,Santa Elena,corregimiento,348
+2023,1,Popular,comuna,1076
+2023,2,Santa Cruz,comuna,837
+2023,3,Manrique,comuna,1385
+2023,4,Aranjuez,comuna,1140
+2023,5,Castilla,comuna,860
+2023,6,Doce de Octubre,comuna,1233
+2023,7,Robledo,comuna,1488
+2023,8,Villa Hermosa,comuna,1276
+2023,9,Buenos Aires,comuna,1158
+2023,10,La Candelaria,comuna,617
+2023,11,Laureles-Estadio,comuna,617
+2023,12,La América,comuna,536
+2023,13,San Javier,comuna,1219
+2023,14,El Poblado,comuna,726
+2023,15,Guayabal,comuna,427
+2023,16,Belén,comuna,1393
+2023,50,Palmitas,corregimiento,74
+2023,60,San Cristóbal,corregimiento,874
+2023,70,Altavista,corregimiento,336
+2023,80,San Antonio de Prado,corregimiento,810
+2023,90,Santa Elena,corregimiento,233
+2024,1,Popular,comuna,1222
+2024,2,Santa Cruz,comuna,908
+2024,3,Manrique,comuna,1440
+2024,4,Aranjuez,comuna,1229
+2024,5,Castilla,comuna,996
+2024,6,Doce de Octubre,comuna,1377
+2024,7,Robledo,comuna,1514
+2024,8,Villa Hermosa,comuna,1398
+2024,9,Buenos Aires,comuna,1309
+2024,10,La Candelaria,comuna,670
+2024,11,Laureles-Estadio,comuna,728
+2024,12,La América,comuna,659
+2024,13,San Javier,comuna,1399
+2024,14,El Poblado,comuna,851
+2024,15,Guayabal,comuna,493
+2024,16,Belén,comuna,1557
+2024,50,Palmitas,corregimiento,77
+2024,60,San Cristóbal,corregimiento,1081
+2024,70,Altavista,corregimiento,344
+2024,80,San Antonio de Prado,corregimiento,901
+2024,90,Santa Elena,corregimiento,238
+2025,1,Popular,comuna,1163
+2025,2,Santa Cruz,comuna,896
+2025,3,Manrique,comuna,1386
+2025,4,Aranjuez,comuna,1158
+2025,5,Castilla,comuna,935
+2025,6,Doce de Octubre,comuna,1336
+2025,7,Robledo,comuna,1610
+2025,8,Villa Hermosa,comuna,1442
+2025,9,Buenos Aires,comuna,1261
+2025,10,La Candelaria,comuna,692
+2025,11,Laureles-Estadio,comuna,770
+2025,12,La América,comuna,707
+2025,13,San Javier,comuna,1401
+2025,14,El Poblado,comuna,777
+2025,15,Guayabal,comuna,526
+2025,16,Belén,comuna,1543
+2025,50,Palmitas,corregimiento,96
+2025,60,San Cristóbal,corregimiento,1208
+2025,70,Altavista,corregimiento,342
+2025,80,San Antonio de Prado,corregimiento,840
+2025,90,Santa Elena,corregimiento,319

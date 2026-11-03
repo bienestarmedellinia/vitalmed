@@ -1,0 +1,20 @@
+{
+  "evento": "mortalidad general",
+  "fuente": "MEData - Secretaría de Salud de Medellín (VC_Datos_Enfermedades)",
+  "anio_referencia": 2022,
+  "unidad_tasa": "defunciones por 100.000 habitantes",
+  "comuna_mayor_tasa": {
+    "comuna": 10,
+    "nombre": "La Candelaria",
+    "tasa": 1325.6,
+    "casos": 1074
+  },
+  "comuna_menor_tasa": {
+    "comuna": 90,
+    "nombre": "Corregimiento de Santa Elena",
+    "tasa": 289.47,
+    "casos": 71
+  },
+  "brecha_veces": 4.58,
+  "variacion_pct_2012_2022_comuna_top": 44.6
+}

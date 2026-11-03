@@ -12,6 +12,8 @@ jobs:
   pipeline:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    permissions:
+      contents: write        # para commitear los outputs regenerados
     steps:
       - name: Checkout del repositorio
         uses: actions/checkout@v4
@@ -53,3 +55,18 @@ jobs:
             outputs/graficos/
             data/raw/_manifiesto_descarga.json
           if-no-files-found: warn
+
+      - name: Commitear outputs regenerados al repo
+        # Deja las tablas y gráficos SIEMPRE actualizados en el repositorio,
+        # para que sean visibles sin descargar el artefacto. Solo outputs
+        # agregados (sin PII); los microdatos crudos quedan excluidos por .gitignore.
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f outputs/tablas/ outputs/graficos/
+          if git diff --cached --quiet; then
+            echo "Sin cambios en outputs."
+          else
+            git commit -m "chore(outputs): actualiza tablas y gráficos [skip ci]"
+            git push
+          fi
