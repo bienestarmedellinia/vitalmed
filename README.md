@@ -70,3 +70,42 @@ Artefactos generados por el pipeline (descargables desde la pestaña Actions):
 > Nota metodológica: una asociación territorial no implica causalidad. La tasa
 > de mortalidad general está influida por la estructura de edad de cada comuna
 > (p. ej. La Candelaria y Laureles tienen población más envejecida).
+
+
+## Fase 2 — Asistente de inteligencia territorial
+
+Sobre los resultados del pipeline se construye un asistente que responde
+preguntas en lenguaje natural **usando solo las cifras verificadas** del
+knowledge base (`outputs/kb/knowledge_base.json`). No inventa datos.
+
+Arquitectura en dos capas:
+
+1. **Motor determinista** (`asistente/motor.py`) — sin IA, sin API key.
+   Detecta la intención de la pregunta y recupera la cifra del KB. **Siempre
+   funciona**, por lo que el jurado puede ejecutarlo sin configurar nada.
+2. **Capa LLM opcional** (`asistente/llm.py`) — si existe `OPENAI_API_KEY`,
+   mejora la redacción tomando *solo* las cifras ya recuperadas (no genera
+   números). Sin la key, se omite y responde el motor determinista.
+
+Cada respuesta entrega: respuesta directa · evidencia (indicador, valor, año,
+territorio, fuente) · interpretación · recomendación · limitaciones.
+
+Uso:
+
+```bash
+# 1) generar el knowledge base (si no está): usa las tablas del pipeline
+python scripts/07_construir_kb.py
+
+# 2a) interfaz web (fase 2):
+pip install -r asistente/requirements.txt
+streamlit run asistente/app.py
+
+# 2b) modo CLI de respaldo (no requiere streamlit):
+python asistente/app.py --cli "¿Qué comunas priorizar en salud?"
+
+# pruebas del asistente (verifican que responde con cifras reales):
+python asistente/test_motor.py
+```
+
+El asistente es liviano (solo lee un JSON pequeño), por lo que corre sin
+problema en la Raspberry Pi; el cómputo pesado sigue siendo del pipeline.

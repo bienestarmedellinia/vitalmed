@@ -1,0 +1,320 @@
+{
+  "meta": {
+    "proyecto": "Medellín, Bienestar Basado en Datos",
+    "descripcion": "Knowledge base del asistente de inteligencia territorial. Todas las cifras provienen del pipeline reproducible; el asistente no inventa datos.",
+    "territorios_oficiales": 21
+  },
+  "indicadores": {
+    "hallazgo_mortalidad": {
+      "evento": "mortalidad general",
+      "fuente": "MEData - Secretaría de Salud de Medellín (VC_Datos_Enfermedades)",
+      "anio_referencia": 2022,
+      "unidad_tasa": "defunciones por 100.000 habitantes",
+      "comuna_mayor_tasa": {
+        "comuna": 10,
+        "nombre": "La Candelaria",
+        "tasa": 1325.6,
+        "casos": 1074
+      },
+      "comuna_menor_tasa": {
+        "comuna": 90,
+        "nombre": "Corregimiento de Santa Elena",
+        "tasa": 289.47,
+        "casos": 71
+      },
+      "brecha_veces": 4.58,
+      "variacion_pct_2012_2022_comuna_top": 44.6
+    },
+    "mortalidad_2022": {
+      "unidad": "defunciones por 100.000 habitantes",
+      "anio": 2022,
+      "ranking": [
+        {
+          "comuna": 10,
+          "nombre": "La Candelaria",
+          "tasa": 1325.6,
+          "casos": 1074
+        },
+        {
+          "comuna": 11,
+          "nombre": "Laureles Estadio",
+          "tasa": 1092.88,
+          "casos": 1183
+        },
+        {
+          "comuna": 12,
+          "nombre": "La América",
+          "tasa": 905.91,
+          "casos": 832
+        },
+        {
+          "comuna": 16,
+          "nombre": "Belén",
+          "tasa": 755.07,
+          "casos": 1630
+        },
+        {
+          "comuna": 4,
+          "nombre": "Aranjuez",
+          "tasa": 740.68,
+          "casos": 1110
+        },
+        {
+          "comuna": 15,
+          "nombre": "Guayabal",
+          "tasa": 725.97,
+          "casos": 502
+        },
+        {
+          "comuna": 14,
+          "nombre": "El Poblado",
+          "tasa": 674.21,
+          "casos": 776
+        },
+        {
+          "comuna": 5,
+          "nombre": "Castilla",
+          "tasa": 647.89,
+          "casos": 855
+        },
+        {
+          "comuna": 3,
+          "nombre": "Manrique",
+          "tasa": 640.38,
+          "casos": 1115
+        },
+        {
+          "comuna": 8,
+          "nombre": "Villa Hermosa",
+          "tasa": 626.78,
+          "casos": 1010
+        },
+        {
+          "comuna": 9,
+          "nombre": "Buenos Aires",
+          "tasa": 608.08,
+          "casos": 1000
+        },
+        {
+          "comuna": 13,
+          "nombre": "San Javier",
+          "tasa": 579.32,
+          "casos": 963
+        },
+        {
+          "comuna": 2,
+          "nombre": "Santa Cruz",
+          "tasa": 571.16,
+          "casos": 680
+        },
+        {
+          "comuna": 6,
+          "nombre": "Doce de Octubre",
+          "tasa": 531.18,
+          "casos": 998
+        },
+        {
+          "comuna": 1,
+          "nombre": "Popular",
+          "tasa": 525.0,
+          "casos": 756
+        },
+        {
+          "comuna": 50,
+          "nombre": "Corregimiento de San Sebastián de Palmitas",
+          "tasa": 484.26,
+          "casos": 28
+        },
+        {
+          "comuna": 7,
+          "nombre": "Robledo",
+          "tasa": 482.22,
+          "casos": 963
+        },
+        {
+          "comuna": 80,
+          "nombre": "Corregimiento de San Antonio de Prado",
+          "tasa": 451.27,
+          "casos": 450
+        },
+        {
+          "comuna": 70,
+          "nombre": "Corregimiento de Altavista",
+          "tasa": 439.2,
+          "casos": 179
+        },
+        {
+          "comuna": 60,
+          "nombre": "Corregimiento de San Cristóbal",
+          "tasa": 394.48,
+          "casos": 481
+        },
+        {
+          "comuna": 90,
+          "nombre": "Corregimiento de Santa Elena",
+          "tasa": 289.47,
+          "casos": 71
+        }
+      ]
+    }
+  },
+  "territorios": {
+    "cobertura_ecv": {
+      "Popular": {
+        "2022": 1648,
+        "2023": 1076,
+        "2024": 1222,
+        "2025": 1163
+      },
+      "Santa Cruz": {
+        "2022": 1228,
+        "2023": 837,
+        "2024": 908,
+        "2025": 896
+      },
+      "Manrique": {
+        "2022": 1949,
+        "2023": 1385,
+        "2024": 1440,
+        "2025": 1386
+      },
+      "Aranjuez": {
+        "2022": 1729,
+        "2023": 1140,
+        "2024": 1229,
+        "2025": 1158
+      },
+      "Castilla": {
+        "2022": 1379,
+        "2023": 860,
+        "2024": 996,
+        "2025": 935
+      },
+      "Doce de Octubre": {
+        "2022": 2000,
+        "2023": 1233,
+        "2024": 1377,
+        "2025": 1336
+      },
+      "Robledo": {
+        "2022": 2122,
+        "2023": 1488,
+        "2024": 1514,
+        "2025": 1610
+      },
+      "Villa Hermosa": {
+        "2022": 1758,
+        "2023": 1276,
+        "2024": 1398,
+        "2025": 1442
+      },
+      "Buenos Aires": {
+        "2022": 1651,
+        "2023": 1158,
+        "2024": 1309,
+        "2025": 1261
+      },
+      "La Candelaria": {
+        "2022": 894,
+        "2023": 617,
+        "2024": 670,
+        "2025": 692
+      },
+      "Laureles-Estadio": {
+        "2022": 1041,
+        "2023": 617,
+        "2024": 728,
+        "2025": 770
+      },
+      "La América": {
+        "2022": 877,
+        "2023": 536,
+        "2024": 659,
+        "2025": 707
+      },
+      "San Javier": {
+        "2022": 1644,
+        "2023": 1219,
+        "2024": 1399,
+        "2025": 1401
+      },
+      "El Poblado": {
+        "2022": 1041,
+        "2023": 726,
+        "2024": 851,
+        "2025": 777
+      },
+      "Guayabal": {
+        "2022": 682,
+        "2023": 427,
+        "2024": 493,
+        "2025": 526
+      },
+      "Belén": {
+        "2022": 2134,
+        "2023": 1393,
+        "2024": 1557,
+        "2025": 1543
+      },
+      "Palmitas": {
+        "2022": 90,
+        "2023": 74,
+        "2024": 77,
+        "2025": 96
+      },
+      "San Cristóbal": {
+        "2022": 1497,
+        "2023": 874,
+        "2024": 1081,
+        "2025": 1208
+      },
+      "Altavista": {
+        "2022": 487,
+        "2023": 336,
+        "2024": 344,
+        "2025": 342
+      },
+      "San Antonio de Prado": {
+        "2022": 1218,
+        "2023": 810,
+        "2024": 901,
+        "2025": 840
+      },
+      "Santa Elena": {
+        "2022": 348,
+        "2023": 233,
+        "2024": 238,
+        "2025": 319
+      }
+    },
+    "anios_disponibles": [
+      2022,
+      2023,
+      2024,
+      2025
+    ]
+  },
+  "fuentes": {
+    "ecv": {
+      "nombre": "Encuesta de Calidad de Vida de Medellín",
+      "entidad": "Alcaldía de Medellín",
+      "anios": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    "medata_salud": {
+      "nombre": "VC_Datos_Enfermedades",
+      "entidad": "Secretaría de Salud de Medellín",
+      "nivel": "comuna",
+      "serie": "2012-2022"
+    },
+    "siata": {
+      "nombre": "Datos validados de calidad del aire",
+      "entidad": "SIATA - Valle de Aburrá",
+      "variable": "PM2.5"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+# Dependencias de la FASE 2 (asistente). Opcionales: el motor determinista
+# funciona solo con la librería estándar + el knowledge_base.json del pipeline.
+#
+#   - streamlit: interfaz web para el jurado (modo CLI no la requiere)
+#   - openai:    capa LLM OPCIONAL; sin OPENAI_API_KEY el asistente igual responde
+#
+# Instalar solo si se quiere la interfaz web y/o la redacción con LLM:
+#   pip install -r asistente/requirements.txt
+streamlit==1.39.0
+openai==1.54.3
