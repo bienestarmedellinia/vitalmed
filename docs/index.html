@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medellín Bienestar AI</title>
+  <style>
+    :root { --azul: #1f4e79; --nar: #d9731a; --gris: #6b7280; }
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+           margin: 0; background: #f4f6f9; color: #1a1a1a; }
+    header { background: var(--azul); color: #fff; padding: 22px 20px; }
+    header h1 { margin: 0; font-size: 1.4rem; }
+    header p { margin: 6px 0 0; opacity: .9; font-size: .9rem; }
+    main { max-width: 820px; margin: 24px auto; padding: 0 16px; }
+    .caja { background: #fff; border-radius: 12px; padding: 18px;
+            box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-bottom: 18px; }
+    label { font-weight: 600; display: block; margin-bottom: 8px; }
+    .fila { display: flex; gap: 8px; }
+    input[type=text] { flex: 1; padding: 11px 12px; border: 1px solid #cbd3dc;
+                       border-radius: 8px; font-size: 1rem; }
+    button { background: var(--azul); color: #fff; border: 0; border-radius: 8px;
+             padding: 11px 18px; font-size: 1rem; cursor: pointer; }
+    button:hover { background: #163a5c; }
+    .sugeridas { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .sugeridas button { background: #eef2f7; color: var(--azul); font-size: .85rem;
+                        padding: 7px 12px; }
+    .sugeridas button:hover { background: #dde6f0; }
+    .respuesta h2 { color: var(--azul); font-size: 1.05rem; margin: 0 0 8px; }
+    .directa { font-size: 1.08rem; line-height: 1.5; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: .9rem; }
+    th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #eceff3; }
+    th { color: var(--gris); font-weight: 600; }
+    .bloque { margin-top: 12px; }
+    .bloque b { color: var(--azul); }
+    .limit { margin-top: 10px; font-size: .85rem; color: var(--nar); }
+    .pie { color: var(--gris); font-size: .8rem; text-align: center; margin: 10px 0 30px; }
+    .aviso { color: var(--nar); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🏥 Medellín Bienestar AI</h1>
+    <p>Asistente de inteligencia territorial para salud y bienestar.
+       Responde con cifras verificadas del pipeline; no inventa datos.</p>
+  </header>
+
+  <main>
+    <div class="caja">
+      <label for="q">Escribe tu pregunta:</label>
+      <div class="fila">
+        <input type="text" id="q" placeholder="¿Qué comunas priorizar en salud?"
+               autocomplete="off" />
+        <button onclick="preguntar()">Preguntar</button>
+      </div>
+      <div class="sugeridas" id="sugeridas"></div>
+    </div>
+
+    <div class="caja respuesta" id="resp" style="display:none;"></div>
+    <p class="pie" id="estado">Cargando datos…</p>
+  </main>
+
+  <script src="asistente.js"></script>
+  <script>
+    const SUGERIDAS = [
+      "¿Qué comunas deberían recibir mayor atención en salud?",
+      "¿Qué territorio tiene la menor tasa de mortalidad?",
+      "Si hay presupuesto para 3 territorios, ¿cuáles priorizar?",
+      "¿Cómo varió la mortalidad entre 2012 y 2022?",
+      "¿De dónde provienen los datos del proyecto?",
+    ];
+
+    function pintarSugeridas() {
+      const cont = document.getElementById("sugeridas");
+      SUGERIDAS.forEach((s) => {
+        const b = document.createElement("button");
+        b.textContent = s;
+        b.onclick = () => { document.getElementById("q").value = s; preguntar(); };
+        cont.appendChild(b);
+      });
+    }
+
+    function esc(s) {
+      return String(s).replace(/[&<>]/g, (c) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+    }
+
+    function preguntar() {
+      const q = document.getElementById("q").value.trim();
+      if (!q) return;
+      const r = window.Asistente.responder(q);
+      const div = document.getElementById("resp");
+      div.style.display = "block";
+      let html = `<h2>Respuesta</h2><div class="directa">${esc(r.respuesta_directa)}</div>`;
+      if (!r.encontrado) html += `<p class="aviso">Sin cifra directa para esta consulta.</p>`;
+      if (r.evidencia && r.evidencia.length) {
+        html += `<div class="bloque"><b>Evidencia</b><table><tr>
+                 <th>Indicador</th><th>Valor</th><th>Año</th><th>Territorio</th><th>Fuente</th></tr>`;
+        r.evidencia.forEach((e) => {
+          html += `<tr><td>${esc(e.indicador)}</td><td>${esc(e.valor)}</td>
+                   <td>${esc(e.anio ?? "")}</td><td>${esc(e.territorio ?? "")}</td>
+                   <td>${esc(e.fuente ?? "")}</td></tr>`;
+        });
+        html += `</table></div>`;
+      }
+      if (r.interpretacion) html += `<div class="bloque"><b>Interpretación:</b> ${esc(r.interpretacion)}</div>`;
+      if (r.recomendacion) html += `<div class="bloque"><b>Recomendación:</b> ${esc(r.recomendacion)}</div>`;
+      if (r.limitaciones) html += `<div class="limit">⚠️ Limitaciones: ${esc(r.limitaciones)}</div>`;
+      div.innerHTML = html;
+    }
+
+    document.getElementById("q").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") preguntar();
+    });
+
+    pintarSugeridas();
+    window.Asistente.cargarKB()
+      .then(() => { document.getElementById("estado").textContent =
+                    "Datos cargados. Escribe una pregunta o usa las sugeridas."; })
+      .catch((err) => { document.getElementById("estado").innerHTML =
+                        '<span class="aviso">No se pudo cargar knowledge_base.json: ' +
+                        esc(err.message) + "</span>"; });
+  </script>
+</body>
+</html>

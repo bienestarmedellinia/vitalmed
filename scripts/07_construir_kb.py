@@ -85,8 +85,15 @@ def main() -> int:
         log(f"cobertura ECV: {len(por_terr)} territorios")
 
     salida = KB / "knowledge_base.json"
-    salida.write_text(json.dumps(kb, indent=2, ensure_ascii=False), encoding="utf-8")
+    contenido = json.dumps(kb, indent=2, ensure_ascii=False)
+    salida.write_text(contenido, encoding="utf-8")
     log(f"Knowledge base -> {salida}")
+
+    # Copia para el asistente web estático (GitHub Pages sirve desde docs/).
+    docs = BASE / "docs"
+    if docs.exists():
+        (docs / "knowledge_base.json").write_text(contenido, encoding="utf-8")
+        log("Knowledge base copiado a docs/ (asistente web)")
     return 0
 
 
