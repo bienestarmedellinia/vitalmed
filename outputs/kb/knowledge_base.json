@@ -184,6 +184,129 @@
           "casos": 71
         }
       ]
+    },
+    "pm25_siata": {
+      "unidad": "µg/m³ (media anual)",
+      "anio": 2025,
+      "nivel": "estación de monitoreo (NO comuna)",
+      "advertencia": "SIATA mide por estación, no por comuna. No se atribuye PM2.5 a comunas sin un mapeo espacial validado.",
+      "ranking": [
+        {
+          "estacion": "CEN-TRAF",
+          "media_pm25": 24.14,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "MED-ALTA",
+          "media_pm25": 19.58,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "ITA-CJUS",
+          "media_pm25": 18.66,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "MED-BEME",
+          "media_pm25": 18.54,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "EST-TABL",
+          "media_pm25": 18.4,
+          "meses_validos": 10
+        },
+        {
+          "estacion": "MED-PROV",
+          "media_pm25": 17.07,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "MED-FISC",
+          "media_pm25": 16.97,
+          "meses_validos": 10
+        },
+        {
+          "estacion": "ITA-CONC",
+          "media_pm25": 16.75,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "MED-ARAN",
+          "media_pm25": 16.56,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "MED-PBLQ",
+          "media_pm25": 15.61,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "MED-SCRI",
+          "media_pm25": 14.72,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "CAL-JOAR",
+          "media_pm25": 14.67,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "MED-VILL",
+          "media_pm25": 14.25,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "MED-TESO",
+          "media_pm25": 13.97,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "EST-HOSP",
+          "media_pm25": 13.96,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "SAB-RAME",
+          "media_pm25": 13.89,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "ENV-HOSP",
+          "media_pm25": 13.71,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "GIR-EPM",
+          "media_pm25": 13.15,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "BEL-FEVE",
+          "media_pm25": 12.59,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "BAR-TORR",
+          "media_pm25": 11.68,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "COP-CVID",
+          "media_pm25": 11.55,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "MED-CES",
+          "media_pm25": 10.79,
+          "meses_validos": 11
+        },
+        {
+          "estacion": "MED-SELE",
+          "media_pm25": 7.91,
+          "meses_validos": 9
+        }
+      ]
     }
   },
   "territorios": {
