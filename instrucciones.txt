@@ -2,33 +2,41 @@ INSTRUCCIONES - Medellín, Bienestar Basado en Datos
 Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
 
 1. QUÉ ES
-   Pipeline automático que descarga datos oficiales de la Encuesta de Calidad
-   de Vida (ECV) de Medellín y de calidad del aire (SIATA), valida su
-   consistencia territorial, los homologa e integra en una tabla agregada por
-   comuna y corregimiento. Todo corre sin intervención manual en GitHub Actions.
+   Pipeline automático que descarga datos oficiales (ECV, SIATA y MEData),
+   valida, integra y analiza la salud y el bienestar por comuna de Medellín.
+   Incluye un asistente que responde preguntas con las cifras obtenidas.
 
 2. PROBARLO EN LÍNEA
-   Pestaña "Actions" del repositorio -> workflow "pipeline-ecv" -> "Run workflow".
-   El resultado queda como artefacto descargable "resultados-ecv".
+   Asistente web (sin instalar nada): [PEGAR ENLACE DE STREAMLIT CLOUD]
+   Pipeline: pestaña "Actions" del repo -> "pipeline-ecv" -> "Run workflow".
 
 3. ENTORNO
    Lenguaje: Python 3.11
-   Dependencias (ver requirements.txt, versiones fijas):
-     pandas==2.2.3 · openpyxl==3.1.5 · requests==2.32.3 · PyYAML==6.0.2 · pyarrow==17.0.0
+   Pipeline (requirements.txt, versiones fijas):
+     pandas==2.2.3 · openpyxl==3.1.5 · requests==2.32.3 · PyYAML==6.0.2
+     pyarrow==17.0.0 · matplotlib==3.9.2
+   Asistente (asistente/requirements.txt, opcional):
+     streamlit==1.39.0 · openai==1.54.3 (la API key es OPCIONAL)
 
 4. EJECUTARLO
+   # Opción A - Asistente en Windows: doble clic en EJECUTAR_ASISTENTE.bat
+   # Opción B - Asistente por comandos:
+   python asistente/app.py --cli "¿Qué comunas priorizar en salud?"
+   # Opción C - Pipeline completo (NO en equipos de poca RAM):
    pip install -r requirements.txt
    python scripts/01_descargar.py
    python scripts/03_validar.py
    python scripts/02_limpiar.py
    python scripts/04_integrar.py
-   (o, de forma automática: ejecutar el workflow .github/workflows/pipeline.yml)
+   python scripts/05_analizar.py
+   python scripts/06_visualizar.py
+   python scripts/07_construir_kb.py
 
 5. QUÉ DEBE VER
-   - El paso de validación imprime "VALIDACIÓN OK: llave territorial consistente".
-   - Se genera outputs/tablas/resumen_territorial.csv con los registros
-     encuestados por comuna/corregimiento y año (16 comunas + 5 corregimientos).
-   - Se genera data/raw/_manifiesto_descarga.json con la procedencia (URL + sha256).
+   - Asistente: ante "¿qué comuna priorizar?", responde "La Candelaria,
+     1325.6 defunciones por 100.000 hab. (2022)" con su evidencia y fuente.
+   - Pipeline: "VALIDACIÓN OK: llave territorial consistente"; genera
+     outputs/tablas/hallazgo.json y los gráficos en outputs/graficos/.
 
 6. DATOS Y FUENTES
    - ECV · Encuesta de Calidad de Vida (microdatos) · Alcaldía de Medellín
@@ -36,13 +44,19 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
      Licencia: Datos abiertos - Alcaldía de Medellín
    - SIATA · Datos validados de calidad del aire · Valle de Aburrá
      https://siata.gov.co/IDEAM/
-   - MEData · Datos abiertos de Medellín (conjunto obligatorio)
-     https://medata.app.medellin.gov.co/
-   Los microdatos NO se incluyen en el repositorio; el pipeline los descarga
-   desde la fuente. Solo se publican tablas agregadas, sin datos personales.
+   - MEData · Secretaría de Salud, servicio "VC_Datos_Enfermedades"
+     (mortalidad y natalidad por comuna)  ·  https://medata.app.medellin.gov.co/
+     Licencia: Datos abiertos - Alcaldía de Medellín
+   Los microdatos NO se publican; el pipeline los descarga desde la fuente.
+   Solo se publican tablas agregadas por comuna, sin datos personales.
 
 7. USO DE IA
-   [Declarar aquí la herramienta de IA usada y para qué, o "No se usó".]
+   - Asistente (asistente/llm.py): un modelo de lenguaje (OpenAI) redacta en
+     lenguaje natural las respuestas. NO genera cifras: solo expresa las que el
+     motor determinista ya recuperó del knowledge base. Sin API key, el
+     asistente funciona igual en modo determinista.
+   - Durante el desarrollo se usó un asistente de IA para apoyo de programación.
+   [Ajustar según el uso real del equipo.]
 
 8. CONTACTO
    [Nombre del líder] · [correo del líder]
