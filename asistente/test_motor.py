@@ -62,6 +62,14 @@ def test_tendencia():
                   r.encontrado and "44.6" in r.respuesta_directa, r.respuesta_directa)
 
 
+def test_hallazgo():
+    r = M.responder("¿Cuál es el hallazgo principal?")
+    return _check("hallazgo cita La Candelaria, 1325.6 y la brecha 4.58",
+                  r.encontrado and "La Candelaria" in r.respuesta_directa
+                  and "1325.6" in r.respuesta_directa
+                  and "4.58" in r.respuesta_directa, r.respuesta_directa)
+
+
 def test_fuentes():
     r = M.responder("¿De dónde salen los datos?")
     return _check("fuentes menciona las tres fuentes",
@@ -87,7 +95,7 @@ def test_no_pii():
 def main() -> int:
     tests = [test_ranking_top, test_ranking_bottom, test_priorizacion_3,
              test_indice_multivariable,
-             test_tendencia, test_fuentes, test_desconocida_no_inventa, test_no_pii]
+             test_tendencia, test_hallazgo, test_fuentes, test_desconocida_no_inventa, test_no_pii]
     if not M.kb:
         print("ERROR: no hay knowledge_base.json. Ejecuta scripts/07_construir_kb.py")
         return 1

@@ -1,6 +1,6 @@
 @echo off
 REM ============================================================
-REM  Pulso Medellin - Asistente (Windows)
+REM  Bienestar Medellin IA - Asistente (Windows)
 REM  Doble clic para iniciar. No requiere conocimientos tecnicos.
 REM  Disenado para ejecutarse sin errores incluso sin contexto.
 REM ============================================================

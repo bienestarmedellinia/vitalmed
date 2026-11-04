@@ -58,6 +58,9 @@ class MotorAsistente:
     def _intencion(self, q: str) -> str:
         qn = _norm(q)
         # El orden importa: intenciones específicas antes que las genéricas.
+        if any(w in qn for w in ["hallazgo", "conclusion principal",
+                                 "resultado principal", "descubrimiento"]):
+            return "hallazgo"
         if any(w in qn for w in ["aire", "contaminacion", "pm2.5", "pm25",
                                  "pm 2.5", "particulas", "ambiental",
                                  "calidad del aire", "polucion", "siata", "respirar"]):
@@ -217,6 +220,40 @@ class MotorAsistente:
                                "periodos y zonas con mayor PM2.5."),
                 limitaciones=(pm.get("advertencia", "") + " Una asociación con la "
                               "salud no implica causalidad sin un diseño adecuado."))
+
+        if intent == "hallazgo":
+            h = self.kb.get("indicadores", {}).get("hallazgo_mortalidad", {})
+            top, bajo = h.get("comuna_mayor_tasa"), h.get("comuna_menor_tasa")
+            if not top or not bajo:
+                return Respuesta("El hallazgo principal no está en el KB.",
+                                 encontrado=False)
+            var = h.get("variacion_pct_2012_2022_comuna_top")
+            fuente = "MEData - Secretaría de Salud"
+            ev = [
+                {"indicador": "tasa de mortalidad", "valor": top["tasa"],
+                 "anio": h.get("anio_referencia", 2022),
+                 "territorio": top["nombre"], "fuente": fuente},
+                {"indicador": "brecha vs menor tasa", "valor": f"{h.get('brecha_veces')}x",
+                 "anio": h.get("anio_referencia", 2022),
+                 "territorio": bajo["nombre"], "fuente": fuente},
+            ]
+            if var is not None:
+                ev.append({"indicador": "variación tasa 2012-2022", "valor": f"{var}%",
+                           "territorio": top["nombre"], "fuente": fuente})
+            return Respuesta(
+                respuesta_directa=(
+                    f"Hallazgo principal: {top['nombre']} tiene la mayor tasa de "
+                    f"mortalidad ({top['tasa']} por 100.000 hab., "
+                    f"{h.get('anio_referencia', 2022)}), {h.get('brecha_veces')} veces la de "
+                    f"{bajo['nombre']} ({bajo['tasa']})"
+                    + (f", y aumentó {var}% entre 2012 y 2022." if var is not None else ".")),
+                evidencia=ev,
+                interpretacion=("La brecha territorial es grande y persistente: "
+                                "el lugar de residencia se asocia con la carga de mortalidad."),
+                recomendacion=("Priorizar intervenciones intersectoriales en los "
+                               "territorios de mayor índice de priorización y monitorear su evolución."),
+                limitaciones=("Tasas brutas, sin estandarizar por edad. "
+                              "Asociación, no causalidad."))
 
         if intent == "fuentes":
             fuentes = self.kb.get("fuentes", {})

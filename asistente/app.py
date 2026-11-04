@@ -73,8 +73,8 @@ def _imprimir(r) -> None:
 def run_streamlit() -> None:
     import streamlit as st
 
-    st.set_page_config(page_title="Pulso Medellín", page_icon="🏥")
-    st.title("🏥 Pulso Medellín")
+    st.set_page_config(page_title="Bienestar Medellín IA", page_icon="🏥")
+    st.title("🏥 Bienestar Medellín IA")
     st.caption("Asistente de inteligencia territorial para salud y bienestar. "
                "Responde con cifras verificadas del pipeline; no inventa datos.")
 

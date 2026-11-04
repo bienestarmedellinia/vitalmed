@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pulso Medellín · Bienestar basado en datos</title>
+  <title>Bienestar Medellín IA · Salud y bienestar basados en datos</title>
   <meta name="description" content="Portal interactivo de inteligencia territorial para salud y bienestar en Medellín: mortalidad, salud mental y calidad del aire con datos abiertos reales (MEData, ECV, SIATA)." />
   <script>document.documentElement.classList.add("js");</script>
   <style>
@@ -23,16 +23,28 @@
     nav a { color:#c9d9ea; text-decoration:none; font-size:.86rem; padding:4px 3px; border-bottom:2px solid transparent; }
     nav a:hover, nav a:focus { color:#fff; border-color:var(--nar); }
 
-    .hero { position:relative; overflow:hidden; color:#fff; padding:44px 0 70px;
+    .hero { position:relative; overflow:hidden; color:#fff; padding:44px 0 150px;
             background:radial-gradient(circle at 85% 10%, #2b6cb0 0%, transparent 45%), linear-gradient(135deg,#1f4e79 0%,#0f2a44 100%); }
     .hero h1 { margin:0 0 6px; font-size:clamp(2rem,6vw,3.3rem); letter-spacing:-1px; }
     .hero h1 span { color:#ffb36b; }
     .hero .lema { font-size:1.1rem; opacity:.93; margin:0 0 22px; max-width:700px; }
-    .hallazgo { background:rgba(255,255,255,.12); border-left:5px solid var(--nar); border-radius:10px; padding:14px 18px; font-size:1.15rem; max-width:780px; backdrop-filter:blur(3px); }
-    .hallazgo small { display:block; margin-top:6px; opacity:.85; font-size:.85rem; }
-    .pulso { position:absolute; left:0; right:0; bottom:0; width:100%; height:60px; opacity:.55; }
-    .pulso path { fill:none; stroke:#ffb36b; stroke-width:2.5; stroke-dasharray:1400; stroke-dashoffset:1400; animation:latido 4s linear infinite; }
-    @keyframes latido { to { stroke-dashoffset:-1400; } }
+    .trio { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin-top:6px; }
+    .tarjeta { background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); border-radius:12px; padding:14px 16px; backdrop-filter:blur(3px); }
+    .tarjeta h2 { margin:0 0 6px; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:#ffcf9f; }
+    .tarjeta p { margin:0; font-size:1rem; }
+    .tarjeta.clave { border-left:5px solid var(--nar); font-size:1.05rem; }
+    .tarjeta small { display:block; margin-top:6px; opacity:.85; font-size:.8rem; }
+    .rapidas { margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+    .rapidas span { font-size:.88rem; opacity:.9; margin-right:4px; }
+    .rapidas button { background:#fff; color:var(--azul-osc); font-size:.88rem; padding:8px 14px; border-radius:20px; font-weight:600; }
+    .rapidas button:hover { background:#ffe3c9; }
+    .latido { position:absolute; left:0; right:0; bottom:46px; height:84px; pointer-events:none; }
+    .latido svg { width:100%; height:100%; display:block; overflow:visible; }
+    .latido .base { fill:none; stroke:rgba(255,255,255,.28); stroke-width:3; stroke-linejoin:round; }
+    .latido .onda { fill:none; stroke:#ffb36b; stroke-width:5; stroke-linecap:round; stroke-linejoin:round;
+                    stroke-dasharray:380 1420; stroke-dashoffset:380; animation:latido 3.2s linear infinite;
+                    filter:drop-shadow(0 0 6px #ff9a3c) drop-shadow(0 0 14px #ff9a3c); }
+    @keyframes latido { to { stroke-dashoffset:-1420; } }
 
     .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px; margin:-40px auto 0; position:relative; z-index:2; }
     .kpi { background:#fff; border-radius:14px; padding:16px; box-shadow:0 6px 18px rgba(15,42,68,.18); border-top:4px solid var(--nar); transition:transform .2s; }
@@ -101,13 +113,45 @@
     .fuentes .caja h3 { margin:0 0 4px; font-size:1rem; color:var(--azul); }
     .etq { display:inline-block; font-size:.72rem; background:#e3efe8; color:var(--verde); border-radius:20px; padding:2px 9px; font-weight:600; margin-bottom:6px; }
     ul.lim { margin:0; padding-left:20px; } ul.lim li { margin-bottom:6px; }
+
+    /* Flujo interactivo del método */
+    .disparos { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:14px; font-size:.9rem; }
+    .disp { background:#e3efe8; color:var(--verde); border-radius:20px; padding:3px 12px; font-weight:600; font-size:.82rem; }
+    .pasos-flujo { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(104px,1fr)); gap:10px; }
+    .pasos-flujo li { position:relative; }
+    .paso { width:100%; background:#eef2f7; color:var(--azul-osc); border:2px solid transparent; border-radius:12px; padding:10px 6px; font-size:.82rem; font-weight:600; display:flex; flex-direction:column; align-items:center; gap:4px; transition:transform .15s, background .2s, border-color .2s; }
+    .paso:hover { background:#dde6f0; transform:translateY(-2px); }
+    .paso .num { background:var(--azul); color:#fff; border-radius:50%; width:26px; height:26px; line-height:26px; font-size:.8rem; }
+    .paso .ico { font-size:1.4rem; line-height:1; }
+    .paso.hecho { background:#e3efe8; } .paso.hecho .num { background:var(--verde); }
+    .paso.activo { background:#fff3e6; border-color:var(--nar); transform:translateY(-3px); box-shadow:0 4px 12px rgba(217,115,26,.25); }
+    .paso.activo .num { background:var(--nar); animation:pulsa 1.4s ease-in-out infinite; }
+    @keyframes pulsa { 50% { box-shadow:0 0 0 7px rgba(217,115,26,.25); } }
+    .progreso { height:6px; background:#e3e9f1; border-radius:6px; overflow:hidden; margin:14px 0 10px; }
+    .progreso i { display:block; height:100%; width:0; background:linear-gradient(90deg,var(--azul),var(--nar)); transition:width .5s; }
+    .controles { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+    .controles .sec { background:#eef2f7; color:var(--azul); }
+    .controles .sec:hover { background:#dde6f0; }
+    .detalle { background:#f7f9fc; border-radius:12px; padding:16px; display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:16px; }
+    @media (max-width:760px) { .detalle { grid-template-columns:1fr; } }
+    .detalle h3 { margin:0 0 6px; color:var(--azul-osc); }
+    .detalle code, code { background:#e3e9f1; border-radius:5px; padding:1px 6px; font-size:.85em; }
+    .detalle h4 { margin:0 0 4px; font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; color:var(--gris); }
+    .detalle ul { margin:0 0 10px; padding-left:18px; font-size:.9rem; }
+    .vivo { background:#fff7ed; border-left:4px solid var(--nar); border-radius:6px; padding:8px 12px; font-size:.9rem; }
+    .garantia { color:var(--verde); font-weight:600; font-size:.9rem; margin-top:8px; }
+    .tabla-wrap { overflow-x:auto; }
+    table.transp { min-width:860px; font-size:.86rem; }
+    table.transp td { vertical-align:top; }
+    .solo-lector { position:absolute; left:-999px; }
+    @media (prefers-reduced-motion:reduce) { .paso, .progreso i { transition:none; } .paso.activo .num { animation:none; } }
     footer { background:var(--azul-osc); color:#c9d6e3; padding:22px 0; font-size:.85rem; margin-top:40px; }
     footer a { color:#fff; }
 
     .js .rev { opacity:0; transform:translateY(22px); transition:opacity .6s, transform .6s; }
     .js .rev.vis { opacity:1; transform:none; }
     @media (prefers-reduced-motion:reduce) {
-      html { scroll-behavior:auto; } .pulso path { animation:none; stroke-dashoffset:0; }
+      html { scroll-behavior:auto; } .latido .onda { animation:none; stroke-dasharray:none; }
       .js .rev { opacity:1; transform:none; transition:none; } .kpi, .barra i { transition:none; }
     }
   </style>
@@ -116,7 +160,7 @@
   <a class="salto" href="#contenido">Saltar al contenido</a>
   <nav aria-label="Secciones">
     <div class="wrap">
-      <b>Pulso Medellín</b>
+      <b>Bienestar Medellín IA</b>
       <a href="#mortalidad">Mortalidad</a>
       <a href="#doble">Doble carga</a>
       <a href="#simulador">Simulador</a>
@@ -124,19 +168,29 @@
       <a href="#aire">Aire</a>
       <a href="#asistente">Pregunta</a>
       <a href="#metodo">Método</a>
+      <a href="#transparencia">Transparencia</a>
     </div>
   </nav>
 
   <header class="hero">
     <div class="wrap">
-      <h1>Pulso <span>Medellín</span></h1>
-      <p class="lema">Dónde duele más en la ciudad y por dónde empezar: salud, salud mental y calidad del aire
-        sobre datos abiertos reales, recalculados automáticamente. Explora, mueve los controles y cuestiona los resultados.</p>
-      <div class="hallazgo" id="hero-hallazgo" aria-live="polite">Cargando hallazgo…</div>
+      <h1>Bienestar Medellín <span>IA</span></h1>
+      <p class="lema">Salud, salud mental y calidad del aire de Medellín sobre datos abiertos reales,
+        recalculados automáticamente. Explora, mueve los controles y cuestiona los resultados.</p>
+      <div class="trio">
+        <div class="tarjeta"><h2>Pregunta de investigación</h2>
+          <p>¿Cómo usar el análisis de datos para identificar factores ambientales, sociales y territoriales que afectan la salud y el bienestar de Medellín?</p></div>
+        <div class="tarjeta clave" id="hero-hallazgo" aria-live="polite"><h2>Hallazgo principal</h2><p>Cargando…</p></div>
+        <div class="tarjeta" id="hero-propuesta" aria-live="polite"><h2>Propuesta de mejora</h2><p>Cargando…</p></div>
+      </div>
+      <div class="rapidas" id="rapidas"><span>Pregúntale a la IA:</span></div>
     </div>
-    <svg class="pulso" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0 35 H300 L320 35 L335 8 L355 52 L372 20 L385 35 H700 L720 35 L735 8 L755 52 L772 20 L785 35 H1200"/>
-    </svg>
+    <div class="latido" aria-hidden="true">
+      <svg viewBox="0 0 1200 84" preserveAspectRatio="xMidYMid slice">
+        <path class="base" d="M0 46 H260 L290 46 L312 10 L342 78 L366 24 L384 46 H640 L670 46 L692 10 L722 78 L746 24 L764 46 H1200"/>
+        <path class="onda" d="M0 46 H260 L290 46 L312 10 L342 78 L366 24 L384 46 H640 L670 46 L692 10 L722 78 L746 24 L764 46 H1200"/>
+      </svg>
+    </div>
   </header>
 
   <main id="contenido" class="wrap">
@@ -222,23 +276,19 @@
     </section>
 
     <section id="metodo" class="rev">
-      <h2>7 · Método, fuentes y automatización</h2>
-      <p class="sub">Todo es reproducible: el repositorio recalcula resultados, gráficos y este portal sin intervención manual.</p>
-      <div class="caja" style="margin-bottom:16px">
-        <ol class="pasos">
-          <li>Descarga de fuentes abiertas</li><li>Validación</li><li>Limpieza</li>
-          <li>Integración</li><li>Análisis e índice</li><li>Visualización</li><li>Base de conocimiento → portal</li>
-        </ol>
-        <p class="nota">Ejecutado en GitHub Actions (push, ejecución manual y cron mensual), con commit automático de resultados. Sin datos personales; sin datos sintéticos.
-          <a href="knowledge_base.json">Descargar la base de conocimiento (JSON)</a>.</p>
-      </div>
-      <div class="fuentes">
-        <div class="caja"><span class="etq">Salud · núcleo</span><h3>MEData · Secretaría de Salud</h3>
-          <p class="nota">Mortalidad, natalidad e intento de suicidio por comuna, 2012–2022 (VC_Datos_Enfermedades).</p></div>
-        <div class="caja"><span class="etq">Social · territorial</span><h3>Encuesta de Calidad de Vida</h3>
-          <p class="nota">Alcaldía de Medellín, 2022–2025; 21 territorios validados (sin código 99 «sin información»).</p></div>
-        <div class="caja"><span class="etq">Ambiental</span><h3>SIATA · Valle de Aburrá</h3>
-          <p class="nota">PM2.5 validado, agregado por estación con ≥75 % de datos válidos.</p></div>
+      <h2>7 · Método y automatización: cómo se construye cada cifra</h2>
+      <p class="sub">Haz clic en cualquier paso, o pulsa «Reproducir flujo» para recorrerlo completo. Todo corre en GitHub Actions, sin intervención manual.</p>
+      <div class="caja flujo">
+        <div class="disparos"><b>Se activa con:</b>
+          <span class="disp">⬆️ push a main</span><span class="disp">🖱️ ejecución manual</span><span class="disp">📅 cron: día 1 de cada mes</span></div>
+        <ol class="pasos-flujo" id="pasos" aria-label="Pasos del pipeline"></ol>
+        <div class="progreso" aria-hidden="true"><i id="prog"></i></div>
+        <div class="controles">
+          <button type="button" id="f-ant" class="sec">← Anterior</button>
+          <button type="button" id="f-play">▶ Reproducir flujo</button>
+          <button type="button" id="f-sig" class="sec">Siguiente →</button>
+        </div>
+        <div class="detalle" id="detalle" aria-live="polite"></div>
       </div>
       <div class="caja" style="margin-top:16px">
         <h3 style="margin-top:0;color:var(--azul)">Honestidad metodológica</h3>
@@ -249,6 +299,48 @@
           <li>MEData cubre hasta 2022; el aire, 2024–2025. Las series no se mezclan en una sola cifra.</li>
           <li>La población de cada territorio se deriva de casos ÷ tasa; sirve para la tasa de ciudad, no sustituye proyecciones oficiales del DANE.</li>
         </ul>
+      </div>
+    </section>
+
+    <section id="transparencia" class="rev">
+      <h2>8 · Transparencia de datos y uso de IA</h2>
+      <p class="sub">Qué datasets se usaron, de dónde vienen, bajo qué condiciones y para qué. Cada cifra del portal se puede rastrear hasta una de estas fuentes.</p>
+      <div class="caja tabla-wrap">
+        <table class="transp">
+          <caption class="solo-lector">Datasets utilizados</caption>
+          <thead><tr><th>Dataset</th><th>Entidad</th><th>Qué se usó</th><th>Enlace</th><th>Licencia / condiciones</th><th>Rol en el análisis</th></tr></thead>
+          <tbody>
+            <tr><td><span class="etq">MEData · obligatorio</span><br>VC_Datos_Enfermedades · capa 3 «Mortalidad»</td><td>Secretaría de Salud de Medellín</td>
+              <td>Casos y tasa por comuna, 2012–2022</td>
+              <td><a href="https://www.medellin.gov.co/servidormapas/rest/services/salud_protec_soc/VC_Datos_Enfermedades/MapServer" rel="noopener">Servicio REST</a> · <a href="https://medata.app.medellin.gov.co/" rel="noopener">Portal MEData</a></td>
+              <td>Datos abiertos · Alcaldía de Medellín / Secretaría de Salud</td><td>Hallazgo principal, tendencia e índice</td></tr>
+            <tr><td><span class="etq">MEData · obligatorio</span><br>VC_Datos_Enfermedades · capa 2 «Intento de suicidio»</td><td>Secretaría de Salud de Medellín</td>
+              <td>Tasa por comuna, 2022</td>
+              <td><a href="https://www.medellin.gov.co/servidormapas/rest/services/salud_protec_soc/VC_Datos_Enfermedades/MapServer" rel="noopener">Servicio REST</a></td>
+              <td>Datos abiertos · Alcaldía de Medellín / Secretaría de Salud</td><td>Componente de salud mental del índice</td></tr>
+            <tr><td><span class="etq">Social</span><br>Encuesta de Calidad de Vida (ECV) 2022–2025</td><td>Alcaldía de Medellín</td>
+              <td>Microdatos → solo conteos agregados por territorio</td>
+              <td><a href="https://www.medellin.gov.co/es/centro-documental/encuesta-calidad-de-vida/" rel="noopener">Centro documental</a></td>
+              <td>Datos abiertos · Alcaldía de Medellín</td><td>Cobertura muestral y llave territorial de 21 territorios. No alimenta el índice.</td></tr>
+            <tr><td><span class="etq">Ambiental</span><br>Datos validados de calidad del aire (PM2.5), 2024–2025</td><td>SIATA · Valle de Aburrá</td>
+              <td>Medias anuales por estación (≥ 75 % de datos válidos)</td>
+              <td><a href="https://siata.gov.co/IDEAM/" rel="noopener">siata.gov.co/IDEAM</a></td>
+              <td>Datos validados publicados por SIATA; condiciones de uso en su sitio</td><td>Contexto ambiental por estación (fuera del índice)</td></tr>
+          </tbody>
+        </table>
+        <p class="nota">Las licencias se toman del manifiesto del proyecto (<a href="https://github.com/watabares/medellin-bienestar-datos/blob/main/scripts/sources.yml" rel="noopener">scripts/sources.yml</a>); consulta la ficha de cada conjunto en su portal para las condiciones vigentes. Referencia OMS: guías de calidad del aire 2021.</p>
+      </div>
+      <div class="fuentes" style="margin-top:16px">
+        <div class="caja"><span class="etq">Privacidad</span><h3>Sin datos personales</h3>
+          <p class="nota">Los microdatos no se publican: el pipeline los descarga desde la fuente y solo se versionan tablas agregadas por territorio o estación. Sin datos sintéticos.</p></div>
+        <div class="caja"><span class="etq">Reproducible</span><h3>Trazabilidad total</h3>
+          <p class="nota">Código, manifiesto de fuentes y resultados en el <a href="https://github.com/watabares/medellin-bienestar-datos" rel="noopener">repositorio público</a>. La base de conocimiento se puede <a href="knowledge_base.json">descargar</a>.</p></div>
+        <div class="caja"><span class="etq">Declaración de IA</span><h3>Uso de inteligencia artificial</h3>
+          <ul class="lim nota" style="padding-left:18px">
+            <li><b>Desarrollo:</b> Kiro CLI (asistente de programación con IA) escribió los scripts, el portal y la documentación; el equipo revisa el resultado. ChatGPT y Gemini se usaron solo en consultas exploratorias iniciales (ideas y búsqueda de fuentes), sin generar código ni cifras.</li>
+            <li><b>Asistente de este portal:</b> no usa IA generativa. Es un motor determinista que solo responde con cifras de la base de conocimiento.</li>
+            <li><b>Opcional, apagado por defecto:</b> <code>asistente/llm.py</code> puede usar un modelo de OpenAI solo para redactar mejor una respuesta ya calculada. No genera cifras y no se usa en este portal web.</li>
+          </ul></div>
       </div>
     </section>
   </main>
@@ -357,9 +449,14 @@
       const top = h.comuna_mayor_tasa, bajo = h.comuna_menor_tasa;
       if (!top || !bajo) return;
       $("hero-hallazgo").innerHTML =
-        `<b>${esc(top.nombre)}</b> tiene una tasa de mortalidad <b>${fmt(h.brecha_veces, 2)}×</b> la de ${esc(bajo.nombre)}
-         (${fmt(top.tasa)} vs ${fmt(bajo.tasa)} por 100.000 hab., ${h.anio_referencia}).
+        `<h2>Hallazgo principal</h2><p><b>${esc(top.nombre)}</b> tiene una tasa de mortalidad <b>${fmt(h.brecha_veces, 2)}×</b> la de ${esc(bajo.nombre)}
+         (${fmt(top.tasa)} vs ${fmt(bajo.tasa)} por 100.000 hab., ${h.anio_referencia}).</p>
          <small>Fuente: MEData · Secretaría de Salud. Asociación, no causalidad.</small>`;
+      const t3 = (((ind.indice_priorizacion || {}).ranking) || []).slice(0, 3).map((x) => x.nombre);
+      $("hero-propuesta").innerHTML = t3.length
+        ? `<h2>Propuesta de mejora</h2><p>Concentrar intervenciones integrales (salud física + salud mental) en <b>${esc(t3.join(", "))}</b>
+           y monitorear ambos indicadores.</p><small>Según el índice de priorización; prueba otros pesos en el simulador.</small>`
+        : `<h2>Propuesta de mejora</h2><p>Priorizar intervenciones en los territorios de mayor mortalidad.</p>`;
       const k = [
         [top.tasa, 1, "", "", "Mayor tasa de mortalidad", `${top.nombre} · por 100.000 hab. · ${h.anio_referencia}`],
         [h.brecha_veces, 2, "", "×", "Brecha entre territorios", `vs ${bajo.nombre}`],
@@ -546,6 +643,7 @@
 
     /* ---------- Asistente (sin cambios de lógica) ---------- */
     const SUGERIDAS = [
+      "¿Cuál es el hallazgo principal?",
       "¿Qué comunas deberían recibir mayor atención en salud?",
       "¿Qué territorio tiene la menor tasa de mortalidad?",
       "Si hay presupuesto para 3 territorios, ¿cuáles priorizar?",
@@ -586,6 +684,21 @@
       b.onclick = () => { $("q").value = s; preguntar(); };
       $("sugeridas").appendChild(b);
     });
+    const RAPIDAS = [
+      ["Hallazgo principal", "¿Cuál es el hallazgo principal?"],
+      ["Qué territorios priorizar", "Si hay presupuesto para 3 territorios, ¿cuáles priorizar?"],
+      ["Análisis de calidad del aire", "¿Qué relación hay entre la contaminación del aire y la salud?"],
+      ["Evolución 2012–2022", "¿Cómo varió la mortalidad entre 2012 y 2022?"],
+    ];
+    RAPIDAS.forEach(([txt, preg]) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.textContent = txt;
+      b.onclick = () => {
+        $("q").value = preg; preguntar();
+        $("asistente").scrollIntoView({ behavior: REDUCIR ? "auto" : "smooth" });
+      };
+      $("rapidas").appendChild(b);
+    });
     $("btn-preguntar").onclick = preguntar;
     $("q").addEventListener("keydown", (e) => { if (e.key === "Enter") preguntar(); });
 
@@ -597,9 +710,87 @@
       els.forEach((e) => io.observe(e));
     })();
 
+    /* ---------- 7. Flujo interactivo del método ---------- */
+    let KBG = null, pasoActual = 0, temporizador = null;
+    const PASOS = [
+      { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py",
+        desc: "Baja los datos únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia.",
+        entra: ["ECV 2022–2025 (Alcaldía de Medellín)", "SIATA · PM2.5 validado 2024–2025", "MEData · VC_Datos_Enfermedades (mortalidad, intento de suicidio, natalidad)"],
+        sale: ["data/raw/ (no se publica)", "manifiesto de descarga con la procedencia"], garantia: "Datos reales, nunca sintéticos." },
+      { ico: "✅", n: "Validar", script: "scripts/03_validar.py",
+        desc: "Comprueba que la llave territorial sea consistente entre años y cubra los 21 territorios (16 comunas + 5 corregimientos). Si una base no cumple, el pipeline se detiene y el fallo queda visible.",
+        entra: ["Bases ECV 2022–2025"], sale: ["«VALIDACIÓN OK: llave territorial consistente»"], garantia: "El código 99 «sin información» se excluye.",
+        vivo: (k) => `${(k.meta || {}).territorios_oficiales || 21} territorios oficiales en el KB.` },
+      { ico: "🧹", n: "Limpiar", script: "scripts/02_limpiar.py",
+        desc: "Homologa la variable territorial, que cambia de nombre cada año (p_006 / P_007 / A.7), a una columna común y añade los nombres oficiales. Lee por bloques para no agotar la memoria.",
+        entra: ["Bases ECV originales"], sale: ["Parquet liviano en data/processed/ (no se publica)"], garantia: "No se cruzan microdatos individuales entre fuentes." },
+      { ico: "🔗", n: "Integrar", script: "scripts/04_integrar.py",
+        desc: "Combina las bases en una tabla agregada por territorio y año. Es la única tabla derivada de la ECV que se publica.",
+        entra: ["Parquet homologado"], sale: ["outputs/tablas/resumen_territorial.csv"], garantia: "Solo agregados, sin datos personales.",
+        vivo: (k) => { const c = (k.territorios || {}).cobertura_ecv; return c ? `Cobertura ECV en ${Object.keys(c).length} territorios, años ${((k.territorios || {}).anios_disponibles || []).join(", ")}.` : null; } },
+      { ico: "📊", n: "Analizar", script: "scripts/05_analizar.py",
+        desc: "Cruza por comuna la mortalidad y el intento de suicidio (MEData), calcula la brecha y la variación 2012–2022, y construye el índice de priorización (min-max 0–100).",
+        entra: ["MEData · mortalidad e intento de suicidio", "Resumen territorial ECV"], sale: ["hallazgo.json", "analisis_mortalidad_comuna.csv", "indice_priorizacion_comuna.csv"], garantia: "Cada cifra sale del cálculo, no se escribe a mano.",
+        vivo: (k) => { const h = (k.indicadores || {}).hallazgo_mortalidad; return h && h.brecha_veces ? `Brecha calculada: ${fmt(h.brecha_veces, 2)}× entre ${h.comuna_mayor_tasa.nombre} y ${h.comuna_menor_tasa.nombre}.` : null; } },
+      { ico: "🖼️", n: "Visualizar", script: "scripts/06_visualizar.py",
+        desc: "Genera los gráficos PNG sin necesidad de pantalla y el diagrama del pipeline, para la ficha de hallazgos.",
+        entra: ["Tablas de outputs/tablas/"], sale: ["outputs/graficos/*.png"], garantia: "Gráficos regenerados en cada ejecución." },
+      { ico: "🌫️", n: "Aire", script: "scripts/08_siata.py",
+        desc: "Extrae el PM2.5 de los ZIP mensuales de SIATA y lo agrega por estación y año, exigiendo ≥ 75 % de datos válidos. No atribuye PM2.5 a comunas.",
+        entra: ["ZIP mensuales de SIATA"], sale: ["outputs/tablas/siata_pm25_estacion.csv"], garantia: "Se reporta por estación, con su advertencia metodológica.",
+        vivo: (k) => { const pm = (k.indicadores || {}).pm25_siata; return pm && pm.ranking ? `${pm.ranking.length} estaciones con dato en ${pm.anio}.` : null; } },
+      { ico: "🧠", n: "Knowledge base", script: "scripts/07_construir_kb.py",
+        desc: "Consolida todo en un único JSON que alimenta este portal y el asistente. El asistente solo lee ese archivo: nunca vuelve a tocar los microdatos.",
+        entra: ["Tablas y hallazgo del análisis"], sale: ["outputs/kb/knowledge_base.json", "docs/knowledge_base.json (portal)"], garantia: "El asistente no puede inventar cifras: solo recupera las del KB.",
+        vivo: (k) => ((k.meta || {}).generado_utc ? `Última generación: ${k.meta.generado_utc} UTC.` : null) },
+      { ico: "🚀", n: "Probar y publicar", script: ".github/workflows/pipeline.yml",
+        desc: "Ejecuta las pruebas automáticas del asistente (si fallan, el workflow se detiene), guarda los resultados como artefacto y hace commit automático. GitHub Pages republica este portal.",
+        entra: ["knowledge_base.json y tablas"], sale: ["Artefacto «resultados-ecv»", "Commit automático de outputs/ y docs/", "Portal actualizado"], garantia: "Del dato oficial a este portal sin pasos manuales." },
+    ];
+    const lista = (a) => `<ul>${a.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+    function pintarPaso() {
+      document.querySelectorAll(".paso").forEach((b, i) => {
+        b.classList.toggle("activo", i === pasoActual);
+        b.classList.toggle("hecho", i < pasoActual);
+        if (i === pasoActual) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current");
+      });
+      $("prog").style.width = ((pasoActual + 1) / PASOS.length * 100) + "%";
+      const p = PASOS[pasoActual];
+      const vivo = p.vivo && KBG ? p.vivo(KBG) : null;
+      $("detalle").innerHTML = `
+        <div><h3>${pasoActual + 1}. ${esc(p.n)}</h3><p style="margin:0 0 8px">${esc(p.desc)}</p>
+          <code>${esc(p.script)}</code>
+          ${vivo ? `<div class="vivo" style="margin-top:10px"><b>Resultado en vivo:</b> ${esc(vivo)}</div>` : ""}
+          <div class="garantia">✔ ${esc(p.garantia)}</div></div>
+        <div><h4>Entra</h4>${lista(p.entra)}<h4>Sale</h4>${lista(p.sale)}</div>`;
+    }
+    function irAPaso(i) { pasoActual = Math.max(0, Math.min(PASOS.length - 1, i)); pintarPaso(); }
+    function detener() { if (temporizador) { clearInterval(temporizador); temporizador = null; } $("f-play").textContent = "▶ Reproducir flujo"; }
+    function reproducir() {
+      if (temporizador) return detener();
+      $("f-play").textContent = "⏸ Pausar";
+      if (pasoActual >= PASOS.length - 1) irAPaso(0);
+      temporizador = setInterval(() => {
+        if (pasoActual >= PASOS.length - 1) return detener();
+        irAPaso(pasoActual + 1);
+        if (pasoActual >= PASOS.length - 1) detener();
+      }, 1900);
+    }
+    function iniciarFlujo() {
+      $("pasos").innerHTML = PASOS.map((p, i) =>
+        `<li><button type="button" class="paso" data-i="${i}"><span class="ico" aria-hidden="true">${p.ico}</span><span class="num">${i + 1}</span><span>${esc(p.n)}</span></button></li>`).join("");
+      document.querySelectorAll(".paso").forEach((b) => { b.onclick = () => { detener(); irAPaso(+b.dataset.i); }; });
+      $("f-ant").onclick = () => { detener(); irAPaso(pasoActual - 1); };
+      $("f-sig").onclick = () => { detener(); irAPaso(pasoActual + 1); };
+      $("f-play").onclick = reproducir;
+      irAPaso(0);
+    }
+    iniciarFlujo();
+
     /* ---------- Arranque ---------- */
     function pintarPortal(KB) {
       const ind = KB.indicadores || {};
+      KBG = KB; pintarPaso();
       construirTerritorios(ind);
       pintarHero(KB);
       if (T.length) {

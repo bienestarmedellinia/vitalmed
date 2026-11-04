@@ -16,6 +16,8 @@ function detectarIntencion(q) {
   const qn = norm(q);
   const tiene = (arr) => arr.some((w) => qn.includes(w));
   // El orden importa: específicas antes que genéricas (idéntico a motor.py).
+  if (tiene(["hallazgo", "conclusion principal", "resultado principal", "descubrimiento"]))
+    return "hallazgo";
   if (tiene(["aire", "contaminacion", "pm2.5", "pm25", "pm 2.5", "particulas",
              "ambiental", "calidad del aire", "polucion", "siata", "respirar"]))
     return "ambiental";
@@ -193,6 +195,31 @@ function responder(pregunta) {
       recomendacion: "Reforzar seguimiento y medidas preventivas en los periodos y zonas con mayor PM2.5.",
       limitaciones: pm.advertencia + " Además, una asociación con la salud no implica causalidad sin un diseño de estudio adecuado.",
       grafico: grafico,
+    };
+  }
+
+  if (intent === "hallazgo") {
+    const h = (KB.indicadores || {}).hallazgo_mortalidad || {};
+    const top = h.comuna_mayor_tasa, bajo = h.comuna_menor_tasa, v = h.variacion_pct_2012_2022_comuna_top;
+    if (!top || !bajo) {
+      return { respuesta_directa: "El hallazgo principal no está en el KB.", encontrado: false, evidencia: [] };
+    }
+    const anio = h.anio_referencia || 2022, fuente = "MEData - Secretaría de Salud";
+    const ev = [
+      { indicador: "tasa de mortalidad", valor: top.tasa, anio: anio, territorio: top.nombre, fuente: fuente },
+      { indicador: "brecha vs menor tasa", valor: h.brecha_veces + "x", anio: anio, territorio: bajo.nombre, fuente: fuente },
+    ];
+    if (v !== null && v !== undefined)
+      ev.push({ indicador: "variación tasa 2012-2022", valor: v + "%", territorio: top.nombre, fuente: fuente });
+    return {
+      encontrado: true,
+      respuesta_directa: `Hallazgo principal: ${top.nombre} tiene la mayor tasa de mortalidad (${top.tasa} por 100.000 hab., ${anio}), ${h.brecha_veces} veces la de ${bajo.nombre} (${bajo.tasa})` +
+        (v !== null && v !== undefined ? `, y aumentó ${v}% entre 2012 y 2022.` : "."),
+      evidencia: ev,
+      interpretacion: "La brecha territorial es grande y persistente: el lugar de residencia se asocia con la carga de mortalidad.",
+      recomendacion: "Priorizar intervenciones intersectoriales en los territorios de mayor índice de priorización y monitorear su evolución.",
+      limitaciones: "Tasas brutas, sin estandarizar por edad. Asociación, no causalidad.",
+      grafico: graficoRanking(r, 0),
     };
   }
 

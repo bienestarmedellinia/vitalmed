@@ -1,13 +1,16 @@
-INSTRUCCIONES - Medellín, Bienestar Basado en Datos
+INSTRUCCIONES - Bienestar Medellín IA (Medellín, Bienestar Basado en Datos)
 Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
 
 1. QUÉ ES
    Pipeline automático que descarga datos oficiales (ECV, SIATA y MEData),
    valida, integra y analiza la salud y el bienestar por comuna de Medellín.
-   Incluye un asistente que responde preguntas con las cifras obtenidas.
+   Combina mortalidad e intento de suicidio por comuna (MEData) en un índice de
+   priorización territorial, y reporta la calidad del aire (PM2.5, SIATA) como
+   contexto ambiental por estación; la ECV aporta la llave y cobertura territorial. Incluye un portal web interactivo con un asistente
+   que responde preguntas SOLO con las cifras obtenidas por el pipeline.
 
 2. PROBARLO EN LÍNEA
-   Asistente web (sin instalar nada): https://watabares.github.io/medellin-bienestar-datos/
+   Portal web + asistente (sin instalar nada): https://watabares.github.io/medellin-bienestar-datos/
    Pipeline: pestaña "Actions" del repo -> "pipeline-ecv" -> "Run workflow".
 
 3. ENTORNO
@@ -35,6 +38,9 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
 5. QUÉ DEBE VER
    - Asistente: ante "¿qué comuna priorizar?", responde "La Candelaria,
      1325.6 defunciones por 100.000 hab. (2022)" con su evidencia y fuente.
+   - Portal: al abrir la URL se ven la pregunta de investigación, el hallazgo
+     (La Candelaria, 4,58 veces la tasa de Santa Elena), la propuesta, gráficos
+     interactivos, el flujo del método y la tabla de transparencia de datos.
    - Pipeline: "VALIDACIÓN OK: llave territorial consistente"; genera
      outputs/tablas/hallazgo.json y los gráficos en outputs/graficos/.
 
@@ -42,21 +48,36 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
    - ECV · Encuesta de Calidad de Vida (microdatos) · Alcaldía de Medellín
      https://www.medellin.gov.co/es/centro-documental/encuesta-calidad-de-vida/
      Licencia: Datos abiertos - Alcaldía de Medellín
-   - SIATA · Datos validados de calidad del aire · Valle de Aburrá
+   - SIATA · Datos validados de calidad del aire (PM2.5, 2024-2025) · Valle de Aburrá
      https://siata.gov.co/IDEAM/
+     Condiciones: datos validados publicados por SIATA (ver su sitio)
    - MEData · Secretaría de Salud, servicio "VC_Datos_Enfermedades"
-     (mortalidad y natalidad por comuna)  ·  https://medata.app.medellin.gov.co/
-     Licencia: Datos abiertos - Alcaldía de Medellín
+     (mortalidad e intento de suicidio por comuna, 2012-2022)
+     Servicio: https://www.medellin.gov.co/servidormapas/rest/services/salud_protec_soc/VC_Datos_Enfermedades/MapServer
+     Portal:   https://medata.app.medellin.gov.co/
+     Licencia: Datos abiertos - Alcaldía de Medellín / Secretaría de Salud
+     (según scripts/sources.yml; consultar la ficha del conjunto en MEData)
    Los microdatos NO se publican; el pipeline los descarga desde la fuente.
    Solo se publican tablas agregadas por comuna, sin datos personales.
 
 7. USO DE IA
-   - Asistente (asistente/llm.py): un modelo de lenguaje (OpenAI) redacta en
-     lenguaje natural las respuestas. NO genera cifras: solo expresa las que el
-     motor determinista ya recuperó del knowledge base. Sin API key, el
-     asistente funciona igual en modo determinista.
-   - Durante el desarrollo se usó un asistente de IA para apoyo de programación.
-   [Ajustar según el uso real del equipo.]
+   Herramientas y para qué se usó cada una:
+   - Kiro CLI (asistente de programación con IA): apoyo en el DESARROLLO.
+     Escribió y refactorizó scripts del pipeline, el motor del asistente, el
+     portal web y la documentación. El equipo revisa, ejecuta y puede explicar
+     el resultado.
+   - Asistente del portal web (docs/asistente.js) y de línea de comandos
+     (asistente/motor.py): NO usan IA generativa. Son un motor determinista de
+     reglas que recupera cifras del knowledge base generado por el pipeline.
+     No inventan datos.
+   - Opcional, desactivado por defecto: asistente/llm.py puede usar un modelo de
+     OpenAI (gpt-4o-mini por defecto) SOLO si existe OPENAI_API_KEY, y solo para
+     redactar con más fluidez una respuesta que el motor ya calculó. No genera
+     cifras ni se usa en el portal web publicado.
+   - ChatGPT (OpenAI) y Gemini (Google): consultas exploratorias puntuales en la
+     etapa inicial (ideas y búsqueda de fuentes). No generaron el código, las
+     cifras ni los análisis del artefacto; todo el desarrollo se hizo con Kiro CLI
+     y el equipo verificó las fuentes contra los portales oficiales.
 
 8. CONTACTO
    [Nombre del líder] · [correo del líder]
