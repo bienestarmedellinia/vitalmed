@@ -5,5 +5,8 @@ PyYAML==6.0.2
 pyarrow==17.0.0
 matplotlib==3.9.2
 xlrd==2.0.1
+# Generación de guia_entrega.pdf (paso 7b)
+reportlab==4.2.5
+pillow==10.4.0
 # Interfaz del asistente (fase 2). Necesaria para desplegar en Streamlit Cloud.
 streamlit==1.39.0

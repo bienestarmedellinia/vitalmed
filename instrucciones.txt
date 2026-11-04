@@ -34,6 +34,7 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
    python scripts/05_analizar.py
    python scripts/06_visualizar.py
    python scripts/07_construir_kb.py
+   python scripts/09_guia_entrega.py     # genera guia_entrega.pdf (datos del equipo en equipo.yml)
 
 5. QUÉ DEBE VER
    - Asistente: ante "¿qué comuna priorizar?", responde "La Candelaria,

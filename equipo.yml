@@ -1,0 +1,11 @@
+# Datos del equipo para guia_entrega.pdf (los lee scripts/09_guia_entrega.py).
+# Complétalos y vuelve a generar la guía (ver COMO_EJECUTAR.md o el workflow).
+# Mientras un valor empiece por "[", la guía lo marca como POR COMPLETAR.
+
+nombre_equipo: "[NOMBRE DEL EQUIPO]"
+categoria: "[Interna o Externa]"          # según las reglas: Interna (ITM) / Externa
+lider_nombre: "[Nombre del líder]"
+lider_correo: "[correo del líder]"
+integrantes:
+  - nombre: "[Nombre integrante 1]"
+    programa: "[Programa / IES]"
