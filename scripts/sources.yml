@@ -8,7 +8,7 @@ ecv:
   descripcion: >
     Encuesta de Calidad de Vida de Medellín. Microdatos a nivel de persona,
     representativos para 16 comunas y 5 corregimientos.
-  licencia: "Datos abiertos - Alcaldía de Medellín"
+  licencia: "CC BY 4.0 (ficha MEData de la ECV, id 1-002-09-000040, cobertura 2011-2019; bases 2022-2025 del centro documental)"
   pagina_oficial: "https://www.medellin.gov.co/es/centro-documental/encuesta-calidad-de-vida/"
   variable_territorial:   # llave de integración por año
     "2022": "p_006"
@@ -76,7 +76,7 @@ medata:
     POR COMUNA, series anuales de casos y tasas. Datos agregados (sin PII) y
     desagregados por territorio, lo que permite integrarlos con la ECV por la
     llave comuna/corregimiento.
-  licencia: "Datos abiertos - Alcaldía de Medellín / Secretaría de Salud"
+  licencia: "CC BY 4.0 (fichas MEData: Mortalidad id 1-026-22-000161; Intento de suicidio id 1-026-22-000146)"
   servicio_rest: "https://www.medellin.gov.co/servidormapas/rest/services/salud_protec_soc/VC_Datos_Enfermedades/MapServer"
   # El servicio requiere User-Agent de navegador. Cada capa se consulta vía /query.
   capas:

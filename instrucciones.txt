@@ -47,7 +47,10 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
 6. DATOS Y FUENTES
    - ECV · Encuesta de Calidad de Vida (microdatos) · Alcaldía de Medellín
      https://www.medellin.gov.co/es/centro-documental/encuesta-calidad-de-vida/
-     Licencia: Datos abiertos - Alcaldía de Medellín
+     Licencia: CC BY 4.0 según la ficha MEData de la misma encuesta (id
+     1-002-09-000040, Planeación; cobertura de esa ficha 2011-2019). Las bases
+     2022-2025 provienen del centro documental de la Alcaldía, que no repite la
+     licencia en su página: se atribuye la fuente.
    - SIATA · Datos validados de calidad del aire (PM2.5, 2024-2025) · Valle de Aburrá
      https://siata.gov.co/IDEAM/
      Condiciones: datos validados publicados por SIATA (ver su sitio)
@@ -55,8 +58,12 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
      (mortalidad e intento de suicidio por comuna, 2012-2022)
      Servicio: https://www.medellin.gov.co/servidormapas/rest/services/salud_protec_soc/VC_Datos_Enfermedades/MapServer
      Portal:   https://medata.app.medellin.gov.co/
-     Licencia: Datos abiertos - Alcaldía de Medellín / Secretaría de Salud
-     (según scripts/sources.yml; consultar la ficha del conjunto en MEData)
+     Licencia: Atribución 4.0 Internacional (CC BY 4.0).
+       - Mortalidad: verificada en su ficha MEData (id 1-026-22-000161,
+         Secretaría de Salud, cobertura desde 2012).
+       - Intento de suicidio: verificada en su ficha MEData (id 1-026-22-000146,
+         registros SIVIGILA, Secretaría de Salud, cobertura desde 2012).
+     Atribución: Alcaldía de Medellín, Secretaría de Salud, MEData.
    Los microdatos NO se publican; el pipeline los descarga desde la fuente.
    Solo se publican tablas agregadas por comuna, sin datos personales.
 
