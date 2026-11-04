@@ -41,7 +41,7 @@ Ejemplos de preguntas:
 3. Haz **doble clic en `EJECUTAR_ASISTENTE.bat`**. Se abre una ventana negra
    que te guía paso a paso y abre el asistente en el navegador.
 
-**¿Funcionó?** Si en el navegador ves el título "Medellín Bienestar AI" y
+**¿Funcionó?** Si en el navegador ves el título "Pulso Medellín" y
 puedes escribir una pregunta, está listo.
 
 ### Si algo falla (solución rápida)

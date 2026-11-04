@@ -2,7 +2,8 @@
   "meta": {
     "proyecto": "Medellín, Bienestar Basado en Datos",
     "descripcion": "Knowledge base del asistente de inteligencia territorial. Todas las cifras provienen del pipeline reproducible; el asistente no inventa datos.",
-    "territorios_oficiales": 21
+    "territorios_oficiales": 21,
+    "generado_utc": "2026-11-04 03:17"
   },
   "indicadores": {
     "hallazgo_mortalidad": {
@@ -66,147 +67,189 @@
             "nombre": "La Candelaria",
             "indice": 100.0,
             "n_mortalidad": 100.0,
-            "n_suicidio": 100.0
+            "n_suicidio": 100.0,
+            "tasa_mortalidad": 1325.6,
+            "tasa_suicidio": 129.6
           },
           {
             "comuna": 11,
             "nombre": "Laureles Estadio",
             "indice": 62.2,
             "n_mortalidad": 77.5,
-            "n_suicidio": 47.0
+            "n_suicidio": 47.0,
+            "tasa_mortalidad": 1092.88,
+            "tasa_suicidio": 60.97
           },
           {
             "comuna": 3,
             "nombre": "Manrique",
             "indice": 61.0,
             "n_mortalidad": 33.9,
-            "n_suicidio": 88.2
+            "n_suicidio": 88.2,
+            "tasa_mortalidad": 640.38,
+            "tasa_suicidio": 114.29
           },
           {
             "comuna": 15,
             "nombre": "Guayabal",
             "indice": 59.6,
             "n_mortalidad": 42.1,
-            "n_suicidio": 77.0
+            "n_suicidio": 77.0,
+            "tasa_mortalidad": 725.97,
+            "tasa_suicidio": 99.78
           },
           {
             "comuna": 8,
             "nombre": "Villa Hermosa",
             "indice": 58.2,
             "n_mortalidad": 32.6,
-            "n_suicidio": 83.8
+            "n_suicidio": 83.8,
+            "tasa_mortalidad": 626.78,
+            "tasa_suicidio": 108.6
           },
           {
             "comuna": 4,
             "nombre": "Aranjuez",
             "indice": 57.6,
             "n_mortalidad": 43.5,
-            "n_suicidio": 71.6
+            "n_suicidio": 71.6,
+            "tasa_mortalidad": 740.68,
+            "tasa_suicidio": 92.75
           },
           {
             "comuna": 9,
             "nombre": "Buenos Aires",
             "indice": 54.8,
             "n_mortalidad": 30.8,
-            "n_suicidio": 78.8
+            "n_suicidio": 78.8,
+            "tasa_mortalidad": 608.08,
+            "tasa_suicidio": 102.16
           },
           {
             "comuna": 12,
             "nombre": "La América",
             "indice": 53.7,
             "n_mortalidad": 59.5,
-            "n_suicidio": 47.9
+            "n_suicidio": 47.9,
+            "tasa_mortalidad": 905.91,
+            "tasa_suicidio": 62.06
           },
           {
             "comuna": 6,
             "nombre": "Doce de Octubre",
             "indice": 52.5,
             "n_mortalidad": 23.3,
-            "n_suicidio": 81.7
+            "n_suicidio": 81.7,
+            "tasa_mortalidad": 531.18,
+            "tasa_suicidio": 105.92
           },
           {
             "comuna": 14,
             "nombre": "El Poblado",
             "indice": 47.0,
             "n_mortalidad": 37.1,
-            "n_suicidio": 57.0
+            "n_suicidio": 57.0,
+            "tasa_mortalidad": 674.21,
+            "tasa_suicidio": 73.85
           },
           {
             "comuna": 5,
             "nombre": "Castilla",
             "indice": 46.8,
             "n_mortalidad": 34.6,
-            "n_suicidio": 59.1
+            "n_suicidio": 59.1,
+            "tasa_mortalidad": 647.89,
+            "tasa_suicidio": 76.53
           },
           {
             "comuna": 16,
             "nombre": "Belén",
             "indice": 44.6,
             "n_mortalidad": 44.9,
-            "n_suicidio": 44.3
+            "n_suicidio": 44.3,
+            "tasa_mortalidad": 755.07,
+            "tasa_suicidio": 57.44
           },
           {
             "comuna": 2,
             "nombre": "Santa Cruz",
             "indice": 44.4,
             "n_mortalidad": 27.2,
-            "n_suicidio": 61.6
+            "n_suicidio": 61.6,
+            "tasa_mortalidad": 571.16,
+            "tasa_suicidio": 79.79
           },
           {
             "comuna": 1,
             "nombre": "Popular",
             "indice": 42.2,
             "n_mortalidad": 22.7,
-            "n_suicidio": 61.6
+            "n_suicidio": 61.6,
+            "tasa_mortalidad": 525.0,
+            "tasa_suicidio": 79.86
           },
           {
             "comuna": 7,
             "nombre": "Robledo",
             "indice": 42.0,
             "n_mortalidad": 18.6,
-            "n_suicidio": 65.3
+            "n_suicidio": 65.3,
+            "tasa_mortalidad": 482.22,
+            "tasa_suicidio": 84.63
           },
           {
             "comuna": 70,
             "nombre": "Corregimiento de Altavista",
             "indice": 36.6,
             "n_mortalidad": 14.5,
-            "n_suicidio": 58.7
+            "n_suicidio": 58.7,
+            "tasa_mortalidad": 439.2,
+            "tasa_suicidio": 76.06
           },
           {
             "comuna": 13,
             "nombre": "San Javier",
             "indice": 35.4,
             "n_mortalidad": 28.0,
-            "n_suicidio": 42.7
+            "n_suicidio": 42.7,
+            "tasa_mortalidad": 579.32,
+            "tasa_suicidio": 55.35
           },
           {
             "comuna": 80,
             "nombre": "Corregimiento de San Antonio de Prado",
             "indice": 34.5,
             "n_mortalidad": 15.6,
-            "n_suicidio": 53.4
+            "n_suicidio": 53.4,
+            "tasa_mortalidad": 451.27,
+            "tasa_suicidio": 69.19
           },
           {
             "comuna": 90,
             "nombre": "Corregimiento de Santa Elena",
             "indice": 28.3,
             "n_mortalidad": 0.0,
-            "n_suicidio": 56.6
+            "n_suicidio": 56.6,
+            "tasa_mortalidad": 289.47,
+            "tasa_suicidio": 73.39
           },
           {
             "comuna": 60,
             "nombre": "Corregimiento de San Cristóbal",
             "indice": 20.2,
             "n_mortalidad": 10.1,
-            "n_suicidio": 30.4
+            "n_suicidio": 30.4,
+            "tasa_mortalidad": 394.48,
+            "tasa_suicidio": 39.37
           },
           {
             "comuna": 50,
             "nombre": "Corregimiento de San Sebastián de Palmitas",
             "indice": 9.4,
             "n_mortalidad": 18.8,
-            "n_suicidio": 0.0
+            "n_suicidio": 0.0,
+            "tasa_mortalidad": 484.26,
+            "tasa_suicidio": 0.0
           }
         ]
       }
@@ -225,147 +268,189 @@
           "nombre": "La Candelaria",
           "indice": 100.0,
           "n_mortalidad": 100.0,
-          "n_suicidio": 100.0
+          "n_suicidio": 100.0,
+          "tasa_mortalidad": 1325.6,
+          "tasa_suicidio": 129.6
         },
         {
           "comuna": 11,
           "nombre": "Laureles Estadio",
           "indice": 62.2,
           "n_mortalidad": 77.5,
-          "n_suicidio": 47.0
+          "n_suicidio": 47.0,
+          "tasa_mortalidad": 1092.88,
+          "tasa_suicidio": 60.97
         },
         {
           "comuna": 3,
           "nombre": "Manrique",
           "indice": 61.0,
           "n_mortalidad": 33.9,
-          "n_suicidio": 88.2
+          "n_suicidio": 88.2,
+          "tasa_mortalidad": 640.38,
+          "tasa_suicidio": 114.29
         },
         {
           "comuna": 15,
           "nombre": "Guayabal",
           "indice": 59.6,
           "n_mortalidad": 42.1,
-          "n_suicidio": 77.0
+          "n_suicidio": 77.0,
+          "tasa_mortalidad": 725.97,
+          "tasa_suicidio": 99.78
         },
         {
           "comuna": 8,
           "nombre": "Villa Hermosa",
           "indice": 58.2,
           "n_mortalidad": 32.6,
-          "n_suicidio": 83.8
+          "n_suicidio": 83.8,
+          "tasa_mortalidad": 626.78,
+          "tasa_suicidio": 108.6
         },
         {
           "comuna": 4,
           "nombre": "Aranjuez",
           "indice": 57.6,
           "n_mortalidad": 43.5,
-          "n_suicidio": 71.6
+          "n_suicidio": 71.6,
+          "tasa_mortalidad": 740.68,
+          "tasa_suicidio": 92.75
         },
         {
           "comuna": 9,
           "nombre": "Buenos Aires",
           "indice": 54.8,
           "n_mortalidad": 30.8,
-          "n_suicidio": 78.8
+          "n_suicidio": 78.8,
+          "tasa_mortalidad": 608.08,
+          "tasa_suicidio": 102.16
         },
         {
           "comuna": 12,
           "nombre": "La América",
           "indice": 53.7,
           "n_mortalidad": 59.5,
-          "n_suicidio": 47.9
+          "n_suicidio": 47.9,
+          "tasa_mortalidad": 905.91,
+          "tasa_suicidio": 62.06
         },
         {
           "comuna": 6,
           "nombre": "Doce de Octubre",
           "indice": 52.5,
           "n_mortalidad": 23.3,
-          "n_suicidio": 81.7
+          "n_suicidio": 81.7,
+          "tasa_mortalidad": 531.18,
+          "tasa_suicidio": 105.92
         },
         {
           "comuna": 14,
           "nombre": "El Poblado",
           "indice": 47.0,
           "n_mortalidad": 37.1,
-          "n_suicidio": 57.0
+          "n_suicidio": 57.0,
+          "tasa_mortalidad": 674.21,
+          "tasa_suicidio": 73.85
         },
         {
           "comuna": 5,
           "nombre": "Castilla",
           "indice": 46.8,
           "n_mortalidad": 34.6,
-          "n_suicidio": 59.1
+          "n_suicidio": 59.1,
+          "tasa_mortalidad": 647.89,
+          "tasa_suicidio": 76.53
         },
         {
           "comuna": 16,
           "nombre": "Belén",
           "indice": 44.6,
           "n_mortalidad": 44.9,
-          "n_suicidio": 44.3
+          "n_suicidio": 44.3,
+          "tasa_mortalidad": 755.07,
+          "tasa_suicidio": 57.44
         },
         {
           "comuna": 2,
           "nombre": "Santa Cruz",
           "indice": 44.4,
           "n_mortalidad": 27.2,
-          "n_suicidio": 61.6
+          "n_suicidio": 61.6,
+          "tasa_mortalidad": 571.16,
+          "tasa_suicidio": 79.79
         },
         {
           "comuna": 1,
           "nombre": "Popular",
           "indice": 42.2,
           "n_mortalidad": 22.7,
-          "n_suicidio": 61.6
+          "n_suicidio": 61.6,
+          "tasa_mortalidad": 525.0,
+          "tasa_suicidio": 79.86
         },
         {
           "comuna": 7,
           "nombre": "Robledo",
           "indice": 42.0,
           "n_mortalidad": 18.6,
-          "n_suicidio": 65.3
+          "n_suicidio": 65.3,
+          "tasa_mortalidad": 482.22,
+          "tasa_suicidio": 84.63
         },
         {
           "comuna": 70,
           "nombre": "Corregimiento de Altavista",
           "indice": 36.6,
           "n_mortalidad": 14.5,
-          "n_suicidio": 58.7
+          "n_suicidio": 58.7,
+          "tasa_mortalidad": 439.2,
+          "tasa_suicidio": 76.06
         },
         {
           "comuna": 13,
           "nombre": "San Javier",
           "indice": 35.4,
           "n_mortalidad": 28.0,
-          "n_suicidio": 42.7
+          "n_suicidio": 42.7,
+          "tasa_mortalidad": 579.32,
+          "tasa_suicidio": 55.35
         },
         {
           "comuna": 80,
           "nombre": "Corregimiento de San Antonio de Prado",
           "indice": 34.5,
           "n_mortalidad": 15.6,
-          "n_suicidio": 53.4
+          "n_suicidio": 53.4,
+          "tasa_mortalidad": 451.27,
+          "tasa_suicidio": 69.19
         },
         {
           "comuna": 90,
           "nombre": "Corregimiento de Santa Elena",
           "indice": 28.3,
           "n_mortalidad": 0.0,
-          "n_suicidio": 56.6
+          "n_suicidio": 56.6,
+          "tasa_mortalidad": 289.47,
+          "tasa_suicidio": 73.39
         },
         {
           "comuna": 60,
           "nombre": "Corregimiento de San Cristóbal",
           "indice": 20.2,
           "n_mortalidad": 10.1,
-          "n_suicidio": 30.4
+          "n_suicidio": 30.4,
+          "tasa_mortalidad": 394.48,
+          "tasa_suicidio": 39.37
         },
         {
           "comuna": 50,
           "nombre": "Corregimiento de San Sebastián de Palmitas",
           "indice": 9.4,
           "n_mortalidad": 18.8,
-          "n_suicidio": 0.0
+          "n_suicidio": 0.0,
+          "tasa_mortalidad": 484.26,
+          "tasa_suicidio": 0.0
         }
       ]
     },
@@ -622,7 +707,128 @@
           "media_pm25": 7.91,
           "meses_validos": 9
         }
-      ]
+      ],
+      "comparacion": {
+        "anio_anterior": 2024,
+        "anio_actual": 2025,
+        "estaciones": [
+          {
+            "estacion": "CEN-TRAF",
+            "anterior": 28.22,
+            "actual": 24.14
+          },
+          {
+            "estacion": "MED-ALTA",
+            "anterior": 23.19,
+            "actual": 19.58
+          },
+          {
+            "estacion": "ITA-CJUS",
+            "anterior": 22.34,
+            "actual": 18.66
+          },
+          {
+            "estacion": "MED-BEME",
+            "anterior": 21.12,
+            "actual": 18.54
+          },
+          {
+            "estacion": "EST-TABL",
+            "anterior": 18.28,
+            "actual": 18.4
+          },
+          {
+            "estacion": "MED-PROV",
+            "anterior": 17.52,
+            "actual": 17.07
+          },
+          {
+            "estacion": "MED-FISC",
+            "anterior": 19.92,
+            "actual": 16.97
+          },
+          {
+            "estacion": "ITA-CONC",
+            "anterior": 15.85,
+            "actual": 16.75
+          },
+          {
+            "estacion": "MED-ARAN",
+            "anterior": 19.1,
+            "actual": 16.56
+          },
+          {
+            "estacion": "MED-PBLQ",
+            "anterior": 17.12,
+            "actual": 15.61
+          },
+          {
+            "estacion": "MED-SCRI",
+            "anterior": 16.16,
+            "actual": 14.72
+          },
+          {
+            "estacion": "CAL-JOAR",
+            "anterior": 18.65,
+            "actual": 14.67
+          },
+          {
+            "estacion": "MED-VILL",
+            "anterior": 16.71,
+            "actual": 14.25
+          },
+          {
+            "estacion": "MED-TESO",
+            "anterior": 16.75,
+            "actual": 13.97
+          },
+          {
+            "estacion": "EST-HOSP",
+            "anterior": 19.69,
+            "actual": 13.96
+          },
+          {
+            "estacion": "SAB-RAME",
+            "anterior": 18.0,
+            "actual": 13.89
+          },
+          {
+            "estacion": "ENV-HOSP",
+            "anterior": 16.17,
+            "actual": 13.71
+          },
+          {
+            "estacion": "GIR-EPM",
+            "anterior": 16.19,
+            "actual": 13.15
+          },
+          {
+            "estacion": "BEL-FEVE",
+            "anterior": 15.64,
+            "actual": 12.59
+          },
+          {
+            "estacion": "BAR-TORR",
+            "anterior": 14.06,
+            "actual": 11.68
+          },
+          {
+            "estacion": "COP-CVID",
+            "anterior": 14.83,
+            "actual": 11.55
+          },
+          {
+            "estacion": "MED-CES",
+            "anterior": 10.39,
+            "actual": 10.79
+          },
+          {
+            "estacion": "MED-SELE",
+            "anterior": 11.25,
+            "actual": 7.91
+          }
+        ]
+      }
     }
   },
   "territorios": {

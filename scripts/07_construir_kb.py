@@ -13,6 +13,7 @@ Se ejecuta en GitHub Actions como paso 7, tras el análisis.
 from __future__ import annotations
 import json
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pandas as pd
@@ -37,6 +38,7 @@ def main() -> int:
                         "Todas las cifras provienen del pipeline reproducible; "
                         "el asistente no inventa datos."),
         "territorios_oficiales": 21,
+        "generado_utc": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M"),
     }
     kb["fuentes"] = {
         "ecv": {"nombre": "Encuesta de Calidad de Vida de Medellín",
@@ -59,6 +61,18 @@ def main() -> int:
             kb["indicadores"]["indice_priorizacion"] = hallazgo["indice_priorizacion"]
             log(f"índice de priorización: "
                 f"{len(hallazgo['indice_priorizacion']['ranking'])} comunas")
+
+    # ── Tasas crudas por componente del índice (para dispersión y simulador) ──
+    idx_f = TAB / "indice_priorizacion_comuna.csv"
+    idx_kb = kb["indicadores"].get("indice_priorizacion")
+    if idx_f.exists() and idx_kb:
+        crudas = pd.read_csv(idx_f).set_index("comuna")
+        for fila in idx_kb["ranking"]:
+            c = int(fila["comuna"])
+            if c in crudas.index:
+                fila["tasa_mortalidad"] = round(float(crudas.loc[c, "tasa_mortalidad"]), 2)
+                fila["tasa_suicidio"] = round(float(crudas.loc[c, "tasa_suicidio"]), 2)
+        log("tasas crudas añadidas al índice")
 
     # ── Ranking de mortalidad por comuna (año de referencia) ──
     mort_f = TAB / "analisis_mortalidad_comuna.csv"
@@ -108,7 +122,18 @@ def main() -> int:
                 for r in ref.itertuples()
             ],
         }
-        log(f"PM2.5 SIATA: {len(ref)} estaciones (año {anio_ref})")
+        # Comparación interanual: solo estaciones con dato en ambos años.
+        previo = df[df["anio"] == anio_ref - 1].set_index("estacion")["media_pm25"]
+        comp = [{"estacion": str(r.estacion),
+                 "anterior": round(float(previo[r.estacion]), 2),
+                 "actual": round(float(r.media_pm25), 2)}
+                for r in ref.itertuples() if r.estacion in previo.index]
+        if comp:
+            kb["indicadores"]["pm25_siata"]["comparacion"] = {
+                "anio_anterior": anio_ref - 1, "anio_actual": anio_ref,
+                "estaciones": comp}
+        log(f"PM2.5 SIATA: {len(ref)} estaciones (año {anio_ref}), "
+            f"{len(comp)} comparables con {anio_ref - 1}")
 
     salida = KB / "knowledge_base.json"
     contenido = json.dumps(kb, indent=2, ensure_ascii=False)
