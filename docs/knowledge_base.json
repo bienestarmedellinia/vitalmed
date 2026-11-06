@@ -3,7 +3,7 @@
     "proyecto": "Medellín, Bienestar Basado en Datos",
     "descripcion": "Knowledge base del asistente de inteligencia territorial. Todas las cifras provienen del pipeline reproducible; el asistente no inventa datos.",
     "territorios_oficiales": 21,
-    "generado_utc": "2026-11-06 01:37"
+    "generado_utc": "2026-11-06 01:41"
   },
   "indicadores": {
     "hallazgo_mortalidad": {
