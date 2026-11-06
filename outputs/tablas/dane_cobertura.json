@@ -1,0 +1,21 @@
+{
+  "municipio": {
+    "cod_dpto": "05",
+    "cod_munic": "001",
+    "nombre": "Medellín"
+  },
+  "meses_por_anio": {
+    "2020": 12,
+    "2021": 12,
+    "2022": 12,
+    "2023": 12,
+    "2024": 12
+  },
+  "nivel": "municipio de ocurrencia (NO comuna)",
+  "periodicidad": "mensual",
+  "causas": {
+    "respiratorias": "CIE-10 J00-J99",
+    "circulatorias": "CIE-10 I00-I99",
+    "total": "todas las causas"
+  }
+}

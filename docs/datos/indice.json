@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-11-06 04:35",
+ "generado_utc": "2026-11-06 23:19",
  "archivos": [
   {
    "archivo": "indicadores_por_territorio.csv",
@@ -25,6 +25,11 @@
    "archivo": "indice_priorizacion.csv",
    "descripcion": "Índice multivariable de priorización en salud por comuna: promedio de la mortalidad general y el intento de suicidio (tasas por 100.000 hab.), cada indicador normalizado 0-100 (min-max). Mayor = más prioritario.",
    "filas": 21
+  },
+  {
+   "archivo": "mortalidad_dane_mensual.csv",
+   "descripcion": "Mortalidad mensual en Medellín por causa CIE-10 (DANE EEVV). Nivel municipal (no comuna). respiratorias=J00-J99, circulatorias=I00-I99.",
+   "filas": 180
   },
   {
    "archivo": "catalogo_indicadores.csv",
