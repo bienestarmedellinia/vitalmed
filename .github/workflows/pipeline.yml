@@ -68,6 +68,9 @@ jobs:
       - name: 6c) Procesar mortalidad DANE (EEVV mensual por causa)
         run: python scripts/10_dane_eevv.py
 
+      - name: 6d) Procesar SIVIGILA (serie semanal INS)
+        run: python scripts/11_sivigila.py
+
       - name: 7) Construir knowledge base del asistente (fase 2)
         run: python scripts/07_construir_kb.py
 

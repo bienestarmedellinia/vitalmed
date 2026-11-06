@@ -130,3 +130,18 @@ dane_eevv:
     "2022": {ficha: 807}
     "2021": {ficha: 775}
     "2020": {ficha: 732}
+
+sivigila:
+  descripcion: >
+    SIVIGILA (INS) — vigilancia en salud pública. Dataset agregado y abierto en
+    datos.gov.co (API SoQL). Serie SEMANAL por municipio de ocurrencia y evento.
+    Se usan Medellín (5001) y dos eventos para el cruce ambiental/salud mental:
+    345 ESI-IRAG (vigilancia centinela, proxy respiratorio) y 356 Intento de suicidio.
+  licencia: "CC BY-SA 4.0 (ficha datos.gov.co, INS)"
+  pagina_oficial: "https://www.datos.gov.co/d/4hyg-wa9d"
+  recurso_socrata: "4hyg-wa9d"
+  endpoint: "https://www.datos.gov.co/resource/4hyg-wa9d.json"
+  municipio_objetivo: {cod_dpto_o: "5", cod_mun_o: "5001", nombre: "Medellín"}
+  eventos:
+    "345": {nombre: "ESI-IRAG (vigilancia centinela)", tema: "respiratorio"}
+    "356": {nombre: "intento de suicidio", tema: "salud mental"}

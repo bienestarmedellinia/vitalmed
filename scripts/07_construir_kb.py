@@ -61,6 +61,9 @@ def main() -> int:
         "dane_eevv": {"nombre": "Estadísticas Vitales (defunciones no fetales)",
                       "entidad": "DANE", "nivel": "municipio (Medellín)",
                       "variable": "mortalidad mensual por causa CIE-10"},
+        "sivigila": {"nombre": "SIVIGILA (vigilancia en salud pública)",
+                     "entidad": "INS", "nivel": "municipio (Medellín)",
+                     "variable": "casos semanales (ESI-IRAG, intento de suicidio)"},
     }
 
     # ── Hallazgo principal ──
@@ -179,6 +182,31 @@ def main() -> int:
         }
         log(f"Mortalidad DANE: {len(anios)} años {anios}, "
             f"causas {sorted(serie)}")
+
+    # ── SIVIGILA: serie semanal de eventos centinela (INS) ──
+    sivi_f = TAB / "sivigila_semanal.csv"
+    if sivi_f.exists():
+        sv = pd.read_csv(sivi_f)
+        cob_f = TAB / "sivigila_cobertura.json"
+        cob = json.loads(cob_f.read_text(encoding="utf-8")) if cob_f.exists() else {}
+        # Serie semanal por evento: {evento: {anio: {semana: casos}}}
+        serie = {}
+        tot_anual = {}
+        for r in sv.itertuples():
+            serie.setdefault(r.evento, {}).setdefault(str(int(r.anio)), {})[str(int(r.semana))] = int(r.casos)
+            tot_anual.setdefault(r.evento, {})
+            tot_anual[r.evento][str(int(r.anio))] = tot_anual[r.evento].get(str(int(r.anio)), 0) + int(r.casos)
+        kb["indicadores"]["sivigila"] = {
+            "unidad": "casos (conteo semanal)",
+            "nivel": cob.get("nivel", "municipio de ocurrencia (NO comuna)"),
+            "municipio": cob.get("municipio", {}),
+            "periodicidad": "semanal (semana epidemiológica)",
+            "advertencia": cob.get("nota", ""),
+            "eventos": cob.get("eventos", {}),
+            "serie": serie,
+            "total_anual": tot_anual,
+        }
+        log(f"SIVIGILA: {len(serie)} eventos, años {cob.get('eventos', {})}")
 
     # ── Series completas por indicador y territorio (todas las fuentes) ──
     series = construir_series()
@@ -352,6 +380,15 @@ def exportar_datos_abiertos(kb: dict, destino: Path) -> None:
             pd.DataFrame(filas_m).sort_values(["causa", "anio", "mes"]),
             "Mortalidad mensual en Medellín por causa CIE-10 (DANE EEVV). "
             "Nivel municipal (no comuna). respiratorias=J00-J99, circulatorias=I00-I99.")
+    sv = kb.get("indicadores", {}).get("sivigila") or {}
+    if sv.get("serie"):
+        filas_s = [{"evento": ev, "anio": int(a), "semana": int(s), "casos": v}
+                   for ev, xa in sv["serie"].items()
+                   for a, xs in xa.items() for s, v in xs.items()]
+        archivos["sivigila_semanal.csv"] = (
+            pd.DataFrame(filas_s).sort_values(["evento", "anio", "semana"]),
+            "Casos semanales SIVIGILA en Medellín (INS). ESI-IRAG (respiratorio "
+            "centinela) e intento de suicidio. Nivel municipal (no comuna).")
     if cat:
         archivos["catalogo_indicadores.csv"] = (
             pd.DataFrame([{k: (", ".join(map(str, v)) if isinstance(v, list) else v)
