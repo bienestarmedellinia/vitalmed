@@ -3,7 +3,9 @@
  * Lee knowledge_base.json y responde SOLO con sus cifras. No inventa.
  * No requiere servidor ni instalación: corre en el navegador.
  */
+(function () {
 "use strict";
+// Ámbito propio: no declara globales que choquen con el script del portal.
 
 let KB = null;
 
@@ -69,7 +71,7 @@ function pideCausa(q) {
           "factor", "se debe", "origen"].some((w) => qn.includes(w));
 }
 
-function mediana(arr) {
+function medianaKB(arr) {
   const v = [...arr].sort((a, b) => a - b), m = Math.floor(v.length / 2);
   return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2;
 }
@@ -116,7 +118,7 @@ function responder(pregunta) {
     ? [] : territoriosEn(pregunta);
   const causa = pideCausa(pregunta);
   if (idxTerr.length && r.length) {
-    const med = mediana(r.map((x) => x.tasa));
+    const med = medianaKB(r.map((x) => x.tasa));
     const ind = ((KB.indicadores || {}).indice_priorizacion || {}).ranking || [];
     const h = (KB.indicadores || {}).hallazgo_mortalidad || {};
     const frases = [], ev = [];
@@ -341,3 +343,4 @@ async function cargarKB() {
 
 /* Exponer para el HTML. */
 window.Asistente = { cargarKB, responder, detectarIntencion };
+})();
