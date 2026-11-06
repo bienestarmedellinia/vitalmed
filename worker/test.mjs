@@ -37,7 +37,8 @@ await caso("respuesta válida y saneada", async () => {
                    ["territorio", ["La Candelaria"], "dengue", [2015, 2020], true]);
   // El esquema enviado a Gemini restringe el indicador al catálogo del KB (+ pm25).
   const enumInd = cuerpoGemini.generationConfig.responseSchema.properties.indicador.enum;
-  assert.deepEqual(enumInd, ["", "mortalidad", "dengue", "pm25"]);
+  assert.deepEqual(enumInd, ["ninguno", "mortalidad", "dengue", "pm25"]);
+  assert.ok(enumInd.every((v) => v.length > 0), "Gemini rechaza valores vacíos en enum");
 });
 
 await caso("origen ajeno -> 403 sin llamar a Gemini", async () => {
@@ -78,6 +79,10 @@ await caso("sanear descarta valores fuera de lista (prompt injection)", async ()
                         indicador: "", anios: [2015, 2018], causa: false });
 });
 
+await caso("indicador 'ninguno' se convierte en vacío", async () => {
+  assert.equal(sanear({ intencion: "tendencia", indicador: "ninguno" }, [{ clave: "mortalidad" }]).indicador, "");
+});
+
 await caso("KB caído: el catálogo queda solo con pm25 y no se cachea", async () => {
   _limpiarCache(); kbFalla = true;
   const c1 = await catalogo({});
@@ -87,4 +92,4 @@ await caso("KB caído: el catálogo queda solo con pm25 y no se cachea", async (
   assert.deepEqual(c2.map((c) => c.clave), ["mortalidad", "dengue", "pm25"]);
 });
 
-console.log(`\n${ok}/9 pruebas OK`);
+console.log(`\n${ok}/10 pruebas OK`);
