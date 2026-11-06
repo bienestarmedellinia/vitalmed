@@ -24,7 +24,7 @@ No requiere Windows, ni Python, ni comandos.
 
 Abre este enlace en cualquier navegador y escribe preguntas:
 
->  **https://watabares.github.io/medellin-bienestar-datos/**
+>  **https://bienestarmedellinia.github.io/vitalmed/**
 
 Ejemplos de preguntas:
 - ¿Qué comunas deberían recibir mayor atención en salud?

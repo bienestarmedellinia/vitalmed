@@ -30,7 +30,7 @@ export const TERRITORIOS = [
 ];
 
 const MAX_LARGO = 300;
-const KB_URL_DEF = "https://watabares.github.io/medellin-bienestar-datos/knowledge_base.json";
+const KB_URL_DEF = "https://bienestarmedellinia.github.io/vitalmed/knowledge_base.json";
 const TTL_MS = 3600 * 1000;
 let cacheCat = { t: 0, lista: null };
 
@@ -154,7 +154,7 @@ async function llamarGemini(pregunta, env) {
 
 export default {
   async fetch(request, env) {
-    const permitido = env.ORIGEN_PERMITIDO || "https://watabares.github.io";
+    const permitido = env.ORIGEN_PERMITIDO || "https://bienestarmedellinia.github.io";
     const origen = request.headers.get("Origin");
     const ok = origen === permitido;
     const url = new URL(request.url);

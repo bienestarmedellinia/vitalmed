@@ -10,7 +10,7 @@ porque requiere iniciar sesión).
    (`watabares`).
 2. Clic en **"Create app"** → **"Deploy a public app from GitHub"**.
 3. Completa:
-   - **Repository:** `watabares/medellin-bienestar-datos`
+   - **Repository:** `bienestarmedellinia/vitalmed`
    - **Branch:** `main`
    - **Main file path:** `asistente/app.py`
 4. (Opcional) En **Advanced settings → Secrets**, si quieres activar la capa LLM:

@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import worker, { sanear, catalogo, _limpiarCache } from "./src/index.js";
 
-const ORIGEN = "https://watabares.github.io";
+const ORIGEN = "https://bienestarmedellinia.github.io";
 let respuestaGemini = null, llamadas = 0, kbFalla = false, cuerpoGemini = null;
 const KB_FALSO = { series: { catalogo: [{ clave: "mortalidad", nombre: "mortalidad general" },
                                         { clave: "dengue", nombre: "dengue" },

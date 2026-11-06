@@ -12,10 +12,10 @@ desde un archivo o desde el teclado: no queda en el historial ni en el repo.
 
 ```bash
 # 1) Token de Cloudflare (Workers Scripts:Edit + Account Settings:Read)
-gh secret set CLOUDFLARE_API_TOKEN -R watabares/medellin-bienestar-datos < ~/.config/cf_token
+gh secret set CLOUDFLARE_API_TOKEN -R bienestarmedellinia/vitalmed < ~/.config/cf_token
 
 # 2) Clave de Gemini (Google AI Studio): pégala cuando la pida y pulsa Enter
-gh secret set GEMINI_API_KEY -R watabares/medellin-bienestar-datos
+gh secret set GEMINI_API_KEY -R bienestarmedellinia/vitalmed
 ```
 
 ## Desplegar
@@ -23,7 +23,7 @@ gh secret set GEMINI_API_KEY -R watabares/medellin-bienestar-datos
 Automático en cada push que cambie `worker/`. Manual:
 
 ```bash
-gh workflow run worker-ia -R watabares/medellin-bienestar-datos
+gh workflow run worker-ia -R bienestarmedellinia/vitalmed
 ```
 
 La URL del Worker aparece en el resumen del run (`https://bienestar-medellin-ia.<subdominio>.workers.dev`).
@@ -33,7 +33,7 @@ La URL del Worker aparece en el resumen del run (`https://bienestar-medellin-ia.
 ```bash
 URL=https://bienestar-medellin-ia.<subdominio>.workers.dev
 curl -s $URL/salud                                    # {"ok":true}
-curl -s -X POST $URL/interpretar -H 'Origin: https://watabares.github.io' \
+curl -s -X POST $URL/interpretar -H 'Origin: https://bienestarmedellinia.github.io' \
      -H 'Content-Type: application/json' -d '{"pregunta":"¿por qué mueren tantos en el centro?"}'
 # → {"intencion":"territorio","territorios":["La Candelaria"],"causa":true,...}
 ```

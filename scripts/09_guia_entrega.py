@@ -36,8 +36,8 @@ EQUIPO_F = BASE / "equipo.yml"
 GRA = BASE / "outputs" / "graficos"
 SALIDA = BASE / "guia_entrega.pdf"
 
-REPO = "https://github.com/watabares/medellin-bienestar-datos"
-PORTAL = "https://watabares.github.io/medellin-bienestar-datos/"
+REPO = "https://github.com/bienestarmedellinia/vitalmed"
+PORTAL = "https://bienestarmedellinia.github.io/vitalmed/"
 
 AZUL = colors.HexColor("#1f4e79")
 AZUL_OSC = colors.HexColor("#0f2a44")

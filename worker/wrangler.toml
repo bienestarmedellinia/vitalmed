@@ -7,7 +7,7 @@ account_id = "2d79373c3af403a1931e4699d556658d"
 workers_dev = true
 
 [vars]
-ORIGEN_PERMITIDO = "https://watabares.github.io"
+ORIGEN_PERMITIDO = "https://bienestarmedellinia.github.io"
 MODELO = "gemini-flash-lite-latest"
 
 # Por IP: 10 consultas/minuto (un salón entero puede compartir IP).
