@@ -58,6 +58,9 @@ def main() -> int:
                          "nivel": "comuna", "serie": "2012-2022"},
         "siata": {"nombre": "Datos validados de calidad del aire",
                   "entidad": "SIATA - Valle de Aburrá", "variable": "PM2.5"},
+        "dane_eevv": {"nombre": "Estadísticas Vitales (defunciones no fetales)",
+                      "entidad": "DANE", "nivel": "municipio (Medellín)",
+                      "variable": "mortalidad mensual por causa CIE-10"},
     }
 
     # ── Hallazgo principal ──
@@ -144,6 +147,38 @@ def main() -> int:
                 "estaciones": comp}
         log(f"PM2.5 SIATA: {len(ref)} estaciones (año {anio_ref}), "
             f"{len(comp)} comparables con {anio_ref - 1}")
+
+    # ── Mortalidad mensual por causa (DANE Estadísticas Vitales) ──
+    dane_f = TAB / "dane_mortalidad_mensual.csv"
+    if dane_f.exists():
+        dm = pd.read_csv(dane_f, dtype={"mes": str})
+        cob_f = TAB / "dane_cobertura.json"
+        cob = json.loads(cob_f.read_text(encoding="utf-8")) if cob_f.exists() else {}
+        anios = sorted(dm["anio"].unique().tolist())
+        # Serie mensual por causa: {causa: {anio: {mes: defunciones}}}
+        serie = {}
+        for r in dm.itertuples():
+            serie.setdefault(r.causa, {}).setdefault(str(int(r.anio)), {})[r.mes] = int(r.defunciones)
+        # Totales anuales por causa (contexto rápido).
+        tot_anual = (dm.groupby(["causa", "anio"])["defunciones"].sum()
+                       .reset_index())
+        resumen = {}
+        for r in tot_anual.itertuples():
+            resumen.setdefault(r.causa, {})[str(int(r.anio))] = int(r.defunciones)
+        kb["indicadores"]["mortalidad_dane"] = {
+            "unidad": "defunciones (conteo mensual)",
+            "nivel": cob.get("nivel", "municipio de ocurrencia (NO comuna)"),
+            "municipio": cob.get("municipio", {}),
+            "periodicidad": "mensual",
+            "anios": anios,
+            "causas": cob.get("causas", {}),
+            "advertencia": ("Serie mensual municipal (Medellín), no por comuna ni "
+                            "diaria. Asociación, no causalidad; sin estandarizar por edad."),
+            "serie": serie,
+            "total_anual": resumen,
+        }
+        log(f"Mortalidad DANE: {len(anios)} años {anios}, "
+            f"causas {sorted(serie)}")
 
     # ── Series completas por indicador y territorio (todas las fuentes) ──
     series = construir_series()
@@ -308,6 +343,15 @@ def exportar_datos_abiertos(kb: dict, destino: Path) -> None:
     if idx.get("ranking"):
         archivos["indice_priorizacion.csv"] = (
             pd.DataFrame(idx["ranking"]), idx.get("descripcion", "Índice de priorización en salud."))
+    md = kb.get("indicadores", {}).get("mortalidad_dane") or {}
+    if md.get("serie"):
+        filas_m = [{"anio": int(a), "mes": mes, "causa": causa, "defunciones": v}
+                   for causa, xa in md["serie"].items()
+                   for a, xm in xa.items() for mes, v in xm.items()]
+        archivos["mortalidad_dane_mensual.csv"] = (
+            pd.DataFrame(filas_m).sort_values(["causa", "anio", "mes"]),
+            "Mortalidad mensual en Medellín por causa CIE-10 (DANE EEVV). "
+            "Nivel municipal (no comuna). respiratorias=J00-J99, circulatorias=I00-I99.")
     if cat:
         archivos["catalogo_indicadores.csv"] = (
             pd.DataFrame([{k: (", ".join(map(str, v)) if isinstance(v, list) else v)

@@ -108,3 +108,25 @@ medata:
     varicela:              {nombre: "varicela", unidad: "casos por 100.000 hab.", casos: "casos", tema: "enfermedades transmisibles"}
     violencia_genero:      {nombre: "violencia de género", unidad: "casos por 100.000 hab.", casos: "casos", tema: "violencias"}
   campo_territorial: "comuna"
+
+dane_eevv:
+  descripcion: >
+    Estadísticas Vitales del DANE (defunciones no fetales). Microdatos
+    anonimizados de uso público. Serie MENSUAL por municipio de ocurrencia con
+    causa básica CIE-10 (C_BAS1) y grupos de edad. Se usa Medellín (05001) para
+    la serie de mortalidad por causa respiratoria (J00-J99) que se cruza con
+    PM2.5 (SIATA). Habilita, a futuro, tasas estandarizadas por edad.
+  licencia: "Microdatos anonimizados de uso público DANE (gratuitos, con cita textual obligatoria a DANE)"
+  pagina_oficial: "https://microdatos.dane.gov.co/index.php/catalog/central?sk=Estad%C3%ADsticas%20Vitales"
+  base_descarga: "https://microdatos.dane.gov.co/index.php/catalog/{ficha}/download/{fileid}"
+  municipio_objetivo: {cod_dpto: "05", cod_munic: "001", nombre: "Medellín"}
+  encoding: "latin-1"
+  # ficha = id del estudio en el catálogo; fileid = archivo "Defunciones no fetales" (CSV dentro del ZIP).
+  # Verificado nov-2026: descarga anónima directa (sin login). fileid del año 2024 confirmado (24462).
+  # Los fileid de otros años se resuelven en 10_dane_eevv.py leyendo la página get-microdata.
+  anios:
+    "2024": {ficha: 878, fileid: 24462}
+    "2023": {ficha: 876}
+    "2022": {ficha: 807}
+    "2021": {ficha: 775}
+    "2020": {ficha: 732}
