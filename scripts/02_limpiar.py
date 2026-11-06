@@ -13,7 +13,9 @@ la integración posterior se hace solo con agregados.
 """
 from __future__ import annotations
 import sys
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
+
 
 import pandas as pd
 import yaml
@@ -58,25 +60,29 @@ def cargar_base(anio: str, var: str, formato: str, sep: str) -> pd.DataFrame:
     return df
 
 
+def _procesar_anio(t) -> str:
+    anio, var, formato, sep = t
+    try:
+        df = cargar_base(anio, var, formato, sep)
+    except FileNotFoundError:
+        return f"ECV {anio}: base no descargada, se omite"
+    salida = PROC / f"ecv_{anio}_homologado.parquet"
+    df.to_parquet(salida, index=False)
+    return f"ECV {anio}: {len(df)} filas -> {salida.name}"
+
+
 def main() -> int:
     cfg = yaml.safe_load(SOURCES.read_text(encoding="utf-8"))
     ecv = cfg["ecv"]
     terr = ecv["variable_territorial"]
     PROC.mkdir(parents=True, exist_ok=True)
 
-    for anio, meta in ecv["archivos"].items():
-        var = terr.get(anio)
-        if not var:
-            continue
-        try:
-            df = cargar_base(anio, var, meta.get("formato", "xlsx"),
-                             meta.get("csv_sep", ";"))
-        except FileNotFoundError:
-            log(f"ECV {anio}: base no descargada, se omite")
-            continue
-        salida = PROC / f"ecv_{anio}_homologado.parquet"
-        df.to_parquet(salida, index=False)
-        log(f"ECV {anio}: {len(df)} filas -> {salida.name}")
+    trabajos = [(a, terr[a], m.get("formato", "xlsx"), m.get("csv_sep", ";"))
+                for a, m in ecv["archivos"].items() if terr.get(a)]
+    # Un proceso por año: leer XLSX grandes es CPU-bound (openpyxl).
+    with ProcessPoolExecutor(max_workers=min(4, len(trabajos) or 1)) as ex:
+        for msg in ex.map(_procesar_anio, trabajos):
+            log(msg)
 
     return 0
 

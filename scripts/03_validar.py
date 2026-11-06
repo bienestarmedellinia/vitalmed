@@ -15,6 +15,7 @@ falla visiblemente y el jurado ve la validación como parte del artefacto.
 """
 from __future__ import annotations
 import sys
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
 import pandas as pd
@@ -77,20 +78,23 @@ def validar_anio(anio: str, var: str, formato: str, sep: str) -> list[str]:
     return errores
 
 
+def _validar(t) -> list[str]:
+    return validar_anio(*t)
+
+
 def main() -> int:
     cfg = yaml.safe_load(SOURCES.read_text(encoding="utf-8"))
     ecv = cfg["ecv"]
     archivos = ecv["archivos"]
     terr = ecv["variable_territorial"]
 
+    trabajos = [(a, terr[a], m.get("formato", "xlsx"), m.get("csv_sep", ";"))
+                for a, m in archivos.items() if terr.get(a)]
     todos_errores: list[str] = []
-    for anio, meta in archivos.items():
-        var = terr.get(anio)
-        if not var:
-            continue
-        formato = meta.get("formato", "xlsx")
-        sep = meta.get("csv_sep", ";")
-        todos_errores += validar_anio(anio, var, formato, sep)
+    # Un proceso por año (lectura de XLSX es CPU-bound).
+    with ProcessPoolExecutor(max_workers=min(4, len(trabajos) or 1)) as ex:
+        for errores in ex.map(_validar, trabajos):
+            todos_errores += errores
 
     print("\n" + "=" * 60)
     if todos_errores:

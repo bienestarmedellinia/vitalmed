@@ -13,6 +13,7 @@ import hashlib
 import json
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import requests
@@ -114,9 +115,10 @@ def main() -> int:
     cfg = yaml.safe_load(SOURCES.read_text(encoding="utf-8"))
     manifiesto = []
 
-    # ── ECV ──────────────────────────────────────────────────
-    ecv = cfg["ecv"]["archivos"]
-    for anio, archivos in ecv.items():
+    # ── ECV + SIATA: descargas independientes, en paralelo (I/O de red) ──
+    # tareas: (fuente, tipo, url, destino, fatal)
+    tareas = []
+    for anio, archivos in cfg["ecv"]["archivos"].items():
         destino_dir = RAW / f"ecv_{anio}"
         for tipo, url in archivos.items():
             if tipo in ("formato", "csv_sep", "nota"):
@@ -125,23 +127,28 @@ def main() -> int:
                 log(f"SKIP ECV {anio}/{tipo}: sin URL en sources.yml")
                 continue
             ext = Path(url).suffix or ".bin"
-            destino = destino_dir / f"{tipo}{ext}"
-            manifiesto.append({"fuente": f"ecv_{anio}", "tipo": tipo,
-                               **descargar(url, destino)})
+            tareas.append((f"ecv_{anio}", tipo, url, destino_dir / f"{tipo}{ext}", True))
 
-    # ── SIATA ────────────────────────────────────────────────
     s = cfg["siata"]
-    patron = s["patron_url"]
     for anio in s["anios"]:
         for mes in s["meses"]:
-            url = patron.format(mes=mes, anio=anio)
-            destino = RAW / "siata" / f"{mes}{anio}.zip"
-            try:
-                manifiesto.append({"fuente": "siata", "tipo": f"{mes}{anio}",
-                                   **descargar(url, destino)})
-            except RuntimeError as e:
-                # Un mes puede no existir todavía; no es fatal.
-                log(f"SIATA {mes}{anio} no disponible: {e}")
+            tareas.append(("siata", f"{mes}{anio}", s["patron_url"].format(mes=mes, anio=anio),
+                           RAW / "siata" / f"{mes}{anio}.zip", False))
+
+    def ejecutar(t):
+        fuente, tipo, url, destino, fatal = t
+        try:
+            return {"fuente": fuente, "tipo": tipo, **descargar(url, destino)}
+        except RuntimeError as e:
+            if fatal:
+                raise
+            # Un mes de SIATA puede no existir todavía; no es fatal.
+            log(f"SIATA {tipo} no disponible: {e}")
+            return None
+
+    # map() conserva el orden de las tareas -> manifiesto determinista.
+    with ThreadPoolExecutor(max_workers=6) as ex:
+        manifiesto += [m for m in ex.map(ejecutar, tareas) if m]
 
     # ── MEData: servicio ArcGIS de salud por comuna (obligatorio) ─
     md = cfg.get("medata", {})
