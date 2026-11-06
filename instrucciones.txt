@@ -75,9 +75,17 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
      portal web y la documentación. El equipo revisa, ejecuta y puede explicar
      el resultado.
    - Asistente del portal web (docs/asistente.js) y de línea de comandos
-     (asistente/motor.py): NO usan IA generativa. Son un motor determinista de
-     reglas que recupera cifras del knowledge base generado por el pipeline.
+     (asistente/motor.py): las cifras salen SIEMPRE de un motor determinista de
+     reglas que las recupera del knowledge base generado por el pipeline.
      No inventan datos.
+   - Google Gemini (capa gratuita, modelo gemini-flash-lite-latest): en el
+     portal web, las preguntas ESCRITAS se envían a un Worker de Cloudflare
+     (worker/src/index.js) que usa Gemini SOLO para interpretarlas: devuelve el
+     tipo de consulta y los territorios mencionados, elegidos de listas
+     cerradas; nunca devuelve cifras. Luego responde el motor determinista. Si
+     la IA falla, responde el motor solo. Las preguntas sugeridas no usan IA.
+     En la capa gratuita, Google puede usar el texto enviado para mejorar sus
+     productos; el Worker no guarda las preguntas.
    - Opcional, desactivado por defecto: asistente/llm.py puede usar un modelo de
      OpenAI (gpt-4o-mini por defecto) SOLO si existe OPENAI_API_KEY, y solo para
      redactar con más fluidez una respuesta que el motor ya calculó. No genera

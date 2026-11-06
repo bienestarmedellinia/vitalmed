@@ -13,6 +13,7 @@ Uso local (con playwright instalado):  python scripts/portal_smoke.py
 from __future__ import annotations
 import functools
 import http.server
+import json
 import sys
 import threading
 from pathlib import Path
@@ -20,7 +21,10 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 DOCS = Path(__file__).resolve().parent.parent / "docs"
-PREGUNTA = "¿Cual es la causa de mortalidad en la Candelaria?"
+PREGUNTA = "¿qué tan grave está la situación en el centro?"   # el motor solo NO la entiende
+# El Worker real rechaza el origen localhost; en la prueba se simula su respuesta
+# (mismo contrato que worker/src/index.js) para probar el camino con IA.
+IA_SIMULADA = {"intencion": "territorio", "territorios": ["La Candelaria"], "causa": False}
 
 
 def main() -> int:
@@ -35,6 +39,9 @@ def main() -> int:
         pag = nav.new_page()
         pag.on("pageerror", lambda e: errores.append(f"JS: {e}"))
         pag.on("console", lambda m: m.type == "error" and errores.append(f"consola: {m.text}"))
+        pag.route("**/interpretar", lambda ruta: ruta.fulfill(
+            status=200, content_type="application/json", body=json.dumps(IA_SIMULADA),
+            headers={"Access-Control-Allow-Origin": "*"}))
         pag.goto(url, wait_until="networkidle")
 
         if not pag.evaluate("typeof window.Chart === 'function'"):
@@ -45,9 +52,13 @@ def main() -> int:
 
         pag.fill("#q", PREGUNTA)
         pag.click("#btn-preguntar")
+        pag.wait_for_function("!document.querySelector('#resp').innerText.includes('Interpretando')",
+                              timeout=15000)
         resp = pag.locator("#resp").inner_text()
-        if "La Candelaria" not in resp:
+        if "La Candelaria" not in resp or "1325.6" not in resp:
             errores.append(f"El asistente no respondió como se esperaba: {resp[:120]!r}")
+        if "Interpreté tu pregunta con IA" not in resp:
+            errores.append("No se usó (o no se declaró) la interpretación con IA")
         if pag.input_value("#q") != "":
             errores.append("El campo de pregunta no se limpió")
         nav.close()
@@ -58,7 +69,7 @@ def main() -> int:
         for e in errores:
             print("  ✗", e)
         return 1
-    print(f"PORTAL: OK ({kpis} KPIs, asistente responde, sin errores JS/CSP)")
+    print(f"PORTAL: OK ({kpis} KPIs, asistente + IA simulada responden, sin errores JS/CSP)")
     return 0
 
 

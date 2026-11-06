@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bienestar Medellín IA · Salud y bienestar basados en datos</title>
   <meta name="description" content="Portal interactivo de inteligencia territorial para salud y bienestar en Medellín: mortalidad, salud mental y calidad del aire con datos abiertos reales (MEData, ECV, SIATA)." />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://bienestar-medellin-ia.watabares.workers.dev; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <script src="init.js"></script>
   <style>
@@ -340,8 +340,9 @@
         <div class="caja"><span class="etq">Declaración de IA</span><h3>Uso de inteligencia artificial</h3>
           <ul class="lim nota" style="padding-left:18px">
             <li><b>Desarrollo:</b> Kiro CLI (asistente de programación con IA) escribió los scripts, el portal y la documentación; el equipo revisa el resultado. ChatGPT y Gemini se usaron solo en consultas exploratorias iniciales (ideas y búsqueda de fuentes), sin generar código ni cifras.</li>
-            <li><b>Asistente de este portal:</b> no usa IA generativa. Es un motor determinista que solo responde con cifras de la base de conocimiento.</li>
-            <li><b>Opcional, apagado por defecto:</b> <code>asistente/llm.py</code> puede usar un modelo de OpenAI solo para redactar mejor una respuesta ya calculada. No genera cifras y no se usa en este portal web.</li>
+            <li><b>Asistente de este portal:</b> las cifras salen siempre de un motor determinista que lee la base de conocimiento. Las preguntas <i>escritas</i> se envían a Google Gemini (capa gratuita, vía un Worker de Cloudflare) <b>solo para interpretarlas</b>: el modelo devuelve el tipo de consulta y los territorios mencionados, elegidos de listas cerradas, y nunca escribe números. Si la IA no responde, contesta el motor por sí solo. Las preguntas sugeridas no usan IA.</li>
+            <li><b>Privacidad:</b> no escribas datos personales en la pregunta. En la capa gratuita, Google puede usar el texto enviado para mejorar sus productos. El Worker no guarda las preguntas.</li>
+            <li><b>Opcional, apagado por defecto:</b> <code>asistente/llm.py</code> (versión de línea de comandos) puede usar un modelo de OpenAI solo para redactar mejor una respuesta ya calculada. No genera cifras y no se usa en este portal web.</li>
           </ul></div>
       </div>
     </section>

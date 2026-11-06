@@ -347,7 +347,7 @@ async function cargarKB() {
  * con eso se arma una consulta canónica y la responde el MISMO motor
  * determinista: las cifras siempre salen del KB, nunca de la IA.
  * Si IA_URL está vacío, falla o tarda, se devuelve la respuesta determinista. */
-const IA_URL = "";
+const IA_URL = "https://bienestar-medellin-ia.watabares.workers.dev/interpretar";
 const CLAVE_INTENCION = {
   hallazgo: "hallazgo principal", ambiental: "calidad del aire",
   priorizacion: "priorizar", tendencia: "tendencia", fuentes: "fuentes",

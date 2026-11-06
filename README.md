@@ -86,6 +86,10 @@ Arquitectura en dos capas:
 2. **Capa LLM opcional** (`asistente/llm.py`) — si existe `OPENAI_API_KEY`,
    mejora la redacción tomando *solo* las cifras ya recuperadas (no genera
    números). Sin la key, se omite y responde el motor determinista.
+3. **Interpretación con IA en el portal web** (`worker/`) — un Worker de
+   Cloudflare usa Gemini para clasificar la pregunta escrita (intención y
+   territorios, de listas cerradas; nunca cifras). Luego responde el motor
+   determinista. Despliegue y verificación: `worker/README.md`.
 
 Cada respuesta entrega: respuesta directa · evidencia (indicador, valor, año,
 territorio, fuente) · interpretación · recomendación · limitaciones.

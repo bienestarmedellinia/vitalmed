@@ -400,7 +400,9 @@ def construir(kb: dict, eq: dict) -> list:
     el.append(Paragraph("9. Uso de inteligencia artificial", S["h2"]))
     for t in ("<b>Kiro CLI</b> (asistente de programación con IA): desarrollo de scripts, portal y documentación; el equipo revisa y puede explicar el resultado.",
               "<b>ChatGPT y Gemini</b>: consultas exploratorias iniciales (ideas y búsqueda de fuentes); no generaron código ni cifras.",
-              "<b>Asistente del portal</b>: motor determinista de reglas; no usa IA generativa y solo responde con cifras de la base de conocimiento. "
+              "<b>Asistente del portal</b>: las cifras salen siempre de un motor determinista que lee la base de conocimiento. "
+              "Las preguntas escritas se interpretan con <b>Google Gemini</b> (capa gratuita, vía un Worker de Cloudflare), que solo devuelve el tipo de consulta "
+              "y los territorios, de listas cerradas; nunca cifras. Si la IA falla, responde el motor solo.",
               "La capa opcional con un modelo de OpenAI (asistente/llm.py) está apagada por defecto y no se usa en el portal publicado."):
         el.append(Paragraph("• " + t, S["base"]))
     gen = (kb.get("meta") or {}).get("generado_utc", "")
