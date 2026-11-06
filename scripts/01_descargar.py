@@ -65,7 +65,7 @@ def descargar(url: str, destino: Path) -> dict:
         except Exception as e:  # noqa: BLE001
             ultimo_error = e
             log(f"intento {intento}/{RETRIES} fallo para {url}: {e}")
-            time.sleep(3 * intento)
+            time.sleep(10 * intento)
     raise RuntimeError(f"No se pudo descargar {url}: {ultimo_error}")
 
 
@@ -153,9 +153,14 @@ def main() -> int:
             log(f"SIATA {tipo} no disponible: {e}")
             return None
 
-    # map() conserva el orden de las tareas -> manifiesto determinista.
-    with ThreadPoolExecutor(max_workers=6) as ex:
-        manifiesto += [m for m in ex.map(ejecutar, tareas) if m]
+    # Concurrencia por servidor: medellin.gov.co corta conexiones si se le abren
+    # muchas a la vez (visto en Actions); SIATA tolera más. Ambos grupos corren en
+    # paralelo entre sí. map() conserva el orden -> manifiesto determinista.
+    alcaldia = [t for t in tareas if "medellin.gov.co" in t[2]]
+    otras = [t for t in tareas if "medellin.gov.co" not in t[2]]
+    with ThreadPoolExecutor(max_workers=2) as ex_a, ThreadPoolExecutor(max_workers=6) as ex_o:
+        res_a, res_o = ex_a.map(ejecutar, alcaldia), ex_o.map(ejecutar, otras)
+        manifiesto += [m for m in list(res_a) + list(res_o) if m]
 
     # ── MEData: servicio ArcGIS de salud por comuna (obligatorio) ─
     md = cfg.get("medata", {})
