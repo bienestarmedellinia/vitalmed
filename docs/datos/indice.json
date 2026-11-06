@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-11-06 23:27",
+ "generado_utc": "2026-11-06 23:34",
  "archivos": [
   {
    "archivo": "indicadores_por_territorio.csv",
@@ -35,6 +35,11 @@
    "archivo": "sivigila_semanal.csv",
    "descripcion": "Casos semanales SIVIGILA en Medellín (INS). ESI-IRAG (respiratorio centinela) e intento de suicidio. Nivel municipal (no comuna).",
    "filas": 1108
+  },
+  {
+   "archivo": "rips_anual.csv",
+   "descripcion": "Atenciones anuales RIPS en Medellín (MinSalud) por gran grupo CIE-10: respiratorias (J) y trastornos mentales (F). Contexto, nivel municipal.",
+   "filas": 26
   },
   {
    "archivo": "catalogo_indicadores.csv",

@@ -3,7 +3,7 @@
     "proyecto": "Medellín, Bienestar Basado en Datos",
     "descripcion": "Knowledge base del asistente de inteligencia territorial. Todas las cifras provienen del pipeline reproducible; el asistente no inventa datos.",
     "territorios_oficiales": 21,
-    "generado_utc": "2026-11-06 23:27"
+    "generado_utc": "2026-11-06 23:34"
   },
   "indicadores": {
     "hallazgo_mortalidad": {
@@ -2531,6 +2531,45 @@
           "2022": 2551
         }
       }
+    },
+    "rips": {
+      "unidad": "atenciones (conteo anual)",
+      "nivel": "municipio (NO comuna)",
+      "municipio": "Medellín",
+      "periodicidad": "anual",
+      "advertencia": "Contexto de carga de morbilidad (no serie para cruce con PM2.5). Caída 2020-2021 por COVID/subregistro.",
+      "serie": {
+        "respiratorias (J00-J99)": {
+          "2009": 1126811,
+          "2010": 1343825,
+          "2011": 1704607,
+          "2012": 1016987,
+          "2013": 534430,
+          "2014": 713078,
+          "2015": 784390,
+          "2016": 916016,
+          "2017": 909920,
+          "2018": 1740658,
+          "2019": 1433908,
+          "2020": 356456,
+          "2021": 421559
+        },
+        "trastornos mentales (F00-F99)": {
+          "2009": 138843,
+          "2010": 325142,
+          "2011": 352094,
+          "2012": 276699,
+          "2013": 116838,
+          "2014": 152624,
+          "2015": 280848,
+          "2016": 189910,
+          "2017": 421691,
+          "2018": 379420,
+          "2019": 860989,
+          "2020": 165395,
+          "2021": 237849
+        }
+      }
     }
   },
   "territorios": {
@@ -2706,6 +2745,12 @@
       "entidad": "INS",
       "nivel": "municipio (Medellín)",
       "variable": "casos semanales (ESI-IRAG, intento de suicidio)"
+    },
+    "rips": {
+      "nombre": "RIPS (prestación de servicios de salud)",
+      "entidad": "MinSalud",
+      "nivel": "municipio (Medellín)",
+      "variable": "atenciones anuales por grupo CIE-10 (respiratorias, mentales)"
     }
   },
   "series": {
