@@ -3,7 +3,7 @@
     "proyecto": "Medellín, Bienestar Basado en Datos",
     "descripcion": "Knowledge base del asistente de inteligencia territorial. Todas las cifras provienen del pipeline reproducible; el asistente no inventa datos.",
     "territorios_oficiales": 21,
-    "generado_utc": "2026-11-06 03:31"
+    "generado_utc": "2026-11-06 03:34"
   },
   "indicadores": {
     "hallazgo_mortalidad": {
@@ -1214,7 +1214,7 @@
       "nombre": "Datos validados de calidad del aire",
       "entidad": "SIATA - Valle de Aburrá",
       "variable": "PM2.5",
-      "serie": "2019-2026"
+      "serie": "2020-2025 (años completos)"
     }
   },
   "series": {
