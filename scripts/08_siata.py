@@ -31,6 +31,10 @@ OUT = BASE / "outputs" / "tablas"
 COL_ESTACION = 0
 COL_CONCENTRACION = 6
 HORAS_MES_MIN = 0.75  # 75% de validez
+# Rango físicamente plausible de PM2.5 horario (µg/m³). Los archivos usan
+# centinelas como 99999 para dato faltante (verificado: ENV-HOSP, mayo 2021);
+# se descartan para no inflar las medias.
+PM25_MIN, PM25_MAX = 0.0, 1000.0
 
 # Horas teóricas por mes (aprox) para el criterio de validez.
 HORAS_POR_MES = {1: 744, 2: 672, 3: 744, 4: 720, 5: 744, 6: 720,
@@ -50,8 +54,8 @@ def leer_xls_pm25(data: bytes) -> tuple[str, list[float]]:
     valores = []
     for r in range(1, sh.nrows):
         v = sh.cell_value(r, COL_CONCENTRACION)
-        if isinstance(v, (int, float)) and v == v:  # excluye NaN
-            valores.append(float(v))
+        if isinstance(v, (int, float)) and v == v and PM25_MIN <= v <= PM25_MAX:
+            valores.append(float(v))  # excluye NaN, negativos y centinelas (99999)
     return estacion, valores
 
 

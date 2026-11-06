@@ -290,7 +290,8 @@ function resAyuda() {
   const anPm = Object.keys(pm.promedio_estaciones || {}).sort();
   let cob = "";
   if (sal.length) cob += `${sal.length} indicadores de salud por comuna (MEData, ${rango(sal)}: ${sal.map((c) => c.nombre).join(", ")})`;
-  if (soc.length) cob += `${cob ? ", " : ""}${soc.length} indicadores sociales de la Encuesta de Calidad de Vida (${rango(soc)}: educación, empleo, seguridad alimentaria, deporte, demografía…)`;
+  const temas = [...new Set(soc.map((c) => c.tema))].sort();
+  if (soc.length) cob += `${cob ? ", " : ""}${soc.length} indicadores sociales de la Encuesta de Calidad de Vida (${rango(soc)}: ${temas.join(", ")})`;
   if (anPm.length) cob += `${cob ? " y " : ""}PM2.5 por estación de SIATA (${anPm[0]}–${anPm[anPm.length - 1]})`;
   const ej = ["¿Qué comuna tiene la mayor mortalidad?", "¿Cómo está Manrique?",
     "¿Cómo evolucionó el dengue en Robledo?", "Tasa de intento de suicidio en Belén en 2018",

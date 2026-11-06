@@ -372,9 +372,9 @@ class MotorAsistente:
             cob += (f"{len(sal)} indicadores de salud por comuna (MEData, {rango(sal)}: "
                     f"{', '.join(c['nombre'] for c in sal)})")
         if soc:
+            temas = sorted({c["tema"] for c in soc})
             cob += (f"{', ' if cob else ''}{len(soc)} indicadores sociales de la Encuesta de "
-                    f"Calidad de Vida ({rango(soc)}: educación, empleo, seguridad alimentaria, "
-                    f"deporte, demografía…)")
+                    f"Calidad de Vida ({rango(soc)}: {', '.join(temas)})")
         if an_pm:
             cob += f"{' y ' if cob else ''}PM2.5 por estación de SIATA ({an_pm[0]}–{an_pm[-1]})"
         ej = ["¿Qué comuna tiene la mayor mortalidad?", "¿Cómo está Manrique?",

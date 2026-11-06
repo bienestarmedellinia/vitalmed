@@ -269,7 +269,7 @@ def completar_pm25(pm: dict, df: pd.DataFrame, kb: dict) -> None:
     actual = datetime.now(timezone.utc).year
     completos = sorted(int(a) for a in df["anio"].unique()
                        if meses.get(int(a), 12) >= MESES_ANIO_COMPLETO and int(a) < actual)
-    validos = df[df["meses_validos"] >= MESES_ANIO_COMPLETO]
+    validos = df[(df["meses_validos"] >= MESES_ANIO_COMPLETO) & df["anio"].isin(completos)]
     serie = {}
     for r in validos.itertuples():
         serie.setdefault(str(r.estacion), {})[str(int(r.anio))] = round(float(r.media_pm25), 2)
