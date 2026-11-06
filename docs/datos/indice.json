@@ -1,0 +1,35 @@
+{
+ "generado_utc": "2026-11-06 03:41",
+ "archivos": [
+  {
+   "archivo": "indicadores_por_territorio.csv",
+   "descripcion": "Todos los indicadores (salud MEData y sociales ECV) por territorio y año.",
+   "filas": 7652
+  },
+  {
+   "archivo": "indicadores_medellin.csv",
+   "descripcion": "Valor de Medellín por indicador y año (tasa agregada de los 21 territorios o total ECV).",
+   "filas": 365
+  },
+  {
+   "archivo": "factores_asociados.csv",
+   "descripcion": "Correlación entre 21 territorios (Pearson y Spearman). Asociación, no causalidad.",
+   "filas": 60
+  },
+  {
+   "archivo": "pm25_por_estacion.csv",
+   "descripcion": "PM2.5 media anual por estación SIATA (años completos). No es por comuna.",
+   "filas": 130
+  },
+  {
+   "archivo": "indice_priorizacion.csv",
+   "descripcion": "Índice multivariable de priorización en salud por comuna: promedio de la mortalidad general y el intento de suicidio (tasas por 100.000 hab.), cada indicador normalizado 0-100 (min-max). Mayor = más prioritario.",
+   "filas": 21
+  },
+  {
+   "archivo": "catalogo_indicadores.csv",
+   "descripcion": "Catálogo: clave, nombre, unidad, tema, dimensión, fuente y años de cada indicador.",
+   "filas": 31
+  }
+ ]
+}

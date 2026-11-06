@@ -15,6 +15,9 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
 
 2. PROBARLO EN LÍNEA
    Portal web + asistente (sin instalar nada): https://watabares.github.io/medellin-bienestar-datos/
+   Explorador de datos (todas las estadísticas, tablas y descargas CSV; módulo
+   independiente del asistente): https://watabares.github.io/medellin-bienestar-datos/datos.html
+   Descargas directas: carpeta docs/datos/ del repositorio (se regenera en cada run).
    Pipeline: pestaña "Actions" del repo -> "pipeline-ecv" -> "Run workflow".
 
 3. ENTORNO

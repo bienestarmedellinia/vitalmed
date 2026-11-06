@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explorador de datos · Bienestar Medellín IA</title>
+  <meta name="description" content="Todas las estadísticas del proyecto por indicador, territorio y año: salud (MEData), condiciones sociales (ECV) y calidad del aire (SIATA). Tablas, gráficos y descargas en CSV." />
+  <!-- Módulo independiente del asistente: no carga asistente.js ni se conecta a la IA. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <script src="init.js"></script>
+  <style>
+    :root { --azul:#1f4e79; --azul-osc:#0f2a44; --nar:#d9731a; --nar-txt:#a8540a; --gris:#4b5563;
+            --fondo:#eef2f7; --verde:#2f7d4f; --rojo:#c0392b; }
+    * { box-sizing:border-box; }
+    body { font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif; margin:0; background:var(--fondo); color:#1a1a1a; line-height:1.5; }
+    a { color:var(--azul); }
+    .wrap { max-width:1180px; margin:0 auto; padding:0 16px; }
+    .salto { position:absolute; left:-999px; }
+    .salto:focus { left:8px; top:8px; background:#fff; padding:8px; z-index:20; }
+    nav { background:rgba(15,42,68,.97); position:sticky; top:0; z-index:10; }
+    nav .wrap { display:flex; gap:2px 14px; flex-wrap:wrap; align-items:center; padding-top:8px; padding-bottom:8px; }
+    nav b { color:#fff; margin-right:auto; }
+    nav a { color:#c9d9ea; text-decoration:none; font-size:.86rem; padding:4px 3px; border-bottom:2px solid transparent; }
+    nav a:hover, nav a:focus { color:#fff; border-color:var(--nar); }
+    nav a[aria-current=page] { color:#fff; border-color:var(--nar); }
+    header { background:linear-gradient(135deg,#1f4e79 0%,#0f2a44 100%); color:#fff; padding:28px 0 26px; }
+    header h1 { margin:0 0 4px; font-size:clamp(1.6rem,4.5vw,2.4rem); }
+    header p { margin:0; opacity:.92; max-width:820px; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .chip { background:rgba(255,255,255,.14); border-radius:20px; padding:4px 12px; font-size:.85rem; }
+    section { margin:26px 0; }
+    section > h2 { color:var(--azul-osc); margin:0 0 4px; font-size:1.4rem; }
+    section > .sub { color:var(--gris); margin:0 0 12px; max-width:880px; }
+    .caja { background:#fff; border-radius:14px; padding:18px; box-shadow:0 1px 6px rgba(15,42,68,.1); }
+    .controles { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-bottom:14px; }
+    label { font-weight:600; font-size:.88rem; display:block; margin-bottom:4px; }
+    select, input[type=search] { width:100%; padding:9px 10px; border:1px solid #9aa5b1; border-radius:8px; font-size:.95rem; background:#fff; font-family:inherit; }
+    button { background:var(--azul); color:#fff; border:0; border-radius:8px; padding:9px 14px; font-size:.92rem; cursor:pointer; font-family:inherit; }
+    button:hover { background:#163a5c; }
+    button.sec { background:#eef2f7; color:var(--azul); }
+    button.sec:hover { background:#dde6f0; }
+    .grid2 { display:grid; grid-template-columns:1.1fr .9fr; gap:16px; }
+    @media (max-width:900px) { .grid2 { grid-template-columns:1fr; } }
+    .resumen { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:14px; }
+    .dato { background:#f5f8fb; border-radius:10px; padding:10px 12px; border-left:4px solid var(--nar); }
+    .dato .n { font-size:1.3rem; font-weight:800; color:var(--azul); line-height:1.15; }
+    .dato .t { font-size:.8rem; color:var(--gris); }
+    .lienzo { position:relative; height:540px; }
+    .lienzo.bajo { height:380px; }
+    .tabla-wrap { overflow:auto; max-height:540px; border:1px solid #e3e8ef; border-radius:10px; }
+    table { border-collapse:collapse; width:100%; font-size:.86rem; }
+    caption { text-align:left; font-weight:600; padding:8px 10px; color:var(--azul-osc); }
+    th, td { padding:6px 9px; border-bottom:1px solid #edf1f5; text-align:right; white-space:nowrap; }
+    th { background:#f0f4f9; position:sticky; top:0; z-index:1; color:var(--azul-osc); }
+    th:first-child, td:first-child { text-align:left; position:sticky; left:0; background:#fff; z-index:2; }
+    th:first-child { background:#f0f4f9; z-index:3; }
+    tr.sel td { background:#fff3e6; }
+    tr.ciudad td { font-weight:700; background:#f5f8fb; }
+    td.vacio { color:#9aa5b1; }
+    .nota { font-size:.84rem; color:var(--gris); margin:10px 0 0; }
+    .limit { font-size:.85rem; color:var(--nar-txt); margin:10px 0 0; }
+    .terr { display:flex; flex-wrap:wrap; gap:6px 14px; max-height:150px; overflow:auto; padding:8px; border:1px solid #e3e8ef; border-radius:8px; margin-bottom:12px; }
+    .terr label { font-weight:400; display:flex; gap:6px; align-items:center; margin:0; font-size:.88rem; }
+    .acciones { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    .sig { color:var(--verde); font-weight:700; }
+    .descargas li { margin:6px 0; }
+    footer { color:var(--gris); font-size:.85rem; padding:24px 0 40px; }
+    .solo-lector { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+    :focus-visible { outline:3px solid var(--nar); outline-offset:2px; }
+  </style>
+</head>
+<body>
+  <a class="salto" href="#contenido">Saltar al contenido</a>
+  <nav aria-label="Secciones">
+    <div class="wrap">
+      <b>Bienestar Medellín IA</b>
+      <a href="index.html">Portal</a>
+      <a href="index.html#asistente">Asistente</a>
+      <a href="datos.html" aria-current="page">Datos</a>
+      <a href="#indicador">Indicador</a>
+      <a href="#serie">Serie histórica</a>
+      <a href="#factores">Factores</a>
+      <a href="#aire">Aire</a>
+      <a href="#descargas">Descargas</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="wrap">
+      <h1>Explorador de datos</h1>
+      <p>Todas las estadísticas del proyecto, sin pasar por el asistente: elige un indicador, un año y unos territorios para ver la tabla, el gráfico y descargar los datos. Las cifras son las mismas que usa el asistente (misma base de conocimiento generada por el pipeline).</p>
+      <div class="chips" id="chips" aria-live="polite"></div>
+    </div>
+  </header>
+
+  <main id="contenido" class="wrap">
+    <section id="indicador">
+      <h2>1 · Indicador por territorio</h2>
+      <p class="sub">Valor de cada comuna y corregimiento en el año elegido, ordenado de mayor a menor, con el valor de Medellín como referencia.</p>
+      <div class="caja">
+        <div class="controles">
+          <div><label for="f-dim">Dimensión</label>
+            <select id="f-dim"><option value="">Todas</option><option value="salud">Salud (MEData)</option><option value="social">Social (ECV)</option></select></div>
+          <div><label for="f-ind">Indicador</label><select id="f-ind"></select></div>
+          <div><label for="f-anio">Año</label><select id="f-anio"></select></div>
+        </div>
+        <div class="resumen" id="resumen" aria-live="polite"></div>
+        <div class="grid2">
+          <div class="lienzo"><canvas id="c-rank" role="img" aria-label="Barras: valor del indicador por territorio en el año elegido"></canvas></div>
+          <div class="tabla-wrap"><table id="t-rank"></table></div>
+        </div>
+        <p class="limit" id="lim-ind"></p>
+        <div class="acciones"><button type="button" class="sec" id="d-rank">Descargar esta tabla (CSV)</button>
+          <button type="button" class="sec" id="copiar">Copiar enlace a esta vista</button></div>
+      </div>
+    </section>
+
+    <section id="serie">
+      <h2>2 · Serie histórica</h2>
+      <p class="sub">Todos los años disponibles del indicador elegido arriba, para los 21 territorios. Marca territorios para compararlos en el gráfico.</p>
+      <div class="caja">
+        <fieldset style="border:0;padding:0;margin:0"><legend class="solo-lector">Territorios a comparar</legend>
+          <div class="terr" id="f-terr"></div></fieldset>
+        <div class="lienzo bajo"><canvas id="c-serie" role="img" aria-label="Líneas: evolución del indicador en los territorios elegidos y en Medellín"></canvas></div>
+        <div class="tabla-wrap" style="margin-top:14px"><table id="t-serie"></table></div>
+        <div class="acciones"><button type="button" class="sec" id="d-serie">Descargar la serie (CSV)</button></div>
+      </div>
+    </section>
+
+    <section id="factores">
+      <h2>3 · Factores asociados</h2>
+      <p class="sub">Correlación entre los 21 territorios de cada factor con la mortalidad y el intento de suicidio, en el año más reciente común a ambos.</p>
+      <div class="caja">
+        <div class="controles">
+          <div><label for="f-res">Resultado de salud</label><select id="f-res"></select></div>
+          <div><label for="f-sig">Mostrar</label>
+            <select id="f-sig"><option value="todas">Todas las correlaciones</option><option value="sig">Solo las estadísticamente apreciables (≈95 %)</option></select></div>
+        </div>
+        <div class="grid2">
+          <div class="lienzo bajo"><canvas id="c-fac" role="img" aria-label="Barras: correlación de cada factor con el resultado de salud"></canvas></div>
+          <div class="tabla-wrap"><table id="t-fac"></table></div>
+        </div>
+        <p class="limit" id="lim-fac"></p>
+        <div class="acciones"><button type="button" class="sec" id="d-fac">Descargar factores (CSV)</button></div>
+      </div>
+    </section>
+
+    <section id="aire">
+      <h2>4 · Calidad del aire (PM2.5, SIATA)</h2>
+      <p class="sub">Media anual por estación de monitoreo (años completos) y promedio de estaciones. La guía anual de la OMS 2021 es 5 µg/m³.</p>
+      <div class="caja">
+        <div class="lienzo bajo"><canvas id="c-aire" role="img" aria-label="Línea: promedio anual de PM2.5 de las estaciones SIATA"></canvas></div>
+        <div class="tabla-wrap" style="margin-top:14px"><table id="t-aire"></table></div>
+        <p class="limit" id="lim-aire"></p>
+        <div class="acciones"><button type="button" class="sec" id="d-aire">Descargar PM2.5 (CSV)</button></div>
+      </div>
+    </section>
+
+    <section id="descargas">
+      <h2>5 · Descargas y diccionario</h2>
+      <p class="sub">Archivos completos generados por el pipeline en cada ejecución (UTF-8, separados por comas). Datos agregados por territorio, sin datos personales.</p>
+      <div class="caja">
+        <ul class="descargas" id="lista-desc"></ul>
+        <div class="tabla-wrap" style="margin-top:12px"><table id="t-cat"></table></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Fuentes: MEData · Secretaría de Salud de Medellín; Encuesta de Calidad de Vida · Alcaldía de Medellín (Planeación); SIATA · Valle de Aburrá. Ver <a href="index.html#transparencia">transparencia y licencias</a>.</p>
+      <p id="estado">Cargando datos…</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" integrity="sha384-NrKB+u6Ts6AtkIhwPixiKTzgSKNblyhlk0Sohlgar9UHUBzai/sgnNNWWd291xqt" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="datos.js"></script>
+</body>
+</html>

@@ -1,0 +1,366 @@
+dimension,tema,clave,indicador,unidad,fuente,anio,valor_medellin
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2008,28.37
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2009,32.8
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2010,681.59
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2011,29.39
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2012,27.71
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2013,89.64
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2014,129.0
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2015,156.11
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2016,700.96
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2017,81.56
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2018,46.93
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2019,46.43
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2020,21.16
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2021,8.24
+salud,enfermedades transmisibles,dengue,dengue,casos por 100.000 hab.,MEData - Secretaría de Salud,2022,5.99
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2008,26.66
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2009,23.6
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2010,11.78
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2011,9.37
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2012,15.84
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2013,14.11
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2014,10.69
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2015,9.25
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2016,7.0
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2017,8.25
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2018,10.88
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2019,16.15
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2020,11.33
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2021,3.34
+salud,enfermedades transmisibles,hepatitis_a,hepatitis A,casos por 100.000 hab.,MEData - Secretaría de Salud,2022,12.44
+salud,salud mental,intento_suicidio,intento de suicidio,casos por 100.000 hab.,MEData - Secretaría de Salud,2013,66.27
+salud,salud mental,intento_suicidio,intento de suicidio,casos por 100.000 hab.,MEData - Secretaría de Salud,2014,58.62
+salud,salud mental,intento_suicidio,intento de suicidio,casos por 100.000 hab.,MEData - Secretaría de Salud,2015,62.98
+salud,salud mental,intento_suicidio,intento de suicidio,casos por 100.000 hab.,MEData - Secretaría de Salud,2016,73.11
+salud,salud mental,intento_suicidio,intento de suicidio,casos por 100.000 hab.,MEData - Secretaría de Salud,2017,86.43
+salud,salud mental,intento_suicidio,intento de suicidio,casos por 100.000 hab.,MEData - Secretaría de Salud,2018,86.89
+salud,salud mental,intento_suicidio,intento de suicidio,casos por 100.000 hab.,MEData - Secretaría de Salud,2019,89.95
+salud,salud mental,intento_suicidio,intento de suicidio,casos por 100.000 hab.,MEData - Secretaría de Salud,2020,72.35
+salud,salud mental,intento_suicidio,intento de suicidio,casos por 100.000 hab.,MEData - Secretaría de Salud,2021,79.2
+salud,salud mental,intento_suicidio,intento de suicidio,casos por 100.000 hab.,MEData - Secretaría de Salud,2022,82.57
+salud,mortalidad,mortalidad,mortalidad general,defunciones por 100.000 hab.,MEData - Secretaría de Salud,2012,488.55
+salud,mortalidad,mortalidad,mortalidad general,defunciones por 100.000 hab.,MEData - Secretaría de Salud,2013,478.5
+salud,mortalidad,mortalidad,mortalidad general,defunciones por 100.000 hab.,MEData - Secretaría de Salud,2014,485.76
+salud,mortalidad,mortalidad,mortalidad general,defunciones por 100.000 hab.,MEData - Secretaría de Salud,2015,507.12
+salud,mortalidad,mortalidad,mortalidad general,defunciones por 100.000 hab.,MEData - Secretaría de Salud,2016,526.76
+salud,mortalidad,mortalidad,mortalidad general,defunciones por 100.000 hab.,MEData - Secretaría de Salud,2017,539.93
+salud,mortalidad,mortalidad,mortalidad general,defunciones por 100.000 hab.,MEData - Secretaría de Salud,2018,583.08
+salud,mortalidad,mortalidad,mortalidad general,defunciones por 100.000 hab.,MEData - Secretaría de Salud,2019,574.42
+salud,mortalidad,mortalidad,mortalidad general,defunciones por 100.000 hab.,MEData - Secretaría de Salud,2020,665.3
+salud,mortalidad,mortalidad,mortalidad general,defunciones por 100.000 hab.,MEData - Secretaría de Salud,2021,837.74
+salud,mortalidad,mortalidad,mortalidad general,defunciones por 100.000 hab.,MEData - Secretaría de Salud,2022,647.5
+salud,demografía,natalidad,natalidad,nacidos vivos por 100.000 hab.,MEData - Secretaría de Salud,2012,1145.75
+salud,demografía,natalidad,natalidad,nacidos vivos por 100.000 hab.,MEData - Secretaría de Salud,2013,1126.25
+salud,demografía,natalidad,natalidad,nacidos vivos por 100.000 hab.,MEData - Secretaría de Salud,2014,1149.76
+salud,demografía,natalidad,natalidad,nacidos vivos por 100.000 hab.,MEData - Secretaría de Salud,2015,1167.99
+salud,demografía,natalidad,natalidad,nacidos vivos por 100.000 hab.,MEData - Secretaría de Salud,2016,1120.07
+salud,demografía,natalidad,natalidad,nacidos vivos por 100.000 hab.,MEData - Secretaría de Salud,2017,1110.72
+salud,demografía,natalidad,natalidad,nacidos vivos por 100.000 hab.,MEData - Secretaría de Salud,2018,1107.15
+salud,demografía,natalidad,natalidad,nacidos vivos por 100.000 hab.,MEData - Secretaría de Salud,2019,1084.74
+salud,demografía,natalidad,natalidad,nacidos vivos por 100.000 hab.,MEData - Secretaría de Salud,2020,1008.08
+salud,demografía,natalidad,natalidad,nacidos vivos por 100.000 hab.,MEData - Secretaría de Salud,2021,886.94
+salud,demografía,natalidad,natalidad,nacidos vivos por 100.000 hab.,MEData - Secretaría de Salud,2022,837.44
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2008,101.99
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2009,75.6
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2010,20.4
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2011,18.45
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2012,19.64
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2013,17.25
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2014,15.65
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2015,16.68
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2016,18.62
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2017,56.45
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2018,92.13
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2019,41.71
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2020,13.78
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2021,11.78
+salud,enfermedades transmisibles,parotiditis,parotiditis (paperas),casos por 100.000 hab.,MEData - Secretaría de Salud,2022,14.19
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2008,4.84
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2009,4.4
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2010,2.05
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2011,6.88
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2012,54.91
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2013,41.62
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2014,21.75
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2015,5.03
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2016,4.38
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2017,3.55
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2018,2.14
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2019,1.77
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2020,0.39
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2021,0.19
+salud,enfermedades transmisibles,tosferina,tosferina,casos por 100.000 hab.,MEData - Secretaría de Salud,2022,0.16
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2008,34.96
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2009,39.66
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2010,44.22
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2011,49.02
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2012,39.66
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2013,46.58
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2014,47.27
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2015,43.87
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2016,47.17
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2017,50.63
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2018,47.55
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2019,57.78
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2020,44.45
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2021,51.49
+salud,enfermedades transmisibles,tuberculosis_pulmonar,tuberculosis pulmonar,casos por 100.000 hab.,MEData - Secretaría de Salud,2022,48.59
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2008,281.14
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2009,193.02
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2010,175.33
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2011,268.68
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2012,176.64
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2013,144.42
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2014,220.15
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2015,207.16
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2016,191.9
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2017,194.06
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2018,149.44
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2019,124.82
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2020,33.43
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2021,30.12
+salud,enfermedades transmisibles,varicela,varicela,casos por 100.000 hab.,MEData - Secretaría de Salud,2022,33.9
+salud,violencias,violencia_genero,violencia de género,casos por 100.000 hab.,MEData - Secretaría de Salud,2013,100.48
+salud,violencias,violencia_genero,violencia de género,casos por 100.000 hab.,MEData - Secretaría de Salud,2014,104.54
+salud,violencias,violencia_genero,violencia de género,casos por 100.000 hab.,MEData - Secretaría de Salud,2015,125.19
+salud,violencias,violencia_genero,violencia de género,casos por 100.000 hab.,MEData - Secretaría de Salud,2016,156.59
+salud,violencias,violencia_genero,violencia de género,casos por 100.000 hab.,MEData - Secretaría de Salud,2017,226.71
+salud,violencias,violencia_genero,violencia de género,casos por 100.000 hab.,MEData - Secretaría de Salud,2018,526.18
+salud,violencias,violencia_genero,violencia de género,casos por 100.000 hab.,MEData - Secretaría de Salud,2019,575.06
+salud,violencias,violencia_genero,violencia de género,casos por 100.000 hab.,MEData - Secretaría de Salud,2020,389.04
+salud,violencias,violencia_genero,violencia de género,casos por 100.000 hab.,MEData - Secretaría de Salud,2021,417.88
+salud,violencias,violencia_genero,violencia de género,casos por 100.000 hab.,MEData - Secretaría de Salud,2022,447.41
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria,Porcentaje de hogares con algún nivel de inseguridad alimentaria,%,ECV - serie histórica de indicadores (Planeación),2013,47.62
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria,Porcentaje de hogares con algún nivel de inseguridad alimentaria,%,ECV - serie histórica de indicadores (Planeación),2014,47.71
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria,Porcentaje de hogares con algún nivel de inseguridad alimentaria,%,ECV - serie histórica de indicadores (Planeación),2015,36.09
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria,Porcentaje de hogares con algún nivel de inseguridad alimentaria,%,ECV - serie histórica de indicadores (Planeación),2016,45.19
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria,Porcentaje de hogares con algún nivel de inseguridad alimentaria,%,ECV - serie histórica de indicadores (Planeación),2017,42.72
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria,Porcentaje de hogares con algún nivel de inseguridad alimentaria,%,ECV - serie histórica de indicadores (Planeación),2018,44.0
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria,Porcentaje de hogares con algún nivel de inseguridad alimentaria,%,ECV - serie histórica de indicadores (Planeación),2019,41.24
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria,Porcentaje de hogares con algún nivel de inseguridad alimentaria,%,ECV - serie histórica de indicadores (Planeación),2021,62.37
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria,Porcentaje de hogares con algún nivel de inseguridad alimentaria,%,ECV - serie histórica de indicadores (Planeación),2022,59.27
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_alta,Porcentaje de hogares con nivel de inseguridad alimentaria alta,%,ECV - serie histórica de indicadores (Planeación),2013,4.46
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_alta,Porcentaje de hogares con nivel de inseguridad alimentaria alta,%,ECV - serie histórica de indicadores (Planeación),2014,3.03
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_alta,Porcentaje de hogares con nivel de inseguridad alimentaria alta,%,ECV - serie histórica de indicadores (Planeación),2015,2.37
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_alta,Porcentaje de hogares con nivel de inseguridad alimentaria alta,%,ECV - serie histórica de indicadores (Planeación),2016,2.07
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_alta,Porcentaje de hogares con nivel de inseguridad alimentaria alta,%,ECV - serie histórica de indicadores (Planeación),2017,5.5
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_alta,Porcentaje de hogares con nivel de inseguridad alimentaria alta,%,ECV - serie histórica de indicadores (Planeación),2018,4.75
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_alta,Porcentaje de hogares con nivel de inseguridad alimentaria alta,%,ECV - serie histórica de indicadores (Planeación),2019,4.37
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_alta,Porcentaje de hogares con nivel de inseguridad alimentaria alta,%,ECV - serie histórica de indicadores (Planeación),2021,14.57
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_alta,Porcentaje de hogares con nivel de inseguridad alimentaria alta,%,ECV - serie histórica de indicadores (Planeación),2022,10.57
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_leve,Porcentaje de hogares con nivel de inseguridad alimentaria leve,%,ECV - serie histórica de indicadores (Planeación),2013,32.81
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_leve,Porcentaje de hogares con nivel de inseguridad alimentaria leve,%,ECV - serie histórica de indicadores (Planeación),2014,34.43
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_leve,Porcentaje de hogares con nivel de inseguridad alimentaria leve,%,ECV - serie histórica de indicadores (Planeación),2015,27.12
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_leve,Porcentaje de hogares con nivel de inseguridad alimentaria leve,%,ECV - serie histórica de indicadores (Planeación),2016,33.82
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_leve,Porcentaje de hogares con nivel de inseguridad alimentaria leve,%,ECV - serie histórica de indicadores (Planeación),2017,27.91
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_leve,Porcentaje de hogares con nivel de inseguridad alimentaria leve,%,ECV - serie histórica de indicadores (Planeación),2018,29.03
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_leve,Porcentaje de hogares con nivel de inseguridad alimentaria leve,%,ECV - serie histórica de indicadores (Planeación),2019,26.91
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_leve,Porcentaje de hogares con nivel de inseguridad alimentaria leve,%,ECV - serie histórica de indicadores (Planeación),2021,35.29
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_leve,Porcentaje de hogares con nivel de inseguridad alimentaria leve,%,ECV - serie histórica de indicadores (Planeación),2022,33.0
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_moderada,Porcentaje de hogares con nivel de inseguridad alimentaria moderada,%,ECV - serie histórica de indicadores (Planeación),2013,10.34
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_moderada,Porcentaje de hogares con nivel de inseguridad alimentaria moderada,%,ECV - serie histórica de indicadores (Planeación),2014,9.79
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_moderada,Porcentaje de hogares con nivel de inseguridad alimentaria moderada,%,ECV - serie histórica de indicadores (Planeación),2015,6.59
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_moderada,Porcentaje de hogares con nivel de inseguridad alimentaria moderada,%,ECV - serie histórica de indicadores (Planeación),2016,9.31
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_moderada,Porcentaje de hogares con nivel de inseguridad alimentaria moderada,%,ECV - serie histórica de indicadores (Planeación),2017,9.31
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_moderada,Porcentaje de hogares con nivel de inseguridad alimentaria moderada,%,ECV - serie histórica de indicadores (Planeación),2018,10.23
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_moderada,Porcentaje de hogares con nivel de inseguridad alimentaria moderada,%,ECV - serie histórica de indicadores (Planeación),2019,9.96
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_moderada,Porcentaje de hogares con nivel de inseguridad alimentaria moderada,%,ECV - serie histórica de indicadores (Planeación),2021,12.51
+social,seguridad alimentaria,ecv_hogares_inseguridad_alimentaria_moderada,Porcentaje de hogares con nivel de inseguridad alimentaria moderada,%,ECV - serie histórica de indicadores (Planeación),2022,15.7
+social,hogares,ecv_hombres_jefes_cabeza_hogar,Porcentaje de hombres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2011,57.26
+social,hogares,ecv_hombres_jefes_cabeza_hogar,Porcentaje de hombres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2012,54.75
+social,hogares,ecv_hombres_jefes_cabeza_hogar,Porcentaje de hombres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2013,54.78
+social,hogares,ecv_hombres_jefes_cabeza_hogar,Porcentaje de hombres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2014,49.88
+social,hogares,ecv_hombres_jefes_cabeza_hogar,Porcentaje de hombres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2015,52.31
+social,hogares,ecv_hombres_jefes_cabeza_hogar,Porcentaje de hombres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2016,52.17
+social,hogares,ecv_hombres_jefes_cabeza_hogar,Porcentaje de hombres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2017,50.65
+social,hogares,ecv_hombres_jefes_cabeza_hogar,Porcentaje de hombres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2018,51.82
+social,hogares,ecv_hombres_jefes_cabeza_hogar,Porcentaje de hombres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2019,49.21
+social,hogares,ecv_hombres_jefes_cabeza_hogar,Porcentaje de hombres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2021,43.62
+social,hogares,ecv_hombres_jefes_cabeza_hogar,Porcentaje de hombres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2022,42.01
+social,salud sexual y reproductiva,ecv_jefes_hogar_informante_calificado_planifica,Porcentaje de jefes de hogar o informante calificado que planifica,%,ECV - serie histórica de indicadores (Planeación),2011,36.12
+social,salud sexual y reproductiva,ecv_jefes_hogar_informante_calificado_planifica,Porcentaje de jefes de hogar o informante calificado que planifica,%,ECV - serie histórica de indicadores (Planeación),2012,38.68
+social,salud sexual y reproductiva,ecv_jefes_hogar_informante_calificado_planifica,Porcentaje de jefes de hogar o informante calificado que planifica,%,ECV - serie histórica de indicadores (Planeación),2013,44.16
+social,salud sexual y reproductiva,ecv_jefes_hogar_informante_calificado_planifica,Porcentaje de jefes de hogar o informante calificado que planifica,%,ECV - serie histórica de indicadores (Planeación),2014,37.59
+social,salud sexual y reproductiva,ecv_jefes_hogar_informante_calificado_planifica,Porcentaje de jefes de hogar o informante calificado que planifica,%,ECV - serie histórica de indicadores (Planeación),2015,25.48
+social,salud sexual y reproductiva,ecv_jefes_hogar_informante_calificado_planifica,Porcentaje de jefes de hogar o informante calificado que planifica,%,ECV - serie histórica de indicadores (Planeación),2016,30.81
+social,salud sexual y reproductiva,ecv_jefes_hogar_informante_calificado_planifica,Porcentaje de jefes de hogar o informante calificado que planifica,%,ECV - serie histórica de indicadores (Planeación),2017,16.54
+social,salud sexual y reproductiva,ecv_jefes_hogar_informante_calificado_planifica,Porcentaje de jefes de hogar o informante calificado que planifica,%,ECV - serie histórica de indicadores (Planeación),2018,17.64
+social,salud sexual y reproductiva,ecv_jefes_hogar_informante_calificado_planifica,Porcentaje de jefes de hogar o informante calificado que planifica,%,ECV - serie histórica de indicadores (Planeación),2019,26.98
+social,salud sexual y reproductiva,ecv_jefes_hogar_informante_calificado_planifica,Porcentaje de jefes de hogar o informante calificado que planifica,%,ECV - serie histórica de indicadores (Planeación),2022,22.95
+social,salud sexual y reproductiva,ecv_jefes_hogar_informantes_calificados_concertan_me,Porcentaje de jefes de hogar o informantes calificados que concertan el método de planificación,%,ECV - serie histórica de indicadores (Planeación),2011,86.44
+social,salud sexual y reproductiva,ecv_jefes_hogar_informantes_calificados_concertan_me,Porcentaje de jefes de hogar o informantes calificados que concertan el método de planificación,%,ECV - serie histórica de indicadores (Planeación),2012,83.48
+social,salud sexual y reproductiva,ecv_jefes_hogar_informantes_calificados_concertan_me,Porcentaje de jefes de hogar o informantes calificados que concertan el método de planificación,%,ECV - serie histórica de indicadores (Planeación),2013,84.3
+social,salud sexual y reproductiva,ecv_jefes_hogar_informantes_calificados_concertan_me,Porcentaje de jefes de hogar o informantes calificados que concertan el método de planificación,%,ECV - serie histórica de indicadores (Planeación),2014,87.15
+social,salud sexual y reproductiva,ecv_jefes_hogar_informantes_calificados_concertan_me,Porcentaje de jefes de hogar o informantes calificados que concertan el método de planificación,%,ECV - serie histórica de indicadores (Planeación),2015,85.85
+social,salud sexual y reproductiva,ecv_jefes_hogar_informantes_calificados_concertan_me,Porcentaje de jefes de hogar o informantes calificados que concertan el método de planificación,%,ECV - serie histórica de indicadores (Planeación),2016,86.54
+social,salud sexual y reproductiva,ecv_jefes_hogar_informantes_calificados_concertan_me,Porcentaje de jefes de hogar o informantes calificados que concertan el método de planificación,%,ECV - serie histórica de indicadores (Planeación),2017,92.58
+social,salud sexual y reproductiva,ecv_jefes_hogar_informantes_calificados_concertan_me,Porcentaje de jefes de hogar o informantes calificados que concertan el método de planificación,%,ECV - serie histórica de indicadores (Planeación),2018,89.42
+social,salud sexual y reproductiva,ecv_jefes_hogar_informantes_calificados_concertan_me,Porcentaje de jefes de hogar o informantes calificados que concertan el método de planificación,%,ECV - serie histórica de indicadores (Planeación),2019,82.14
+social,salud sexual y reproductiva,ecv_jefes_hogar_informantes_calificados_concertan_me,Porcentaje de jefes de hogar o informantes calificados que concertan el método de planificación,%,ECV - serie histórica de indicadores (Planeación),2022,84.72
+social,salud sexual y reproductiva,ecv_jefes_hogar_suficiente_informacion_metodos_plani,Porcentaje de jefes de hogar que tienen suficiente información sobre los métodos de planificación familiar,%,ECV - serie histórica de indicadores (Planeación),2011,77.38
+social,salud sexual y reproductiva,ecv_jefes_hogar_suficiente_informacion_metodos_plani,Porcentaje de jefes de hogar que tienen suficiente información sobre los métodos de planificación familiar,%,ECV - serie histórica de indicadores (Planeación),2012,80.06
+social,salud sexual y reproductiva,ecv_jefes_hogar_suficiente_informacion_metodos_plani,Porcentaje de jefes de hogar que tienen suficiente información sobre los métodos de planificación familiar,%,ECV - serie histórica de indicadores (Planeación),2013,81.9
+social,salud sexual y reproductiva,ecv_jefes_hogar_suficiente_informacion_metodos_plani,Porcentaje de jefes de hogar que tienen suficiente información sobre los métodos de planificación familiar,%,ECV - serie histórica de indicadores (Planeación),2014,75.94
+social,salud sexual y reproductiva,ecv_jefes_hogar_suficiente_informacion_metodos_plani,Porcentaje de jefes de hogar que tienen suficiente información sobre los métodos de planificación familiar,%,ECV - serie histórica de indicadores (Planeación),2015,71.74
+social,salud sexual y reproductiva,ecv_jefes_hogar_suficiente_informacion_metodos_plani,Porcentaje de jefes de hogar que tienen suficiente información sobre los métodos de planificación familiar,%,ECV - serie histórica de indicadores (Planeación),2016,70.22
+social,salud sexual y reproductiva,ecv_jefes_hogar_suficiente_informacion_metodos_plani,Porcentaje de jefes de hogar que tienen suficiente información sobre los métodos de planificación familiar,%,ECV - serie histórica de indicadores (Planeación),2017,76.76
+social,salud sexual y reproductiva,ecv_jefes_hogar_suficiente_informacion_metodos_plani,Porcentaje de jefes de hogar que tienen suficiente información sobre los métodos de planificación familiar,%,ECV - serie histórica de indicadores (Planeación),2018,75.74
+social,salud sexual y reproductiva,ecv_jefes_hogar_suficiente_informacion_metodos_plani,Porcentaje de jefes de hogar que tienen suficiente información sobre los métodos de planificación familiar,%,ECV - serie histórica de indicadores (Planeación),2019,73.75
+social,salud sexual y reproductiva,ecv_jefes_hogar_suficiente_informacion_metodos_plani,Porcentaje de jefes de hogar que tienen suficiente información sobre los métodos de planificación familiar,%,ECV - serie histórica de indicadores (Planeación),2022,66.32
+social,hogares,ecv_mujeres_jefes_cabeza_hogar,Porcentaje de mujeres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2011,42.74
+social,hogares,ecv_mujeres_jefes_cabeza_hogar,Porcentaje de mujeres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2012,45.25
+social,hogares,ecv_mujeres_jefes_cabeza_hogar,Porcentaje de mujeres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2013,45.22
+social,hogares,ecv_mujeres_jefes_cabeza_hogar,Porcentaje de mujeres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2014,50.12
+social,hogares,ecv_mujeres_jefes_cabeza_hogar,Porcentaje de mujeres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2015,47.69
+social,hogares,ecv_mujeres_jefes_cabeza_hogar,Porcentaje de mujeres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2016,47.83
+social,hogares,ecv_mujeres_jefes_cabeza_hogar,Porcentaje de mujeres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2017,49.35
+social,hogares,ecv_mujeres_jefes_cabeza_hogar,Porcentaje de mujeres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2018,47.64
+social,hogares,ecv_mujeres_jefes_cabeza_hogar,Porcentaje de mujeres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2019,50.79
+social,hogares,ecv_mujeres_jefes_cabeza_hogar,Porcentaje de mujeres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2021,56.38
+social,hogares,ecv_mujeres_jefes_cabeza_hogar,Porcentaje de mujeres jefes cabeza de hogar,%,ECV - serie histórica de indicadores (Planeación),2022,57.99
+social,deporte y cultura,ecv_personas_asiste_participa_programas_culturales,Porcentaje de personas que asiste o participa a programas culturales,%,ECV - serie histórica de indicadores (Planeación),2011,16.91
+social,deporte y cultura,ecv_personas_asiste_participa_programas_culturales,Porcentaje de personas que asiste o participa a programas culturales,%,ECV - serie histórica de indicadores (Planeación),2012,10.77
+social,deporte y cultura,ecv_personas_asiste_participa_programas_culturales,Porcentaje de personas que asiste o participa a programas culturales,%,ECV - serie histórica de indicadores (Planeación),2013,7.57
+social,deporte y cultura,ecv_personas_asiste_participa_programas_culturales,Porcentaje de personas que asiste o participa a programas culturales,%,ECV - serie histórica de indicadores (Planeación),2014,7.27
+social,deporte y cultura,ecv_personas_asiste_participa_programas_culturales,Porcentaje de personas que asiste o participa a programas culturales,%,ECV - serie histórica de indicadores (Planeación),2015,3.88
+social,deporte y cultura,ecv_personas_asiste_participa_programas_culturales,Porcentaje de personas que asiste o participa a programas culturales,%,ECV - serie histórica de indicadores (Planeación),2016,7.01
+social,deporte y cultura,ecv_personas_asiste_participa_programas_culturales,Porcentaje de personas que asiste o participa a programas culturales,%,ECV - serie histórica de indicadores (Planeación),2017,5.48
+social,deporte y cultura,ecv_personas_asiste_participa_programas_culturales,Porcentaje de personas que asiste o participa a programas culturales,%,ECV - serie histórica de indicadores (Planeación),2018,6.71
+social,deporte y cultura,ecv_personas_asiste_participa_programas_culturales,Porcentaje de personas que asiste o participa a programas culturales,%,ECV - serie histórica de indicadores (Planeación),2019,7.12
+social,deporte y cultura,ecv_personas_asiste_participa_programas_culturales,Porcentaje de personas que asiste o participa a programas culturales,%,ECV - serie histórica de indicadores (Planeación),2021,7.81
+social,deporte y cultura,ecv_personas_asiste_participa_programas_culturales,Porcentaje de personas que asiste o participa a programas culturales,%,ECV - serie histórica de indicadores (Planeación),2022,6.49
+social,deporte y cultura,ecv_poblacion_inscrita_programas_deportivos_recreati,"Porcentaje de población inscrita en programas deportivos, recreativos y/o lúdicos",%,ECV - serie histórica de indicadores (Planeación),2011,10.44
+social,deporte y cultura,ecv_poblacion_inscrita_programas_deportivos_recreati,"Porcentaje de población inscrita en programas deportivos, recreativos y/o lúdicos",%,ECV - serie histórica de indicadores (Planeación),2012,10.65
+social,deporte y cultura,ecv_poblacion_inscrita_programas_deportivos_recreati,"Porcentaje de población inscrita en programas deportivos, recreativos y/o lúdicos",%,ECV - serie histórica de indicadores (Planeación),2013,5.97
+social,deporte y cultura,ecv_poblacion_inscrita_programas_deportivos_recreati,"Porcentaje de población inscrita en programas deportivos, recreativos y/o lúdicos",%,ECV - serie histórica de indicadores (Planeación),2014,6.76
+social,deporte y cultura,ecv_poblacion_inscrita_programas_deportivos_recreati,"Porcentaje de población inscrita en programas deportivos, recreativos y/o lúdicos",%,ECV - serie histórica de indicadores (Planeación),2015,6.6
+social,deporte y cultura,ecv_poblacion_inscrita_programas_deportivos_recreati,"Porcentaje de población inscrita en programas deportivos, recreativos y/o lúdicos",%,ECV - serie histórica de indicadores (Planeación),2016,5.95
+social,deporte y cultura,ecv_poblacion_inscrita_programas_deportivos_recreati,"Porcentaje de población inscrita en programas deportivos, recreativos y/o lúdicos",%,ECV - serie histórica de indicadores (Planeación),2017,7.65
+social,deporte y cultura,ecv_poblacion_inscrita_programas_deportivos_recreati,"Porcentaje de población inscrita en programas deportivos, recreativos y/o lúdicos",%,ECV - serie histórica de indicadores (Planeación),2018,8.4
+social,deporte y cultura,ecv_poblacion_inscrita_programas_deportivos_recreati,"Porcentaje de población inscrita en programas deportivos, recreativos y/o lúdicos",%,ECV - serie histórica de indicadores (Planeación),2019,8.06
+social,deporte y cultura,ecv_poblacion_inscrita_programas_deportivos_recreati,"Porcentaje de población inscrita en programas deportivos, recreativos y/o lúdicos",%,ECV - serie histórica de indicadores (Planeación),2021,6.25
+social,deporte y cultura,ecv_poblacion_inscrita_programas_deportivos_recreati,"Porcentaje de población inscrita en programas deportivos, recreativos y/o lúdicos",%,ECV - serie histórica de indicadores (Planeación),2022,20.62
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas,Porcentaje de población que practica actividades deportivas,%,ECV - serie histórica de indicadores (Planeación),2011,28.66
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas,Porcentaje de población que practica actividades deportivas,%,ECV - serie histórica de indicadores (Planeación),2012,23.96
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas,Porcentaje de población que practica actividades deportivas,%,ECV - serie histórica de indicadores (Planeación),2013,16.93
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas,Porcentaje de población que practica actividades deportivas,%,ECV - serie histórica de indicadores (Planeación),2014,18.13
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas,Porcentaje de población que practica actividades deportivas,%,ECV - serie histórica de indicadores (Planeación),2015,8.81
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas,Porcentaje de población que practica actividades deportivas,%,ECV - serie histórica de indicadores (Planeación),2016,17.03
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas,Porcentaje de población que practica actividades deportivas,%,ECV - serie histórica de indicadores (Planeación),2017,11.92
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas,Porcentaje de población que practica actividades deportivas,%,ECV - serie histórica de indicadores (Planeación),2018,15.94
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas,Porcentaje de población que practica actividades deportivas,%,ECV - serie histórica de indicadores (Planeación),2019,18.44
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas,Porcentaje de población que practica actividades deportivas,%,ECV - serie histórica de indicadores (Planeación),2021,7.37
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas,Porcentaje de población que practica actividades deportivas,%,ECV - serie histórica de indicadores (Planeación),2022,21.56
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas_recrea,"Porcentaje de población que practica actividades deportivas, recreativas y lúdicas",%,ECV - serie histórica de indicadores (Planeación),2011,25.9
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas_recrea,"Porcentaje de población que practica actividades deportivas, recreativas y lúdicas",%,ECV - serie histórica de indicadores (Planeación),2012,23.54
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas_recrea,"Porcentaje de población que practica actividades deportivas, recreativas y lúdicas",%,ECV - serie histórica de indicadores (Planeación),2013,18.29
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas_recrea,"Porcentaje de población que practica actividades deportivas, recreativas y lúdicas",%,ECV - serie histórica de indicadores (Planeación),2014,17.94
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas_recrea,"Porcentaje de población que practica actividades deportivas, recreativas y lúdicas",%,ECV - serie histórica de indicadores (Planeación),2015,9.05
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas_recrea,"Porcentaje de población que practica actividades deportivas, recreativas y lúdicas",%,ECV - serie histórica de indicadores (Planeación),2016,17.87
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas_recrea,"Porcentaje de población que practica actividades deportivas, recreativas y lúdicas",%,ECV - serie histórica de indicadores (Planeación),2017,12.84
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas_recrea,"Porcentaje de población que practica actividades deportivas, recreativas y lúdicas",%,ECV - serie histórica de indicadores (Planeación),2018,16.45
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas_recrea,"Porcentaje de población que practica actividades deportivas, recreativas y lúdicas",%,ECV - serie histórica de indicadores (Planeación),2019,18.47
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas_recrea,"Porcentaje de población que practica actividades deportivas, recreativas y lúdicas",%,ECV - serie histórica de indicadores (Planeación),2021,11.9
+social,deporte y cultura,ecv_poblacion_practica_actividades_deportivas_recrea,"Porcentaje de población que practica actividades deportivas, recreativas y lúdicas",%,ECV - serie histórica de indicadores (Planeación),2022,21.5
+social,empleo,ecv_t100,Tasa desempleo población discapacitada,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2008,11.69
+social,empleo,ecv_t100,Tasa desempleo población discapacitada,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2009,16.94
+social,empleo,ecv_t100,Tasa desempleo población discapacitada,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2010,11.94
+social,empleo,ecv_t100,Tasa desempleo población discapacitada,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2011,6.17
+social,empleo,ecv_t100,Tasa desempleo población discapacitada,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2012,9.86
+social,empleo,ecv_t100,Tasa desempleo población discapacitada,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2013,7.73
+social,empleo,ecv_t100,Tasa desempleo población discapacitada,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2014,13.57
+social,empleo,ecv_t100,Tasa desempleo población discapacitada,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2015,6.94
+social,empleo,ecv_t100,Tasa desempleo población discapacitada,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2016,8.47
+social,empleo,ecv_t100,Tasa desempleo población discapacitada,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2017,9.18
+social,empleo,ecv_t100,Tasa desempleo población discapacitada,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2018,9.49
+social,empleo,ecv_t100,Tasa desempleo población discapacitada,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2019,11.52
+social,empleo,ecv_t103,Tasa desempleo población afrodescendiente,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2007,0.0
+social,empleo,ecv_t103,Tasa desempleo población afrodescendiente,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2008,22.01
+social,empleo,ecv_t103,Tasa desempleo población afrodescendiente,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2009,22.72
+social,empleo,ecv_t103,Tasa desempleo población afrodescendiente,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2010,17.32
+social,empleo,ecv_t103,Tasa desempleo población afrodescendiente,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2011,10.33
+social,empleo,ecv_t103,Tasa desempleo población afrodescendiente,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2012,11.1
+social,empleo,ecv_t103,Tasa desempleo población afrodescendiente,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2013,14.96
+social,empleo,ecv_t103,Tasa desempleo población afrodescendiente,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2014,14.1
+social,empleo,ecv_t103,Tasa desempleo población afrodescendiente,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2015,6.67
+social,empleo,ecv_t103,Tasa desempleo población afrodescendiente,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2016,12.58
+social,empleo,ecv_t103,Tasa desempleo población afrodescendiente,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2017,9.66
+social,empleo,ecv_t103,Tasa desempleo población afrodescendiente,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2018,15.51
+social,empleo,ecv_t103,Tasa desempleo población afrodescendiente,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2019,15.41
+social,empleo,ecv_t104,Tasa ocupación,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2007,44.46
+social,empleo,ecv_t104,Tasa ocupación,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2008,45.34
+social,empleo,ecv_t104,Tasa ocupación,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2009,46.13
+social,empleo,ecv_t104,Tasa ocupación,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2010,49.09
+social,empleo,ecv_t104,Tasa ocupación,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2011,46.86
+social,empleo,ecv_t104,Tasa ocupación,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2012,47.47
+social,empleo,ecv_t104,Tasa ocupación,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2013,51.12
+social,empleo,ecv_t104,Tasa ocupación,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2014,50.0
+social,empleo,ecv_t104,Tasa ocupación,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2015,48.91
+social,empleo,ecv_t104,Tasa ocupación,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2016,48.99
+social,empleo,ecv_t104,Tasa ocupación,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2017,51.24
+social,empleo,ecv_t104,Tasa ocupación,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2018,51.81
+social,empleo,ecv_t104,Tasa ocupación,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2019,51.28
+social,empleo,ecv_t113,Tasa bruta de participación TBP,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2007,37.48
+social,empleo,ecv_t113,Tasa bruta de participación TBP,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2008,42.53
+social,empleo,ecv_t113,Tasa bruta de participación TBP,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2009,45.03
+social,empleo,ecv_t113,Tasa bruta de participación TBP,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2010,46.71
+social,empleo,ecv_t113,Tasa bruta de participación TBP,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2011,42.65
+social,empleo,ecv_t113,Tasa bruta de participación TBP,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2012,43.71
+social,empleo,ecv_t113,Tasa bruta de participación TBP,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2013,47.74
+social,empleo,ecv_t113,Tasa bruta de participación TBP,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2014,47.41
+social,empleo,ecv_t113,Tasa bruta de participación TBP,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2015,44.26
+social,empleo,ecv_t113,Tasa bruta de participación TBP,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2016,46.46
+social,empleo,ecv_t113,Tasa bruta de participación TBP,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2017,47.61
+social,empleo,ecv_t113,Tasa bruta de participación TBP,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2018,49.29
+social,empleo,ecv_t113,Tasa bruta de participación TBP,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2019,48.76
+social,demografía,ecv_t44,Índice de dependencia económica,%,ECV - serie histórica de indicadores (Planeación),2007,45.18
+social,demografía,ecv_t44,Índice de dependencia económica,%,ECV - serie histórica de indicadores (Planeación),2008,44.12
+social,demografía,ecv_t44,Índice de dependencia económica,%,ECV - serie histórica de indicadores (Planeación),2009,40.87
+social,demografía,ecv_t44,Índice de dependencia económica,%,ECV - serie histórica de indicadores (Planeación),2010,40.4
+social,demografía,ecv_t44,Índice de dependencia económica,%,ECV - serie histórica de indicadores (Planeación),2011,40.0
+social,demografía,ecv_t44,Índice de dependencia económica,%,ECV - serie histórica de indicadores (Planeación),2012,39.79
+social,demografía,ecv_t44,Índice de dependencia económica,%,ECV - serie histórica de indicadores (Planeación),2013,39.75
+social,demografía,ecv_t44,Índice de dependencia económica,%,ECV - serie histórica de indicadores (Planeación),2014,39.8
+social,demografía,ecv_t44,Índice de dependencia económica,%,ECV - serie histórica de indicadores (Planeación),2015,39.94
+social,demografía,ecv_t44,Índice de dependencia económica,%,ECV - serie histórica de indicadores (Planeación),2016,40.51
+social,demografía,ecv_t44,Índice de dependencia económica,%,ECV - serie histórica de indicadores (Planeación),2017,40.65
+social,demografía,ecv_t44,Índice de dependencia económica,%,ECV - serie histórica de indicadores (Planeación),2018,41.04
+social,demografía,ecv_t44,Índice de dependencia económica,%,ECV - serie histórica de indicadores (Planeación),2019,41.74
+social,demografía,ecv_t48,Índice de Masculinidad,hombres por cada 100 mujeres,ECV - serie histórica de indicadores (Planeación),2007,83.56
+social,demografía,ecv_t48,Índice de Masculinidad,hombres por cada 100 mujeres,ECV - serie histórica de indicadores (Planeación),2008,83.46
+social,demografía,ecv_t48,Índice de Masculinidad,hombres por cada 100 mujeres,ECV - serie histórica de indicadores (Planeación),2009,89.2
+social,demografía,ecv_t48,Índice de Masculinidad,hombres por cada 100 mujeres,ECV - serie histórica de indicadores (Planeación),2010,89.32
+social,demografía,ecv_t48,Índice de Masculinidad,hombres por cada 100 mujeres,ECV - serie histórica de indicadores (Planeación),2011,89.22
+social,demografía,ecv_t48,Índice de Masculinidad,hombres por cada 100 mujeres,ECV - serie histórica de indicadores (Planeación),2012,89.2
+social,demografía,ecv_t48,Índice de Masculinidad,hombres por cada 100 mujeres,ECV - serie histórica de indicadores (Planeación),2013,89.22
+social,demografía,ecv_t48,Índice de Masculinidad,hombres por cada 100 mujeres,ECV - serie histórica de indicadores (Planeación),2014,89.22
+social,demografía,ecv_t48,Índice de Masculinidad,hombres por cada 100 mujeres,ECV - serie histórica de indicadores (Planeación),2015,89.14
+social,demografía,ecv_t48,Índice de Masculinidad,hombres por cada 100 mujeres,ECV - serie histórica de indicadores (Planeación),2016,89.37
+social,demografía,ecv_t48,Índice de Masculinidad,hombres por cada 100 mujeres,ECV - serie histórica de indicadores (Planeación),2017,89.29
+social,demografía,ecv_t48,Índice de Masculinidad,hombres por cada 100 mujeres,ECV - serie histórica de indicadores (Planeación),2018,89.27
+social,demografía,ecv_t48,Índice de Masculinidad,hombres por cada 100 mujeres,ECV - serie histórica de indicadores (Planeación),2019,88.94
+social,empleo,ecv_t98,Tasa desempleo oculto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2008,2.14
+social,empleo,ecv_t98,Tasa desempleo oculto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2009,2.97
+social,empleo,ecv_t98,Tasa desempleo oculto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2010,2.54
+social,empleo,ecv_t98,Tasa desempleo oculto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2011,0.8
+social,empleo,ecv_t98,Tasa desempleo oculto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2012,1.01
+social,empleo,ecv_t98,Tasa desempleo oculto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2013,0.65
+social,empleo,ecv_t98,Tasa desempleo oculto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2014,0.93
+social,empleo,ecv_t98,Tasa desempleo oculto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2015,0.83
+social,empleo,ecv_t98,Tasa desempleo oculto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2016,0.73
+social,empleo,ecv_t98,Tasa desempleo oculto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2017,0.94
+social,empleo,ecv_t98,Tasa desempleo oculto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2018,0.83
+social,empleo,ecv_t98,Tasa desempleo oculto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2019,0.73
+social,empleo,ecv_t99,Tasa desempleo abierto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2008,8.4
+social,empleo,ecv_t99,Tasa desempleo abierto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2009,10.73
+social,empleo,ecv_t99,Tasa desempleo abierto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2010,8.61
+social,empleo,ecv_t99,Tasa desempleo abierto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2011,6.02
+social,empleo,ecv_t99,Tasa desempleo abierto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2012,6.67
+social,empleo,ecv_t99,Tasa desempleo abierto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2013,8.09
+social,empleo,ecv_t99,Tasa desempleo abierto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2014,9.01
+social,empleo,ecv_t99,Tasa desempleo abierto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2015,4.64
+social,empleo,ecv_t99,Tasa desempleo abierto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2016,7.6
+social,empleo,ecv_t99,Tasa desempleo abierto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2017,6.74
+social,empleo,ecv_t99,Tasa desempleo abierto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2018,8.87
+social,empleo,ecv_t99,Tasa desempleo abierto,por cada 100 personas,ECV - serie histórica de indicadores (Planeación),2019,8.97

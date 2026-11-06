@@ -86,7 +86,11 @@ Arquitectura en dos capas:
 2. **Capa LLM opcional** (`asistente/llm.py`) — si existe `OPENAI_API_KEY`,
    mejora la redacción tomando *solo* las cifras ya recuperadas (no genera
    números). Sin la key, se omite y responde el motor determinista.
-3. **Interpretación con IA en el portal web** (`worker/`) — un Worker de
+3. **Explorador de datos** (`docs/datos.html`) — módulo independiente del
+   asistente: tablas, gráficos y CSV de todos los indicadores por territorio y
+   año, factores asociados y PM2.5. Archivos abiertos en `docs/datos/`
+   (generados por `07_construir_kb.py` desde el mismo KB).
+4. **Interpretación con IA en el portal web** (`worker/`) — un Worker de
    Cloudflare usa Gemini para clasificar la pregunta escrita (intención y
    territorios, de listas cerradas; nunca cifras). Luego responde el motor
    determinista. Despliegue y verificación: `worker/README.md`.

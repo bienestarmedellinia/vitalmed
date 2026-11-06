@@ -180,6 +180,7 @@ def main() -> int:
         compacto = json.dumps(kb, ensure_ascii=False, separators=(",", ":"))
         (docs / "knowledge_base.json").write_text(compacto, encoding="utf-8")
         log("Knowledge base copiado a docs/ (asistente web)")
+        exportar_datos_abiertos(kb, docs / "datos")
     return 0
 
 
@@ -256,6 +257,71 @@ def construir_series() -> dict | None:
                              "spearman": float(r.spearman), "significativa": bool(r.significativa)})
     return {"territorios": territorios, "catalogo": catalogo, "datos": datos,
             "correlaciones": corr, "nota_correlaciones": NOTA_CORRELACION}
+
+
+def exportar_datos_abiertos(kb: dict, destino: Path) -> None:
+    """Publica TODAS las estadísticas del KB como CSV legibles en docs/datos/
+    (módulo de datos independiente del asistente). Se generan desde el KB para
+    que las cifras sean idénticas en el explorador, el asistente y las descargas."""
+    destino.mkdir(parents=True, exist_ok=True)
+    s = kb.get("series") or {}
+    terr = s.get("territorios", {})
+    cat = {c["clave"]: c for c in s.get("catalogo", [])}
+    filas, ciudad = [], []
+    for clave, d in (s.get("datos") or {}).items():
+        c = cat.get(clave)
+        if not c:
+            continue
+        base = {"dimension": c["dimension"], "tema": c["tema"], "clave": clave,
+                "indicador": c["nombre"], "unidad": c["unidad"], "fuente": c["fuente"]}
+        for cod, serie in d.get("valores", {}).items():
+            for anio, v in serie.items():
+                filas.append({**base, "territorio_cod": int(cod), "territorio": terr.get(cod, cod),
+                              "anio": int(anio), "valor": v,
+                              "casos": (d.get("casos") or {}).get(cod, {}).get(anio)})
+        for anio, v in (d.get("ciudad") or {}).items():
+            ciudad.append({**base, "anio": int(anio), "valor_medellin": v})
+    archivos = {}
+    if filas:
+        df = pd.DataFrame(filas).sort_values(["dimension", "clave", "anio", "territorio_cod"])
+        df["casos"] = df["casos"].astype("Int64")
+        archivos["indicadores_por_territorio.csv"] = (
+            df, "Todos los indicadores (salud MEData y sociales ECV) por territorio y año.")
+    if ciudad:
+        archivos["indicadores_medellin.csv"] = (
+            pd.DataFrame(ciudad).sort_values(["dimension", "clave", "anio"]),
+            "Valor de Medellín por indicador y año (tasa agregada de los 21 territorios o total ECV).")
+    if s.get("correlaciones"):
+        cr = pd.DataFrame(s["correlaciones"])
+        cr.insert(1, "resultado_nombre", cr["resultado"].map(lambda k: cat.get(k, {}).get("nombre", k)))
+        cr.insert(3, "factor_nombre", cr["factor"].map(lambda k: cat.get(k, {}).get("nombre", k)))
+        archivos["factores_asociados.csv"] = (
+            cr, "Correlación entre 21 territorios (Pearson y Spearman). Asociación, no causalidad.")
+    pm = kb.get("indicadores", {}).get("pm25_siata") or {}
+    if pm.get("serie"):
+        p = pd.DataFrame([{"estacion": e, "anio": int(a), "pm25_media_anual": v}
+                          for e, x in pm["serie"].items() for a, v in x.items()])
+        archivos["pm25_por_estacion.csv"] = (
+            p.sort_values(["anio", "estacion"]),
+            "PM2.5 media anual por estación SIATA (años completos). No es por comuna.")
+    idx = kb.get("indicadores", {}).get("indice_priorizacion") or {}
+    if idx.get("ranking"):
+        archivos["indice_priorizacion.csv"] = (
+            pd.DataFrame(idx["ranking"]), idx.get("descripcion", "Índice de priorización en salud."))
+    if cat:
+        archivos["catalogo_indicadores.csv"] = (
+            pd.DataFrame([{k: (", ".join(map(str, v)) if isinstance(v, list) else v)
+                           for k, v in c.items()} for c in cat.values()]),
+            "Catálogo: clave, nombre, unidad, tema, dimensión, fuente y años de cada indicador.")
+    for nombre, (df, _) in archivos.items():
+        df.to_csv(destino / nombre, index=False, encoding="utf-8")
+    # Índice de archivos (lo lee el explorador para listar las descargas).
+    indice = [{"archivo": n, "descripcion": d, "filas": int(len(df))}
+              for n, (df, d) in archivos.items()]
+    (destino / "indice.json").write_text(
+        json.dumps({"generado_utc": kb.get("meta", {}).get("generado_utc"), "archivos": indice},
+                   ensure_ascii=False, indent=1), encoding="utf-8")
+    log(f"datos abiertos -> {destino} ({len(archivos)} archivos)")
 
 
 def completar_pm25(pm: dict, df: pd.DataFrame, kb: dict) -> None:

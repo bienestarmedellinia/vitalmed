@@ -1,0 +1,61 @@
+resultado,resultado_nombre,factor,factor_nombre,anio,n,pearson,spearman,significativa
+mortalidad,mortalidad general,hepatitis_a,hepatitis A,2022,21,0.686,0.635,True
+intento_suicidio,intento de suicidio,tuberculosis_pulmonar,tuberculosis pulmonar,2022,21,0.672,0.718,True
+intento_suicidio,intento de suicidio,ecv_jefes_hogar_informante_calificado_planifica,Porcentaje de jefes de hogar o informante calificado que planifica,2022,21,-0.662,-0.303,False
+intento_suicidio,intento de suicidio,violencia_genero,violencia de género,2022,21,0.629,0.59,True
+mortalidad,mortalidad general,dengue,dengue,2022,21,0.594,0.464,True
+mortalidad,mortalidad general,ecv_t99,Tasa desempleo abierto,2019,21,-0.583,-0.614,True
+intento_suicidio,intento de suicidio,natalidad,natalidad,2022,21,0.571,0.517,True
+mortalidad,mortalidad general,ecv_hogares_inseguridad_alimentaria,Porcentaje de hogares con algún nivel de inseguridad alimentaria,2022,21,-0.541,-0.605,True
+intento_suicidio,intento de suicidio,ecv_jefes_hogar_suficiente_informacion_metodos_plani,Porcentaje de jefes de hogar que tienen suficiente información sobre los métodos de planificación familiar,2022,21,-0.502,-0.145,False
+intento_suicidio,intento de suicidio,ecv_hombres_jefes_cabeza_hogar,Porcentaje de hombres jefes cabeza de hogar,2022,21,-0.487,-0.182,False
+intento_suicidio,intento de suicidio,ecv_mujeres_jefes_cabeza_hogar,Porcentaje de mujeres jefes cabeza de hogar,2022,21,0.487,0.182,False
+intento_suicidio,intento de suicidio,ecv_poblacion_inscrita_programas_deportivos_recreati,"Porcentaje de población inscrita en programas deportivos, recreativos y/o lúdicos",2022,21,-0.482,-0.332,False
+intento_suicidio,intento de suicidio,parotiditis,parotiditis (paperas),2022,21,0.472,0.171,False
+mortalidad,mortalidad general,ecv_t100,Tasa desempleo población discapacitada,2019,21,-0.442,-0.361,False
+mortalidad,mortalidad general,ecv_hogares_inseguridad_alimentaria_moderada,Porcentaje de hogares con nivel de inseguridad alimentaria moderada,2022,21,-0.44,-0.505,True
+mortalidad,mortalidad general,ecv_hogares_inseguridad_alimentaria_leve,Porcentaje de hogares con nivel de inseguridad alimentaria leve,2022,21,-0.42,-0.43,False
+mortalidad,mortalidad general,ecv_hogares_inseguridad_alimentaria_alta,Porcentaje de hogares con nivel de inseguridad alimentaria alta,2022,21,-0.404,-0.473,False
+mortalidad,mortalidad general,tuberculosis_pulmonar,tuberculosis pulmonar,2022,21,0.391,0.419,False
+mortalidad,mortalidad general,ecv_poblacion_practica_actividades_deportivas_recrea,"Porcentaje de población que practica actividades deportivas, recreativas y lúdicas",2022,21,0.387,0.477,False
+mortalidad,mortalidad general,parotiditis,parotiditis (paperas),2022,21,0.379,0.555,False
+mortalidad,mortalidad general,ecv_personas_asiste_participa_programas_culturales,Porcentaje de personas que asiste o participa a programas culturales,2022,21,0.367,0.427,False
+mortalidad,mortalidad general,ecv_t48,Índice de Masculinidad,2019,21,-0.366,-0.371,False
+intento_suicidio,intento de suicidio,dengue,dengue,2022,21,0.356,0.17,False
+mortalidad,mortalidad general,ecv_t44,Índice de dependencia económica,2019,21,0.353,0.343,False
+mortalidad,mortalidad general,varicela,varicela,2022,21,0.35,0.484,False
+mortalidad,mortalidad general,ecv_poblacion_practica_actividades_deportivas,Porcentaje de población que practica actividades deportivas,2022,21,0.339,0.448,False
+intento_suicidio,intento de suicidio,mortalidad,mortalidad general,2022,21,0.337,0.234,False
+mortalidad,mortalidad general,intento_suicidio,intento de suicidio,2022,21,0.337,0.234,False
+intento_suicidio,intento de suicidio,ecv_t99,Tasa desempleo abierto,2019,21,-0.326,-0.206,False
+intento_suicidio,intento de suicidio,hepatitis_a,hepatitis A,2022,21,0.324,0.255,False
+mortalidad,mortalidad general,ecv_jefes_hogar_informante_calificado_planifica,Porcentaje de jefes de hogar o informante calificado que planifica,2022,21,-0.317,-0.609,False
+mortalidad,mortalidad general,ecv_t103,Tasa desempleo población afrodescendiente,2019,21,-0.317,-0.317,False
+intento_suicidio,intento de suicidio,ecv_jefes_hogar_informantes_calificados_concertan_me,Porcentaje de jefes de hogar o informantes calificados que concertan el método de planificación,2022,21,0.298,-0.006,False
+mortalidad,mortalidad general,ecv_t98,Tasa desempleo oculto,2019,21,-0.264,-0.197,False
+intento_suicidio,intento de suicidio,ecv_hogares_inseguridad_alimentaria_leve,Porcentaje de hogares con nivel de inseguridad alimentaria leve,2022,21,-0.262,-0.173,False
+intento_suicidio,intento de suicidio,ecv_t48,Índice de Masculinidad,2019,21,0.236,0.136,False
+intento_suicidio,intento de suicidio,varicela,varicela,2022,21,0.227,0.394,False
+intento_suicidio,intento de suicidio,ecv_t103,Tasa desempleo población afrodescendiente,2019,21,0.216,0.164,False
+intento_suicidio,intento de suicidio,ecv_poblacion_practica_actividades_deportivas_recrea,"Porcentaje de población que practica actividades deportivas, recreativas y lúdicas",2022,21,-0.203,-0.365,False
+mortalidad,mortalidad general,ecv_mujeres_jefes_cabeza_hogar,Porcentaje de mujeres jefes cabeza de hogar,2022,21,-0.19,-0.394,False
+mortalidad,mortalidad general,ecv_hombres_jefes_cabeza_hogar,Porcentaje de hombres jefes cabeza de hogar,2022,21,0.19,0.394,False
+intento_suicidio,intento de suicidio,ecv_poblacion_practica_actividades_deportivas,Porcentaje de población que practica actividades deportivas,2022,21,-0.186,-0.312,False
+intento_suicidio,intento de suicidio,ecv_hogares_inseguridad_alimentaria_alta,Porcentaje de hogares con nivel de inseguridad alimentaria alta,2022,21,0.185,0.223,False
+mortalidad,mortalidad general,ecv_jefes_hogar_informantes_calificados_concertan_me,Porcentaje de jefes de hogar o informantes calificados que concertan el método de planificación,2022,21,0.18,0.199,False
+intento_suicidio,intento de suicidio,ecv_t100,Tasa desempleo población discapacitada,2019,21,-0.178,0.099,False
+mortalidad,mortalidad general,ecv_t113,Tasa bruta de participación TBP,2019,21,0.173,-0.056,False
+intento_suicidio,intento de suicidio,ecv_hogares_inseguridad_alimentaria_moderada,Porcentaje de hogares con nivel de inseguridad alimentaria moderada,2022,21,0.166,0.182,False
+intento_suicidio,intento de suicidio,ecv_t98,Tasa desempleo oculto,2019,21,0.16,0.208,False
+mortalidad,mortalidad general,ecv_poblacion_inscrita_programas_deportivos_recreati,"Porcentaje de población inscrita en programas deportivos, recreativos y/o lúdicos",2022,21,0.14,0.319,False
+mortalidad,mortalidad general,ecv_jefes_hogar_suficiente_informacion_metodos_plani,Porcentaje de jefes de hogar que tienen suficiente información sobre los métodos de planificación familiar,2022,21,-0.131,-0.055,False
+intento_suicidio,intento de suicidio,ecv_t104,Tasa ocupación,2019,21,-0.108,-0.157,False
+mortalidad,mortalidad general,natalidad,natalidad,2022,21,0.106,0.031,False
+mortalidad,mortalidad general,ecv_t104,Tasa ocupación,2019,21,-0.101,-0.248,False
+mortalidad,mortalidad general,violencia_genero,violencia de género,2022,21,-0.071,-0.139,False
+intento_suicidio,intento de suicidio,ecv_t113,Tasa bruta de participación TBP,2019,21,-0.062,-0.163,False
+intento_suicidio,intento de suicidio,tosferina,tosferina,2022,21,0.054,0.062,False
+mortalidad,mortalidad general,tosferina,tosferina,2022,21,-0.042,0.115,False
+intento_suicidio,intento de suicidio,ecv_personas_asiste_participa_programas_culturales,Porcentaje de personas que asiste o participa a programas culturales,2022,21,-0.021,-0.162,False
+intento_suicidio,intento de suicidio,ecv_t44,Índice de dependencia económica,2019,21,0.015,0.103,False
+intento_suicidio,intento de suicidio,ecv_hogares_inseguridad_alimentaria,Porcentaje de hogares con algún nivel de inseguridad alimentaria,2022,21,0.014,0.058,False

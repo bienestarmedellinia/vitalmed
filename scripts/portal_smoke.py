@@ -72,6 +72,20 @@ def main() -> int:
         n_series = pag.evaluate("Chart.getChart('chart') ? Chart.getChart('chart').data.datasets.length : 0")
         if n_series < 2:
             errores.append(f"La tendencia debería mostrar territorio + Medellín (series: {n_series})")
+        # Explorador de datos (módulo independiente del asistente).
+        pag2 = nav.new_page()
+        pag2.on("pageerror", lambda e: errores.append(f"datos.html JS: {e}"))
+        pag2.on("console", lambda m: m.type == "error" and errores.append(f"datos.html consola: {m.text}"))
+        pag2.goto(url + "datos.html#ind=dengue&anio=2016&terr=7", wait_until="networkidle")
+        filas = pag2.locator("#t-rank tbody tr").count()
+        if filas < 21:
+            errores.append(f"Explorador: la tabla del indicador tiene {filas} filas (esperadas >= 21)")
+        if "Dengue" not in pag2.locator("#t-rank caption").inner_text().capitalize():
+            errores.append("Explorador: no respetó el indicador del enlace (#ind=dengue)")
+        if pag2.locator("#lista-desc li").count() < 2:
+            errores.append("Explorador: no listó las descargas de docs/datos/")
+        if pag2.evaluate("typeof window.Asistente") != "undefined":
+            errores.append("Explorador: no debe cargar el asistente (módulos separados)")
         nav.close()
     srv.shutdown()
 
@@ -80,7 +94,7 @@ def main() -> int:
         for e in errores:
             print("  ✗", e)
         return 1
-    print(f"PORTAL: OK ({kpis} KPIs, asistente + IA simulada responden, sin errores JS/CSP)")
+    print(f"PORTAL: OK ({kpis} KPIs, asistente + IA simulada responden, explorador de datos OK, sin errores JS/CSP)")
     return 0
 
 

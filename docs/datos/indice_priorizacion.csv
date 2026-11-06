@@ -1,0 +1,22 @@
+comuna,nombre,indice,n_mortalidad,n_suicidio,tasa_mortalidad,tasa_suicidio
+10,La Candelaria,100.0,100.0,100.0,1325.6,129.6
+11,Laureles Estadio,62.2,77.5,47.0,1092.88,60.97
+3,Manrique,61.0,33.9,88.2,640.38,114.29
+15,Guayabal,59.6,42.1,77.0,725.97,99.78
+8,Villa Hermosa,58.2,32.6,83.8,626.78,108.6
+4,Aranjuez,57.6,43.5,71.6,740.68,92.75
+9,Buenos Aires,54.8,30.8,78.8,608.08,102.16
+12,La América,53.7,59.5,47.9,905.91,62.06
+6,Doce de Octubre,52.5,23.3,81.7,531.18,105.92
+14,El Poblado,47.0,37.1,57.0,674.21,73.85
+5,Castilla,46.8,34.6,59.1,647.89,76.53
+16,Belén,44.6,44.9,44.3,755.07,57.44
+2,Santa Cruz,44.4,27.2,61.6,571.16,79.79
+1,Popular,42.2,22.7,61.6,525.0,79.86
+7,Robledo,42.0,18.6,65.3,482.22,84.63
+70,Corregimiento de Altavista,36.6,14.5,58.7,439.2,76.06
+13,San Javier,35.4,28.0,42.7,579.32,55.35
+80,Corregimiento de San Antonio de Prado,34.5,15.6,53.4,451.27,69.19
+90,Corregimiento de Santa Elena,28.3,0.0,56.6,289.47,73.39
+60,Corregimiento de San Cristóbal,20.2,10.1,30.4,394.48,39.37
+50,Corregimiento de San Sebastián de Palmitas,9.4,18.8,0.0,484.26,0.0
