@@ -294,7 +294,7 @@
     "¿Cómo evolucionó el dengue en Robledo?",
     "¿Dónde hay más inseguridad alimentaria?",
     "Si hay presupuesto para 3 territorios, ¿cuáles priorizar?",
-    "¿Cómo ha cambiado el aire entre 2024 y 2025?",
+    "¿Cómo ha cambiado el aire desde 2020?",
     "¿De dónde provienen los datos del proyecto?",
   ];
   let enCurso = false;

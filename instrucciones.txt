@@ -9,7 +9,7 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
    contexto ambiental por estación; la ECV aporta la llave y cobertura territorial.
    Carga la totalidad de las series oficiales disponibles: las 10 capas de salud
    de MEData por comuna (2008-2022), la serie histórica de indicadores sociales de
-   la ECV (2007-2022) y el PM2.5 de SIATA desde 2019, y calcula los factores
+   la ECV (2007-2022) y el PM2.5 de SIATA (años completos 2020-2025), y calcula los factores
    asociados (correlaciones entre territorios). Incluye un portal web interactivo
    con un asistente que responde preguntas SOLO con las cifras del pipeline.
 
@@ -60,7 +60,8 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
      https://www.medellin.gov.co/es/wp-content/uploads/2023/01/Serie-Historica-Indicadores_24052023.xlsx
      Se excluyen los indicadores que la propia fuente marca "no publicar" y los
      que, por territorio, suman el total de la ciudad (no son tasas comparables).
-   - SIATA · Datos validados de calidad del aire (PM2.5, desde 2019) · Valle de Aburrá
+   - SIATA · Datos validados de calidad del aire (PM2.5, años completos desde 2020;
+     publicado desde junio de 2019) · Valle de Aburrá
      https://siata.gov.co/IDEAM/
      Condiciones: datos validados publicados por SIATA (ver su sitio)
    - MEData · Secretaría de Salud, servicio "VC_Datos_Enfermedades"

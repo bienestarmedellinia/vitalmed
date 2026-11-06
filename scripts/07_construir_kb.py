@@ -297,8 +297,9 @@ def completar_pm25(pm: dict, df: pd.DataFrame, kb: dict) -> None:
                                  "estaciones": comp}
         else:
             pm.pop("comparacion", None)
-    anios_pm = sorted(int(a) for a in df["anio"].unique())
-    kb["fuentes"]["siata"]["serie"] = f"{anios_pm[0]}-{anios_pm[-1]}"
+    # Se reporta el rango de años COMPLETOS (los parciales no tienen media anual válida).
+    if completos:
+        kb["fuentes"]["siata"]["serie"] = f"{completos[0]}-{completos[-1]} (años completos)"
     log(f"PM2.5: años completos {completos}, referencia {pm.get('anio')}")
 
 
