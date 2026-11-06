@@ -654,6 +654,7 @@
     function preguntar() {
       const q = $("q").value.trim(); if (!q) return;
       const r = window.Asistente.responder(q), div = $("resp");
+      $("q").value = "";
       div.style.display = "block";
       let html = `<h3>Respuesta</h3><div class="directa">${esc(r.respuesta_directa)}</div>`;
       if (!r.encontrado) html += `<p class="aviso">Sin cifra directa para esta consulta.</p>`;

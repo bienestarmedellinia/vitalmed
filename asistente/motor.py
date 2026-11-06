@@ -44,6 +44,34 @@ def _norm(texto: str) -> str:
     return "".join(c for c in t if not unicodedata.combining(c))
 
 
+SIN_CAUSA = ("Los datos del proyecto no incluyen la causa específica de las "
+             "defunciones (no hay desagregación por causa ni por edad), por lo "
+             "que no puedo afirmar qué las causa. ")
+
+
+def _aliases(nombre: str) -> list:
+    """Variantes del nombre de un territorio (igual que aliasesTerritorio en JS)."""
+    n = _norm(nombre)
+    sin_art = re.sub(r"^(la|el|los|las) ", "", n)
+    sin_corr = re.sub(r"^corregimiento de ", "", sin_art)
+    out = {n, sin_art, sin_corr, re.sub(r"^san sebastian de ", "", sin_corr)}
+    if "laureles" in n:
+        out |= {"laureles", "estadio"}
+    return [a for a in out if len(a) >= 4]
+
+
+def _pide_causa(q: str) -> bool:
+    qn = _norm(q)
+    return any(w in qn for w in ["causa", "por que", "porque", "motivo", "razon",
+                                 "explica", "factor", "se debe", "origen"])
+
+
+def _mediana(vals: list) -> float:
+    v = sorted(vals)
+    m = len(v) // 2
+    return v[m] if len(v) % 2 else (v[m - 1] + v[m]) / 2
+
+
 class MotorAsistente:
     def __init__(self, kb_path: Path = KB_PATH):
         self.kb_path = kb_path
@@ -88,6 +116,59 @@ class MotorAsistente:
                        .get("mortalidad_2022", {})
                        .get("ranking", []))
 
+    def _territorios_en(self, q: str) -> list:
+        """Índices (en el ranking) de hasta 2 territorios mencionados en la pregunta."""
+        qn = " " + re.sub(r" +", " ", re.sub(r"[^a-z0-9 ]", " ", _norm(q))) + " "
+        hallados = []
+        for i, t in enumerate(self._ranking()):
+            mejor = max((len(a) for a in _aliases(t["nombre"])
+                         if f" {a} " in qn), default=0)
+            if mejor:
+                hallados.append((i, mejor))
+        hallados.sort(key=lambda x: -x[1])
+        return sorted(i for i, _ in hallados[:2])
+
+    def _resp_territorio(self, idxs: list, causa: bool) -> Respuesta:
+        r = self._ranking()
+        med = _mediana([x["tasa"] for x in r])
+        ind = (self.kb.get("indicadores", {}).get("indice_priorizacion") or {}).get("ranking", [])
+        h = self.kb.get("indicadores", {}).get("hallazgo_mortalidad", {})
+        var = h.get("variacion_pct_2012_2022_comuna_top")
+        frases, ev = [], []
+        for i in idxs:
+            t = r[i]
+            f = (f"{t['nombre']}: tasa de mortalidad general 2022 de {t['tasa']} por "
+                 f"100.000 hab. ({t['casos']} defunciones), puesto {i + 1} de {len(r)} "
+                 f"(1 = mayor tasa), {t['tasa'] / med:.2f} veces la mediana de los "
+                 f"territorios ({med:.1f})")
+            j = next((k for k, x in enumerate(ind) if x["comuna"] == t["comuna"]), -1)
+            if j >= 0:
+                f += (f". Índice de priorización {ind[j]['indice']:g} (puesto {j + 1} de "
+                      f"{len(ind)}); intento de suicidio {ind[j]['tasa_suicidio']:g} por 100.000")
+            if h.get("comuna_mayor_tasa", {}).get("comuna") == t["comuna"] and var is not None:
+                f += (f". Su tasa {'aumentó' if var >= 0 else 'disminuyó'} "
+                      f"{abs(var):g}% entre 2012 y 2022")
+            frases.append(f + ".")
+            ev.append({"indicador": "tasa de mortalidad", "valor": t["tasa"], "anio": 2022,
+                       "territorio": t["nombre"], "fuente": "MEData - Secretaría de Salud"})
+            if j >= 0:
+                ev.append({"indicador": "índice de priorización", "valor": ind[j]["indice"],
+                           "anio": 2022, "territorio": t["nombre"],
+                           "fuente": "MEData - Secretaría de Salud"})
+        directa = (SIN_CAUSA + "Lo que sí muestran los datos: " if causa else "") + " ".join(frases)
+        if causa:
+            interp = ("Una tasa alta describe cuánto se muere, no por qué. Posibles factores "
+                      "a verificar (hipótesis, no demostradas con estos datos): estructura de "
+                      "edad de la población, condiciones sociales del territorio y salud mental "
+                      "(el índice incluye intento de suicidio).")
+            rec = ("Para identificar causas: pedir a MEData/Secretaría de Salud las defunciones "
+                   "por causa (CIE-10) y grupo de edad por comuna, y estandarizar las tasas por edad.")
+        else:
+            interp = "La posición y la razón frente a la mediana permiten ubicar al territorio dentro de la ciudad."
+            rec = ""
+        return Respuesta(directa, ev, interp, rec,
+                         "Tasas brutas, sin estandarizar por edad; asociación, no causalidad.")
+
     # ── Respuestas por intención ───────────────────────────
     def responder(self, pregunta: str) -> Respuesta:
         if not self.kb:
@@ -101,6 +182,22 @@ class MotorAsistente:
                                       "tendencia", "priorizacion"):
             return Respuesta("El indicador de mortalidad no está en el KB.",
                              encontrado=False)
+
+        causa = _pide_causa(pregunta)
+        idxs = [] if intent in ("hallazgo", "ambiental", "fuentes") else self._territorios_en(pregunta)
+        if idxs and ranking:
+            return self._resp_territorio(idxs, causa)
+        if causa and intent == "desconocida" and ranking:
+            t, b = ranking[0], ranking[-1]
+            return Respuesta(
+                SIN_CAUSA + f"Lo que sí muestran: la mayor tasa 2022 está en {t['nombre']} "
+                f"({t['tasa']} por 100.000 hab.) y la menor en {b['nombre']} ({b['tasa']}). "
+                f"Pregunta por un territorio concreto, p. ej. «¿Qué sabemos de mortalidad en {t['nombre']}?».",
+                [{"indicador": "tasa de mortalidad", "valor": t["tasa"], "anio": 2022,
+                  "territorio": t["nombre"], "fuente": "MEData - Secretaría de Salud"}],
+                "El análisis es descriptivo y territorial: identifica dónde se concentra la mortalidad, no su causa.",
+                "Pedir defunciones por causa (CIE-10) y edad para un análisis causal o estandarizado.",
+                "Asociación, no causalidad.")
 
         if intent == "ranking_top":
             top = ranking[0]
@@ -265,11 +362,15 @@ class MotorAsistente:
                             "fuente": "pipeline"}])
 
         # Intención desconocida: orientar sin inventar.
+        nombre0 = ranking[0]["nombre"] if ranking else "La Candelaria"
+        otros = ", ".join(x["nombre"] for x in ranking[:3])
         return Respuesta(
             respuesta_directa=(
                 "No identifiqué una consulta que pueda responder con los datos "
-                "disponibles. Puedo responder sobre: comunas con mayor/menor "
-                "mortalidad, priorización territorial, tendencia 2012-2022 y fuentes."),
+                f"disponibles. Prueba con: «¿Qué sabemos de la mortalidad en {nombre0}?», "
+                "«¿Qué comunas priorizar?», «¿Cómo varió la mortalidad entre 2012 y 2022?», "
+                "«¿Qué relación hay entre el aire y la salud?» o «¿De dónde vienen los datos?». "
+                f"También puedes nombrar un territorio ({otros}…)."),
             encontrado=False,
             limitaciones="El asistente solo responde con cifras del pipeline.")
 

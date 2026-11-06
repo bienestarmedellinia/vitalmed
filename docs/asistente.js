@@ -35,6 +35,47 @@ function detectarIntencion(q) {
   return "desconocida";
 }
 
+/* Detección de territorios (comunas/corregimientos) mencionados en la pregunta.
+ * Idéntico a _territorios_en en motor.py. */
+function aliasesTerritorio(nombre) {
+  const n = norm(nombre);
+  const out = new Set([n]);
+  const sinArt = n.replace(/^(la|el|los|las) /, "");
+  out.add(sinArt);
+  const sinCorr = sinArt.replace(/^corregimiento de /, "");
+  out.add(sinCorr);
+  out.add(sinCorr.replace(/^san sebastian de /, ""));
+  if (n.includes("laureles")) { out.add("laureles"); out.add("estadio"); }
+  return [...out].filter((a) => a.length >= 4);
+}
+
+function territoriosEn(q) {
+  const qn = " " + norm(q).replace(/[^a-z0-9 ]/g, " ").replace(/ +/g, " ") + " ";
+  const hallados = [];
+  ranking().forEach((t, i) => {
+    let mejor = 0;
+    aliasesTerritorio(t.nombre).forEach((a) => {
+      if (qn.includes(" " + a + " ") && a.length > mejor) mejor = a.length;
+    });
+    if (mejor) hallados.push({ i: i, largo: mejor });
+  });
+  return hallados.sort((a, b) => b.largo - a.largo).slice(0, 2)
+    .map((h) => h.i).sort((a, b) => a - b);
+}
+
+function pideCausa(q) {
+  const qn = norm(q);
+  return ["causa", "por que", "porque", "motivo", "razon", "explica",
+          "factor", "se debe", "origen"].some((w) => qn.includes(w));
+}
+
+function mediana(arr) {
+  const v = [...arr].sort((a, b) => a - b), m = Math.floor(v.length / 2);
+  return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2;
+}
+
+const SIN_CAUSA = "Los datos del proyecto no incluyen la causa específica de las defunciones (no hay desagregación por causa ni por edad), por lo que no puedo afirmar qué las causa. ";
+
 function ranking() {
   return (((KB || {}).indicadores || {}).mortalidad_2022 || {}).ranking || [];
 }
@@ -69,6 +110,55 @@ function responder(pregunta) {
   if (necesitaRanking && r.length === 0) {
     return { respuesta_directa: "El indicador de mortalidad no está en el KB.",
              encontrado: false, evidencia: [] };
+  }
+
+  const idxTerr = (intent === "hallazgo" || intent === "ambiental" || intent === "fuentes")
+    ? [] : territoriosEn(pregunta);
+  const causa = pideCausa(pregunta);
+  if (idxTerr.length && r.length) {
+    const med = mediana(r.map((x) => x.tasa));
+    const ind = ((KB.indicadores || {}).indice_priorizacion || {}).ranking || [];
+    const h = (KB.indicadores || {}).hallazgo_mortalidad || {};
+    const frases = [], ev = [];
+    idxTerr.forEach((i) => {
+      const t = r[i];
+      let f = `${t.nombre}: tasa de mortalidad general 2022 de ${t.tasa} por 100.000 hab. (${t.casos} defunciones), puesto ${i + 1} de ${r.length} (1 = mayor tasa), ${(t.tasa / med).toFixed(2)} veces la mediana de los territorios (${med.toFixed(1)})`;
+      const j = ind.findIndex((x) => x.comuna === t.comuna);
+      if (j >= 0) f += `. Índice de priorización ${ind[j].indice} (puesto ${j + 1} de ${ind.length}); intento de suicidio ${ind[j].tasa_suicidio} por 100.000`;
+      if (h.comuna_mayor_tasa && h.comuna_mayor_tasa.comuna === t.comuna && h.variacion_pct_2012_2022_comuna_top != null)
+        f += `. Su tasa ${h.variacion_pct_2012_2022_comuna_top >= 0 ? "aumentó" : "disminuyó"} ${Math.abs(h.variacion_pct_2012_2022_comuna_top)}% entre 2012 y 2022`;
+      frases.push(f + ".");
+      ev.push({ indicador: "tasa de mortalidad", valor: t.tasa, anio: 2022, territorio: t.nombre, fuente: "MEData - Secretaría de Salud" });
+      if (j >= 0) ev.push({ indicador: "índice de priorización", valor: ind[j].indice, anio: 2022, territorio: t.nombre, fuente: "MEData - Secretaría de Salud" });
+    });
+    const out = {
+      encontrado: true,
+      respuesta_directa: (causa ? SIN_CAUSA + "Lo que sí muestran los datos: " : "") + frases.join(" "),
+      evidencia: ev,
+      limitaciones: "Tasas brutas, sin estandarizar por edad; asociación, no causalidad.",
+      grafico: graficoRanking(r, idxTerr[0]),
+    };
+    if (out.grafico) out.grafico.resaltar = r.map((_, i) => idxTerr.includes(i));
+    if (causa) {
+      out.interpretacion = "Una tasa alta describe cuánto se muere, no por qué. Posibles factores a verificar (hipótesis, no demostradas con estos datos): estructura de edad de la población, condiciones sociales del territorio y salud mental (el índice incluye intento de suicidio).";
+      out.recomendacion = "Para identificar causas: pedir a MEData/Secretaría de Salud las defunciones por causa (CIE-10) y grupo de edad por comuna, y estandarizar las tasas por edad.";
+    } else {
+      out.interpretacion = "La posición y la razón frente a la mediana permiten ubicar al territorio dentro de la ciudad.";
+    }
+    return out;
+  }
+
+  if (causa && !necesitaRanking && intent === "desconocida" && r.length) {
+    const t = r[0];
+    return {
+      encontrado: true,
+      respuesta_directa: SIN_CAUSA + `Lo que sí muestran: la mayor tasa 2022 está en ${t.nombre} (${t.tasa} por 100.000 hab.) y la menor en ${r[r.length - 1].nombre} (${r[r.length - 1].tasa}). Pregunta por un territorio concreto, p. ej. «¿Qué sabemos de mortalidad en ${t.nombre}?».`,
+      evidencia: [{ indicador: "tasa de mortalidad", valor: t.tasa, anio: 2022, territorio: t.nombre, fuente: "MEData - Secretaría de Salud" }],
+      interpretacion: "El análisis es descriptivo y territorial: identifica dónde se concentra la mortalidad, no su causa.",
+      recomendacion: "Pedir defunciones por causa (CIE-10) y edad para un análisis causal o estandarizado.",
+      limitaciones: "Asociación, no causalidad.",
+      grafico: graficoRanking(r, 0),
+    };
   }
 
   if (intent === "ranking_top") {
@@ -233,9 +323,10 @@ function responder(pregunta) {
     };
   }
 
+  const nombres = r.slice(0, 3).map((x) => x.nombre).join(", ");
   return {
     encontrado: false,
-    respuesta_directa: "No identifiqué una consulta que pueda responder con los datos disponibles. Puedo responder sobre: comunas con mayor/menor mortalidad, priorización territorial, tendencia 2012-2022 y fuentes.",
+    respuesta_directa: "No identifiqué una consulta que pueda responder con los datos disponibles. Prueba con: «¿Qué sabemos de la mortalidad en " + (r[0] ? r[0].nombre : "La Candelaria") + "?», «¿Qué comunas priorizar?», «¿Cómo varió la mortalidad entre 2012 y 2022?», «¿Qué relación hay entre el aire y la salud?» o «¿De dónde vienen los datos?». También puedes nombrar un territorio (" + nombres + "…).",
     limitaciones: "El asistente solo responde con cifras del pipeline.",
     evidencia: [],
   };

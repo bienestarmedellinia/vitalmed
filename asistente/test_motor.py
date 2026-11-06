@@ -83,6 +83,28 @@ def test_desconocida_no_inventa():
                   (not r.encontrado), r.respuesta_directa)
 
 
+def test_territorio_causa():
+    r = M.responder("¿Cual es la causa de moratilidad en la Candelaria?")
+    return _check("causa en La Candelaria: es honesto y da cifras del territorio",
+                  r.encontrado and "no incluyen la causa" in r.respuesta_directa
+                  and "1325.6" in r.respuesta_directa and "puesto 1 de 21" in r.respuesta_directa
+                  and bool(r.recomendacion), r.respuesta_directa)
+
+
+def test_territorio_simple():
+    r = M.responder("¿Cómo está Santa Elena?")
+    return _check("territorio por nombre (Santa Elena, puesto 21)",
+                  r.encontrado and "289.47" in r.respuesta_directa
+                  and "puesto 21 de 21" in r.respuesta_directa, r.respuesta_directa)
+
+
+def test_comparar_dos():
+    r = M.responder("comparar Manrique y Laureles")
+    return _check("compara dos territorios",
+                  r.encontrado and "Manrique" in r.respuesta_directa
+                  and "Laureles Estadio" in r.respuesta_directa, r.respuesta_directa)
+
+
 def test_no_pii():
     """El KB no debe contener microdatos ni nombres de personas."""
     import json
@@ -95,7 +117,8 @@ def test_no_pii():
 def main() -> int:
     tests = [test_ranking_top, test_ranking_bottom, test_priorizacion_3,
              test_indice_multivariable,
-             test_tendencia, test_hallazgo, test_fuentes, test_desconocida_no_inventa, test_no_pii]
+             test_tendencia, test_hallazgo, test_fuentes, test_desconocida_no_inventa,
+             test_territorio_causa, test_territorio_simple, test_comparar_dos, test_no_pii]
     if not M.kb:
         print("ERROR: no hay knowledge_base.json. Ejecuta scripts/07_construir_kb.py")
         return 1
