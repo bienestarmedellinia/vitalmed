@@ -12,10 +12,11 @@ atribuye PM2.5 a comunas sin un mapeo espacial validado. Se reporta por estació
 Criterio de validez SIATA: se exige >=75% de datos válidos en el periodo para
 considerar representativo el promedio (informe de calidad del aire SIATA).
 
-Salida: outputs/tablas/siata_pm25_estacion.csv
+Salida: outputs/tablas/siata_pm25_estacion.csv y siata_cobertura.json
 Se ejecuta en GitHub Actions (xlrd no apto para la Raspberry Pi en lote).
 """
 from __future__ import annotations
+import json
 import re
 import sys
 import zipfile
@@ -112,6 +113,13 @@ def main() -> int:
 
     salida = OUT / "siata_pm25_estacion.csv"
     anual.to_csv(salida, index=False, encoding="utf-8")
+
+    # Cobertura: meses con archivo PM2.5 publicado por año (define si un año
+    # está completo; ver 07_construir_kb.py).
+    cobertura = {int(a): int(n) for a, n in df.groupby("anio")["mes"].nunique().items()}
+    (OUT / "siata_cobertura.json").write_text(
+        json.dumps({"meses_por_anio": cobertura}, indent=2), encoding="utf-8")
+    log(f"Cobertura (meses por año): {cobertura}")
     log(f"PM2.5 por estación/año -> {salida} ({len(anual)} filas)")
     log(f"Estaciones: {sorted(anual['estacion'].unique().tolist())}")
     return 0

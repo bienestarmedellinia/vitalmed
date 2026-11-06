@@ -298,7 +298,8 @@
           <li>Asociación, no causalidad: no se hacen afirmaciones causales.</li>
           <li>Tasas brutas, sin estandarizar por edad: pueden sobrerrepresentar comunas con población mayor.</li>
           <li>El PM2.5 es por estación y no se atribuye a comunas sin un mapeo espacial validado; por eso no entra al índice.</li>
-          <li>MEData cubre hasta 2022; el aire, 2024–2025. Las series no se mezclan en una sola cifra.</li>
+          <li>MEData publica las series de salud por comuna hasta 2022 (desde 2008, 2012 o 2013 según el evento); la serie histórica de indicadores ECV llega a 2022; el aire tiene años completos válidos desde 2024. Las series no se mezclan en una sola cifra.</li>
+          <li>Los factores asociados son correlaciones entre los 21 territorios, sin ajustar por edad: describen patrones, no causas. Se excluyen indicadores ECV que la propia fuente marca «no publicar» o cuyos valores por territorio suman el total de la ciudad.</li>
           <li>La población de cada territorio se deriva de casos ÷ tasa; sirve para la tasa de ciudad, no sustituye proyecciones oficiales del DANE.</li>
         </ul>
       </div>
@@ -317,15 +318,23 @@
               <td><a href="https://www.medellin.gov.co/servidormapas/rest/services/salud_protec_soc/VC_Datos_Enfermedades/MapServer" rel="noopener noreferrer">Servicio REST</a> · <a href="https://medata.app.medellin.gov.co/" rel="noopener noreferrer">Portal MEData</a></td>
               <td>CC BY 4.0 · verificada en la ficha MEData «Mortalidad» (id 1-026-22-000161)</td><td>Hallazgo principal, tendencia e índice</td></tr>
             <tr><td><span class="etq">MEData · obligatorio</span><br>VC_Datos_Enfermedades · capa 2 «Intento de suicidio»</td><td>Secretaría de Salud de Medellín</td>
-              <td>Tasa por comuna, 2022</td>
+              <td>Casos y tasa por comuna, 2013–2022</td>
               <td><a href="https://www.medellin.gov.co/servidormapas/rest/services/salud_protec_soc/VC_Datos_Enfermedades/MapServer" rel="noopener noreferrer">Servicio REST</a></td>
               <td>CC BY 4.0 · verificada en la ficha MEData «Intento de suicidio» (id 1-026-22-000146)</td><td>Componente de salud mental del índice</td></tr>
+            <tr><td><span class="etq">MEData · obligatorio</span><br>VC_Datos_Enfermedades · las otras 8 capas: natalidad, dengue, hepatitis A, parotiditis, tosferina, tuberculosis pulmonar, varicela y violencia de género</td><td>Secretaría de Salud de Medellín</td>
+              <td>Casos y tasa por comuna, 2008/2012/2013–2022</td>
+              <td><a href="https://www.medellin.gov.co/servidormapas/rest/services/salud_protec_soc/VC_Datos_Enfermedades/MapServer" rel="noopener noreferrer">Servicio REST</a></td>
+              <td>Mismo servicio y entidad que las capas anteriores; consultar la ficha de cada evento en MEData</td><td>Consultas del asistente y factores asociados</td></tr>
             <tr><td><span class="etq">Social</span><br>Encuesta de Calidad de Vida (ECV) 2022–2025</td><td>Alcaldía de Medellín</td>
               <td>Microdatos → solo conteos agregados por territorio</td>
               <td><a href="https://www.medellin.gov.co/es/centro-documental/encuesta-calidad-de-vida/" rel="noopener noreferrer">Centro documental</a></td>
               <td>CC BY 4.0 · ficha MEData de la misma encuesta (id 1-002-09-000040, cobertura 2011–2019); las bases 2022–2025 vienen del centro documental, que no repite la licencia</td><td>Cobertura muestral y llave territorial de 21 territorios. No alimenta el índice.</td></tr>
-            <tr><td><span class="etq">Ambiental</span><br>Datos validados de calidad del aire (PM2.5), 2024–2025</td><td>SIATA · Valle de Aburrá</td>
-              <td>Medias anuales por estación (≥ 75 % de datos válidos)</td>
+            <tr><td><span class="etq">Social</span><br>ECV · Serie histórica de indicadores (2007–2022)</td><td>Alcaldía de Medellín · Planeación</td>
+              <td>Indicadores oficiales por territorio: empleo, seguridad alimentaria, deporte, cultura, hogares, demografía</td>
+              <td><a href="https://www.medellin.gov.co/es/centro-documental/encuesta-de-calidad-de-vida-2022/" rel="noopener noreferrer">Centro documental ECV 2022</a></td>
+              <td>Misma condición que la ECV</td><td>Factores sociales asociados y consultas del asistente</td></tr>
+            <tr><td><span class="etq">Ambiental</span><br>Datos validados de calidad del aire (PM2.5), 2019 en adelante</td><td>SIATA · Valle de Aburrá</td>
+              <td>Medias anuales por estación con ≥ 9 meses válidos (cada mes ≥ 75 % de horas válidas)</td>
               <td><a href="https://siata.gov.co/IDEAM/" rel="noopener noreferrer">siata.gov.co/IDEAM</a></td>
               <td>Datos validados publicados por SIATA; condiciones de uso en su sitio</td><td>Contexto ambiental por estación (fuera del índice)</td></tr>
           </tbody>

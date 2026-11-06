@@ -369,13 +369,20 @@ def construir(kb: dict, eq: dict) -> list:
          [C("<b>MEData</b> · Mortalidad (VC_Datos_Enfermedades, capa 3), 2012-2022"),
           C("Secretaría de Salud de Medellín · id 1-026-22-000161"),
           C("CC BY 4.0 (verificada en la ficha MEData)")],
-         [C("<b>MEData</b> · Intento de suicidio (capa 2), SIVIGILA"),
+         [C("<b>MEData</b> · Intento de suicidio (capa 2), SIVIGILA, 2013-2022"),
           C("Secretaría de Salud de Medellín · id 1-026-22-000146"),
           C("CC BY 4.0 (verificada en la ficha MEData)")],
+         [C("<b>MEData</b> · otras 8 capas por comuna: natalidad, dengue, hepatitis A, parotiditis, tosferina, "
+            "tuberculosis pulmonar, varicela, violencia de género (2008/2012/2013-2022)"),
+          C("Secretaría de Salud de Medellín · mismo servicio"),
+          C("Ver la ficha de cada evento en MEData")],
+         [C("<b>ECV</b> · Serie histórica de indicadores por territorio, 2007-2022"),
+          C("Alcaldía de Medellín, Planeación"),
+          C("Misma condición que la ECV; se excluyen los indicadores marcados «no publicar» por la fuente")],
          [C("<b>Encuesta de Calidad de Vida</b> 2022-2025 (solo conteos agregados: cobertura y llave de 21 territorios)"),
           C("Alcaldía de Medellín, Planeación · ficha MEData id 1-002-09-000040"),
           C("CC BY 4.0 según la ficha de la misma encuesta (cobertura 2011-2019); las bases 2022-2025 vienen del centro documental, que no repite la licencia")],
-         [C("<b>SIATA</b> · PM2.5 validado 2024-2025, por estación"),
+         [C("<b>SIATA</b> · PM2.5 validado desde 2019, por estación"),
           C("SIATA · Valle de Aburrá · siata.gov.co/IDEAM"),
           C("Sin licencia publicada en su sitio; se atribuye la fuente")]]
     el.append(tabla(d, [6.0 * cm, 5.2 * cm, W - 11.2 * cm], S))
@@ -386,7 +393,8 @@ def construir(kb: dict, eq: dict) -> list:
     for t in ("Asociación, no causalidad: no se hacen afirmaciones causales.",
               "Tasas brutas, sin estandarizar por edad; pueden sobrerrepresentar comunas con población mayor.",
               "El PM2.5 se mide por estación y no se atribuye a comunas sin un mapeo espacial validado; por eso no entra al índice.",
-              "MEData cubre hasta 2022 y el aire 2024-2025: las series no se mezclan en una sola cifra.",
+              "MEData publica sus series por comuna hasta 2022; el aire tiene años completos válidos desde 2024: las series no se mezclan en una sola cifra.",
+              "Los factores asociados son correlaciones entre 21 territorios, sin ajustar por edad: describen patrones, no causas.",
               "La población por territorio se deriva de casos / tasa; sirve para la tasa de ciudad y no sustituye proyecciones oficiales del DANE."):
         el.append(Paragraph("• " + e(t), S["base"]))
 

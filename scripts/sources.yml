@@ -65,8 +65,9 @@ siata:
     - octubre
     - noviembre
     - diciembre
-  # Rango a descargar (configurable). Mantener corto para el runner.
-  anios: [2024, 2025]
+  # Serie completa publicada (verificado nov 2026: el primer archivo es junio 2019).
+  # Los meses aún no publicados devuelven 404 y se omiten sin reintentos.
+  anios: [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
 
 medata:
   descripcion: >
@@ -90,8 +91,20 @@ medata:
     7: tuberculosis_pulmonar
     8: varicela
     9: violencia_genero
-  # Capas priorizadas para el análisis de salud y bienestar.
-  capas_prioritarias: [2, 3, 4]   # intento_suicidio, mortalidad y natalidad
-  # La capa 2 (intento_suicidio) se usa como segundo indicador de salud mental
-  # en el índice multivariable de priorización por comuna (ver 05_analizar.py).
+  # Se descargan TODAS las capas (series por comuna 2008/2012/2013-2022).
+  capas_prioritarias: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  # Metadatos por capa. Todas las tasas son por 100.000 habitantes (verificado:
+  # casos / población implícita * 100.000). Natalidad usa el campo naciviv_<año>.
+  # mortalidad + intento_suicidio forman el índice de priorización (05_analizar.py).
+  indicadores:
+    mortalidad:            {nombre: "mortalidad general", unidad: "defunciones por 100.000 hab.", casos: "casos", tema: "mortalidad"}
+    intento_suicidio:      {nombre: "intento de suicidio", unidad: "casos por 100.000 hab.", casos: "casos", tema: "salud mental"}
+    natalidad:             {nombre: "natalidad", unidad: "nacidos vivos por 100.000 hab.", casos: "naciviv", tema: "demografía"}
+    dengue:                {nombre: "dengue", unidad: "casos por 100.000 hab.", casos: "casos", tema: "enfermedades transmisibles"}
+    hepatitis_a:           {nombre: "hepatitis A", unidad: "casos por 100.000 hab.", casos: "casos", tema: "enfermedades transmisibles"}
+    parotiditis:           {nombre: "parotiditis (paperas)", unidad: "casos por 100.000 hab.", casos: "casos", tema: "enfermedades transmisibles"}
+    tosferina:             {nombre: "tosferina", unidad: "casos por 100.000 hab.", casos: "casos", tema: "enfermedades transmisibles"}
+    tuberculosis_pulmonar: {nombre: "tuberculosis pulmonar", unidad: "casos por 100.000 hab.", casos: "casos", tema: "enfermedades transmisibles"}
+    varicela:              {nombre: "varicela", unidad: "casos por 100.000 hab.", casos: "casos", tema: "enfermedades transmisibles"}
+    violencia_genero:      {nombre: "violencia de género", unidad: "casos por 100.000 hab.", casos: "casos", tema: "violencias"}
   campo_territorial: "comuna"

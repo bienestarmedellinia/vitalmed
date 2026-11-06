@@ -17,10 +17,20 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import pandas as pd
+import yaml
 
 BASE = Path(__file__).resolve().parent.parent
 TAB = BASE / "outputs" / "tablas"
 KB = BASE / "outputs" / "kb"
+SOURCES = Path(__file__).resolve().parent / "sources.yml"
+MESES_ANIO_COMPLETO = 9      # >= 75% de los meses publicados (criterio SIATA de validez)
+
+NOTA_CORRELACION = (
+    "Correlación entre los 21 territorios (no entre personas) y sin ajustar por edad. "
+    "La mortalidad bruta es mayor donde la población es más envejecida; por eso puede "
+    "asociarse NEGATIVAMENTE con desempleo o inseguridad alimentaria sin que estos "
+    "protejan de nada. Con muchos factores probados, alguna asociación puede ser casual. "
+    "Asociación no implica causalidad.")
 
 
 def log(msg: str) -> None:
@@ -135,6 +145,29 @@ def main() -> int:
         log(f"PM2.5 SIATA: {len(ref)} estaciones (año {anio_ref}), "
             f"{len(comp)} comparables con {anio_ref - 1}")
 
+    # ── Series completas por indicador y territorio (todas las fuentes) ──
+    series = construir_series()
+    if series:
+        kb["series"] = series
+        log(f"series: {len(series['catalogo'])} indicadores, "
+            f"{len(series['correlaciones'])} correlaciones")
+        f = kb["fuentes"]
+        sal = [c for c in series["catalogo"] if c["fuente"].startswith("MEData")]
+        eco = [c for c in series["catalogo"] if c["fuente"].startswith("ECV")]
+        if sal:
+            f["medata_salud"]["serie"] = (f"{min(c['anios'][0] for c in sal)}-"
+                                          f"{max(c['anios'][-1] for c in sal)}")
+            f["medata_salud"]["indicadores"] = len(sal)
+        if eco:
+            f["ecv"]["serie_historica"] = (f"{min(c['anios'][0] for c in eco)}-"
+                                           f"{max(c['anios'][-1] for c in eco)}")
+            f["ecv"]["indicadores"] = len(eco)
+
+    # ── PM2.5: serie por estación y año de referencia = último año completo ──
+    pm = kb["indicadores"].get("pm25_siata")
+    if pm and siata_f.exists():
+        completar_pm25(pm, pd.read_csv(siata_f), kb)
+
     salida = KB / "knowledge_base.json"
     contenido = json.dumps(kb, indent=2, ensure_ascii=False)
     salida.write_text(contenido, encoding="utf-8")
@@ -143,9 +176,130 @@ def main() -> int:
     # Copia para el asistente web estático (GitHub Pages sirve desde docs/).
     docs = BASE / "docs"
     if docs.exists():
-        (docs / "knowledge_base.json").write_text(contenido, encoding="utf-8")
+        # Versión compacta para la web (mismo contenido, sin espacios).
+        compacto = json.dumps(kb, ensure_ascii=False, separators=(",", ":"))
+        (docs / "knowledge_base.json").write_text(compacto, encoding="utf-8")
         log("Knowledge base copiado a docs/ (asistente web)")
     return 0
+
+
+def construir_series() -> dict | None:
+    """Catálogo + datos {clave: {valores: {cod: {anio: v}}, casos?, ciudad?}} +
+    correlaciones. Claves de territorio y año como texto (JSON)."""
+    f_sal, f_ecv = TAB / "salud_comuna_serie.csv", TAB / "ecv_indicadores_serie.csv"
+    if not f_sal.exists():
+        return None
+    cfg = yaml.safe_load(SOURCES.read_text(encoding="utf-8"))
+    meta_sal = cfg.get("medata", {}).get("indicadores", {})
+    sal = pd.read_csv(f_sal)
+    territorios = {str(int(c)): str(n) for c, n in
+                   sal.drop_duplicates("comuna")[["comuna", "nombre"]].itertuples(index=False)}
+    catalogo, datos = [], {}
+    # Población implícita por territorio y año (casos / tasa * 100.000). Todas las
+    # capas MEData usan los mismos denominadores; se toma la primera capa con dato
+    # > 0 para poder agregar también capas con tasa 0 en algún territorio.
+    pob = {}
+    for r in sal[(sal["tasa"] > 0) & sal["casos"].notna()].itertuples():
+        pob.setdefault((int(r.comuna), int(r.anio)), r.casos / r.tasa * 100000)
+
+    for clave, d in sal.groupby("indicador", sort=False):
+        m = meta_sal.get(clave, {})
+        d = d.dropna(subset=["tasa"])
+        valores, casos = {}, {}
+        for r in d.itertuples():
+            valores.setdefault(str(int(r.comuna)), {})[str(int(r.anio))] = round(float(r.tasa), 2)
+            if r.casos == r.casos:
+                casos.setdefault(str(int(r.comuna)), {})[str(int(r.anio))] = int(r.casos)
+        # Tasa agregada de los 21 territorios: suma de casos / población implícita.
+        ciudad = {}
+        for anio, g in d.groupby("anio"):
+            ps = [pob.get((int(c), int(anio))) for c in g["comuna"]]
+            if len(g) == len(territorios) and all(ps) and g["casos"].notna().all():
+                ciudad[str(int(anio))] = round(float(g["casos"].sum() / sum(ps) * 100000), 2)
+        anios = sorted(int(a) for a in d["anio"].unique())
+        catalogo.append({"clave": clave, "nombre": m.get("nombre", clave),
+                         "unidad": m.get("unidad", "por 100.000 hab."),
+                         "tema": m.get("tema", "salud"), "dimension": "salud",
+                         "fuente": "MEData - Secretaría de Salud", "anios": anios})
+        datos[clave] = {"valores": valores, "casos": casos}
+        if ciudad:
+            datos[clave]["ciudad"] = ciudad
+
+    if f_ecv.exists():
+        ecv = pd.read_csv(f_ecv)
+        cat_ecv = json.loads((TAB / "ecv_catalogo.json").read_text(encoding="utf-8"))
+        por_clave = {k: g for k, g in ecv.groupby("indicador")}
+        for c in cat_ecv:
+            g = por_clave.get(c["clave"])
+            if g is None:
+                continue
+            valores, ciudad = {}, {}
+            for r in g.itertuples():
+                if int(r.territorio_cod) == 0:
+                    ciudad[str(int(r.anio))] = float(r.valor)
+                else:
+                    valores.setdefault(str(int(r.territorio_cod)), {})[str(int(r.anio))] = float(r.valor)
+            catalogo.append({"clave": c["clave"], "nombre": c["nombre"], "unidad": c["unidad"],
+                             "tema": c["tema"], "dimension": "social",
+                             "fuente": "ECV - serie histórica de indicadores (Planeación)",
+                             "anios": sorted(int(a) for a in g["anio"].unique())})
+            datos[c["clave"]] = {"valores": valores, "ciudad": ciudad}
+
+    corr = []
+    f_corr = TAB / "correlaciones_territoriales.csv"
+    if f_corr.exists():
+        claves = {c["clave"] for c in catalogo}
+        for r in pd.read_csv(f_corr).itertuples():
+            if r.factor in claves and r.resultado in claves:
+                corr.append({"resultado": r.resultado, "factor": r.factor, "anio": int(r.anio),
+                             "n": int(r.n), "pearson": float(r.pearson),
+                             "spearman": float(r.spearman), "significativa": bool(r.significativa)})
+    return {"territorios": territorios, "catalogo": catalogo, "datos": datos,
+            "correlaciones": corr, "nota_correlaciones": NOTA_CORRELACION}
+
+
+def completar_pm25(pm: dict, df: pd.DataFrame, kb: dict) -> None:
+    """Serie por estación, promedio de estaciones por año y año de referencia =
+    último año COMPLETO (>= 9 meses publicados y anterior al año en curso)."""
+    cob_f = TAB / "siata_cobertura.json"
+    meses = {}
+    if cob_f.exists():
+        meses = {int(a): int(n) for a, n in
+                 json.loads(cob_f.read_text(encoding="utf-8"))["meses_por_anio"].items()}
+    actual = datetime.now(timezone.utc).year
+    completos = sorted(int(a) for a in df["anio"].unique()
+                       if meses.get(int(a), 12) >= MESES_ANIO_COMPLETO and int(a) < actual)
+    validos = df[df["meses_validos"] >= MESES_ANIO_COMPLETO]
+    serie = {}
+    for r in validos.itertuples():
+        serie.setdefault(str(r.estacion), {})[str(int(r.anio))] = round(float(r.media_pm25), 2)
+    prom = {str(int(a)): round(float(g["media_pm25"].mean()), 2)
+            for a, g in validos.groupby("anio") if int(a) in completos}
+    pm["serie"] = serie
+    pm["promedio_estaciones"] = prom
+    pm["anios_completos"] = [int(a) for a in completos]
+    pm["meses_publicados"] = {str(a): n for a, n in sorted(meses.items())}
+    pm["criterio"] = (f"Media anual por estación con >= {MESES_ANIO_COMPLETO} meses válidos "
+                      "(cada mes con >= 75% de horas válidas). Año completo: >= "
+                      f"{MESES_ANIO_COMPLETO} meses publicados.")
+    if completos:
+        ref_anio = int(completos[-1])
+        ref = validos[validos["anio"] == ref_anio].sort_values("media_pm25", ascending=False)
+        pm["anio"] = ref_anio
+        pm["ranking"] = [{"estacion": str(r.estacion), "media_pm25": round(float(r.media_pm25), 2),
+                          "meses_validos": int(r.meses_validos)} for r in ref.itertuples()]
+        previo = validos[validos["anio"] == ref_anio - 1].set_index("estacion")["media_pm25"]
+        comp = [{"estacion": str(r.estacion), "anterior": round(float(previo[r.estacion]), 2),
+                 "actual": round(float(r.media_pm25), 2)}
+                for r in ref.itertuples() if r.estacion in previo.index]
+        if comp:
+            pm["comparacion"] = {"anio_anterior": ref_anio - 1, "anio_actual": ref_anio,
+                                 "estaciones": comp}
+        else:
+            pm.pop("comparacion", None)
+    anios_pm = sorted(int(a) for a in df["anio"].unique())
+    kb["fuentes"]["siata"]["serie"] = f"{anios_pm[0]}-{anios_pm[-1]}"
+    log(f"PM2.5: años completos {completos}, referencia {pm.get('anio')}")
 
 
 if __name__ == "__main__":

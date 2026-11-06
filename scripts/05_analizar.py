@@ -6,25 +6,36 @@ Cruza, a nivel de comuna/corregimiento:
   - MEData · Secretaría de Salud: mortalidad y natalidad (casos y tasa por año)
   - ECV: cobertura muestral social por territorio (de 04_integrar)
 
-Produce un hallazgo principal con cifra y una tabla analítica publicable:
+Produce un hallazgo principal con cifra y tablas analíticas publicables:
   outputs/tablas/analisis_mortalidad_comuna.csv
-  outputs/tablas/hallazgo.json          (cifra principal, para la ficha)
+  outputs/tablas/hallazgo.json               (cifra principal, para la ficha)
+  outputs/tablas/salud_comuna_serie.csv      (10 capas MEData, todos los años)
+  outputs/tablas/ecv_indicadores_serie.csv   (serie histórica oficial ECV por territorio)
+  outputs/tablas/ecv_catalogo.json           (nombre, unidad, tema y notas de cada indicador ECV)
+  outputs/tablas/correlaciones_territoriales.csv (factores asociados, entre territorios)
 
 Se ejecuta en GitHub Actions. Datos agregados por comuna, sin PII.
 """
 from __future__ import annotations
 import json
+import math
+import re
 import sys
+import unicodedata
 from pathlib import Path
 
 import pandas as pd
+import yaml
 
 BASE = Path(__file__).resolve().parent.parent
 RAW = BASE / "data" / "raw"
 OUT = BASE / "outputs" / "tablas"
 
 ANIO_REF = 2022          # último año disponible en MEData salud
-ANIO_INI = 2012          # inicio de la serie
+ANIO_INI = 2012          # inicio de la serie (mortalidad)
+SOURCES = Path(__file__).resolve().parent / "sources.yml"
+SERIE_ECV = RAW / "ecv_2022" / "serie.xlsx"   # Serie histórica oficial de indicadores ECV
+MIN_TERRITORIOS_CORR = 15                    # mínimo de territorios para correlacionar
 
 # Territorios válidos: 16 comunas + 5 corregimientos. Excluye códigos
 # residuales de la fuente como 99 = "Sin información de comuna".
@@ -47,7 +58,8 @@ def cargar_salud(nombre: str, prefijo_casos: str) -> pd.DataFrame:
     df = df[df["comuna"].isin(TERRITORIOS_VALIDOS)].copy()
 
     registros = []
-    for anio in range(ANIO_INI, ANIO_REF + 1):
+    anios = sorted({int(m) for c in df.columns for m in re.findall(r"_(\d{4})$", c)})
+    for anio in anios:
         col_casos = f"{prefijo_casos}_{anio}"
         col_tasa = f"tasa_{anio}"
         if col_casos not in df.columns or col_tasa not in df.columns:
@@ -59,6 +71,216 @@ def cargar_salud(nombre: str, prefijo_casos: str) -> pd.DataFrame:
     largo = pd.concat(registros, ignore_index=True)
     largo["evento"] = nombre
     return largo
+
+
+def _norm(t: str) -> str:
+    t = unicodedata.normalize("NFKD", str(t).lower())
+    return "".join(c for c in t if not unicodedata.combining(c))
+
+
+# ── Todas las capas MEData en formato largo ─────────────────────────
+def serie_salud(cfg_ind: dict) -> pd.DataFrame:
+    partes = []
+    for clave, meta in cfg_ind.items():
+        if not (RAW / "medata" / f"{clave}.csv").exists():
+            log(f"MEData {clave}: no descargado, se omite")
+            continue
+        d = cargar_salud(clave, meta.get("casos", "casos"))
+        d["indicador"] = clave
+        partes.append(d)
+        log(f"MEData {clave}: {d['comuna'].nunique()} territorios, "
+            f"{d['anio'].min()}-{d['anio'].max()}")
+    if not partes:
+        return pd.DataFrame()
+    out = pd.concat(partes, ignore_index=True)
+    return out[["indicador", "comuna", "nombre", "anio", "casos", "tasa"]]
+
+
+# ── Serie histórica oficial de indicadores ECV (Planeación) ─────────
+def _es_anio(v) -> int | None:
+    s = str(v).strip() if v is not None else ""
+    if re.fullmatch(r"(19|20)\d{2}(\.0)?", s):
+        return int(float(s))
+    return None
+
+
+def _unidad_ecv(titulo: str) -> str:
+    t = _norm(titulo)
+    if "masculinidad" in t:
+        return "hombres por cada 100 mujeres"
+    if "por 100 personas" in t:
+        return "por cada 100 personas"
+    if "porcentaje" in t:
+        return "%"
+    return ""
+
+
+def _tema_ecv(nombre: str) -> str:
+    t = _norm(nombre)
+    for claves, tema in (
+            (("planific",), "salud sexual y reproductiva"),
+            (("inseguridad alimentaria",), "seguridad alimentaria"),
+            (("deport", "recreativ", "ludic", "cultural"), "deporte y cultura"),
+            (("escolar", "desercion", "analfabet"), "educación"),
+            (("desempleo", "ocupacion", "participacion"), "empleo"),
+            (("dependencia", "masculinidad"), "demografía"),
+            (("jefe",), "hogares")):
+        if any(c in t for c in claves):
+            return tema
+    return "condiciones de vida"
+
+
+def _limpiar_nombre(titulo: str) -> str:
+    t = re.sub(r"^T\d+\s*=\s*", "", titulo.strip())
+    t = re.sub(r"\s*,00\s*$", "", t)
+    t = re.sub(r"\((por 100 personas|porcentaje|p)\)?\s*$", "", t, flags=re.I)
+    t = re.sub(r"\s*\(por 100 personas\)", "", t, flags=re.I)
+    return re.sub(r"\s+", " ", t).strip(" .")
+
+
+def _slug(nombre: str) -> str:
+    vacias = {"de", "la", "el", "los", "las", "que", "con", "o", "y", "en", "a",
+              "del", "porcentaje", "por", "nivel", "algun", "tienen", "sobre"}
+    pal = [w for w in re.split(r"[^a-z0-9]+", _norm(nombre)) if w and w not in vacias]
+    return "ecv_" + "_".join(pal)[:48].rstrip("_")
+
+
+def serie_ecv() -> tuple[pd.DataFrame, list]:
+    """Lee las dos hojas de la serie histórica y devuelve (largo, catálogo).
+
+    Reglas (documentadas en el catálogo):
+      - Se excluyen indicadores cuya nota técnica de la fuente dice "no publicar".
+      - Si un año aparece en dos versiones (p. ej. 2021 y "2021 UDEA"), ese año se
+        excluye por ambiguo (la fuente indica que la metodología difiere).
+      - Territorio 0 = Total Medellín.
+    """
+    if not SERIE_ECV.exists():
+        log("Serie histórica ECV no descargada: se omite")
+        return pd.DataFrame(), []
+    import openpyxl
+    wb = openpyxl.load_workbook(SERIE_ECV, read_only=True, data_only=True)
+    filas, catalogo, vistos = [], [], {}
+    for ws in wb.worksheets:
+        rows = [list(r) for r in ws.iter_rows(values_only=True, max_col=40)]
+        titulo_t, codigo_t = None, None
+        i = 0
+        while i < len(rows):
+            r = rows[i]
+            c0 = r[0] if r else None
+            if isinstance(c0, str) and re.match(r"^T\d+\s*=", c0.strip()):
+                titulo_t = c0.strip()
+                codigo_t = re.match(r"^T(\d+)", c0.strip()).group(1)
+            anios_col = {j: _es_anio(v) for j, v in enumerate(r[1:], start=1)}
+            n_anios = sum(1 for a in anios_col.values() if a)
+            if not (isinstance(c0, str) and n_anios >= 3):
+                i += 1
+                continue
+            es_tabla = c0.strip().lower().startswith("tabla")
+            titulo = titulo_t if es_tabla and titulo_t else c0.strip()
+            codigo = codigo_t if es_tabla else None
+            etiquetas = [str(v).strip() for v in r[1:] if v is not None]
+            ambiguos = {a for a in anios_col.values() if a and
+                        sum(1 for e in etiquetas if e.startswith(str(a))) > 1}
+            notas = [str(v).strip() for v in r[1:]
+                     if isinstance(v, str) and len(v.strip()) > 25]
+            excluir = any("no publicar" in _norm(n) for n in notas)
+            j, datos = i + 1, []
+            while j < len(rows) and rows[j] and isinstance(rows[j][0], str):
+                t0 = rows[j][0].strip()
+                m = re.match(r"^(\d{1,2})\.\s*", t0)
+                cod = int(m.group(1)) if m else (0 if t0.lower() == "total" else None)
+                if cod is None and not t0.lower().startswith("total"):
+                    break
+                if cod is not None and (cod == 0 or cod in TERRITORIOS_VALIDOS):
+                    for col, anio in anios_col.items():
+                        v = rows[j][col] if col < len(rows[j]) else None
+                        if anio and anio not in ambiguos and isinstance(v, (int, float)) \
+                                and not isinstance(v, bool) and v == v:
+                            datos.append((cod, anio, round(float(v), 2)))
+                j += 1
+            i = j
+            nombre = _limpiar_nombre(titulo)
+            if excluir or not datos:
+                log(f"ECV excluido ({'nota técnica: no publicar' if excluir else 'sin datos'}): {nombre}")
+                continue
+            clave = f"ecv_t{codigo}" if codigo else _slug(nombre)
+            ultimo = max(a for _, a, _ in datos)
+            previo = vistos.get(_norm(nombre))
+            if previo and previo[1] >= ultimo:
+                continue  # duplicado entre hojas: se conserva la serie más reciente
+            if previo:
+                filas = [f for f in filas if f[0] != previo[0]]
+                catalogo = [c for c in catalogo if c["clave"] != previo[0]]
+            vistos[_norm(nombre)] = (clave, ultimo)
+            catalogo.append({"clave": clave, "nombre": nombre, "unidad": _unidad_ecv(titulo),
+                             "tema": _tema_ecv(nombre), "hoja": ws.title,
+                             "nota_tecnica": " ".join(notas)[:400],
+                             "anios_excluidos_ambiguos": sorted(ambiguos)})
+            filas += [(clave, c, a, v) for c, a, v in datos]
+    wb.close()
+    largo = pd.DataFrame(filas, columns=["indicador", "territorio_cod", "anio", "valor"])
+    # Control de calidad: en algunas tablas de la fuente los valores por territorio
+    # SUMAN el total de Medellín (son aportes al total, no tasas del territorio) y
+    # no se pueden comparar entre territorios. Se detecta y se excluye.
+    aditivos = []
+    for clave, g in largo.groupby("indicador"):
+        tot = g[g["territorio_cod"] == 0].set_index("anio")["valor"]
+        suma = g[g["territorio_cod"] != 0].groupby("anio")["valor"].sum()
+        razon = (suma / tot).replace([float("inf")], float("nan")).dropna()
+        if len(razon) and any(abs(razon.median() - k) < 0.03 * k for k in (1, 10)):
+            aditivos.append(clave)
+    for clave in aditivos:
+        nombre = next(c["nombre"] for c in catalogo if c["clave"] == clave)
+        log(f"ECV excluido (valores por territorio suman el total: no son tasas comparables): {nombre}")
+    largo = largo[~largo["indicador"].isin(aditivos)]
+    catalogo = [c for c in catalogo if c["clave"] not in aditivos]
+    log(f"ECV serie histórica: {len(catalogo)} indicadores, {len(largo)} valores")
+    return largo, catalogo
+
+
+# ── Factores asociados: correlación entre territorios ───────────────
+def correlaciones(salud: pd.DataFrame, ecv: pd.DataFrame) -> pd.DataFrame:
+    """Pearson y Spearman entre cada factor y cada resultado de salud, en el año
+    más reciente con >= MIN_TERRITORIOS_CORR territorios en ambos. Describe la
+    asociación ENTRE TERRITORIOS (no individual, no causal)."""
+    tablas = {}
+    if not salud.empty:
+        for k, d in salud.groupby("indicador"):
+            tablas[k] = d.pivot_table(index="comuna", columns="anio", values="tasa")
+    if not ecv.empty:
+        e = ecv[ecv["territorio_cod"] != 0]
+        for k, d in e.groupby("indicador"):
+            tablas[k] = d.pivot_table(index="territorio_cod", columns="anio", values="valor")
+    out = []
+    for res in ("mortalidad", "intento_suicidio"):
+        if res not in tablas:
+            continue
+        y_t = tablas[res]
+        for fac, x_t in tablas.items():
+            if fac == res:
+                continue
+            for anio in sorted(set(y_t.columns) & set(x_t.columns), reverse=True):
+                par = pd.concat([x_t[anio], y_t[anio]], axis=1, join="inner").dropna()
+                if len(par) < MIN_TERRITORIOS_CORR or par.iloc[:, 0].nunique() < 3:
+                    continue
+                n = len(par)
+                p = par.iloc[:, 0].corr(par.iloc[:, 1])
+                # Spearman = Pearson sobre rangos (sin depender de scipy).
+                s = par.iloc[:, 0].rank().corr(par.iloc[:, 1].rank())
+                if p != p or s != s:
+                    break
+                r_crit = math.tanh(1.96 / math.sqrt(n - 3))
+                out.append({"resultado": res, "factor": fac, "anio": int(anio), "n": n,
+                            "pearson": round(float(p), 3), "spearman": round(float(s), 3),
+                            "r_critico_95": round(r_crit, 3),
+                            "significativa": bool(abs(p) >= r_crit and abs(s) >= r_crit
+                                                  and (p > 0) == (s > 0))})
+                break
+    df = pd.DataFrame(out)
+    if not df.empty:
+        df = df.reindex(df["pearson"].abs().sort_values(ascending=False).index)
+        log(f"correlaciones: {len(df)} pares, {int(df['significativa'].sum())} significativas (aprox. 95%)")
+    return df
 
 
 def _norm_minmax(s: pd.Series) -> pd.Series:
@@ -141,6 +363,20 @@ def main() -> int:
         log(f"índice de priorización: {len(indice)} comunas "
             f"(top: {indice.iloc[0]['nombre']} = "
             f"{indice.iloc[0]['indice']})")
+
+    # ── Series completas: todas las capas MEData + serie histórica ECV ──
+    cfg = yaml.safe_load(SOURCES.read_text(encoding="utf-8"))
+    salud = serie_salud(cfg.get("medata", {}).get("indicadores", {}))
+    if not salud.empty:
+        salud.to_csv(OUT / "salud_comuna_serie.csv", index=False, encoding="utf-8")
+    ecv, catalogo_ecv = serie_ecv()
+    if not ecv.empty:
+        ecv.to_csv(OUT / "ecv_indicadores_serie.csv", index=False, encoding="utf-8")
+        (OUT / "ecv_catalogo.json").write_text(
+            json.dumps(catalogo_ecv, indent=2, ensure_ascii=False), encoding="utf-8")
+    corr = correlaciones(salud, ecv)
+    if not corr.empty:
+        corr.to_csv(OUT / "correlaciones_territoriales.csv", index=False, encoding="utf-8")
 
     hallazgo = {
         "evento": "mortalidad general",

@@ -1,0 +1,2773 @@
+indicador,comuna,nombre,anio,casos,tasa
+mortalidad,1,Popular,2012,521.0,405.61
+mortalidad,2,Santa Cruz,2012,518.0,473.14
+mortalidad,3,Manrique,2012,754.0,479.93
+mortalidad,4,Aranjuez,2012,789.0,489.89
+mortalidad,5,Castilla,2012,628.0,424.81
+mortalidad,6,Doce de Octubre,2012,743.0,387.63
+mortalidad,7,Robledo,2012,699.0,418.56
+mortalidad,8,Villa Hermosa,2012,657.0,484.11
+mortalidad,9,Buenos Aires,2012,718.0,528.7
+mortalidad,10,La Candelaria,2012,781.0,916.44
+mortalidad,11,Laureles Estadio,2012,783.0,645.2
+mortalidad,12,La América,2012,590.0,620.37
+mortalidad,13,San Javier,2012,755.0,555.62
+mortalidad,14,El Poblado,2012,508.0,408.98
+mortalidad,16,Belén,2012,1132.0,580.75
+mortalidad,50,Corregimiento de San Sebastián de Palmitas,2012,31.0,609.52
+mortalidad,60,Corregimiento de San Cristóbal,2012,230.0,340.22
+mortalidad,70,Corregimiento de Altavista,2012,114.0,356.83
+mortalidad,90,Corregimiento de Santa Elena,2012,43.0,270.51
+mortalidad,80,Corregimiento de San Antonio de Prado,2012,269.0,302.25
+mortalidad,15,Guayabal,2012,428.0,461.9
+mortalidad,1,Popular,2013,524.0,405.75
+mortalidad,2,Santa Cruz,2013,469.0,425.58
+mortalidad,3,Manrique,2013,822.0,520.16
+mortalidad,4,Aranjuez,2013,794.0,491.67
+mortalidad,5,Castilla,2013,658.0,443.13
+mortalidad,6,Doce de Octubre,2013,762.0,396.09
+mortalidad,7,Robledo,2013,681.0,403.86
+mortalidad,8,Villa Hermosa,2013,663.0,486.16
+mortalidad,9,Buenos Aires,2013,713.0,523.67
+mortalidad,10,La Candelaria,2013,790.0,925.89
+mortalidad,11,Laureles Estadio,2013,771.0,633.64
+mortalidad,12,La América,2013,637.0,666.86
+mortalidad,13,San Javier,2013,692.0,506.26
+mortalidad,14,El Poblado,2013,471.0,374.28
+mortalidad,16,Belén,2013,1099.0,561.9
+mortalidad,50,Corregimiento de San Sebastián de Palmitas,2013,20.0,365.23
+mortalidad,60,Corregimiento de San Cristóbal,2013,226.0,316.0
+mortalidad,70,Corregimiento de Altavista,2013,94.0,280.88
+mortalidad,90,Corregimiento de Santa Elena,2013,35.0,210.64
+mortalidad,80,Corregimiento de San Antonio de Prado,2013,271.0,284.09
+mortalidad,15,Guayabal,2013,375.0,401.82
+mortalidad,1,Popular,2014,542.0,417.63
+mortalidad,2,Santa Cruz,2014,470.0,423.97
+mortalidad,3,Manrique,2014,815.0,512.98
+mortalidad,4,Aranjuez,2014,835.0,515.8
+mortalidad,5,Castilla,2014,639.0,428.48
+mortalidad,6,Doce de Octubre,2014,743.0,384.9
+mortalidad,7,Robledo,2014,735.0,431.9
+mortalidad,8,Villa Hermosa,2014,681.0,497.17
+mortalidad,9,Buenos Aires,2014,767.0,562.0
+mortalidad,10,La Candelaria,2014,745.0,872.18
+mortalidad,11,Laureles Estadio,2014,881.0,722.31
+mortalidad,12,La América,2014,582.0,606.78
+mortalidad,13,San Javier,2014,713.0,518.84
+mortalidad,14,El Poblado,2014,507.0,398.0
+mortalidad,16,Belén,2014,1162.0,592.33
+mortalidad,50,Corregimiento de San Sebastián de Palmitas,2014,29.0,492.61
+mortalidad,60,Corregimiento de San Cristóbal,2014,197.0,260.95
+mortalidad,70,Corregimiento de Altavista,2014,79.0,225.86
+mortalidad,90,Corregimiento de Santa Elena,2014,45.0,259.74
+mortalidad,80,Corregimiento de San Antonio de Prado,2014,286.0,280.33
+mortalidad,15,Guayabal,2014,405.0,431.18
+mortalidad,1,Popular,2015,561.0,430.32
+mortalidad,2,Santa Cruz,2015,486.0,436.06
+mortalidad,3,Manrique,2015,833.0,521.74
+mortalidad,4,Aranjuez,2015,884.0,544.83
+mortalidad,5,Castilla,2015,697.0,465.44
+mortalidad,6,Doce de Octubre,2015,816.0,421.36
+mortalidad,7,Robledo,2015,780.0,454.39
+mortalidad,8,Villa Hermosa,2015,670.0,487.16
+mortalidad,9,Buenos Aires,2015,795.0,581.25
+mortalidad,10,La Candelaria,2015,873.0,1020.99
+mortalidad,11,Laureles Estadio,2015,907.0,741.96
+mortalidad,12,La América,2015,583.0,605.54
+mortalidad,13,San Javier,2015,718.0,520.05
+mortalidad,14,El Poblado,2015,565.0,438.53
+mortalidad,16,Belén,2015,1225.0,622.79
+mortalidad,50,Corregimiento de San Sebastián de Palmitas,2015,15.0,237.19
+mortalidad,60,Corregimiento de San Cristóbal,2015,233.0,293.24
+mortalidad,70,Corregimiento de Altavista,2015,104.0,285.22
+mortalidad,90,Corregimiento de Santa Elena,2015,44.0,244.11
+mortalidad,80,Corregimiento de San Antonio de Prado,2015,290.0,266.41
+mortalidad,15,Guayabal,2015,418.0,442.47
+mortalidad,1,Popular,2016,562.0,429.29
+mortalidad,2,Santa Cruz,2016,542.0,483.96
+mortalidad,3,Manrique,2016,893.0,556.81
+mortalidad,4,Aranjuez,2016,911.0,560.28
+mortalidad,5,Castilla,2016,708.0,470.91
+mortalidad,6,Doce de Octubre,2016,826.0,425.25
+mortalidad,7,Robledo,2016,770.0,444.89
+mortalidad,8,Villa Hermosa,2016,809.0,586.04
+mortalidad,9,Buenos Aires,2016,805.0,587.38
+mortalidad,10,La Candelaria,2016,921.0,1076.1
+mortalidad,11,Laureles Estadio,2016,850.0,693.86
+mortalidad,12,La América,2016,636.0,658.3
+mortalidad,13,San Javier,2016,725.0,522.99
+mortalidad,14,El Poblado,2016,594.0,456.2
+mortalidad,16,Belén,2016,1263.0,640.72
+mortalidad,50,Corregimiento de San Sebastián de Palmitas,2016,23.0,343.95
+mortalidad,60,Corregimiento de San Cristóbal,2016,325.0,376.53
+mortalidad,70,Corregimiento de Altavista,2016,141.0,376.22
+mortalidad,90,Corregimiento de Santa Elena,2016,83.0,441.75
+mortalidad,80,Corregimiento de San Antonio de Prado,2016,310.0,273.85
+mortalidad,15,Guayabal,2016,402.0,423.34
+mortalidad,1,Popular,2017,656.0,499.07
+mortalidad,2,Santa Cruz,2017,538.0,478.16
+mortalidad,3,Manrique,2017,941.0,584.22
+mortalidad,4,Aranjuez,2017,910.0,558.57
+mortalidad,5,Castilla,2017,693.0,459.3
+mortalidad,6,Doce de Octubre,2017,826.0,424.05
+mortalidad,7,Robledo,2017,812.0,465.58
+mortalidad,8,Villa Hermosa,2017,759.0,547.85
+mortalidad,9,Buenos Aires,2017,795.0,579.21
+mortalidad,10,La Candelaria,2017,879.0,1026.17
+mortalidad,11,Laureles Estadio,2017,981.0,799.22
+mortalidad,12,La América,2017,680.0,701.62
+mortalidad,13,San Javier,2017,768.0,551.82
+mortalidad,14,El Poblado,2017,654.0,497.39
+mortalidad,16,Belén,2017,1283.0,649.95
+mortalidad,50,Corregimiento de San Sebastián de Palmitas,2017,38.0,538.17
+mortalidad,60,Corregimiento de San Cristóbal,2017,381.0,409.36
+mortalidad,70,Corregimiento de Altavista,2017,119.0,308.5
+mortalidad,90,Corregimiento de Santa Elena,2017,68.0,347.67
+mortalidad,80,Corregimiento de San Antonio de Prado,2017,340.0,289.13
+mortalidad,15,Guayabal,2017,423.0,443.41
+mortalidad,1,Popular,2018,715.0,521.95
+mortalidad,2,Santa Cruz,2018,605.0,535.1
+mortalidad,3,Manrique,2018,977.0,592.63
+mortalidad,4,Aranjuez,2018,925.0,654.58
+mortalidad,5,Castilla,2018,744.0,600.04
+mortalidad,6,Doce de Octubre,2018,881.0,497.21
+mortalidad,7,Robledo,2018,885.0,467.67
+mortalidad,8,Villa Hermosa,2018,815.0,531.93
+mortalidad,9,Buenos Aires,2018,854.0,549.58
+mortalidad,10,La Candelaria,2018,932.0,1227.72
+mortalidad,11,Laureles Estadio,2018,961.0,961.92
+mortalidad,12,La América,2018,672.0,786.74
+mortalidad,13,San Javier,2018,831.0,528.48
+mortalidad,14,El Poblado,2018,597.0,558.96
+mortalidad,16,Belén,2018,1285.0,633.22
+mortalidad,50,Corregimiento de San Sebastián de Palmitas,2018,36.0,657.65
+mortalidad,60,Corregimiento de San Cristóbal,2018,412.0,353.89
+mortalidad,70,Corregimiento de Altavista,2018,175.0,450.38
+mortalidad,90,Corregimiento de Santa Elena,2018,62.0,264.19
+mortalidad,80,Corregimiento de San Antonio de Prado,2018,362.0,381.85
+mortalidad,15,Guayabal,2018,426.0,658.92
+mortalidad,1,Popular,2019,665.0,474.26
+mortalidad,2,Santa Cruz,2019,610.0,527.74
+mortalidad,3,Manrique,2019,971.0,575.5
+mortalidad,4,Aranjuez,2019,1003.0,701.45
+mortalidad,5,Castilla,2019,743.0,593.09
+mortalidad,6,Doce de Octubre,2019,882.0,491.38
+mortalidad,7,Robledo,2019,812.0,418.47
+mortalidad,8,Villa Hermosa,2019,818.0,518.81
+mortalidad,9,Buenos Aires,2019,826.0,516.1
+mortalidad,10,La Candelaria,2019,908.0,1178.41
+mortalidad,11,Laureles Estadio,2019,977.0,969.74
+mortalidad,12,La América,2019,683.0,790.48
+mortalidad,13,San Javier,2019,853.0,527.97
+mortalidad,14,El Poblado,2019,675.0,623.01
+mortalidad,16,Belén,2019,1373.0,664.1
+mortalidad,50,Corregimiento de San Sebastián de Palmitas,2019,23.0,404.29
+mortalidad,60,Corregimiento de San Cristóbal,2019,380.0,307.73
+mortalidad,70,Corregimiento de Altavista,2019,142.0,353.67
+mortalidad,90,Corregimiento de Santa Elena,2019,76.0,304.57
+mortalidad,80,Corregimiento de San Antonio de Prado,2019,399.0,401.58
+mortalidad,15,Guayabal,2019,447.0,687.58
+mortalidad,1,Popular,2020,804.0,562.08
+mortalidad,2,Santa Cruz,2020,739.0,627.63
+mortalidad,3,Manrique,2020,1109.0,644.43
+mortalidad,4,Aranjuez,2020,1108.0,768.2
+mortalidad,5,Castilla,2020,918.0,727.42
+mortalidad,6,Doce de Octubre,2020,1061.0,585.43
+mortalidad,7,Robledo,2020,1086.0,547.73
+mortalidad,8,Villa Hermosa,2020,1042.0,644.29
+mortalidad,9,Buenos Aires,2020,1063.0,647.07
+mortalidad,10,La Candelaria,2020,1082.0,1388.5
+mortalidad,11,Laureles Estadio,2020,1093.0,1078.8
+mortalidad,12,La América,2020,723.0,829.81
+mortalidad,13,San Javier,2020,960.0,580.28
+mortalidad,14,El Poblado,2020,693.0,632.3
+mortalidad,16,Belén,2020,1612.0,767.56
+mortalidad,50,Corregimiento de San Sebastián de Palmitas,2020,31.0,526.76
+mortalidad,60,Corregimiento de San Cristóbal,2020,508.0,389.23
+mortalidad,70,Corregimiento de Altavista,2020,177.0,428.05
+mortalidad,90,Corregimiento de Santa Elena,2020,82.0,309.85
+mortalidad,80,Corregimiento de San Antonio de Prado,2020,474.0,456.55
+mortalidad,15,Guayabal,2020,490.0,752.16
+mortalidad,1,Popular,2021,934.0,643.1
+mortalidad,2,Santa Cruz,2021,856.0,717.07
+mortalidad,3,Manrique,2021,1406.0,804.85
+mortalidad,4,Aranjuez,2021,1458.0,1006.8
+mortalidad,5,Castilla,2021,1172.0,925.85
+mortalidad,6,Doce de Octubre,2021,1362.0,747.67
+mortalidad,7,Robledo,2021,1420.0,704.17
+mortalidad,8,Villa Hermosa,2021,1265.0,766.38
+mortalidad,9,Buenos Aires,2021,1332.0,793.52
+mortalidad,10,La Candelaria,2021,1368.0,1743.16
+mortalidad,11,Laureles Estadio,2021,1341.0,1321.53
+mortalidad,12,La América,2021,969.0,1107.57
+mortalidad,13,San Javier,2021,1297.0,769.05
+mortalidad,14,El Poblado,2021,893.0,808.3
+mortalidad,16,Belén,2021,2162.0,1017.51
+mortalidad,50,Corregimiento de San Sebastián de Palmitas,2021,31.0,510.46
+mortalidad,60,Corregimiento de San Cristóbal,2021,616.0,448.73
+mortalidad,70,Corregimiento de Altavista,2021,203.0,478.3
+mortalidad,90,Corregimiento de Santa Elena,2021,117.0,419.11
+mortalidad,80,Corregimiento de San Antonio de Prado,2021,641.0,593.54
+mortalidad,15,Guayabal,2021,714.0,1098.06
+mortalidad,1,Popular,2022,756.0,524.99635419
+mortalidad,2,Santa Cruz,2022,680.0,571.15979035
+mortalidad,3,Manrique,2022,1115.0,640.37767925
+mortalidad,4,Aranjuez,2022,1110.0,740.67648452
+mortalidad,5,Castilla,2022,855.0,647.88924504
+mortalidad,6,Doce de Octubre,2022,998.0,531.18163964
+mortalidad,7,Robledo,2022,963.0,482.223335
+mortalidad,8,Villa Hermosa,2022,1010.0,626.78416284
+mortalidad,9,Buenos Aires,2022,1000.0,608.0764717
+mortalidad,10,La Candelaria,2022,1074.0,1325.59861763
+mortalidad,11,Laureles Estadio,2022,1183.0,1092.88103025
+mortalidad,12,La América,2022,832.0,905.91348091
+mortalidad,13,San Javier,2022,963.0,579.32478283
+mortalidad,14,El Poblado,2022,776.0,674.21392391
+mortalidad,16,Belén,2022,1630.0,755.07358493
+mortalidad,50,Corregimiento de San Sebastián de Palmitas,2022,28.0,484.26150121
+mortalidad,60,Corregimiento de San Cristóbal,2022,481.0,394.48217039
+mortalidad,70,Corregimiento de Altavista,2022,179.0,439.19913632
+mortalidad,90,Corregimiento de Santa Elena,2022,71.0,289.46510111
+mortalidad,80,Corregimiento de San Antonio de Prado,2022,450.0,451.26806326
+mortalidad,15,Guayabal,2022,502.0,725.96856064
+intento_suicidio,1,Popular,2013,125.0,96.79
+intento_suicidio,2,Santa Cruz,2013,89.0,80.76
+intento_suicidio,3,Manrique,2013,129.0,81.63
+intento_suicidio,4,Aranjuez,2013,102.0,63.16
+intento_suicidio,5,Castilla,2013,100.0,67.34
+intento_suicidio,6,Doce de Octubre,2013,136.0,70.69
+intento_suicidio,7,Robledo,2013,139.0,82.43
+intento_suicidio,8,Villa Hermosa,2013,139.0,101.92
+intento_suicidio,9,Buenos Aires,2013,125.0,91.81
+intento_suicidio,10,La Candelaria,2013,73.0,85.56
+intento_suicidio,11,Laureles Estadio,2013,44.0,36.16
+intento_suicidio,12,La América,2013,27.0,28.27
+intento_suicidio,13,San Javier,2013,82.0,59.99
+intento_suicidio,14,El Poblado,2013,47.0,37.35
+intento_suicidio,16,Belén,2013,93.0,47.55
+intento_suicidio,50,Corregimiento de San Sebastián de Palmitas,2013,1.0,18.26
+intento_suicidio,60,Corregimiento de San Cristóbal,2013,35.0,48.94
+intento_suicidio,70,Corregimiento de Altavista,2013,16.0,47.81
+intento_suicidio,90,Corregimiento de Santa Elena,2013,11.0,66.2
+intento_suicidio,80,Corregimiento de San Antonio de Prado,2013,41.0,42.98
+intento_suicidio,15,Guayabal,2013,48.0,51.43
+intento_suicidio,1,Popular,2014,100.0,77.05
+intento_suicidio,2,Santa Cruz,2014,53.0,47.81
+intento_suicidio,3,Manrique,2014,97.0,61.05
+intento_suicidio,4,Aranjuez,2014,70.0,43.24
+intento_suicidio,5,Castilla,2014,96.0,64.37
+intento_suicidio,6,Doce de Octubre,2014,129.0,66.83
+intento_suicidio,7,Robledo,2014,101.0,59.35
+intento_suicidio,8,Villa Hermosa,2014,126.0,91.99
+intento_suicidio,9,Buenos Aires,2014,99.0,72.54
+intento_suicidio,10,La Candelaria,2014,66.0,77.27
+intento_suicidio,11,Laureles Estadio,2014,41.0,33.62
+intento_suicidio,12,La América,2014,36.0,37.53
+intento_suicidio,13,San Javier,2014,92.0,66.95
+intento_suicidio,14,El Poblado,2014,58.0,45.53
+intento_suicidio,16,Belén,2014,101.0,51.48
+intento_suicidio,50,Corregimiento de San Sebastián de Palmitas,2014,0.0,0.0
+intento_suicidio,60,Corregimiento de San Cristóbal,2014,22.0,29.14
+intento_suicidio,70,Corregimiento de Altavista,2014,11.0,31.45
+intento_suicidio,90,Corregimiento de Santa Elena,2014,10.0,57.72
+intento_suicidio,80,Corregimiento de San Antonio de Prado,2014,70.0,68.61
+intento_suicidio,15,Guayabal,2014,53.0,56.43
+intento_suicidio,1,Popular,2015,93.0,71.34
+intento_suicidio,2,Santa Cruz,2015,42.0,37.68
+intento_suicidio,3,Manrique,2015,109.0,68.27
+intento_suicidio,4,Aranjuez,2015,86.0,53.0
+intento_suicidio,5,Castilla,2015,100.0,66.78
+intento_suicidio,6,Doce de Octubre,2015,135.0,69.71
+intento_suicidio,7,Robledo,2015,114.0,66.41
+intento_suicidio,8,Villa Hermosa,2015,121.0,87.98
+intento_suicidio,9,Buenos Aires,2015,117.0,85.54
+intento_suicidio,10,La Candelaria,2015,77.0,90.05
+intento_suicidio,11,Laureles Estadio,2015,52.0,42.54
+intento_suicidio,12,La América,2015,33.0,34.28
+intento_suicidio,13,San Javier,2015,102.0,73.88
+intento_suicidio,14,El Poblado,2015,54.0,41.91
+intento_suicidio,16,Belén,2015,132.0,67.11
+intento_suicidio,50,Corregimiento de San Sebastián de Palmitas,2015,2.0,31.63
+intento_suicidio,60,Corregimiento de San Cristóbal,2015,26.0,32.72
+intento_suicidio,70,Corregimiento de Altavista,2015,15.0,41.14
+intento_suicidio,90,Corregimiento de Santa Elena,2015,11.0,61.03
+intento_suicidio,80,Corregimiento de San Antonio de Prado,2015,75.0,68.9
+intento_suicidio,15,Guayabal,2015,56.0,59.28
+intento_suicidio,1,Popular,2016,117.0,89.37
+intento_suicidio,2,Santa Cruz,2016,76.0,67.86
+intento_suicidio,3,Manrique,2016,99.0,61.73
+intento_suicidio,4,Aranjuez,2016,107.0,65.81
+intento_suicidio,5,Castilla,2016,87.0,57.87
+intento_suicidio,6,Doce de Octubre,2016,150.0,77.22
+intento_suicidio,7,Robledo,2016,151.0,87.25
+intento_suicidio,8,Villa Hermosa,2016,122.0,88.38
+intento_suicidio,9,Buenos Aires,2016,151.0,110.18
+intento_suicidio,10,La Candelaria,2016,86.0,100.48
+intento_suicidio,11,Laureles Estadio,2016,64.0,52.24
+intento_suicidio,12,La América,2016,42.0,43.47
+intento_suicidio,13,San Javier,2016,121.0,87.29
+intento_suicidio,14,El Poblado,2016,73.0,56.07
+intento_suicidio,16,Belén,2016,157.0,79.65
+intento_suicidio,50,Corregimiento de San Sebastián de Palmitas,2016,5.0,74.77
+intento_suicidio,60,Corregimiento de San Cristóbal,2016,60.0,69.51
+intento_suicidio,70,Corregimiento de Altavista,2016,15.0,40.02
+intento_suicidio,90,Corregimiento de Santa Elena,2016,21.0,111.77
+intento_suicidio,80,Corregimiento de San Antonio de Prado,2016,63.0,55.65
+intento_suicidio,15,Guayabal,2016,51.0,53.71
+intento_suicidio,1,Popular,2017,147.0,111.83
+intento_suicidio,2,Santa Cruz,2017,108.0,95.99
+intento_suicidio,3,Manrique,2017,157.0,97.47
+intento_suicidio,4,Aranjuez,2017,112.0,68.75
+intento_suicidio,5,Castilla,2017,130.0,86.16
+intento_suicidio,6,Doce de Octubre,2017,162.0,83.17
+intento_suicidio,7,Robledo,2017,188.0,107.79
+intento_suicidio,8,Villa Hermosa,2017,110.0,79.4
+intento_suicidio,9,Buenos Aires,2017,135.0,98.36
+intento_suicidio,10,La Candelaria,2017,101.0,117.91
+intento_suicidio,11,Laureles Estadio,2017,60.0,48.88
+intento_suicidio,12,La América,2017,64.0,66.04
+intento_suicidio,13,San Javier,2017,146.0,104.9
+intento_suicidio,14,El Poblado,2017,66.0,50.2
+intento_suicidio,16,Belén,2017,182.0,92.2
+intento_suicidio,50,Corregimiento de San Sebastián de Palmitas,2017,7.0,99.14
+intento_suicidio,60,Corregimiento de San Cristóbal,2017,103.0,110.67
+intento_suicidio,70,Corregimiento de Altavista,2017,20.0,51.85
+intento_suicidio,90,Corregimiento de Santa Elena,2017,13.0,66.47
+intento_suicidio,80,Corregimiento de San Antonio de Prado,2017,86.0,73.13
+intento_suicidio,15,Guayabal,2017,71.0,74.43
+intento_suicidio,1,Popular,2018,118.0,86.14
+intento_suicidio,2,Santa Cruz,2018,111.0,98.17
+intento_suicidio,3,Manrique,2018,153.0,92.81
+intento_suicidio,4,Aranjuez,2018,157.0,111.1
+intento_suicidio,5,Castilla,2018,95.0,76.62
+intento_suicidio,6,Doce de Octubre,2018,167.0,94.25
+intento_suicidio,7,Robledo,2018,206.0,108.86
+intento_suicidio,8,Villa Hermosa,2018,140.0,91.37
+intento_suicidio,9,Buenos Aires,2018,144.0,92.67
+intento_suicidio,10,La Candelaria,2018,110.0,144.9
+intento_suicidio,11,Laureles Estadio,2018,71.0,71.07
+intento_suicidio,12,La América,2018,54.0,63.22
+intento_suicidio,13,San Javier,2018,111.0,70.59
+intento_suicidio,14,El Poblado,2018,61.0,57.11
+intento_suicidio,16,Belén,2018,162.0,79.83
+intento_suicidio,50,Corregimiento de San Sebastián de Palmitas,2018,1.0,18.27
+intento_suicidio,60,Corregimiento de San Cristóbal,2018,69.0,59.27
+intento_suicidio,70,Corregimiento de Altavista,2018,19.0,48.9
+intento_suicidio,90,Corregimiento de Santa Elena,2018,19.0,80.96
+intento_suicidio,80,Corregimiento de San Antonio de Prado,2018,74.0,78.06
+intento_suicidio,15,Guayabal,2018,67.0,103.63
+intento_suicidio,1,Popular,2019,129.0,92.0
+intento_suicidio,2,Santa Cruz,2019,90.0,77.86
+intento_suicidio,3,Manrique,2019,173.0,102.53
+intento_suicidio,4,Aranjuez,2019,129.0,90.22
+intento_suicidio,5,Castilla,2019,117.0,93.39
+intento_suicidio,6,Doce de Octubre,2019,162.0,90.25
+intento_suicidio,7,Robledo,2019,187.0,96.37
+intento_suicidio,8,Villa Hermosa,2019,161.0,102.11
+intento_suicidio,9,Buenos Aires,2019,174.0,108.72
+intento_suicidio,10,La Candelaria,2019,112.0,145.35
+intento_suicidio,11,Laureles Estadio,2019,79.0,78.41
+intento_suicidio,12,La América,2019,69.0,79.86
+intento_suicidio,13,San Javier,2019,119.0,73.66
+intento_suicidio,14,El Poblado,2019,80.0,73.84
+intento_suicidio,16,Belén,2019,153.0,74.0
+intento_suicidio,50,Corregimiento de San Sebastián de Palmitas,2019,4.0,70.31
+intento_suicidio,60,Corregimiento de San Cristóbal,2019,84.0,68.03
+intento_suicidio,70,Corregimiento de Altavista,2019,11.0,27.4
+intento_suicidio,90,Corregimiento de Santa Elena,2019,21.0,84.16
+intento_suicidio,80,Corregimiento de San Antonio de Prado,2019,101.0,101.65
+intento_suicidio,15,Guayabal,2019,79.0,121.52
+intento_suicidio,1,Popular,2020,118.0,82.49
+intento_suicidio,2,Santa Cruz,2020,77.0,65.4
+intento_suicidio,3,Manrique,2020,178.0,103.43
+intento_suicidio,4,Aranjuez,2020,116.0,80.43
+intento_suicidio,5,Castilla,2020,81.0,64.18
+intento_suicidio,6,Doce de Octubre,2020,122.0,67.32
+intento_suicidio,7,Robledo,2020,167.0,84.23
+intento_suicidio,8,Villa Hermosa,2020,113.0,69.87
+intento_suicidio,9,Buenos Aires,2020,155.0,94.35
+intento_suicidio,10,La Candelaria,2020,115.0,147.58
+intento_suicidio,11,Laureles Estadio,2020,60.0,59.22
+intento_suicidio,12,La América,2020,56.0,64.27
+intento_suicidio,13,San Javier,2020,111.0,67.1
+intento_suicidio,14,El Poblado,2020,48.0,43.8
+intento_suicidio,16,Belén,2020,115.0,54.76
+intento_suicidio,50,Corregimiento de San Sebastián de Palmitas,2020,2.0,33.98
+intento_suicidio,60,Corregimiento de San Cristóbal,2020,75.0,57.47
+intento_suicidio,70,Corregimiento de Altavista,2020,12.0,29.02
+intento_suicidio,90,Corregimiento de Santa Elena,2020,10.0,37.79
+intento_suicidio,80,Corregimiento de San Antonio de Prado,2020,53.0,51.05
+intento_suicidio,15,Guayabal,2020,49.0,75.22
+intento_suicidio,1,Popular,2021,140.0,96.4
+intento_suicidio,2,Santa Cruz,2021,95.0,79.58
+intento_suicidio,3,Manrique,2021,171.0,97.89
+intento_suicidio,4,Aranjuez,2021,141.0,97.37
+intento_suicidio,5,Castilla,2021,73.0,57.67
+intento_suicidio,6,Doce de Octubre,2021,129.0,70.81
+intento_suicidio,7,Robledo,2021,184.0,91.24
+intento_suicidio,8,Villa Hermosa,2021,142.0,86.03
+intento_suicidio,9,Buenos Aires,2021,142.0,84.59
+intento_suicidio,10,La Candelaria,2021,110.0,140.17
+intento_suicidio,11,Laureles Estadio,2021,75.0,73.91
+intento_suicidio,12,La América,2021,70.0,80.01
+intento_suicidio,13,San Javier,2021,88.0,52.18
+intento_suicidio,14,El Poblado,2021,59.0,53.4
+intento_suicidio,16,Belén,2021,149.0,70.12
+intento_suicidio,50,Corregimiento de San Sebastián de Palmitas,2021,4.0,65.87
+intento_suicidio,60,Corregimiento de San Cristóbal,2021,104.0,75.76
+intento_suicidio,70,Corregimiento de Altavista,2021,18.0,42.41
+intento_suicidio,90,Corregimiento de Santa Elena,2021,14.0,50.15
+intento_suicidio,80,Corregimiento de San Antonio de Prado,2021,78.0,72.22
+intento_suicidio,15,Guayabal,2021,52.0,79.97
+intento_suicidio,1,Popular,2022,115.0,79.86
+intento_suicidio,2,Santa Cruz,2022,95.0,79.79
+intento_suicidio,3,Manrique,2022,199.0,114.29
+intento_suicidio,4,Aranjuez,2022,139.0,92.75
+intento_suicidio,5,Castilla,2022,101.0,76.53
+intento_suicidio,6,Doce de Octubre,2022,199.0,105.92
+intento_suicidio,7,Robledo,2022,169.0,84.63
+intento_suicidio,8,Villa Hermosa,2022,175.0,108.6
+intento_suicidio,9,Buenos Aires,2022,168.0,102.16
+intento_suicidio,10,La Candelaria,2022,105.0,129.6
+intento_suicidio,11,Laureles Estadio,2022,66.0,60.97
+intento_suicidio,12,La América,2022,57.0,62.06
+intento_suicidio,13,San Javier,2022,92.0,55.35
+intento_suicidio,14,El Poblado,2022,85.0,73.85
+intento_suicidio,16,Belén,2022,124.0,57.44
+intento_suicidio,50,Corregimiento de San Sebastián de Palmitas,2022,0.0,0.0
+intento_suicidio,60,Corregimiento de San Cristóbal,2022,48.0,39.37
+intento_suicidio,70,Corregimiento de Altavista,2022,31.0,76.06
+intento_suicidio,90,Corregimiento de Santa Elena,2022,18.0,73.39
+intento_suicidio,80,Corregimiento de San Antonio de Prado,2022,69.0,69.19
+intento_suicidio,15,Guayabal,2022,69.0,99.78
+natalidad,1,Popular,2012,2139.0,1665.28
+natalidad,2,Santa Cruz,2012,1562.0,1426.73
+natalidad,3,Manrique,2012,2292.0,1458.89
+natalidad,4,Aranjuez,2012,1892.0,1174.74
+natalidad,5,Castilla,2012,1409.0,953.11
+natalidad,6,Doce de Octubre,2012,1989.0,1037.68
+natalidad,7,Robledo,2012,2274.0,1361.65
+natalidad,8,Villa Hermosa,2012,1932.0,1423.59
+natalidad,9,Buenos Aires,2012,1804.0,1328.39
+natalidad,10,La Candelaria,2012,915.0,1073.68
+natalidad,11,Laureles Estadio,2012,741.0,610.59
+natalidad,12,La América,2012,912.0,958.95
+natalidad,13,San Javier,2012,2040.0,1501.27
+natalidad,14,El Poblado,2012,927.0,746.32
+natalidad,16,Belén,2012,1937.0,993.74
+natalidad,50,Corregimiento de San Sebastián de Palmitas,2012,116.0,2280.77
+natalidad,60,Corregimiento de San Cristóbal,2012,591.0,874.22
+natalidad,70,Corregimiento de Altavista,2012,307.0,960.94
+natalidad,90,Corregimiento de Santa Elena,2012,160.0,1006.54
+natalidad,80,Corregimiento de San Antonio de Prado,2012,767.0,861.82
+natalidad,15,Guayabal,2012,712.0,768.39
+natalidad,1,Popular,2013,2116.0,1638.48
+natalidad,2,Santa Cruz,2013,1534.0,1391.99
+natalidad,3,Manrique,2013,2224.0,1407.35
+natalidad,4,Aranjuez,2013,1879.0,1163.53
+natalidad,5,Castilla,2013,1417.0,954.27
+natalidad,6,Doce de Octubre,2013,1934.0,1005.3
+natalidad,7,Robledo,2013,2393.0,1419.13
+natalidad,8,Villa Hermosa,2013,1923.0,1410.08
+natalidad,9,Buenos Aires,2013,1743.0,1280.17
+natalidad,10,La Candelaria,2013,911.0,1067.71
+natalidad,11,Laureles Estadio,2013,735.0,604.05
+natalidad,12,La América,2013,828.0,866.81
+natalidad,13,San Javier,2013,1992.0,1457.32
+natalidad,14,El Poblado,2013,1141.0,906.7
+natalidad,16,Belén,2013,1853.0,947.4
+natalidad,50,Corregimiento de San Sebastián de Palmitas,2013,80.0,1460.92
+natalidad,60,Corregimiento de San Cristóbal,2013,579.0,809.59
+natalidad,70,Corregimiento de Altavista,2013,285.0,851.61
+natalidad,90,Corregimiento de Santa Elena,2013,121.0,728.21
+natalidad,80,Corregimiento de San Antonio de Prado,2013,871.0,913.07
+natalidad,15,Guayabal,2013,666.0,713.63
+natalidad,1,Popular,2014,2278.0,1755.26
+natalidad,2,Santa Cruz,2014,1603.0,1445.99
+natalidad,3,Manrique,2014,2259.0,1421.85
+natalidad,4,Aranjuez,2014,1986.0,1226.8
+natalidad,5,Castilla,2014,1305.0,875.06
+natalidad,6,Doce de Octubre,2014,2051.0,1062.48
+natalidad,7,Robledo,2014,2442.0,1434.97
+natalidad,8,Villa Hermosa,2014,2052.0,1498.07
+natalidad,9,Buenos Aires,2014,1838.0,1346.75
+natalidad,10,La Candelaria,2014,883.0,1033.74
+natalidad,11,Laureles Estadio,2014,731.0,599.33
+natalidad,12,La América,2014,799.0,833.02
+natalidad,13,San Javier,2014,2200.0,1600.91
+natalidad,14,El Poblado,2014,1161.0,911.4
+natalidad,16,Belén,2014,1985.0,1011.85
+natalidad,50,Corregimiento de San Sebastián de Palmitas,2014,48.0,815.36
+natalidad,60,Corregimiento de San Cristóbal,2014,503.0,666.29
+natalidad,70,Corregimiento de Altavista,2014,272.0,777.65
+natalidad,90,Corregimiento de Santa Elena,2014,108.0,623.38
+natalidad,80,Corregimiento de San Antonio de Prado,2014,882.0,864.51
+natalidad,15,Guayabal,2014,681.0,725.02
+natalidad,1,Popular,2015,2212.0,1696.72
+natalidad,2,Santa Cruz,2015,1542.0,1383.56
+natalidad,3,Manrique,2015,2265.0,1418.66
+natalidad,4,Aranjuez,2015,1981.0,1220.94
+natalidad,5,Castilla,2015,1375.0,918.19
+natalidad,6,Doce de Octubre,2015,2079.0,1073.55
+natalidad,7,Robledo,2015,2577.0,1501.22
+natalidad,8,Villa Hermosa,2015,2065.0,1501.48
+natalidad,9,Buenos Aires,2015,1907.0,1394.27
+natalidad,10,La Candelaria,2015,940.0,1099.35
+natalidad,11,Laureles Estadio,2015,744.0,608.62
+natalidad,12,La América,2015,854.0,887.01
+natalidad,13,San Javier,2015,2257.0,1634.76
+natalidad,14,El Poblado,2015,1294.0,1004.35
+natalidad,16,Belén,2015,2090.0,1062.56
+natalidad,50,Corregimiento de San Sebastián de Palmitas,2015,37.0,585.07
+natalidad,60,Corregimiento de San Cristóbal,2015,509.0,640.59
+natalidad,70,Corregimiento de Altavista,2015,313.0,858.4
+natalidad,90,Corregimiento de Santa Elena,2015,116.0,643.55
+natalidad,80,Corregimiento de San Antonio de Prado,2015,917.0,842.4
+natalidad,15,Guayabal,2015,709.0,750.5
+natalidad,1,Popular,2016,2023.0,1545.29
+natalidad,2,Santa Cruz,2016,1522.0,1359.03
+natalidad,3,Manrique,2016,2346.0,1462.79
+natalidad,4,Aranjuez,2016,1974.0,1214.05
+natalidad,5,Castilla,2016,1310.0,871.32
+natalidad,6,Doce de Octubre,2016,1936.0,996.71
+natalidad,7,Robledo,2016,2322.0,1341.61
+natalidad,8,Villa Hermosa,2016,1992.0,1443.01
+natalidad,9,Buenos Aires,2016,1806.0,1317.78
+natalidad,10,La Candelaria,2016,843.0,984.96
+natalidad,11,Laureles Estadio,2016,748.0,610.6
+natalidad,12,La América,2016,773.0,800.1
+natalidad,13,San Javier,2016,2108.0,1520.65
+natalidad,14,El Poblado,2016,1073.0,824.08
+natalidad,16,Belén,2016,1878.0,952.7
+natalidad,50,Corregimiento de San Sebastián de Palmitas,2016,57.0,852.4
+natalidad,60,Corregimiento de San Cristóbal,2016,930.0,1077.45
+natalidad,70,Corregimiento de Altavista,2016,365.0,973.9
+natalidad,90,Corregimiento de Santa Elena,2016,231.0,1229.44
+natalidad,80,Corregimiento de San Antonio de Prado,2016,932.0,823.31
+natalidad,15,Guayabal,2016,684.0,720.3
+natalidad,1,Popular,2017,2089.0,1589.26
+natalidad,2,Santa Cruz,2017,1427.0,1268.29
+natalidad,3,Manrique,2017,2193.0,1361.52
+natalidad,4,Aranjuez,2017,2152.0,1320.93
+natalidad,5,Castilla,2017,1364.0,904.02
+natalidad,6,Doce de Octubre,2017,1840.0,944.62
+natalidad,7,Robledo,2017,2261.0,1296.4
+natalidad,8,Villa Hermosa,2017,2006.0,1447.94
+natalidad,9,Buenos Aires,2017,1798.0,1309.97
+natalidad,10,La Candelaria,2017,867.0,1012.16
+natalidad,11,Laureles Estadio,2017,751.0,611.84
+natalidad,12,La América,2017,812.0,837.82
+natalidad,13,San Javier,2017,2125.0,1526.85
+natalidad,14,El Poblado,2017,1114.0,847.24
+natalidad,16,Belén,2017,1920.0,972.65
+natalidad,50,Corregimiento de San Sebastián de Palmitas,2017,46.0,651.47
+natalidad,60,Corregimiento de San Cristóbal,2017,951.0,1021.79
+natalidad,70,Corregimiento de Altavista,2017,350.0,907.35
+natalidad,90,Corregimiento de Santa Elena,2017,204.0,1043.0
+natalidad,80,Corregimiento de San Antonio de Prado,2017,924.0,785.75
+natalidad,15,Guayabal,2017,668.0,700.23
+natalidad,1,Popular,2018,1982.0,1446.86
+natalidad,2,Santa Cruz,2018,1443.0,1276.27
+natalidad,3,Manrique,2018,2466.0,1495.83
+natalidad,4,Aranjuez,2018,1975.0,1397.62
+natalidad,5,Castilla,2018,1210.0,975.87
+natalidad,6,Doce de Octubre,2018,1700.0,959.42
+natalidad,7,Robledo,2018,2368.0,1251.33
+natalidad,8,Villa Hermosa,2018,1900.0,1240.08
+natalidad,9,Buenos Aires,2018,1738.0,1118.47
+natalidad,10,La Candelaria,2018,823.0,1084.14
+natalidad,11,Laureles Estadio,2018,672.0,672.65
+natalidad,12,La América,2018,710.0,831.23
+natalidad,13,San Javier,2018,1988.0,1264.29
+natalidad,14,El Poblado,2018,1051.0,984.04
+natalidad,16,Belén,2018,1785.0,879.61
+natalidad,50,Corregimiento de San Sebastián de Palmitas,2018,49.0,895.14
+natalidad,60,Corregimiento de San Cristóbal,2018,957.0,822.02
+natalidad,70,Corregimiento de Altavista,2018,360.0,926.5
+natalidad,90,Corregimiento de Santa Elena,2018,194.0,826.66
+natalidad,80,Corregimiento de San Antonio de Prado,2018,937.0,988.39
+natalidad,15,Guayabal,2018,564.0,872.38
+natalidad,1,Popular,2019,2024.0,1443.47
+natalidad,2,Santa Cruz,2019,1374.0,1188.7
+natalidad,3,Manrique,2019,2631.0,1559.35
+natalidad,4,Aranjuez,2019,2063.0,1442.76
+natalidad,5,Castilla,2019,1172.0,935.53
+natalidad,6,Doce de Octubre,2019,1723.0,959.93
+natalidad,7,Robledo,2019,2317.0,1194.07
+natalidad,8,Villa Hermosa,2019,1860.0,1179.69
+natalidad,9,Buenos Aires,2019,1750.0,1093.44
+natalidad,10,La Candelaria,2019,947.0,1229.02
+natalidad,11,Laureles Estadio,2019,611.0,606.46
+natalidad,12,La América,2019,654.0,756.92
+natalidad,13,San Javier,2019,2010.0,1244.1
+natalidad,14,El Poblado,2019,883.0,814.99
+natalidad,16,Belén,2019,1851.0,895.31
+natalidad,50,Corregimiento de San Sebastián de Palmitas,2019,42.0,738.27
+natalidad,60,Corregimiento de San Cristóbal,2019,979.0,792.82
+natalidad,70,Corregimiento de Altavista,2019,412.0,1026.15
+natalidad,90,Corregimiento de Santa Elena,2019,130.0,520.98
+natalidad,80,Corregimiento de San Antonio de Prado,2019,918.0,923.93
+natalidad,15,Guayabal,2019,589.0,906.0
+natalidad,1,Popular,2020,1949.0,1362.57
+natalidad,2,Santa Cruz,2020,1357.0,1152.5
+natalidad,3,Manrique,2020,2629.0,1527.69
+natalidad,4,Aranjuez,2020,1718.0,1191.13
+natalidad,5,Castilla,2020,1138.0,901.74
+natalidad,6,Doce de Octubre,2020,1504.0,829.86
+natalidad,7,Robledo,2020,2229.0,1124.2
+natalidad,8,Villa Hermosa,2020,1916.0,1184.71
+natalidad,9,Buenos Aires,2020,1608.0,978.82
+natalidad,10,La Candelaria,2020,941.0,1207.56
+natalidad,11,Laureles Estadio,2020,576.0,568.52
+natalidad,12,La América,2020,610.0,700.12
+natalidad,13,San Javier,2020,1951.0,1179.31
+natalidad,14,El Poblado,2020,814.0,742.7
+natalidad,16,Belén,2020,1662.0,791.37
+natalidad,50,Corregimiento de San Sebastián de Palmitas,2020,45.0,764.66
+natalidad,60,Corregimiento de San Cristóbal,2020,959.0,734.79
+natalidad,70,Corregimiento de Altavista,2020,354.0,856.11
+natalidad,90,Corregimiento de Santa Elena,2020,143.0,540.36
+natalidad,80,Corregimiento de San Antonio de Prado,2020,911.0,877.46
+natalidad,15,Guayabal,2020,525.0,805.88
+natalidad,1,Popular,2021,1700.0,1170.52
+natalidad,2,Santa Cruz,2021,1113.0,932.36
+natalidad,3,Manrique,2021,2326.0,1331.49
+natalidad,4,Aranjuez,2021,1451.0,1001.97
+natalidad,5,Castilla,2021,999.0,789.18
+natalidad,6,Doce de Octubre,2021,1355.0,743.83
+natalidad,7,Robledo,2021,2068.0,1025.51
+natalidad,8,Villa Hermosa,2021,1819.0,1102.02
+natalidad,9,Buenos Aires,2021,1425.0,848.92
+natalidad,10,La Candelaria,2021,845.0,1076.73
+natalidad,11,Laureles Estadio,2021,562.0,553.84
+natalidad,12,La América,2021,545.0,622.94
+natalidad,13,San Javier,2021,1742.0,1032.91
+natalidad,14,El Poblado,2021,824.0,745.84
+natalidad,16,Belén,2021,1472.0,692.77
+natalidad,50,Corregimiento de San Sebastián de Palmitas,2021,27.0,444.59
+natalidad,60,Corregimiento de San Cristóbal,2021,896.0,652.69
+natalidad,70,Corregimiento de Altavista,2021,319.0,751.61
+natalidad,90,Corregimiento de Santa Elena,2021,138.0,494.34
+natalidad,80,Corregimiento de San Antonio de Prado,2021,744.0,688.91
+natalidad,15,Guayabal,2021,453.0,696.67
+natalidad,1,Popular,2022,1565.0,1086.8
+natalidad,2,Santa Cruz,2022,1045.0,877.74
+natalidad,3,Manrique,2022,1990.0,1142.92
+natalidad,4,Aranjuez,2022,1427.0,952.2
+natalidad,5,Castilla,2022,890.0,674.41
+natalidad,6,Doce de Octubre,2022,1277.0,679.68
+natalidad,7,Robledo,2022,1886.0,944.42
+natalidad,8,Villa Hermosa,2022,1650.0,1023.95
+natalidad,9,Buenos Aires,2022,1344.0,817.25
+natalidad,10,La Candelaria,2022,744.0,918.29
+natalidad,11,Laureles Estadio,2022,628.0,580.16
+natalidad,12,La América,2022,652.0,709.92
+natalidad,13,San Javier,2022,1617.0,972.76
+natalidad,14,El Poblado,2022,856.0,743.72
+natalidad,16,Belén,2022,1440.0,667.06
+natalidad,50,Corregimiento de San Sebastián de Palmitas,2022,26.0,449.67
+natalidad,60,Corregimiento de San Cristóbal,2022,892.0,731.56
+natalidad,70,Corregimiento de Altavista,2022,293.0,718.91
+natalidad,90,Corregimiento de Santa Elena,2022,121.0,493.31
+natalidad,80,Corregimiento de San Antonio de Prado,2022,722.0,724.03
+natalidad,15,Guayabal,2022,477.0,689.81
+dengue,1,Popular,2008,25.0,19.98
+dengue,2,Santa Cruz,2008,34.0,32.05
+dengue,3,Manrique,2008,50.0,32.74
+dengue,4,Aranjuez,2008,50.0,31.46
+dengue,5,Castilla,2008,28.0,19.3
+dengue,6,Doce de Octubre,2008,28.0,14.86
+dengue,7,Robledo,2008,63.0,39.4
+dengue,8,Villa Hermosa,2008,38.0,28.67
+dengue,9,Buenos Aires,2008,46.0,34.3
+dengue,10,La Candelaria,2008,34.0,40.12
+dengue,11,Laureles Estadio,2008,29.0,24.22
+dengue,12,La América,2008,28.0,30.07
+dengue,13,San Javier,2008,34.0,25.83
+dengue,14,El Poblado,2008,52.0,44.5
+dengue,16,Belén,2008,56.0,29.26
+dengue,50,Corregimiento de San Sebastián de Palmitas,2008,2.0,51.1
+dengue,60,Corregimiento de San Cristóbal,2008,19.0,40.85
+dengue,70,Corregimiento de Altavista,2008,1.0,3.7
+dengue,90,Corregimiento de Santa Elena,2008,3.0,23.95
+dengue,80,Corregimiento de San Antonio de Prado,2008,10.0,13.95
+dengue,15,Guayabal,2008,20.0,22.38
+dengue,1,Popular,2009,17.0,13.49
+dengue,2,Santa Cruz,2009,40.0,37.39
+dengue,3,Manrique,2009,44.0,28.59
+dengue,4,Aranjuez,2009,67.0,42.0
+dengue,5,Castilla,2009,38.0,26.07
+dengue,6,Doce de Octubre,2009,36.0,19.01
+dengue,7,Robledo,2009,49.0,30.29
+dengue,8,Villa Hermosa,2009,39.0,29.23
+dengue,9,Buenos Aires,2009,51.0,37.9
+dengue,10,La Candelaria,2009,30.0,35.35
+dengue,11,Laureles Estadio,2009,56.0,46.6
+dengue,12,La América,2009,46.0,49.12
+dengue,13,San Javier,2009,62.0,46.69
+dengue,14,El Poblado,2009,38.0,31.98
+dengue,16,Belén,2009,86.0,44.69
+dengue,50,Corregimiento de San Sebastián de Palmitas,2009,0.0,0.0
+dengue,60,Corregimiento de San Cristóbal,2009,9.0,16.87
+dengue,70,Corregimiento de Altavista,2009,3.0,10.77
+dengue,90,Corregimiento de Santa Elena,2009,2.0,14.86
+dengue,80,Corregimiento de San Antonio de Prado,2009,12.0,16.16
+dengue,15,Guayabal,2009,35.0,38.76
+dengue,1,Popular,2010,752.0,592.65
+dengue,2,Santa Cruz,2010,851.0,788.92
+dengue,3,Manrique,2010,1441.0,929.38
+dengue,4,Aranjuez,2010,1580.0,987.08
+dengue,5,Castilla,2010,701.0,478.59
+dengue,6,Doce de Octubre,2010,707.0,371.8
+dengue,7,Robledo,2010,868.0,530.7
+dengue,8,Villa Hermosa,2010,982.0,731.55
+dengue,9,Buenos Aires,2010,953.0,705.9
+dengue,10,La Candelaria,2010,753.0,885.88
+dengue,11,Laureles Estadio,2010,733.0,607.76
+dengue,12,La América,2010,987.0,1048.16
+dengue,13,San Javier,2010,1126.0,840.81
+dengue,14,El Poblado,2010,561.0,464.81
+dengue,16,Belén,2010,1866.0,965.12
+dengue,50,Corregimiento de San Sebastián de Palmitas,2010,11.0,251.72
+dengue,60,Corregimiento de San Cristóbal,2010,102.0,169.93
+dengue,70,Corregimiento de Altavista,2010,165.0,569.5
+dengue,90,Corregimiento de Santa Elena,2010,24.0,165.51
+dengue,80,Corregimiento de San Antonio de Prado,2010,245.0,318.15
+dengue,15,Guayabal,2010,562.0,616.59
+dengue,1,Popular,2011,24.0,18.79
+dengue,2,Santa Cruz,2011,35.0,32.2
+dengue,3,Manrique,2011,27.0,17.3
+dengue,4,Aranjuez,2011,44.0,27.4
+dengue,5,Castilla,2011,35.0,23.78
+dengue,6,Doce de Octubre,2011,51.0,26.71
+dengue,7,Robledo,2011,54.0,32.67
+dengue,8,Villa Hermosa,2011,30.0,22.22
+dengue,9,Buenos Aires,2011,49.0,36.18
+dengue,10,La Candelaria,2011,40.0,46.99
+dengue,11,Laureles Estadio,2011,37.0,30.58
+dengue,12,La América,2011,39.0,41.2
+dengue,13,San Javier,2011,56.0,41.5
+dengue,14,El Poblado,2011,47.0,38.37
+dengue,16,Belén,2011,66.0,33.99
+dengue,50,Corregimiento de San Sebastián de Palmitas,2011,3.0,63.44
+dengue,60,Corregimiento de San Cristóbal,2011,16.0,25.09
+dengue,70,Corregimiento de Altavista,2011,5.0,16.42
+dengue,90,Corregimiento de Santa Elena,2011,3.0,19.74
+dengue,80,Corregimiento de San Antonio de Prado,2011,12.0,14.48
+dengue,15,Guayabal,2011,23.0,25.02
+dengue,1,Popular,2012,43.0,33.48
+dengue,2,Santa Cruz,2012,41.0,37.45
+dengue,3,Manrique,2012,57.0,36.28
+dengue,4,Aranjuez,2012,36.0,22.35
+dengue,5,Castilla,2012,43.0,29.09
+dengue,6,Doce de Octubre,2012,50.0,26.09
+dengue,7,Robledo,2012,51.0,30.54
+dengue,8,Villa Hermosa,2012,54.0,39.79
+dengue,9,Buenos Aires,2012,46.0,33.87
+dengue,10,La Candelaria,2012,33.0,38.72
+dengue,11,Laureles Estadio,2012,14.0,11.54
+dengue,12,La América,2012,21.0,22.08
+dengue,13,San Javier,2012,42.0,30.91
+dengue,14,El Poblado,2012,35.0,28.18
+dengue,16,Belén,2012,49.0,25.14
+dengue,50,Corregimiento de San Sebastián de Palmitas,2012,1.0,19.66
+dengue,60,Corregimiento de San Cristóbal,2012,8.0,11.83
+dengue,70,Corregimiento de Altavista,2012,4.0,12.52
+dengue,90,Corregimiento de Santa Elena,2012,7.0,44.04
+dengue,80,Corregimiento de San Antonio de Prado,2012,10.0,11.24
+dengue,15,Guayabal,2012,18.0,19.43
+dengue,1,Popular,2013,81.0,62.72
+dengue,2,Santa Cruz,2013,151.0,137.02
+dengue,3,Manrique,2013,74.0,46.83
+dengue,4,Aranjuez,2013,163.0,100.93
+dengue,5,Castilla,2013,149.0,100.34
+dengue,6,Doce de Octubre,2013,157.0,81.61
+dengue,7,Robledo,2013,167.0,99.04
+dengue,8,Villa Hermosa,2013,103.0,75.53
+dengue,9,Buenos Aires,2013,73.0,53.62
+dengue,10,La Candelaria,2013,99.0,116.03
+dengue,11,Laureles Estadio,2013,98.0,80.54
+dengue,12,La América,2013,70.0,73.28
+dengue,13,San Javier,2013,258.0,188.75
+dengue,14,El Poblado,2013,101.0,80.26
+dengue,16,Belén,2013,176.0,89.99
+dengue,50,Corregimiento de San Sebastián de Palmitas,2013,0.0,0.0
+dengue,60,Corregimiento de San Cristóbal,2013,20.0,27.96
+dengue,70,Corregimiento de Altavista,2013,57.0,170.32
+dengue,90,Corregimiento de Santa Elena,2013,5.0,30.09
+dengue,80,Corregimiento de San Antonio de Prado,2013,50.0,52.42
+dengue,15,Guayabal,2013,115.0,123.22
+dengue,1,Popular,2014,213.0,164.12
+dengue,2,Santa Cruz,2014,145.0,130.8
+dengue,3,Manrique,2014,424.0,266.87
+dengue,4,Aranjuez,2014,290.0,179.14
+dengue,5,Castilla,2014,109.0,73.09
+dengue,6,Doce de Octubre,2014,150.0,77.7
+dengue,7,Robledo,2014,361.0,212.13
+dengue,8,Villa Hermosa,2014,215.0,156.96
+dengue,9,Buenos Aires,2014,159.0,116.5
+dengue,10,La Candelaria,2014,129.0,151.02
+dengue,11,Laureles Estadio,2014,102.0,83.63
+dengue,12,La América,2014,88.0,91.75
+dengue,13,San Javier,2014,248.0,180.47
+dengue,14,El Poblado,2014,86.0,67.51
+dengue,16,Belén,2014,229.0,116.73
+dengue,50,Corregimiento de San Sebastián de Palmitas,2014,0.0,0.0
+dengue,60,Corregimiento de San Cristóbal,2014,28.0,37.09
+dengue,70,Corregimiento de Altavista,2014,25.0,71.48
+dengue,90,Corregimiento de Santa Elena,2014,5.0,28.86
+dengue,80,Corregimiento de San Antonio de Prado,2014,49.0,48.03
+dengue,15,Guayabal,2014,94.0,100.08
+dengue,1,Popular,2015,285.0,218.61
+dengue,2,Santa Cruz,2015,191.0,171.37
+dengue,3,Manrique,2015,327.0,204.81
+dengue,4,Aranjuez,2015,379.0,233.59
+dengue,5,Castilla,2015,92.0,61.44
+dengue,6,Doce de Octubre,2015,146.0,75.39
+dengue,7,Robledo,2015,180.0,104.86
+dengue,8,Villa Hermosa,2015,887.0,644.95
+dengue,9,Buenos Aires,2015,283.0,206.91
+dengue,10,La Candelaria,2015,180.0,210.51
+dengue,11,Laureles Estadio,2015,86.0,70.35
+dengue,12,La América,2015,80.0,83.09
+dengue,13,San Javier,2015,261.0,189.04
+dengue,14,El Poblado,2015,107.0,83.05
+dengue,16,Belén,2015,164.0,83.38
+dengue,50,Corregimiento de San Sebastián de Palmitas,2015,1.0,15.81
+dengue,60,Corregimiento de San Cristóbal,2015,28.0,35.24
+dengue,70,Corregimiento de Altavista,2015,18.0,49.37
+dengue,90,Corregimiento de Santa Elena,2015,14.0,77.67
+dengue,80,Corregimiento de San Antonio de Prado,2015,59.0,54.2
+dengue,15,Guayabal,2015,79.0,83.62
+dengue,1,Popular,2016,1045.0,798.23
+dengue,2,Santa Cruz,2016,685.0,611.65
+dengue,3,Manrique,2016,1474.0,919.08
+dengue,4,Aranjuez,2016,840.0,516.62
+dengue,5,Castilla,2016,591.0,393.09
+dengue,6,Doce de Octubre,2016,1104.0,568.37
+dengue,7,Robledo,2016,800.0,462.23
+dengue,8,Villa Hermosa,2016,2225.0,1611.79
+dengue,9,Buenos Aires,2016,1851.0,1350.61
+dengue,10,La Candelaria,2016,1135.0,1326.14
+dengue,11,Laureles Estadio,2016,497.0,405.7
+dengue,12,La América,2016,383.0,396.43
+dengue,13,San Javier,2016,1083.0,781.24
+dengue,14,El Poblado,2016,404.0,310.28
+dengue,16,Belén,2016,1230.0,623.98
+dengue,50,Corregimiento de San Sebastián de Palmitas,2016,4.0,59.82
+dengue,60,Corregimiento de San Cristóbal,2016,257.0,297.75
+dengue,70,Corregimiento de Altavista,2016,505.0,1347.46
+dengue,90,Corregimiento de Santa Elena,2016,113.0,601.42
+dengue,80,Corregimiento de San Antonio de Prado,2016,701.0,619.25
+dengue,15,Guayabal,2016,504.0,530.75
+dengue,1,Popular,2017,93.0,70.75
+dengue,2,Santa Cruz,2017,92.0,81.77
+dengue,3,Manrique,2017,158.0,98.09
+dengue,4,Aranjuez,2017,131.0,80.41
+dengue,5,Castilla,2017,100.0,66.28
+dengue,6,Doce de Octubre,2017,132.0,67.77
+dengue,7,Robledo,2017,142.0,81.42
+dengue,8,Villa Hermosa,2017,127.0,91.67
+dengue,9,Buenos Aires,2017,144.0,104.91
+dengue,10,La Candelaria,2017,99.0,115.58
+dengue,11,Laureles Estadio,2017,78.0,63.55
+dengue,12,La América,2017,89.0,91.83
+dengue,13,San Javier,2017,123.0,88.38
+dengue,14,El Poblado,2017,84.0,63.89
+dengue,16,Belén,2017,223.0,112.97
+dengue,50,Corregimiento de San Sebastián de Palmitas,2017,1.0,14.16
+dengue,60,Corregimiento de San Cristóbal,2017,56.0,60.17
+dengue,70,Corregimiento de Altavista,2017,32.0,82.96
+dengue,90,Corregimiento de Santa Elena,2017,11.0,56.24
+dengue,80,Corregimiento de San Antonio de Prado,2017,53.0,45.07
+dengue,15,Guayabal,2017,78.0,81.76
+dengue,1,Popular,2018,64.0,46.72
+dengue,2,Santa Cruz,2018,54.0,47.76
+dengue,3,Manrique,2018,73.0,44.28
+dengue,4,Aranjuez,2018,79.0,55.9
+dengue,5,Castilla,2018,52.0,41.94
+dengue,6,Doce de Octubre,2018,79.0,44.58
+dengue,7,Robledo,2018,99.0,52.32
+dengue,8,Villa Hermosa,2018,65.0,42.42
+dengue,9,Buenos Aires,2018,64.0,41.19
+dengue,10,La Candelaria,2018,63.0,82.99
+dengue,11,Laureles Estadio,2018,61.0,61.06
+dengue,12,La América,2018,52.0,60.88
+dengue,13,San Javier,2018,65.0,41.34
+dengue,14,El Poblado,2018,58.0,54.3
+dengue,16,Belén,2018,97.0,47.8
+dengue,50,Corregimiento de San Sebastián de Palmitas,2018,0.0,0.0
+dengue,60,Corregimiento de San Cristóbal,2018,25.0,21.47
+dengue,70,Corregimiento de Altavista,2018,13.0,33.46
+dengue,90,Corregimiento de Santa Elena,2018,6.0,25.57
+dengue,80,Corregimiento de San Antonio de Prado,2018,21.0,22.15
+dengue,15,Guayabal,2018,49.0,75.79
+dengue,1,Popular,2019,61.0,43.5
+dengue,2,Santa Cruz,2019,43.0,37.2
+dengue,3,Manrique,2019,105.0,62.23
+dengue,4,Aranjuez,2019,56.0,39.16
+dengue,5,Castilla,2019,71.0,56.67
+dengue,6,Doce de Octubre,2019,53.0,29.53
+dengue,7,Robledo,2019,66.0,34.01
+dengue,8,Villa Hermosa,2019,102.0,64.69
+dengue,9,Buenos Aires,2019,65.0,40.61
+dengue,10,La Candelaria,2019,63.0,81.76
+dengue,11,Laureles Estadio,2019,43.0,42.68
+dengue,12,La América,2019,45.0,52.08
+dengue,13,San Javier,2019,53.0,32.8
+dengue,14,El Poblado,2019,71.0,65.53
+dengue,16,Belén,2019,133.0,64.33
+dengue,50,Corregimiento de San Sebastián de Palmitas,2019,1.0,17.58
+dengue,60,Corregimiento de San Cristóbal,2019,26.0,21.06
+dengue,70,Corregimiento de Altavista,2019,15.0,37.36
+dengue,90,Corregimiento de Santa Elena,2019,9.0,36.07
+dengue,80,Corregimiento de San Antonio de Prado,2019,38.0,38.25
+dengue,15,Guayabal,2019,34.0,52.3
+dengue,1,Popular,2020,21.0,14.68
+dengue,2,Santa Cruz,2020,17.0,14.44
+dengue,3,Manrique,2020,31.0,18.01
+dengue,4,Aranjuez,2020,23.0,15.95
+dengue,5,Castilla,2020,26.0,20.6
+dengue,6,Doce de Octubre,2020,21.0,11.59
+dengue,7,Robledo,2020,43.0,21.69
+dengue,8,Villa Hermosa,2020,42.0,25.97
+dengue,9,Buenos Aires,2020,29.0,17.65
+dengue,10,La Candelaria,2020,25.0,32.08
+dengue,11,Laureles Estadio,2020,43.0,42.44
+dengue,12,La América,2020,16.0,18.36
+dengue,13,San Javier,2020,35.0,21.16
+dengue,14,El Poblado,2020,20.0,18.25
+dengue,16,Belén,2020,81.0,38.57
+dengue,50,Corregimiento de San Sebastián de Palmitas,2020,0.0,0.0
+dengue,60,Corregimiento de San Cristóbal,2020,29.0,22.22
+dengue,70,Corregimiento de Altavista,2020,11.0,26.6
+dengue,90,Corregimiento de Santa Elena,2020,4.0,15.11
+dengue,80,Corregimiento de San Antonio de Prado,2020,10.0,9.63
+dengue,15,Guayabal,2020,9.0,13.82
+dengue,1,Popular,2021,14.0,9.64
+dengue,2,Santa Cruz,2021,5.0,4.19
+dengue,3,Manrique,2021,13.0,7.44
+dengue,4,Aranjuez,2021,15.0,10.36
+dengue,5,Castilla,2021,10.0,7.9
+dengue,6,Doce de Octubre,2021,14.0,7.69
+dengue,7,Robledo,2021,15.0,7.44
+dengue,8,Villa Hermosa,2021,20.0,12.12
+dengue,9,Buenos Aires,2021,10.0,5.96
+dengue,10,La Candelaria,2021,14.0,17.84
+dengue,11,Laureles Estadio,2021,7.0,6.9
+dengue,12,La América,2021,8.0,9.14
+dengue,13,San Javier,2021,12.0,7.12
+dengue,14,El Poblado,2021,22.0,19.91
+dengue,16,Belén,2021,17.0,8.0
+dengue,50,Corregimiento de San Sebastián de Palmitas,2021,0.0,0.0
+dengue,60,Corregimiento de San Cristóbal,2021,6.0,4.37
+dengue,70,Corregimiento de Altavista,2021,4.0,9.42
+dengue,90,Corregimiento de Santa Elena,2021,1.0,3.58
+dengue,80,Corregimiento de San Antonio de Prado,2021,3.0,2.78
+dengue,15,Guayabal,2021,2.0,3.08
+dengue,1,Popular,2022,4.0,2.78
+dengue,2,Santa Cruz,2022,4.0,3.36
+dengue,3,Manrique,2022,11.0,6.32
+dengue,4,Aranjuez,2022,9.0,6.01
+dengue,5,Castilla,2022,8.0,6.06
+dengue,6,Doce de Octubre,2022,10.0,5.32
+dengue,7,Robledo,2022,13.0,6.51
+dengue,8,Villa Hermosa,2022,8.0,4.96
+dengue,9,Buenos Aires,2022,7.0,4.26
+dengue,10,La Candelaria,2022,13.0,16.05
+dengue,11,Laureles Estadio,2022,5.0,4.62
+dengue,12,La América,2022,6.0,6.53
+dengue,13,San Javier,2022,6.0,3.61
+dengue,14,El Poblado,2022,15.0,13.03
+dengue,16,Belén,2022,18.0,8.34
+dengue,50,Corregimiento de San Sebastián de Palmitas,2022,0.0,0.0
+dengue,60,Corregimiento de San Cristóbal,2022,11.0,9.02
+dengue,70,Corregimiento de Altavista,2022,2.0,4.91
+dengue,90,Corregimiento de Santa Elena,2022,0.0,0.0
+dengue,80,Corregimiento de San Antonio de Prado,2022,2.0,2.01
+dengue,15,Guayabal,2022,2.0,2.89
+hepatitis_a,1,Popular,2008,47.0,37.57
+hepatitis_a,2,Santa Cruz,2008,43.0,40.54
+hepatitis_a,3,Manrique,2008,81.0,53.04
+hepatitis_a,4,Aranjuez,2008,53.0,33.35
+hepatitis_a,5,Castilla,2008,37.0,25.51
+hepatitis_a,6,Doce de Octubre,2008,39.0,20.69
+hepatitis_a,7,Robledo,2008,49.0,30.65
+hepatitis_a,8,Villa Hermosa,2008,51.0,38.48
+hepatitis_a,9,Buenos Aires,2008,30.0,22.37
+hepatitis_a,10,La Candelaria,2008,28.0,33.04
+hepatitis_a,11,Laureles Estadio,2008,6.0,5.01
+hepatitis_a,12,La América,2008,14.0,15.04
+hepatitis_a,13,San Javier,2008,35.0,26.59
+hepatitis_a,14,El Poblado,2008,4.0,3.42
+hepatitis_a,16,Belén,2008,32.0,16.72
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2008,0.0,0.0
+hepatitis_a,60,Corregimiento de San Cristóbal,2008,25.0,53.75
+hepatitis_a,70,Corregimiento de Altavista,2008,8.0,29.61
+hepatitis_a,90,Corregimiento de Santa Elena,2008,3.0,23.95
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2008,10.0,13.95
+hepatitis_a,15,Guayabal,2008,16.0,17.9
+hepatitis_a,1,Popular,2009,45.0,35.71
+hepatitis_a,2,Santa Cruz,2009,25.0,23.37
+hepatitis_a,3,Manrique,2009,60.0,38.98
+hepatitis_a,4,Aranjuez,2009,46.0,28.84
+hepatitis_a,5,Castilla,2009,15.0,10.29
+hepatitis_a,6,Doce de Octubre,2009,18.0,9.51
+hepatitis_a,7,Robledo,2009,25.0,15.46
+hepatitis_a,8,Villa Hermosa,2009,59.0,44.23
+hepatitis_a,9,Buenos Aires,2009,57.0,42.36
+hepatitis_a,10,La Candelaria,2009,28.0,32.99
+hepatitis_a,11,Laureles Estadio,2009,17.0,14.15
+hepatitis_a,12,La América,2009,10.0,10.68
+hepatitis_a,13,San Javier,2009,51.0,38.4
+hepatitis_a,14,El Poblado,2009,11.0,9.26
+hepatitis_a,16,Belén,2009,30.0,15.59
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2009,0.0,0.0
+hepatitis_a,60,Corregimiento de San Cristóbal,2009,9.0,16.87
+hepatitis_a,70,Corregimiento de Altavista,2009,12.0,43.08
+hepatitis_a,90,Corregimiento de Santa Elena,2009,2.0,14.86
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2009,3.0,4.04
+hepatitis_a,15,Guayabal,2009,24.0,26.58
+hepatitis_a,1,Popular,2010,35.0,27.58
+hepatitis_a,2,Santa Cruz,2010,24.0,22.25
+hepatitis_a,3,Manrique,2010,20.0,12.9
+hepatitis_a,4,Aranjuez,2010,11.0,6.87
+hepatitis_a,5,Castilla,2010,8.0,5.46
+hepatitis_a,6,Doce de Octubre,2010,11.0,5.78
+hepatitis_a,7,Robledo,2010,15.0,9.17
+hepatitis_a,8,Villa Hermosa,2010,38.0,28.31
+hepatitis_a,9,Buenos Aires,2010,26.0,19.26
+hepatitis_a,10,La Candelaria,2010,20.0,23.53
+hepatitis_a,11,Laureles Estadio,2010,10.0,8.29
+hepatitis_a,12,La América,2010,7.0,7.43
+hepatitis_a,13,San Javier,2010,11.0,8.21
+hepatitis_a,14,El Poblado,2010,3.0,2.49
+hepatitis_a,16,Belén,2010,16.0,8.28
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2010,6.0,137.3
+hepatitis_a,60,Corregimiento de San Cristóbal,2010,5.0,8.33
+hepatitis_a,70,Corregimiento de Altavista,2010,1.0,3.45
+hepatitis_a,90,Corregimiento de Santa Elena,2010,1.0,6.9
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2010,4.0,5.19
+hepatitis_a,15,Guayabal,2010,4.0,4.39
+hepatitis_a,1,Popular,2011,25.0,19.58
+hepatitis_a,2,Santa Cruz,2011,35.0,32.2
+hepatitis_a,3,Manrique,2011,25.0,16.01
+hepatitis_a,4,Aranjuez,2011,19.0,11.83
+hepatitis_a,5,Castilla,2011,11.0,7.47
+hepatitis_a,6,Doce de Octubre,2011,13.0,6.81
+hepatitis_a,7,Robledo,2011,12.0,7.26
+hepatitis_a,8,Villa Hermosa,2011,22.0,16.3
+hepatitis_a,9,Buenos Aires,2011,15.0,11.08
+hepatitis_a,10,La Candelaria,2011,12.0,14.1
+hepatitis_a,11,Laureles Estadio,2011,1.0,0.83
+hepatitis_a,12,La América,2011,2.0,2.11
+hepatitis_a,13,San Javier,2011,9.0,6.67
+hepatitis_a,14,El Poblado,2011,2.0,1.63
+hepatitis_a,16,Belén,2011,7.0,3.61
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2011,0.0,0.0
+hepatitis_a,60,Corregimiento de San Cristóbal,2011,6.0,9.41
+hepatitis_a,70,Corregimiento de Altavista,2011,0.0,0.0
+hepatitis_a,90,Corregimiento de Santa Elena,2011,2.0,13.16
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2011,1.0,1.21
+hepatitis_a,15,Guayabal,2011,3.0,3.26
+hepatitis_a,1,Popular,2012,20.0,15.57
+hepatitis_a,2,Santa Cruz,2012,24.0,21.92
+hepatitis_a,3,Manrique,2012,35.0,22.28
+hepatitis_a,4,Aranjuez,2012,27.0,16.76
+hepatitis_a,5,Castilla,2012,13.0,8.79
+hepatitis_a,6,Doce de Octubre,2012,30.0,15.65
+hepatitis_a,7,Robledo,2012,35.0,20.96
+hepatitis_a,8,Villa Hermosa,2012,29.0,21.37
+hepatitis_a,9,Buenos Aires,2012,22.0,16.2
+hepatitis_a,10,La Candelaria,2012,21.0,24.64
+hepatitis_a,11,Laureles Estadio,2012,9.0,7.42
+hepatitis_a,12,La América,2012,12.0,12.62
+hepatitis_a,13,San Javier,2012,30.0,22.08
+hepatitis_a,14,El Poblado,2012,14.0,11.27
+hepatitis_a,16,Belén,2012,30.0,15.39
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2012,0.0,0.0
+hepatitis_a,60,Corregimiento de San Cristóbal,2012,8.0,11.83
+hepatitis_a,70,Corregimiento de Altavista,2012,5.0,15.65
+hepatitis_a,90,Corregimiento de Santa Elena,2012,2.0,12.58
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2012,5.0,5.62
+hepatitis_a,15,Guayabal,2012,8.0,8.63
+hepatitis_a,1,Popular,2013,25.0,19.36
+hepatitis_a,2,Santa Cruz,2013,19.0,17.24
+hepatitis_a,3,Manrique,2013,52.0,32.91
+hepatitis_a,4,Aranjuez,2013,27.0,16.72
+hepatitis_a,5,Castilla,2013,8.0,5.39
+hepatitis_a,6,Doce de Octubre,2013,17.0,8.84
+hepatitis_a,7,Robledo,2013,13.0,7.71
+hepatitis_a,8,Villa Hermosa,2013,48.0,35.2
+hepatitis_a,9,Buenos Aires,2013,20.0,14.69
+hepatitis_a,10,La Candelaria,2013,16.0,18.75
+hepatitis_a,11,Laureles Estadio,2013,12.0,9.86
+hepatitis_a,12,La América,2013,7.0,7.33
+hepatitis_a,13,San Javier,2013,17.0,12.44
+hepatitis_a,14,El Poblado,2013,11.0,8.74
+hepatitis_a,16,Belén,2013,17.0,8.69
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2013,1.0,18.26
+hepatitis_a,60,Corregimiento de San Cristóbal,2013,5.0,6.99
+hepatitis_a,70,Corregimiento de Altavista,2013,4.0,11.95
+hepatitis_a,90,Corregimiento de Santa Elena,2013,2.0,12.04
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2013,6.0,6.29
+hepatitis_a,15,Guayabal,2013,14.0,15.0
+hepatitis_a,1,Popular,2014,25.0,19.26
+hepatitis_a,2,Santa Cruz,2014,24.0,21.65
+hepatitis_a,3,Manrique,2014,37.0,23.29
+hepatitis_a,4,Aranjuez,2014,34.0,21.0
+hepatitis_a,5,Castilla,2014,12.0,8.05
+hepatitis_a,6,Doce de Octubre,2014,9.0,4.66
+hepatitis_a,7,Robledo,2014,13.0,7.64
+hepatitis_a,8,Villa Hermosa,2014,21.0,15.33
+hepatitis_a,9,Buenos Aires,2014,12.0,8.79
+hepatitis_a,10,La Candelaria,2014,17.0,19.9
+hepatitis_a,11,Laureles Estadio,2014,5.0,4.1
+hepatitis_a,12,La América,2014,2.0,2.09
+hepatitis_a,13,San Javier,2014,12.0,8.73
+hepatitis_a,14,El Poblado,2014,6.0,4.71
+hepatitis_a,16,Belén,2014,17.0,8.67
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2014,0.0,0.0
+hepatitis_a,60,Corregimiento de San Cristóbal,2014,1.0,1.32
+hepatitis_a,70,Corregimiento de Altavista,2014,3.0,8.58
+hepatitis_a,90,Corregimiento de Santa Elena,2014,1.0,5.77
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2014,4.0,3.92
+hepatitis_a,15,Guayabal,2014,6.0,6.39
+hepatitis_a,1,Popular,2015,5.0,3.84
+hepatitis_a,2,Santa Cruz,2015,7.0,6.28
+hepatitis_a,3,Manrique,2015,16.0,10.02
+hepatitis_a,4,Aranjuez,2015,10.0,6.16
+hepatitis_a,5,Castilla,2015,13.0,8.68
+hepatitis_a,6,Doce de Octubre,2015,9.0,4.65
+hepatitis_a,7,Robledo,2015,13.0,7.57
+hepatitis_a,8,Villa Hermosa,2015,15.0,10.91
+hepatitis_a,9,Buenos Aires,2015,19.0,13.89
+hepatitis_a,10,La Candelaria,2015,23.0,26.9
+hepatitis_a,11,Laureles Estadio,2015,14.0,11.45
+hepatitis_a,12,La América,2015,19.0,19.73
+hepatitis_a,13,San Javier,2015,6.0,4.35
+hepatitis_a,14,El Poblado,2015,12.0,9.31
+hepatitis_a,16,Belén,2015,30.0,15.25
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2015,0.0,0.0
+hepatitis_a,60,Corregimiento de San Cristóbal,2015,0.0,0.0
+hepatitis_a,70,Corregimiento de Altavista,2015,0.0,0.0
+hepatitis_a,90,Corregimiento de Santa Elena,2015,0.0,0.0
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2015,5.0,4.59
+hepatitis_a,15,Guayabal,2015,12.0,12.7
+hepatitis_a,1,Popular,2016,3.0,2.29
+hepatitis_a,2,Santa Cruz,2016,12.0,10.72
+hepatitis_a,3,Manrique,2016,2.0,1.25
+hepatitis_a,4,Aranjuez,2016,6.0,3.69
+hepatitis_a,5,Castilla,2016,9.0,5.99
+hepatitis_a,6,Doce de Octubre,2016,12.0,6.18
+hepatitis_a,7,Robledo,2016,10.0,5.78
+hepatitis_a,8,Villa Hermosa,2016,8.0,5.8
+hepatitis_a,9,Buenos Aires,2016,16.0,11.67
+hepatitis_a,10,La Candelaria,2016,13.0,15.19
+hepatitis_a,11,Laureles Estadio,2016,9.0,7.35
+hepatitis_a,12,La América,2016,12.0,12.42
+hepatitis_a,13,San Javier,2016,12.0,8.66
+hepatitis_a,14,El Poblado,2016,13.0,9.98
+hepatitis_a,16,Belén,2016,18.0,9.13
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2016,0.0,0.0
+hepatitis_a,60,Corregimiento de San Cristóbal,2016,8.0,9.27
+hepatitis_a,70,Corregimiento de Altavista,2016,1.0,2.67
+hepatitis_a,90,Corregimiento de Santa Elena,2016,0.0,0.0
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2016,3.0,2.65
+hepatitis_a,15,Guayabal,2016,7.0,7.37
+hepatitis_a,1,Popular,2017,5.0,3.8
+hepatitis_a,2,Santa Cruz,2017,8.0,7.11
+hepatitis_a,3,Manrique,2017,15.0,9.31
+hepatitis_a,4,Aranjuez,2017,22.0,13.5
+hepatitis_a,5,Castilla,2017,10.0,6.63
+hepatitis_a,6,Doce de Octubre,2017,7.0,3.59
+hepatitis_a,7,Robledo,2017,10.0,5.73
+hepatitis_a,8,Villa Hermosa,2017,13.0,9.38
+hepatitis_a,9,Buenos Aires,2017,13.0,9.47
+hepatitis_a,10,La Candelaria,2017,16.0,18.68
+hepatitis_a,11,Laureles Estadio,2017,19.0,15.48
+hepatitis_a,12,La América,2017,11.0,11.35
+hepatitis_a,13,San Javier,2017,6.0,4.31
+hepatitis_a,14,El Poblado,2017,14.0,10.65
+hepatitis_a,16,Belén,2017,25.0,12.66
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2017,0.0,0.0
+hepatitis_a,60,Corregimiento de San Cristóbal,2017,1.0,1.07
+hepatitis_a,70,Corregimiento de Altavista,2017,0.0,0.0
+hepatitis_a,90,Corregimiento de Santa Elena,2017,1.0,5.11
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2017,3.0,2.55
+hepatitis_a,15,Guayabal,2017,8.0,8.39
+hepatitis_a,1,Popular,2018,14.0,10.22
+hepatitis_a,2,Santa Cruz,2018,11.0,9.73
+hepatitis_a,3,Manrique,2018,26.0,15.77
+hepatitis_a,4,Aranjuez,2018,26.0,18.4
+hepatitis_a,5,Castilla,2018,11.0,8.87
+hepatitis_a,6,Doce de Octubre,2018,16.0,9.03
+hepatitis_a,7,Robledo,2018,30.0,15.85
+hepatitis_a,8,Villa Hermosa,2018,12.0,7.83
+hepatitis_a,9,Buenos Aires,2018,13.0,8.37
+hepatitis_a,10,La Candelaria,2018,26.0,34.25
+hepatitis_a,11,Laureles Estadio,2018,12.0,12.01
+hepatitis_a,12,La América,2018,10.0,11.71
+hepatitis_a,13,San Javier,2018,8.0,5.09
+hepatitis_a,14,El Poblado,2018,7.0,6.55
+hepatitis_a,16,Belén,2018,18.0,8.87
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2018,0.0,0.0
+hepatitis_a,60,Corregimiento de San Cristóbal,2018,4.0,3.44
+hepatitis_a,70,Corregimiento de Altavista,2018,0.0,0.0
+hepatitis_a,90,Corregimiento de Santa Elena,2018,3.0,12.78
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2018,6.0,6.33
+hepatitis_a,15,Guayabal,2018,11.0,17.01
+hepatitis_a,1,Popular,2019,16.0,11.41
+hepatitis_a,2,Santa Cruz,2019,15.0,12.98
+hepatitis_a,3,Manrique,2019,23.0,13.63
+hepatitis_a,4,Aranjuez,2019,18.0,12.59
+hepatitis_a,5,Castilla,2019,12.0,9.58
+hepatitis_a,6,Doce de Octubre,2019,13.0,7.24
+hepatitis_a,7,Robledo,2019,32.0,16.49
+hepatitis_a,8,Villa Hermosa,2019,24.0,15.22
+hepatitis_a,9,Buenos Aires,2019,30.0,18.74
+hepatitis_a,10,La Candelaria,2019,30.0,38.93
+hepatitis_a,11,Laureles Estadio,2019,16.0,15.88
+hepatitis_a,12,La América,2019,9.0,10.42
+hepatitis_a,13,San Javier,2019,11.0,6.81
+hepatitis_a,14,El Poblado,2019,9.0,8.31
+hepatitis_a,16,Belén,2019,97.0,46.92
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2019,2.0,35.16
+hepatitis_a,60,Corregimiento de San Cristóbal,2019,9.0,7.29
+hepatitis_a,70,Corregimiento de Altavista,2019,8.0,19.93
+hepatitis_a,90,Corregimiento de Santa Elena,2019,3.0,12.02
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2019,4.0,4.03
+hepatitis_a,15,Guayabal,2019,20.0,30.76
+hepatitis_a,1,Popular,2020,9.0,6.29
+hepatitis_a,2,Santa Cruz,2020,8.0,6.79
+hepatitis_a,3,Manrique,2020,17.0,9.88
+hepatitis_a,4,Aranjuez,2020,22.0,15.25
+hepatitis_a,5,Castilla,2020,11.0,8.72
+hepatitis_a,6,Doce de Octubre,2020,10.0,5.52
+hepatitis_a,7,Robledo,2020,21.0,10.59
+hepatitis_a,8,Villa Hermosa,2020,33.0,20.4
+hepatitis_a,9,Buenos Aires,2020,29.0,17.65
+hepatitis_a,10,La Candelaria,2020,40.0,51.33
+hepatitis_a,11,Laureles Estadio,2020,13.0,12.83
+hepatitis_a,12,La América,2020,4.0,4.59
+hepatitis_a,13,San Javier,2020,10.0,6.04
+hepatitis_a,14,El Poblado,2020,12.0,10.95
+hepatitis_a,16,Belén,2020,29.0,13.81
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2020,0.0,0.0
+hepatitis_a,60,Corregimiento de San Cristóbal,2020,2.0,1.53
+hepatitis_a,70,Corregimiento de Altavista,2020,1.0,2.42
+hepatitis_a,90,Corregimiento de Santa Elena,2020,3.0,11.34
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2020,5.0,4.82
+hepatitis_a,15,Guayabal,2020,8.0,12.28
+hepatitis_a,1,Popular,2021,6.0,4.13
+hepatitis_a,2,Santa Cruz,2021,4.0,3.35
+hepatitis_a,3,Manrique,2021,10.0,5.72
+hepatitis_a,4,Aranjuez,2021,9.0,6.21
+hepatitis_a,5,Castilla,2021,4.0,3.16
+hepatitis_a,6,Doce de Octubre,2021,1.0,0.55
+hepatitis_a,7,Robledo,2021,7.0,3.47
+hepatitis_a,8,Villa Hermosa,2021,5.0,3.03
+hepatitis_a,9,Buenos Aires,2021,6.0,3.57
+hepatitis_a,10,La Candelaria,2021,10.0,12.74
+hepatitis_a,11,Laureles Estadio,2021,1.0,0.99
+hepatitis_a,12,La América,2021,3.0,3.43
+hepatitis_a,13,San Javier,2021,1.0,0.59
+hepatitis_a,14,El Poblado,2021,8.0,7.24
+hepatitis_a,16,Belén,2021,2.0,0.94
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2021,1.0,16.47
+hepatitis_a,60,Corregimiento de San Cristóbal,2021,3.0,2.19
+hepatitis_a,70,Corregimiento de Altavista,2021,0.0,0.0
+hepatitis_a,90,Corregimiento de Santa Elena,2021,0.0,0.0
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2021,3.0,2.78
+hepatitis_a,15,Guayabal,2021,2.0,3.08
+hepatitis_a,1,Popular,2022,10.0,6.94
+hepatitis_a,2,Santa Cruz,2022,14.0,11.76
+hepatitis_a,3,Manrique,2022,25.0,14.36
+hepatitis_a,4,Aranjuez,2022,7.0,4.67
+hepatitis_a,5,Castilla,2022,15.0,11.37
+hepatitis_a,6,Doce de Octubre,2022,19.0,10.11
+hepatitis_a,7,Robledo,2022,27.0,13.52
+hepatitis_a,8,Villa Hermosa,2022,18.0,11.17
+hepatitis_a,9,Buenos Aires,2022,28.0,17.03
+hepatitis_a,10,La Candelaria,2022,27.0,33.33
+hepatitis_a,11,Laureles Estadio,2022,20.0,18.48
+hepatitis_a,12,La América,2022,11.0,11.98
+hepatitis_a,13,San Javier,2022,14.0,8.42
+hepatitis_a,14,El Poblado,2022,22.0,19.11
+hepatitis_a,16,Belén,2022,29.0,13.43
+hepatitis_a,50,Corregimiento de San Sebastián de Palmitas,2022,1.0,17.3
+hepatitis_a,60,Corregimiento de San Cristóbal,2022,4.0,3.28
+hepatitis_a,70,Corregimiento de Altavista,2022,2.0,4.91
+hepatitis_a,90,Corregimiento de Santa Elena,2022,1.0,4.08
+hepatitis_a,80,Corregimiento de San Antonio de Prado,2022,4.0,4.01
+hepatitis_a,15,Guayabal,2022,22.0,31.82
+parotiditis,1,Popular,2008,276.0,220.61
+parotiditis,2,Santa Cruz,2008,123.0,115.96
+parotiditis,3,Manrique,2008,202.0,132.27
+parotiditis,4,Aranjuez,2008,120.0,75.51
+parotiditis,5,Castilla,2008,94.0,64.81
+parotiditis,6,Doce de Octubre,2008,172.0,91.26
+parotiditis,7,Robledo,2008,195.0,121.96
+parotiditis,8,Villa Hermosa,2008,277.0,209.02
+parotiditis,9,Buenos Aires,2008,108.0,80.54
+parotiditis,10,La Candelaria,2008,68.0,80.25
+parotiditis,11,Laureles Estadio,2008,52.0,43.44
+parotiditis,12,La América,2008,59.0,63.37
+parotiditis,13,San Javier,2008,162.0,123.06
+parotiditis,14,El Poblado,2008,48.0,41.07
+parotiditis,16,Belén,2008,112.0,58.52
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2008,2.0,51.1
+parotiditis,60,Corregimiento de San Cristóbal,2008,117.0,251.55
+parotiditis,70,Corregimiento de Altavista,2008,34.0,125.83
+parotiditis,90,Corregimiento de Santa Elena,2008,8.0,63.87
+parotiditis,80,Corregimiento de San Antonio de Prado,2008,78.0,108.79
+parotiditis,15,Guayabal,2008,30.0,33.56
+parotiditis,1,Popular,2009,141.0,111.88
+parotiditis,2,Santa Cruz,2009,115.0,107.49
+parotiditis,3,Manrique,2009,142.0,92.26
+parotiditis,4,Aranjuez,2009,105.0,65.83
+parotiditis,5,Castilla,2009,70.0,48.02
+parotiditis,6,Doce de Octubre,2009,150.0,79.22
+parotiditis,7,Robledo,2009,111.0,68.62
+parotiditis,8,Villa Hermosa,2009,160.0,119.93
+parotiditis,9,Buenos Aires,2009,114.0,84.71
+parotiditis,10,La Candelaria,2009,49.0,57.73
+parotiditis,11,Laureles Estadio,2009,50.0,41.6
+parotiditis,12,La América,2009,48.0,51.26
+parotiditis,13,San Javier,2009,122.0,91.87
+parotiditis,14,El Poblado,2009,58.0,48.82
+parotiditis,16,Belén,2009,159.0,82.63
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2009,0.0,0.0
+parotiditis,60,Corregimiento de San Cristóbal,2009,28.0,52.48
+parotiditis,70,Corregimiento de Altavista,2009,31.0,111.28
+parotiditis,90,Corregimiento de Santa Elena,2009,3.0,22.29
+parotiditis,80,Corregimiento de San Antonio de Prado,2009,28.0,37.71
+parotiditis,15,Guayabal,2009,68.0,75.31
+parotiditis,1,Popular,2010,30.0,23.64
+parotiditis,2,Santa Cruz,2010,17.0,15.76
+parotiditis,3,Manrique,2010,25.0,16.12
+parotiditis,4,Aranjuez,2010,28.0,17.49
+parotiditis,5,Castilla,2010,33.0,22.53
+parotiditis,6,Doce de Octubre,2010,31.0,16.3
+parotiditis,7,Robledo,2010,41.0,25.07
+parotiditis,8,Villa Hermosa,2010,49.0,36.5
+parotiditis,9,Buenos Aires,2010,42.0,31.11
+parotiditis,10,La Candelaria,2010,23.0,27.06
+parotiditis,11,Laureles Estadio,2010,16.0,13.27
+parotiditis,12,La América,2010,13.0,13.81
+parotiditis,13,San Javier,2010,33.0,24.64
+parotiditis,14,El Poblado,2010,25.0,20.71
+parotiditis,16,Belén,2010,27.0,13.96
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2010,0.0,0.0
+parotiditis,60,Corregimiento de San Cristóbal,2010,17.0,28.32
+parotiditis,70,Corregimiento de Altavista,2010,8.0,27.61
+parotiditis,90,Corregimiento de Santa Elena,2010,0.0,0.0
+parotiditis,80,Corregimiento de San Antonio de Prado,2010,2.0,2.6
+parotiditis,15,Guayabal,2010,18.0,19.75
+parotiditis,1,Popular,2011,33.0,25.84
+parotiditis,2,Santa Cruz,2011,19.0,17.48
+parotiditis,3,Manrique,2011,27.0,17.3
+parotiditis,4,Aranjuez,2011,16.0,9.96
+parotiditis,5,Castilla,2011,20.0,13.59
+parotiditis,6,Doce de Octubre,2011,40.0,20.95
+parotiditis,7,Robledo,2011,37.0,22.38
+parotiditis,8,Villa Hermosa,2011,34.0,25.18
+parotiditis,9,Buenos Aires,2011,40.0,29.54
+parotiditis,10,La Candelaria,2011,17.0,19.97
+parotiditis,11,Laureles Estadio,2011,17.0,14.05
+parotiditis,12,La América,2011,11.0,11.62
+parotiditis,13,San Javier,2011,29.0,21.49
+parotiditis,14,El Poblado,2011,18.0,14.7
+parotiditis,16,Belén,2011,34.0,17.51
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2011,0.0,0.0
+parotiditis,60,Corregimiento de San Cristóbal,2011,11.0,17.25
+parotiditis,70,Corregimiento de Altavista,2011,5.0,16.42
+parotiditis,90,Corregimiento de Santa Elena,2011,1.0,6.58
+parotiditis,80,Corregimiento de San Antonio de Prado,2011,11.0,13.27
+parotiditis,15,Guayabal,2011,17.0,18.49
+parotiditis,1,Popular,2012,47.0,36.59
+parotiditis,2,Santa Cruz,2012,26.0,23.75
+parotiditis,3,Manrique,2012,41.0,26.1
+parotiditis,4,Aranjuez,2012,27.0,16.76
+parotiditis,5,Castilla,2012,20.0,13.53
+parotiditis,6,Doce de Octubre,2012,29.0,15.13
+parotiditis,7,Robledo,2012,40.0,23.95
+parotiditis,8,Villa Hermosa,2012,48.0,35.37
+parotiditis,9,Buenos Aires,2012,36.0,26.51
+parotiditis,10,La Candelaria,2012,27.0,31.68
+parotiditis,11,Laureles Estadio,2012,14.0,11.54
+parotiditis,12,La América,2012,5.0,5.26
+parotiditis,13,San Javier,2012,26.0,19.13
+parotiditis,14,El Poblado,2012,19.0,15.3
+parotiditis,16,Belén,2012,34.0,17.44
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2012,0.0,0.0
+parotiditis,60,Corregimiento de San Cristóbal,2012,10.0,14.79
+parotiditis,70,Corregimiento de Altavista,2012,3.0,9.39
+parotiditis,90,Corregimiento de Santa Elena,2012,3.0,18.87
+parotiditis,80,Corregimiento de San Antonio de Prado,2012,6.0,6.74
+parotiditis,15,Guayabal,2012,9.0,9.71
+parotiditis,1,Popular,2013,18.0,13.94
+parotiditis,2,Santa Cruz,2013,17.0,15.43
+parotiditis,3,Manrique,2013,27.0,17.09
+parotiditis,4,Aranjuez,2013,27.0,16.72
+parotiditis,5,Castilla,2013,16.0,10.78
+parotiditis,6,Doce de Octubre,2013,39.0,20.27
+parotiditis,7,Robledo,2013,24.0,14.23
+parotiditis,8,Villa Hermosa,2013,35.0,25.66
+parotiditis,9,Buenos Aires,2013,34.0,24.97
+parotiditis,10,La Candelaria,2013,13.0,15.24
+parotiditis,11,Laureles Estadio,2013,26.0,21.37
+parotiditis,12,La América,2013,14.0,14.66
+parotiditis,13,San Javier,2013,14.0,10.24
+parotiditis,14,El Poblado,2013,31.0,24.63
+parotiditis,16,Belén,2013,33.0,16.87
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2013,2.0,36.52
+parotiditis,60,Corregimiento de San Cristóbal,2013,14.0,19.58
+parotiditis,70,Corregimiento de Altavista,2013,7.0,20.92
+parotiditis,90,Corregimiento de Santa Elena,2013,5.0,30.09
+parotiditis,80,Corregimiento de San Antonio de Prado,2013,8.0,8.39
+parotiditis,15,Guayabal,2013,13.0,13.93
+parotiditis,1,Popular,2014,13.0,10.02
+parotiditis,2,Santa Cruz,2014,12.0,10.82
+parotiditis,3,Manrique,2014,22.0,13.85
+parotiditis,4,Aranjuez,2014,21.0,12.97
+parotiditis,5,Castilla,2014,42.0,28.16
+parotiditis,6,Doce de Octubre,2014,18.0,9.32
+parotiditis,7,Robledo,2014,26.0,15.28
+parotiditis,8,Villa Hermosa,2014,33.0,24.09
+parotiditis,9,Buenos Aires,2014,31.0,22.71
+parotiditis,10,La Candelaria,2014,22.0,25.76
+parotiditis,11,Laureles Estadio,2014,18.0,14.76
+parotiditis,12,La América,2014,20.0,20.85
+parotiditis,13,San Javier,2014,21.0,15.28
+parotiditis,14,El Poblado,2014,23.0,18.06
+parotiditis,16,Belén,2014,31.0,15.8
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2014,0.0,0.0
+parotiditis,60,Corregimiento de San Cristóbal,2014,11.0,14.57
+parotiditis,70,Corregimiento de Altavista,2014,2.0,5.72
+parotiditis,90,Corregimiento de Santa Elena,2014,0.0,0.0
+parotiditis,80,Corregimiento de San Antonio de Prado,2014,10.0,9.8
+parotiditis,15,Guayabal,2014,6.0,6.39
+parotiditis,1,Popular,2015,11.0,8.44
+parotiditis,2,Santa Cruz,2015,19.0,17.05
+parotiditis,3,Manrique,2015,35.0,21.92
+parotiditis,4,Aranjuez,2015,26.0,16.02
+parotiditis,5,Castilla,2015,33.0,22.04
+parotiditis,6,Doce de Octubre,2015,40.0,20.66
+parotiditis,7,Robledo,2015,22.0,12.82
+parotiditis,8,Villa Hermosa,2015,15.0,10.91
+parotiditis,9,Buenos Aires,2015,32.0,23.4
+parotiditis,10,La Candelaria,2015,24.0,28.07
+parotiditis,11,Laureles Estadio,2015,21.0,17.18
+parotiditis,12,La América,2015,14.0,14.54
+parotiditis,13,San Javier,2015,25.0,18.11
+parotiditis,14,El Poblado,2015,16.0,12.42
+parotiditis,16,Belén,2015,40.0,20.34
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2015,1.0,15.81
+parotiditis,60,Corregimiento de San Cristóbal,2015,4.0,5.03
+parotiditis,70,Corregimiento de Altavista,2015,5.0,13.71
+parotiditis,90,Corregimiento de Santa Elena,2015,0.0,0.0
+parotiditis,80,Corregimiento de San Antonio de Prado,2015,14.0,12.86
+parotiditis,15,Guayabal,2015,14.0,14.82
+parotiditis,1,Popular,2016,12.0,9.17
+parotiditis,2,Santa Cruz,2016,11.0,9.82
+parotiditis,3,Manrique,2016,28.0,17.46
+parotiditis,4,Aranjuez,2016,32.0,19.68
+parotiditis,5,Castilla,2016,24.0,15.96
+parotiditis,6,Doce de Octubre,2016,37.0,19.05
+parotiditis,7,Robledo,2016,30.0,17.33
+parotiditis,8,Villa Hermosa,2016,33.0,23.91
+parotiditis,9,Buenos Aires,2016,37.0,27.0
+parotiditis,10,La Candelaria,2016,28.0,32.72
+parotiditis,11,Laureles Estadio,2016,26.0,21.22
+parotiditis,12,La América,2016,21.0,21.74
+parotiditis,13,San Javier,2016,22.0,15.87
+parotiditis,14,El Poblado,2016,24.0,18.43
+parotiditis,16,Belén,2016,39.0,19.78
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2016,1.0,14.95
+parotiditis,60,Corregimiento de San Cristóbal,2016,11.0,12.74
+parotiditis,70,Corregimiento de Altavista,2016,10.0,26.68
+parotiditis,90,Corregimiento de Santa Elena,2016,1.0,5.32
+parotiditis,80,Corregimiento de San Antonio de Prado,2016,15.0,13.25
+parotiditis,15,Guayabal,2016,21.0,22.11
+parotiditis,1,Popular,2017,52.0,39.56
+parotiditis,2,Santa Cruz,2017,42.0,37.33
+parotiditis,3,Manrique,2017,98.0,60.84
+parotiditis,4,Aranjuez,2017,118.0,72.43
+parotiditis,5,Castilla,2017,67.0,44.41
+parotiditis,6,Doce de Octubre,2017,77.0,39.53
+parotiditis,7,Robledo,2017,89.0,51.03
+parotiditis,8,Villa Hermosa,2017,77.0,55.58
+parotiditis,9,Buenos Aires,2017,126.0,91.8
+parotiditis,10,La Candelaria,2017,71.0,82.89
+parotiditis,11,Laureles Estadio,2017,88.0,71.69
+parotiditis,12,La América,2017,46.0,47.46
+parotiditis,13,San Javier,2017,94.0,67.54
+parotiditis,14,El Poblado,2017,72.0,54.76
+parotiditis,16,Belén,2017,155.0,78.52
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2017,4.0,56.65
+parotiditis,60,Corregimiento de San Cristóbal,2017,37.0,39.75
+parotiditis,70,Corregimiento de Altavista,2017,22.0,57.03
+parotiditis,90,Corregimiento de Santa Elena,2017,4.0,20.45
+parotiditis,80,Corregimiento de San Antonio de Prado,2017,26.0,22.11
+parotiditis,15,Guayabal,2017,51.0,53.46
+parotiditis,1,Popular,2018,111.0,81.03
+parotiditis,2,Santa Cruz,2018,99.0,87.56
+parotiditis,3,Manrique,2018,145.0,87.95
+parotiditis,4,Aranjuez,2018,157.0,111.1
+parotiditis,5,Castilla,2018,128.0,103.23
+parotiditis,6,Doce de Octubre,2018,161.0,90.86
+parotiditis,7,Robledo,2018,187.0,98.82
+parotiditis,8,Villa Hermosa,2018,123.0,80.28
+parotiditis,9,Buenos Aires,2018,151.0,97.17
+parotiditis,10,La Candelaria,2018,96.0,126.46
+parotiditis,11,Laureles Estadio,2018,99.0,99.1
+parotiditis,12,La América,2018,80.0,93.66
+parotiditis,13,San Javier,2018,127.0,80.77
+parotiditis,14,El Poblado,2018,122.0,114.23
+parotiditis,16,Belén,2018,228.0,112.35
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2018,1.0,18.27
+parotiditis,60,Corregimiento de San Cristóbal,2018,66.0,56.69
+parotiditis,70,Corregimiento de Altavista,2018,24.0,61.77
+parotiditis,90,Corregimiento de Santa Elena,2018,9.0,38.35
+parotiditis,80,Corregimiento de San Antonio de Prado,2018,47.0,49.58
+parotiditis,15,Guayabal,2018,75.0,116.01
+parotiditis,1,Popular,2019,43.0,30.67
+parotiditis,2,Santa Cruz,2019,43.0,37.2
+parotiditis,3,Manrique,2019,81.0,48.01
+parotiditis,4,Aranjuez,2019,65.0,45.46
+parotiditis,5,Castilla,2019,44.0,35.12
+parotiditis,6,Doce de Octubre,2019,56.0,31.2
+parotiditis,7,Robledo,2019,75.0,38.65
+parotiditis,8,Villa Hermosa,2019,63.0,39.96
+parotiditis,9,Buenos Aires,2019,91.0,56.86
+parotiditis,10,La Candelaria,2019,52.0,67.49
+parotiditis,11,Laureles Estadio,2019,60.0,59.55
+parotiditis,12,La América,2019,48.0,55.55
+parotiditis,13,San Javier,2019,57.0,35.28
+parotiditis,14,El Poblado,2019,46.0,42.46
+parotiditis,16,Belén,2019,92.0,44.5
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2019,0.0,0.0
+parotiditis,60,Corregimiento de San Cristóbal,2019,27.0,21.87
+parotiditis,70,Corregimiento de Altavista,2019,15.0,37.36
+parotiditis,90,Corregimiento de Santa Elena,2019,8.0,32.06
+parotiditis,80,Corregimiento de San Antonio de Prado,2019,27.0,27.17
+parotiditis,15,Guayabal,2019,43.0,66.14
+parotiditis,1,Popular,2020,10.0,6.99
+parotiditis,2,Santa Cruz,2020,9.0,7.64
+parotiditis,3,Manrique,2020,29.0,16.85
+parotiditis,4,Aranjuez,2020,31.0,21.49
+parotiditis,5,Castilla,2020,15.0,11.89
+parotiditis,6,Doce de Octubre,2020,18.0,9.93
+parotiditis,7,Robledo,2020,23.0,11.6
+parotiditis,8,Villa Hermosa,2020,21.0,12.98
+parotiditis,9,Buenos Aires,2020,28.0,17.04
+parotiditis,10,La Candelaria,2020,10.0,12.83
+parotiditis,11,Laureles Estadio,2020,25.0,24.68
+parotiditis,12,La América,2020,20.0,22.95
+parotiditis,13,San Javier,2020,26.0,15.72
+parotiditis,14,El Poblado,2020,26.0,23.72
+parotiditis,16,Belén,2020,37.0,17.62
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2020,0.0,0.0
+parotiditis,60,Corregimiento de San Cristóbal,2020,6.0,4.6
+parotiditis,70,Corregimiento de Altavista,2020,3.0,7.26
+parotiditis,90,Corregimiento de Santa Elena,2020,1.0,3.78
+parotiditis,80,Corregimiento de San Antonio de Prado,2020,6.0,5.78
+parotiditis,15,Guayabal,2020,5.0,7.68
+parotiditis,1,Popular,2021,19.0,13.08
+parotiditis,2,Santa Cruz,2021,13.0,10.89
+parotiditis,3,Manrique,2021,19.0,10.88
+parotiditis,4,Aranjuez,2021,18.0,12.43
+parotiditis,5,Castilla,2021,9.0,7.11
+parotiditis,6,Doce de Octubre,2021,16.0,8.78
+parotiditis,7,Robledo,2021,14.0,6.94
+parotiditis,8,Villa Hermosa,2021,14.0,8.48
+parotiditis,9,Buenos Aires,2021,20.0,11.91
+parotiditis,10,La Candelaria,2021,18.0,22.94
+parotiditis,11,Laureles Estadio,2021,23.0,22.67
+parotiditis,12,La América,2021,20.0,22.86
+parotiditis,13,San Javier,2021,19.0,11.27
+parotiditis,14,El Poblado,2021,19.0,17.2
+parotiditis,16,Belén,2021,36.0,16.94
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2021,2.0,32.93
+parotiditis,60,Corregimiento de San Cristóbal,2021,4.0,2.91
+parotiditis,70,Corregimiento de Altavista,2021,4.0,9.42
+parotiditis,90,Corregimiento de Santa Elena,2021,2.0,7.16
+parotiditis,80,Corregimiento de San Antonio de Prado,2021,6.0,5.56
+parotiditis,15,Guayabal,2021,8.0,12.3
+parotiditis,1,Popular,2022,16.0,11.11
+parotiditis,2,Santa Cruz,2022,15.0,12.6
+parotiditis,3,Manrique,2022,18.0,10.34
+parotiditis,4,Aranjuez,2022,33.0,22.02
+parotiditis,5,Castilla,2022,13.0,9.85
+parotiditis,6,Doce de Octubre,2022,19.0,10.11
+parotiditis,7,Robledo,2022,32.0,16.02
+parotiditis,8,Villa Hermosa,2022,21.0,13.03
+parotiditis,9,Buenos Aires,2022,31.0,18.85
+parotiditis,10,La Candelaria,2022,12.0,14.81
+parotiditis,11,Laureles Estadio,2022,16.0,14.78
+parotiditis,12,La América,2022,15.0,16.33
+parotiditis,13,San Javier,2022,24.0,14.44
+parotiditis,14,El Poblado,2022,22.0,19.11
+parotiditis,16,Belén,2022,35.0,16.21
+parotiditis,50,Corregimiento de San Sebastián de Palmitas,2022,0.0,0.0
+parotiditis,60,Corregimiento de San Cristóbal,2022,9.0,7.38
+parotiditis,70,Corregimiento de Altavista,2022,3.0,7.36
+parotiditis,90,Corregimiento de Santa Elena,2022,3.0,12.23
+parotiditis,80,Corregimiento de San Antonio de Prado,2022,16.0,16.05
+parotiditis,15,Guayabal,2022,12.0,17.35
+tosferina,1,Popular,2008,8.0,6.39
+tosferina,2,Santa Cruz,2008,6.0,5.66
+tosferina,3,Manrique,2008,10.0,6.55
+tosferina,4,Aranjuez,2008,7.0,4.4
+tosferina,5,Castilla,2008,6.0,4.14
+tosferina,6,Doce de Octubre,2008,9.0,4.78
+tosferina,7,Robledo,2008,10.0,6.25
+tosferina,8,Villa Hermosa,2008,8.0,6.04
+tosferina,9,Buenos Aires,2008,7.0,5.22
+tosferina,10,La Candelaria,2008,3.0,3.54
+tosferina,11,Laureles Estadio,2008,3.0,2.51
+tosferina,12,La América,2008,2.0,2.15
+tosferina,13,San Javier,2008,15.0,11.39
+tosferina,14,El Poblado,2008,2.0,1.71
+tosferina,16,Belén,2008,7.0,3.66
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2008,0.0,0.0
+tosferina,60,Corregimiento de San Cristóbal,2008,3.0,6.45
+tosferina,70,Corregimiento de Altavista,2008,0.0,0.0
+tosferina,90,Corregimiento de Santa Elena,2008,0.0,0.0
+tosferina,80,Corregimiento de San Antonio de Prado,2008,2.0,2.79
+tosferina,15,Guayabal,2008,3.0,3.36
+tosferina,1,Popular,2009,10.0,7.93
+tosferina,2,Santa Cruz,2009,5.0,4.67
+tosferina,3,Manrique,2009,12.0,7.8
+tosferina,4,Aranjuez,2009,8.0,5.02
+tosferina,5,Castilla,2009,2.0,1.37
+tosferina,6,Doce de Octubre,2009,10.0,5.28
+tosferina,7,Robledo,2009,2.0,1.24
+tosferina,8,Villa Hermosa,2009,8.0,6.0
+tosferina,9,Buenos Aires,2009,10.0,7.43
+tosferina,10,La Candelaria,2009,8.0,9.43
+tosferina,11,Laureles Estadio,2009,2.0,1.66
+tosferina,12,La América,2009,3.0,3.2
+tosferina,13,San Javier,2009,7.0,5.27
+tosferina,14,El Poblado,2009,1.0,0.84
+tosferina,16,Belén,2009,3.0,1.56
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2009,0.0,0.0
+tosferina,60,Corregimiento de San Cristóbal,2009,1.0,1.87
+tosferina,70,Corregimiento de Altavista,2009,1.0,3.59
+tosferina,90,Corregimiento de Santa Elena,2009,0.0,0.0
+tosferina,80,Corregimiento de San Antonio de Prado,2009,5.0,6.73
+tosferina,15,Guayabal,2009,4.0,4.43
+tosferina,1,Popular,2010,0.0,0.0
+tosferina,2,Santa Cruz,2010,1.0,0.93
+tosferina,3,Manrique,2010,5.0,3.22
+tosferina,4,Aranjuez,2010,1.0,0.62
+tosferina,5,Castilla,2010,3.0,2.05
+tosferina,6,Doce de Octubre,2010,3.0,1.58
+tosferina,7,Robledo,2010,1.0,0.61
+tosferina,8,Villa Hermosa,2010,7.0,5.21
+tosferina,9,Buenos Aires,2010,9.0,6.67
+tosferina,10,La Candelaria,2010,2.0,2.35
+tosferina,11,Laureles Estadio,2010,3.0,2.49
+tosferina,12,La América,2010,1.0,1.06
+tosferina,13,San Javier,2010,4.0,2.99
+tosferina,14,El Poblado,2010,1.0,0.83
+tosferina,16,Belén,2010,5.0,2.59
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2010,0.0,0.0
+tosferina,60,Corregimiento de San Cristóbal,2010,1.0,1.67
+tosferina,70,Corregimiento de Altavista,2010,0.0,0.0
+tosferina,90,Corregimiento de Santa Elena,2010,0.0,0.0
+tosferina,80,Corregimiento de San Antonio de Prado,2010,0.0,0.0
+tosferina,15,Guayabal,2010,1.0,1.1
+tosferina,1,Popular,2011,17.0,13.31
+tosferina,2,Santa Cruz,2011,7.0,6.44
+tosferina,3,Manrique,2011,10.0,6.41
+tosferina,4,Aranjuez,2011,5.0,3.11
+tosferina,5,Castilla,2011,6.0,4.08
+tosferina,6,Doce de Octubre,2011,14.0,7.33
+tosferina,7,Robledo,2011,11.0,6.65
+tosferina,8,Villa Hermosa,2011,15.0,11.11
+tosferina,9,Buenos Aires,2011,12.0,8.86
+tosferina,10,La Candelaria,2011,4.0,4.7
+tosferina,11,Laureles Estadio,2011,0.0,0.0
+tosferina,12,La América,2011,8.0,8.45
+tosferina,13,San Javier,2011,23.0,17.05
+tosferina,14,El Poblado,2011,3.0,2.45
+tosferina,16,Belén,2011,10.0,5.15
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2011,0.0,0.0
+tosferina,60,Corregimiento de San Cristóbal,2011,3.0,4.7
+tosferina,70,Corregimiento de Altavista,2011,2.0,6.57
+tosferina,90,Corregimiento de Santa Elena,2011,0.0,0.0
+tosferina,80,Corregimiento de San Antonio de Prado,2011,10.0,12.06
+tosferina,15,Guayabal,2011,3.0,3.26
+tosferina,1,Popular,2012,197.0,153.37
+tosferina,2,Santa Cruz,2012,147.0,134.27
+tosferina,3,Manrique,2012,72.0,45.83
+tosferina,4,Aranjuez,2012,101.0,62.71
+tosferina,5,Castilla,2012,57.0,38.56
+tosferina,6,Doce de Octubre,2012,65.0,33.91
+tosferina,7,Robledo,2012,69.0,41.32
+tosferina,8,Villa Hermosa,2012,90.0,66.32
+tosferina,9,Buenos Aires,2012,81.0,59.64
+tosferina,10,La Candelaria,2012,66.0,77.45
+tosferina,11,Laureles Estadio,2012,26.0,21.42
+tosferina,12,La América,2012,24.0,25.24
+tosferina,13,San Javier,2012,49.0,36.06
+tosferina,14,El Poblado,2012,39.0,31.4
+tosferina,16,Belén,2012,78.0,40.02
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2012,0.0,0.0
+tosferina,60,Corregimiento de San Cristóbal,2012,15.0,22.19
+tosferina,70,Corregimiento de Altavista,2012,12.0,37.56
+tosferina,90,Corregimiento de Santa Elena,2012,8.0,50.33
+tosferina,80,Corregimiento de San Antonio de Prado,2012,48.0,53.93
+tosferina,15,Guayabal,2012,70.0,75.54
+tosferina,1,Popular,2013,86.0,66.59
+tosferina,2,Santa Cruz,2013,95.0,86.21
+tosferina,3,Manrique,2013,84.0,53.16
+tosferina,4,Aranjuez,2013,132.0,81.74
+tosferina,5,Castilla,2013,41.0,27.61
+tosferina,6,Doce de Octubre,2013,41.0,21.31
+tosferina,7,Robledo,2013,53.0,31.43
+tosferina,8,Villa Hermosa,2013,83.0,60.86
+tosferina,9,Buenos Aires,2013,54.0,39.66
+tosferina,10,La Candelaria,2013,35.0,41.02
+tosferina,11,Laureles Estadio,2013,29.0,23.83
+tosferina,12,La América,2013,30.0,31.41
+tosferina,13,San Javier,2013,65.0,47.55
+tosferina,14,El Poblado,2013,37.0,29.4
+tosferina,16,Belén,2013,53.0,27.1
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2013,0.0,0.0
+tosferina,60,Corregimiento de San Cristóbal,2013,19.0,26.57
+tosferina,70,Corregimiento de Altavista,2013,13.0,38.85
+tosferina,90,Corregimiento de Santa Elena,2013,8.0,48.15
+tosferina,80,Corregimiento de San Antonio de Prado,2013,21.0,22.01
+tosferina,15,Guayabal,2013,27.0,28.93
+tosferina,1,Popular,2014,54.0,41.61
+tosferina,2,Santa Cruz,2014,54.0,48.71
+tosferina,3,Manrique,2014,43.0,27.06
+tosferina,4,Aranjuez,2014,56.0,34.59
+tosferina,5,Castilla,2014,24.0,16.09
+tosferina,6,Doce de Octubre,2014,35.0,18.13
+tosferina,7,Robledo,2014,34.0,19.98
+tosferina,8,Villa Hermosa,2014,27.0,19.71
+tosferina,9,Buenos Aires,2014,21.0,15.39
+tosferina,10,La Candelaria,2014,20.0,23.41
+tosferina,11,Laureles Estadio,2014,16.0,13.12
+tosferina,12,La América,2014,21.0,21.89
+tosferina,13,San Javier,2014,47.0,34.2
+tosferina,14,El Poblado,2014,10.0,7.85
+tosferina,16,Belén,2014,29.0,14.78
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2014,1.0,16.99
+tosferina,60,Corregimiento de San Cristóbal,2014,8.0,10.6
+tosferina,70,Corregimiento de Altavista,2014,5.0,14.3
+tosferina,90,Corregimiento de Santa Elena,2014,4.0,23.09
+tosferina,80,Corregimiento de San Antonio de Prado,2014,15.0,14.7
+tosferina,15,Guayabal,2014,7.0,7.45
+tosferina,1,Popular,2015,13.0,9.97
+tosferina,2,Santa Cruz,2015,7.0,6.28
+tosferina,3,Manrique,2015,3.0,1.88
+tosferina,4,Aranjuez,2015,7.0,4.31
+tosferina,5,Castilla,2015,5.0,3.34
+tosferina,6,Doce de Octubre,2015,10.0,5.16
+tosferina,7,Robledo,2015,14.0,8.16
+tosferina,8,Villa Hermosa,2015,3.0,2.18
+tosferina,9,Buenos Aires,2015,6.0,4.39
+tosferina,10,La Candelaria,2015,4.0,4.68
+tosferina,11,Laureles Estadio,2015,6.0,4.91
+tosferina,12,La América,2015,6.0,6.23
+tosferina,13,San Javier,2015,6.0,4.35
+tosferina,14,El Poblado,2015,10.0,7.76
+tosferina,16,Belén,2015,11.0,5.59
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2015,1.0,15.81
+tosferina,60,Corregimiento de San Cristóbal,2015,1.0,1.26
+tosferina,70,Corregimiento de Altavista,2015,2.0,5.49
+tosferina,90,Corregimiento de Santa Elena,2015,1.0,5.55
+tosferina,80,Corregimiento de San Antonio de Prado,2015,5.0,4.59
+tosferina,15,Guayabal,2015,3.0,3.18
+tosferina,1,Popular,2016,10.0,7.64
+tosferina,2,Santa Cruz,2016,7.0,6.25
+tosferina,3,Manrique,2016,5.0,3.12
+tosferina,4,Aranjuez,2016,6.0,3.69
+tosferina,5,Castilla,2016,5.0,3.33
+tosferina,6,Doce de Octubre,2016,10.0,5.15
+tosferina,7,Robledo,2016,8.0,4.62
+tosferina,8,Villa Hermosa,2016,10.0,7.24
+tosferina,9,Buenos Aires,2016,4.0,2.92
+tosferina,10,La Candelaria,2016,3.0,3.51
+tosferina,11,Laureles Estadio,2016,3.0,2.45
+tosferina,12,La América,2016,2.0,2.07
+tosferina,13,San Javier,2016,8.0,5.77
+tosferina,14,El Poblado,2016,5.0,3.84
+tosferina,16,Belén,2016,8.0,4.06
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2016,0.0,0.0
+tosferina,60,Corregimiento de San Cristóbal,2016,3.0,3.48
+tosferina,70,Corregimiento de Altavista,2016,2.0,5.34
+tosferina,90,Corregimiento de Santa Elena,2016,1.0,5.32
+tosferina,80,Corregimiento de San Antonio de Prado,2016,4.0,3.53
+tosferina,15,Guayabal,2016,5.0,5.27
+tosferina,1,Popular,2017,8.0,6.09
+tosferina,2,Santa Cruz,2017,2.0,1.78
+tosferina,3,Manrique,2017,4.0,2.48
+tosferina,4,Aranjuez,2017,8.0,4.91
+tosferina,5,Castilla,2017,6.0,3.98
+tosferina,6,Doce de Octubre,2017,5.0,2.57
+tosferina,7,Robledo,2017,4.0,2.29
+tosferina,8,Villa Hermosa,2017,8.0,5.77
+tosferina,9,Buenos Aires,2017,4.0,2.91
+tosferina,10,La Candelaria,2017,1.0,1.17
+tosferina,11,Laureles Estadio,2017,4.0,3.26
+tosferina,12,La América,2017,0.0,0.0
+tosferina,13,San Javier,2017,13.0,9.34
+tosferina,14,El Poblado,2017,4.0,3.04
+tosferina,16,Belén,2017,7.0,3.55
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2017,1.0,14.16
+tosferina,60,Corregimiento de San Cristóbal,2017,1.0,1.07
+tosferina,70,Corregimiento de Altavista,2017,0.0,0.0
+tosferina,90,Corregimiento de Santa Elena,2017,1.0,5.11
+tosferina,80,Corregimiento de San Antonio de Prado,2017,4.0,3.4
+tosferina,15,Guayabal,2017,4.0,4.19
+tosferina,1,Popular,2018,4.0,2.92
+tosferina,2,Santa Cruz,2018,3.0,2.65
+tosferina,3,Manrique,2018,1.0,0.61
+tosferina,4,Aranjuez,2018,2.0,1.42
+tosferina,5,Castilla,2018,2.0,1.61
+tosferina,6,Doce de Octubre,2018,4.0,2.26
+tosferina,7,Robledo,2018,8.0,4.23
+tosferina,8,Villa Hermosa,2018,7.0,4.57
+tosferina,9,Buenos Aires,2018,0.0,0.0
+tosferina,10,La Candelaria,2018,1.0,1.32
+tosferina,11,Laureles Estadio,2018,2.0,2.0
+tosferina,12,La América,2018,1.0,1.17
+tosferina,13,San Javier,2018,5.0,3.18
+tosferina,14,El Poblado,2018,1.0,0.94
+tosferina,16,Belén,2018,4.0,1.97
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2018,0.0,0.0
+tosferina,60,Corregimiento de San Cristóbal,2018,3.0,2.58
+tosferina,70,Corregimiento de Altavista,2018,2.0,5.15
+tosferina,90,Corregimiento de Santa Elena,2018,0.0,0.0
+tosferina,80,Corregimiento de San Antonio de Prado,2018,1.0,1.05
+tosferina,15,Guayabal,2018,1.0,1.55
+tosferina,1,Popular,2019,4.0,2.85
+tosferina,2,Santa Cruz,2019,4.0,3.46
+tosferina,3,Manrique,2019,3.0,1.78
+tosferina,4,Aranjuez,2019,3.0,2.1
+tosferina,5,Castilla,2019,3.0,2.39
+tosferina,6,Doce de Octubre,2019,1.0,0.56
+tosferina,7,Robledo,2019,3.0,1.55
+tosferina,8,Villa Hermosa,2019,7.0,4.44
+tosferina,9,Buenos Aires,2019,2.0,1.25
+tosferina,10,La Candelaria,2019,3.0,3.89
+tosferina,11,Laureles Estadio,2019,1.0,0.99
+tosferina,12,La América,2019,0.0,0.0
+tosferina,13,San Javier,2019,3.0,1.86
+tosferina,14,El Poblado,2019,2.0,1.85
+tosferina,16,Belén,2019,3.0,1.45
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2019,0.0,0.0
+tosferina,60,Corregimiento de San Cristóbal,2019,1.0,0.81
+tosferina,70,Corregimiento de Altavista,2019,0.0,0.0
+tosferina,90,Corregimiento de Santa Elena,2019,0.0,0.0
+tosferina,80,Corregimiento de San Antonio de Prado,2019,1.0,1.01
+tosferina,15,Guayabal,2019,0.0,0.0
+tosferina,1,Popular,2020,0.0,0.0
+tosferina,2,Santa Cruz,2020,1.0,0.85
+tosferina,3,Manrique,2020,0.0,0.0
+tosferina,4,Aranjuez,2020,1.0,0.69
+tosferina,5,Castilla,2020,0.0,0.0
+tosferina,6,Doce de Octubre,2020,0.0,0.0
+tosferina,7,Robledo,2020,0.0,0.0
+tosferina,8,Villa Hermosa,2020,4.0,2.47
+tosferina,9,Buenos Aires,2020,1.0,0.61
+tosferina,10,La Candelaria,2020,0.0,0.0
+tosferina,11,Laureles Estadio,2020,0.0,0.0
+tosferina,12,La América,2020,0.0,0.0
+tosferina,13,San Javier,2020,1.0,0.6
+tosferina,14,El Poblado,2020,0.0,0.0
+tosferina,16,Belén,2020,1.0,0.48
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2020,0.0,0.0
+tosferina,60,Corregimiento de San Cristóbal,2020,1.0,0.77
+tosferina,70,Corregimiento de Altavista,2020,0.0,0.0
+tosferina,90,Corregimiento de Santa Elena,2020,0.0,0.0
+tosferina,80,Corregimiento de San Antonio de Prado,2020,0.0,0.0
+tosferina,15,Guayabal,2020,0.0,0.0
+tosferina,1,Popular,2021,0.0,0.0
+tosferina,2,Santa Cruz,2021,0.0,0.0
+tosferina,3,Manrique,2021,0.0,0.0
+tosferina,4,Aranjuez,2021,0.0,0.0
+tosferina,5,Castilla,2021,1.0,0.79
+tosferina,6,Doce de Octubre,2021,0.0,0.0
+tosferina,7,Robledo,2021,1.0,0.5
+tosferina,8,Villa Hermosa,2021,2.0,1.21
+tosferina,9,Buenos Aires,2021,0.0,0.0
+tosferina,10,La Candelaria,2021,0.0,0.0
+tosferina,11,Laureles Estadio,2021,0.0,0.0
+tosferina,12,La América,2021,0.0,0.0
+tosferina,13,San Javier,2021,0.0,0.0
+tosferina,14,El Poblado,2021,0.0,0.0
+tosferina,16,Belén,2021,1.0,0.47
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2021,0.0,0.0
+tosferina,60,Corregimiento de San Cristóbal,2021,0.0,0.0
+tosferina,70,Corregimiento de Altavista,2021,0.0,0.0
+tosferina,90,Corregimiento de Santa Elena,2021,0.0,0.0
+tosferina,80,Corregimiento de San Antonio de Prado,2021,0.0,0.0
+tosferina,15,Guayabal,2021,0.0,0.0
+tosferina,1,Popular,2022,0.0,0.0
+tosferina,2,Santa Cruz,2022,2.0,1.68
+tosferina,3,Manrique,2022,0.0,0.0
+tosferina,4,Aranjuez,2022,0.0,0.0
+tosferina,5,Castilla,2022,0.0,0.0
+tosferina,6,Doce de Octubre,2022,0.0,0.0
+tosferina,7,Robledo,2022,0.0,0.0
+tosferina,8,Villa Hermosa,2022,1.0,0.62
+tosferina,9,Buenos Aires,2022,0.0,0.0
+tosferina,10,La Candelaria,2022,0.0,0.0
+tosferina,11,Laureles Estadio,2022,0.0,0.0
+tosferina,12,La América,2022,0.0,0.0
+tosferina,13,San Javier,2022,0.0,0.0
+tosferina,14,El Poblado,2022,0.0,0.0
+tosferina,16,Belén,2022,1.0,0.46
+tosferina,50,Corregimiento de San Sebastián de Palmitas,2022,0.0,0.0
+tosferina,60,Corregimiento de San Cristóbal,2022,0.0,0.0
+tosferina,70,Corregimiento de Altavista,2022,0.0,0.0
+tosferina,90,Corregimiento de Santa Elena,2022,0.0,0.0
+tosferina,80,Corregimiento de San Antonio de Prado,2022,0.0,0.0
+tosferina,15,Guayabal,2022,0.0,0.0
+tuberculosis_pulmonar,1,Popular,2008,72.0,57.55
+tuberculosis_pulmonar,2,Santa Cruz,2008,69.0,65.05
+tuberculosis_pulmonar,3,Manrique,2008,101.0,66.14
+tuberculosis_pulmonar,4,Aranjuez,2008,98.0,61.67
+tuberculosis_pulmonar,5,Castilla,2008,42.0,28.96
+tuberculosis_pulmonar,6,Doce de Octubre,2008,47.0,24.94
+tuberculosis_pulmonar,7,Robledo,2008,36.0,22.51
+tuberculosis_pulmonar,8,Villa Hermosa,2008,65.0,49.05
+tuberculosis_pulmonar,9,Buenos Aires,2008,43.0,32.07
+tuberculosis_pulmonar,10,La Candelaria,2008,52.0,61.37
+tuberculosis_pulmonar,11,Laureles Estadio,2008,6.0,5.01
+tuberculosis_pulmonar,12,La América,2008,21.0,22.55
+tuberculosis_pulmonar,13,San Javier,2008,38.0,28.87
+tuberculosis_pulmonar,14,El Poblado,2008,13.0,11.12
+tuberculosis_pulmonar,16,Belén,2008,41.0,21.42
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2008,0.0,0.0
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2008,16.0,34.4
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2008,7.0,25.91
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2008,4.0,31.93
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2008,21.0,29.29
+tuberculosis_pulmonar,15,Guayabal,2008,9.0,10.07
+tuberculosis_pulmonar,1,Popular,2009,69.0,54.75
+tuberculosis_pulmonar,2,Santa Cruz,2009,93.0,86.92
+tuberculosis_pulmonar,3,Manrique,2009,94.0,61.07
+tuberculosis_pulmonar,4,Aranjuez,2009,112.0,70.21
+tuberculosis_pulmonar,5,Castilla,2009,54.0,37.05
+tuberculosis_pulmonar,6,Doce de Octubre,2009,69.0,36.44
+tuberculosis_pulmonar,7,Robledo,2009,35.0,21.64
+tuberculosis_pulmonar,8,Villa Hermosa,2009,83.0,62.22
+tuberculosis_pulmonar,9,Buenos Aires,2009,57.0,42.36
+tuberculosis_pulmonar,10,La Candelaria,2009,75.0,88.37
+tuberculosis_pulmonar,11,Laureles Estadio,2009,11.0,9.15
+tuberculosis_pulmonar,12,La América,2009,19.0,20.29
+tuberculosis_pulmonar,13,San Javier,2009,40.0,30.12
+tuberculosis_pulmonar,14,El Poblado,2009,10.0,8.42
+tuberculosis_pulmonar,16,Belén,2009,25.0,12.99
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2009,25.0,604.3
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2009,13.0,24.37
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2009,5.0,17.95
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2009,4.0,29.73
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2009,12.0,16.16
+tuberculosis_pulmonar,15,Guayabal,2009,14.0,15.5
+tuberculosis_pulmonar,1,Popular,2010,96.0,75.66
+tuberculosis_pulmonar,2,Santa Cruz,2010,93.0,86.22
+tuberculosis_pulmonar,3,Manrique,2010,115.0,74.17
+tuberculosis_pulmonar,4,Aranjuez,2010,103.0,64.35
+tuberculosis_pulmonar,5,Castilla,2010,60.0,40.96
+tuberculosis_pulmonar,6,Doce de Octubre,2010,61.0,32.08
+tuberculosis_pulmonar,7,Robledo,2010,58.0,35.46
+tuberculosis_pulmonar,8,Villa Hermosa,2010,92.0,68.54
+tuberculosis_pulmonar,9,Buenos Aires,2010,70.0,51.85
+tuberculosis_pulmonar,10,La Candelaria,2010,87.0,102.35
+tuberculosis_pulmonar,11,Laureles Estadio,2010,23.0,19.07
+tuberculosis_pulmonar,12,La América,2010,11.0,11.68
+tuberculosis_pulmonar,13,San Javier,2010,42.0,31.36
+tuberculosis_pulmonar,14,El Poblado,2010,11.0,9.11
+tuberculosis_pulmonar,16,Belén,2010,43.0,22.24
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2010,0.0,0.0
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2010,23.0,38.32
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2010,5.0,17.26
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2010,2.0,13.79
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2010,14.0,18.18
+tuberculosis_pulmonar,15,Guayabal,2010,27.0,29.62
+tuberculosis_pulmonar,1,Popular,2011,104.0,81.44
+tuberculosis_pulmonar,2,Santa Cruz,2011,114.0,104.87
+tuberculosis_pulmonar,3,Manrique,2011,92.0,58.93
+tuberculosis_pulmonar,4,Aranjuez,2011,120.0,74.73
+tuberculosis_pulmonar,5,Castilla,2011,57.0,38.73
+tuberculosis_pulmonar,6,Doce de Octubre,2011,98.0,51.33
+tuberculosis_pulmonar,7,Robledo,2011,60.0,36.3
+tuberculosis_pulmonar,8,Villa Hermosa,2011,110.0,81.48
+tuberculosis_pulmonar,9,Buenos Aires,2011,58.0,42.83
+tuberculosis_pulmonar,10,La Candelaria,2011,89.0,104.56
+tuberculosis_pulmonar,11,Laureles Estadio,2011,29.0,23.97
+tuberculosis_pulmonar,12,La América,2011,30.0,31.7
+tuberculosis_pulmonar,13,San Javier,2011,52.0,38.54
+tuberculosis_pulmonar,14,El Poblado,2011,19.0,15.51
+tuberculosis_pulmonar,16,Belén,2011,59.0,30.39
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2011,0.0,0.0
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2011,34.0,53.31
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2011,9.0,29.55
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2011,2.0,13.16
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2011,5.0,6.03
+tuberculosis_pulmonar,15,Guayabal,2011,20.0,21.75
+tuberculosis_pulmonar,1,Popular,2012,72.0,56.05
+tuberculosis_pulmonar,2,Santa Cruz,2012,50.0,45.67
+tuberculosis_pulmonar,3,Manrique,2012,59.0,37.55
+tuberculosis_pulmonar,4,Aranjuez,2012,51.0,31.67
+tuberculosis_pulmonar,5,Castilla,2012,65.0,43.97
+tuberculosis_pulmonar,6,Doce de Octubre,2012,71.0,37.04
+tuberculosis_pulmonar,7,Robledo,2012,75.0,44.91
+tuberculosis_pulmonar,8,Villa Hermosa,2012,77.0,56.74
+tuberculosis_pulmonar,9,Buenos Aires,2012,64.0,47.13
+tuberculosis_pulmonar,10,La Candelaria,2012,47.0,55.15
+tuberculosis_pulmonar,11,Laureles Estadio,2012,25.0,20.6
+tuberculosis_pulmonar,12,La América,2012,26.0,27.34
+tuberculosis_pulmonar,13,San Javier,2012,65.0,47.83
+tuberculosis_pulmonar,14,El Poblado,2012,31.0,24.96
+tuberculosis_pulmonar,16,Belén,2012,78.0,40.02
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2012,1.0,19.66
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2012,25.0,36.98
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2012,14.0,43.82
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2012,7.0,44.04
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2012,19.0,21.35
+tuberculosis_pulmonar,15,Guayabal,2012,27.0,29.14
+tuberculosis_pulmonar,1,Popular,2013,102.0,78.98
+tuberculosis_pulmonar,2,Santa Cruz,2013,91.0,82.58
+tuberculosis_pulmonar,3,Manrique,2013,117.0,74.04
+tuberculosis_pulmonar,4,Aranjuez,2013,129.0,79.88
+tuberculosis_pulmonar,5,Castilla,2013,68.0,45.79
+tuberculosis_pulmonar,6,Doce de Octubre,2013,79.0,41.06
+tuberculosis_pulmonar,7,Robledo,2013,52.0,30.84
+tuberculosis_pulmonar,8,Villa Hermosa,2013,106.0,77.73
+tuberculosis_pulmonar,9,Buenos Aires,2013,72.0,52.88
+tuberculosis_pulmonar,10,La Candelaria,2013,81.0,94.93
+tuberculosis_pulmonar,11,Laureles Estadio,2013,23.0,18.9
+tuberculosis_pulmonar,12,La América,2013,19.0,19.89
+tuberculosis_pulmonar,13,San Javier,2013,57.0,41.7
+tuberculosis_pulmonar,14,El Poblado,2013,13.0,10.33
+tuberculosis_pulmonar,16,Belén,2013,48.0,24.54
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2013,0.0,0.0
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2013,21.0,29.36
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2013,9.0,26.89
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2013,2.0,12.04
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2013,19.0,19.92
+tuberculosis_pulmonar,15,Guayabal,2013,18.0,19.29
+tuberculosis_pulmonar,1,Popular,2014,97.0,74.74
+tuberculosis_pulmonar,2,Santa Cruz,2014,131.0,118.17
+tuberculosis_pulmonar,3,Manrique,2014,113.0,71.12
+tuberculosis_pulmonar,4,Aranjuez,2014,127.0,78.45
+tuberculosis_pulmonar,5,Castilla,2014,52.0,34.87
+tuberculosis_pulmonar,6,Doce de Octubre,2014,58.0,30.05
+tuberculosis_pulmonar,7,Robledo,2014,46.0,27.03
+tuberculosis_pulmonar,8,Villa Hermosa,2014,82.0,59.86
+tuberculosis_pulmonar,9,Buenos Aires,2014,71.0,52.02
+tuberculosis_pulmonar,10,La Candelaria,2014,145.0,169.75
+tuberculosis_pulmonar,11,Laureles Estadio,2014,23.0,18.86
+tuberculosis_pulmonar,12,La América,2014,20.0,20.85
+tuberculosis_pulmonar,13,San Javier,2014,51.0,37.11
+tuberculosis_pulmonar,14,El Poblado,2014,13.0,10.21
+tuberculosis_pulmonar,16,Belén,2014,62.0,31.6
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2014,0.0,0.0
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2014,15.0,19.87
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2014,8.0,22.87
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2014,0.0,0.0
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2014,16.0,15.68
+tuberculosis_pulmonar,15,Guayabal,2014,24.0,25.55
+tuberculosis_pulmonar,1,Popular,2015,82.0,62.9
+tuberculosis_pulmonar,2,Santa Cruz,2015,109.0,97.8
+tuberculosis_pulmonar,3,Manrique,2015,114.0,71.4
+tuberculosis_pulmonar,4,Aranjuez,2015,107.0,65.95
+tuberculosis_pulmonar,5,Castilla,2015,39.0,26.04
+tuberculosis_pulmonar,6,Doce de Octubre,2015,76.0,39.24
+tuberculosis_pulmonar,7,Robledo,2015,74.0,43.11
+tuberculosis_pulmonar,8,Villa Hermosa,2015,74.0,53.81
+tuberculosis_pulmonar,9,Buenos Aires,2015,50.0,36.56
+tuberculosis_pulmonar,10,La Candelaria,2015,135.0,157.89
+tuberculosis_pulmonar,11,Laureles Estadio,2015,25.0,20.45
+tuberculosis_pulmonar,12,La América,2015,18.0,18.7
+tuberculosis_pulmonar,13,San Javier,2015,46.0,33.32
+tuberculosis_pulmonar,14,El Poblado,2015,15.0,11.64
+tuberculosis_pulmonar,16,Belén,2015,52.0,26.44
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2015,1.0,15.81
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2015,23.0,28.95
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2015,4.0,10.97
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2015,3.0,16.64
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2015,11.0,10.11
+tuberculosis_pulmonar,15,Guayabal,2015,23.0,24.35
+tuberculosis_pulmonar,1,Popular,2016,95.0,72.57
+tuberculosis_pulmonar,2,Santa Cruz,2016,97.0,86.61
+tuberculosis_pulmonar,3,Manrique,2016,114.0,71.08
+tuberculosis_pulmonar,4,Aranjuez,2016,125.0,76.88
+tuberculosis_pulmonar,5,Castilla,2016,49.0,32.59
+tuberculosis_pulmonar,6,Doce de Octubre,2016,69.0,35.52
+tuberculosis_pulmonar,7,Robledo,2016,69.0,39.87
+tuberculosis_pulmonar,8,Villa Hermosa,2016,88.0,63.75
+tuberculosis_pulmonar,9,Buenos Aires,2016,72.0,52.54
+tuberculosis_pulmonar,10,La Candelaria,2016,160.0,186.94
+tuberculosis_pulmonar,11,Laureles Estadio,2016,23.0,18.78
+tuberculosis_pulmonar,12,La América,2016,16.0,16.56
+tuberculosis_pulmonar,13,San Javier,2016,45.0,32.46
+tuberculosis_pulmonar,14,El Poblado,2016,12.0,9.22
+tuberculosis_pulmonar,16,Belén,2016,55.0,27.9
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2016,0.0,0.0
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2016,29.0,33.6
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2016,4.0,10.67
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2016,4.0,21.29
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2016,34.0,30.03
+tuberculosis_pulmonar,15,Guayabal,2016,13.0,13.69
+tuberculosis_pulmonar,1,Popular,2017,119.0,90.53
+tuberculosis_pulmonar,2,Santa Cruz,2017,114.0,101.32
+tuberculosis_pulmonar,3,Manrique,2017,111.0,68.91
+tuberculosis_pulmonar,4,Aranjuez,2017,126.0,77.34
+tuberculosis_pulmonar,5,Castilla,2017,60.0,39.77
+tuberculosis_pulmonar,6,Doce de Octubre,2017,94.0,48.26
+tuberculosis_pulmonar,7,Robledo,2017,64.0,36.7
+tuberculosis_pulmonar,8,Villa Hermosa,2017,112.0,80.84
+tuberculosis_pulmonar,9,Buenos Aires,2017,76.0,55.37
+tuberculosis_pulmonar,10,La Candelaria,2017,131.0,152.93
+tuberculosis_pulmonar,11,Laureles Estadio,2017,16.0,13.04
+tuberculosis_pulmonar,12,La América,2017,27.0,27.86
+tuberculosis_pulmonar,13,San Javier,2017,49.0,35.21
+tuberculosis_pulmonar,14,El Poblado,2017,19.0,14.45
+tuberculosis_pulmonar,16,Belén,2017,51.0,25.84
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2017,2.0,28.32
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2017,33.0,35.46
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2017,9.0,23.33
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2017,4.0,20.45
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2017,27.0,22.96
+tuberculosis_pulmonar,15,Guayabal,2017,26.0,27.25
+tuberculosis_pulmonar,1,Popular,2018,85.0,62.05
+tuberculosis_pulmonar,2,Santa Cruz,2018,119.0,105.25
+tuberculosis_pulmonar,3,Manrique,2018,103.0,62.48
+tuberculosis_pulmonar,4,Aranjuez,2018,103.0,72.89
+tuberculosis_pulmonar,5,Castilla,2018,54.0,43.55
+tuberculosis_pulmonar,6,Doce de Octubre,2018,77.0,43.46
+tuberculosis_pulmonar,7,Robledo,2018,68.0,35.93
+tuberculosis_pulmonar,8,Villa Hermosa,2018,88.0,57.44
+tuberculosis_pulmonar,9,Buenos Aires,2018,68.0,43.76
+tuberculosis_pulmonar,10,La Candelaria,2018,111.0,146.22
+tuberculosis_pulmonar,11,Laureles Estadio,2018,17.0,17.02
+tuberculosis_pulmonar,12,La América,2018,20.0,23.41
+tuberculosis_pulmonar,13,San Javier,2018,73.0,46.42
+tuberculosis_pulmonar,14,El Poblado,2018,13.0,12.17
+tuberculosis_pulmonar,16,Belén,2018,58.0,28.58
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2018,0.0,0.0
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2018,38.0,32.64
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2018,5.0,12.87
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2018,6.0,25.57
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2018,14.0,14.77
+tuberculosis_pulmonar,15,Guayabal,2018,34.0,52.59
+tuberculosis_pulmonar,1,Popular,2019,113.0,80.59
+tuberculosis_pulmonar,2,Santa Cruz,2019,131.0,113.33
+tuberculosis_pulmonar,3,Manrique,2019,150.0,88.9
+tuberculosis_pulmonar,4,Aranjuez,2019,156.0,109.1
+tuberculosis_pulmonar,5,Castilla,2019,92.0,73.44
+tuberculosis_pulmonar,6,Doce de Octubre,2019,87.0,48.47
+tuberculosis_pulmonar,7,Robledo,2019,77.0,39.68
+tuberculosis_pulmonar,8,Villa Hermosa,2019,113.0,71.67
+tuberculosis_pulmonar,9,Buenos Aires,2019,84.0,52.49
+tuberculosis_pulmonar,10,La Candelaria,2019,124.0,160.93
+tuberculosis_pulmonar,11,Laureles Estadio,2019,30.0,29.78
+tuberculosis_pulmonar,12,La América,2019,23.0,26.62
+tuberculosis_pulmonar,13,San Javier,2019,64.0,39.61
+tuberculosis_pulmonar,14,El Poblado,2019,17.0,15.69
+tuberculosis_pulmonar,16,Belén,2019,57.0,27.57
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2019,0.0,0.0
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2019,42.0,34.01
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2019,10.0,24.91
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2019,10.0,40.08
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2019,29.0,29.19
+tuberculosis_pulmonar,15,Guayabal,2019,26.0,39.99
+tuberculosis_pulmonar,1,Popular,2020,106.0,74.11
+tuberculosis_pulmonar,2,Santa Cruz,2020,118.0,100.22
+tuberculosis_pulmonar,3,Manrique,2020,109.0,63.34
+tuberculosis_pulmonar,4,Aranjuez,2020,131.0,90.83
+tuberculosis_pulmonar,5,Castilla,2020,62.0,49.13
+tuberculosis_pulmonar,6,Doce de Octubre,2020,73.0,40.28
+tuberculosis_pulmonar,7,Robledo,2020,78.0,39.34
+tuberculosis_pulmonar,8,Villa Hermosa,2020,82.0,50.7
+tuberculosis_pulmonar,9,Buenos Aires,2020,54.0,32.87
+tuberculosis_pulmonar,10,La Candelaria,2020,91.0,116.78
+tuberculosis_pulmonar,11,Laureles Estadio,2020,27.0,26.65
+tuberculosis_pulmonar,12,La América,2020,20.0,22.95
+tuberculosis_pulmonar,13,San Javier,2020,51.0,30.83
+tuberculosis_pulmonar,14,El Poblado,2020,8.0,7.3
+tuberculosis_pulmonar,16,Belén,2020,47.0,22.38
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2020,0.0,0.0
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2020,26.0,19.92
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2020,2.0,4.84
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2020,6.0,22.67
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2020,19.0,18.3
+tuberculosis_pulmonar,15,Guayabal,2020,16.0,24.56
+tuberculosis_pulmonar,1,Popular,2021,122.0,84.0
+tuberculosis_pulmonar,2,Santa Cruz,2021,125.0,104.71
+tuberculosis_pulmonar,3,Manrique,2021,128.0,73.27
+tuberculosis_pulmonar,4,Aranjuez,2021,120.0,82.86
+tuberculosis_pulmonar,5,Castilla,2021,62.0,48.98
+tuberculosis_pulmonar,6,Doce de Octubre,2021,91.0,49.95
+tuberculosis_pulmonar,7,Robledo,2021,63.0,31.24
+tuberculosis_pulmonar,8,Villa Hermosa,2021,109.0,66.04
+tuberculosis_pulmonar,9,Buenos Aires,2021,84.0,50.04
+tuberculosis_pulmonar,10,La Candelaria,2021,124.0,158.01
+tuberculosis_pulmonar,11,Laureles Estadio,2021,34.0,33.51
+tuberculosis_pulmonar,12,La América,2021,32.0,36.58
+tuberculosis_pulmonar,13,San Javier,2021,56.0,33.21
+tuberculosis_pulmonar,14,El Poblado,2021,14.0,12.67
+tuberculosis_pulmonar,16,Belén,2021,60.0,28.24
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2021,0.0,0.0
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2021,51.0,37.15
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2021,10.0,23.56
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2021,9.0,32.24
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2021,11.0,10.19
+tuberculosis_pulmonar,15,Guayabal,2021,20.0,30.76
+tuberculosis_pulmonar,1,Popular,2022,101.0,70.14
+tuberculosis_pulmonar,2,Santa Cruz,2022,117.0,98.27
+tuberculosis_pulmonar,3,Manrique,2022,137.0,78.68
+tuberculosis_pulmonar,4,Aranjuez,2022,111.0,74.07
+tuberculosis_pulmonar,5,Castilla,2022,69.0,52.29
+tuberculosis_pulmonar,6,Doce de Octubre,2022,98.0,52.16
+tuberculosis_pulmonar,7,Robledo,2022,56.0,28.04
+tuberculosis_pulmonar,8,Villa Hermosa,2022,123.0,76.33
+tuberculosis_pulmonar,9,Buenos Aires,2022,78.0,47.43
+tuberculosis_pulmonar,10,La Candelaria,2022,80.0,98.74
+tuberculosis_pulmonar,11,Laureles Estadio,2022,31.0,28.64
+tuberculosis_pulmonar,12,La América,2022,29.0,31.58
+tuberculosis_pulmonar,13,San Javier,2022,69.0,41.51
+tuberculosis_pulmonar,14,El Poblado,2022,9.0,7.82
+tuberculosis_pulmonar,16,Belén,2022,60.0,27.79
+tuberculosis_pulmonar,50,Corregimiento de San Sebastián de Palmitas,2022,0.0,0.0
+tuberculosis_pulmonar,60,Corregimiento de San Cristóbal,2022,33.0,27.06
+tuberculosis_pulmonar,70,Corregimiento de Altavista,2022,10.0,24.54
+tuberculosis_pulmonar,90,Corregimiento de Santa Elena,2022,2.0,8.15
+tuberculosis_pulmonar,80,Corregimiento de San Antonio de Prado,2022,14.0,14.04
+tuberculosis_pulmonar,15,Guayabal,2022,23.0,33.26
+varicela,1,Popular,2008,380.0,303.73
+varicela,2,Santa Cruz,2008,290.0,273.4
+varicela,3,Manrique,2008,371.0,242.94
+varicela,4,Aranjuez,2008,474.0,298.28
+varicela,5,Castilla,2008,371.0,255.78
+varicela,6,Doce de Octubre,2008,460.0,244.06
+varicela,7,Robledo,2008,477.0,298.32
+varicela,8,Villa Hermosa,2008,473.0,356.91
+varicela,9,Buenos Aires,2008,564.0,420.58
+varicela,10,La Candelaria,2008,254.0,299.75
+varicela,11,Laureles Estadio,2008,185.0,154.53
+varicela,12,La América,2008,276.0,296.43
+varicela,13,San Javier,2008,505.0,383.6
+varicela,14,El Poblado,2008,155.0,132.63
+varicela,16,Belén,2008,581.0,303.55
+varicela,50,Corregimiento de San Sebastián de Palmitas,2008,32.0,817.58
+varicela,60,Corregimiento de San Cristóbal,2008,116.0,249.4
+varicela,70,Corregimiento de Altavista,2008,126.0,466.32
+varicela,90,Corregimiento de Santa Elena,2008,12.0,95.8
+varicela,80,Corregimiento de San Antonio de Prado,2008,102.0,142.26
+varicela,15,Guayabal,2008,238.0,266.27
+varicela,1,Popular,2009,237.0,188.06
+varicela,2,Santa Cruz,2009,188.0,175.72
+varicela,3,Manrique,2009,388.0,252.09
+varicela,4,Aranjuez,2009,322.0,201.87
+varicela,5,Castilla,2009,220.0,150.93
+varicela,6,Doce de Octubre,2009,300.0,158.45
+varicela,7,Robledo,2009,352.0,217.62
+varicela,8,Villa Hermosa,2009,387.0,290.09
+varicela,9,Buenos Aires,2009,324.0,240.76
+varicela,10,La Candelaria,2009,175.0,206.19
+varicela,11,Laureles Estadio,2009,124.0,103.18
+varicela,12,La América,2009,148.0,158.04
+varicela,13,San Javier,2009,281.0,211.6
+varicela,14,El Poblado,2009,149.0,125.41
+varicela,16,Belén,2009,373.0,193.85
+varicela,50,Corregimiento de San Sebastián de Palmitas,2009,4.0,96.69
+varicela,60,Corregimiento de San Cristóbal,2009,169.0,316.75
+varicela,70,Corregimiento de Altavista,2009,58.0,208.21
+varicela,90,Corregimiento de Santa Elena,2009,13.0,96.61
+varicela,80,Corregimiento de San Antonio de Prado,2009,100.0,134.69
+varicela,15,Guayabal,2009,161.0,178.3
+varicela,1,Popular,2010,258.0,203.33
+varicela,2,Santa Cruz,2010,199.0,184.48
+varicela,3,Manrique,2010,337.0,217.35
+varicela,4,Aranjuez,2010,299.0,186.8
+varicela,5,Castilla,2010,212.0,144.74
+varicela,6,Doce de Octubre,2010,279.0,146.72
+varicela,7,Robledo,2010,272.0,166.3
+varicela,8,Villa Hermosa,2010,343.0,255.52
+varicela,9,Buenos Aires,2010,434.0,321.47
+varicela,10,La Candelaria,2010,188.0,221.18
+varicela,11,Laureles Estadio,2010,103.0,85.4
+varicela,12,La América,2010,148.0,157.17
+varicela,13,San Javier,2010,430.0,321.09
+varicela,14,El Poblado,2010,93.0,77.05
+varicela,16,Belén,2010,223.0,115.34
+varicela,50,Corregimiento de San Sebastián de Palmitas,2010,1.0,22.88
+varicela,60,Corregimiento de San Cristóbal,2010,84.0,139.94
+varicela,70,Corregimiento de Altavista,2010,19.0,65.58
+varicela,90,Corregimiento de Santa Elena,2010,12.0,82.75
+varicela,80,Corregimiento de San Antonio de Prado,2010,59.0,76.62
+varicela,15,Guayabal,2010,115.0,126.17
+varicela,1,Popular,2011,454.0,355.53
+varicela,2,Santa Cruz,2011,361.0,332.1
+varicela,3,Manrique,2011,517.0,331.17
+varicela,4,Aranjuez,2011,546.0,340.02
+varicela,5,Castilla,2011,293.0,199.1
+varicela,6,Doce de Octubre,2011,463.0,242.48
+varicela,7,Robledo,2011,537.0,324.84
+varicela,8,Villa Hermosa,2011,428.0,317.03
+varicela,9,Buenos Aires,2011,436.0,321.96
+varicela,10,La Candelaria,2011,220.0,258.47
+varicela,11,Laureles Estadio,2011,155.0,128.1
+varicela,12,La América,2011,199.0,210.25
+varicela,13,San Javier,2011,426.0,315.71
+varicela,14,El Poblado,2011,189.0,154.3
+varicela,16,Belén,2011,467.0,240.51
+varicela,50,Corregimiento de San Sebastián de Palmitas,2011,16.0,338.34
+varicela,60,Corregimiento de San Cristóbal,2011,204.0,319.88
+varicela,70,Corregimiento de Altavista,2011,72.0,236.39
+varicela,90,Corregimiento de Santa Elena,2011,43.0,282.93
+varicela,80,Corregimiento de San Antonio de Prado,2011,176.0,212.3
+varicela,15,Guayabal,2011,161.0,175.12
+varicela,1,Popular,2012,314.0,244.46
+varicela,2,Santa Cruz,2012,232.0,211.91
+varicela,3,Manrique,2012,328.0,208.78
+varicela,4,Aranjuez,2012,297.0,184.41
+varicela,5,Castilla,2012,225.0,152.2
+varicela,6,Doce de Octubre,2012,274.0,142.95
+varicela,7,Robledo,2012,297.0,177.84
+varicela,8,Villa Hermosa,2012,355.0,261.58
+varicela,9,Buenos Aires,2012,304.0,223.85
+varicela,10,La Candelaria,2012,209.0,245.24
+varicela,11,Laureles Estadio,2012,128.0,105.47
+varicela,12,La América,2012,123.0,129.33
+varicela,13,San Javier,2012,252.0,185.45
+varicela,14,El Poblado,2012,150.0,120.76
+varicela,16,Belén,2012,350.0,179.56
+varicela,50,Corregimiento de San Sebastián de Palmitas,2012,10.0,196.62
+varicela,60,Corregimiento de San Cristóbal,2012,105.0,155.32
+varicela,70,Corregimiento de Altavista,2012,33.0,103.29
+varicela,90,Corregimiento de Santa Elena,2012,32.0,201.31
+varicela,80,Corregimiento de San Antonio de Prado,2012,100.0,112.36
+varicela,15,Guayabal,2012,109.0,117.63
+varicela,1,Popular,2013,249.0,192.81
+varicela,2,Santa Cruz,2013,111.0,100.72
+varicela,3,Manrique,2013,244.0,154.4
+varicela,4,Aranjuez,2013,224.0,138.71
+varicela,5,Castilla,2013,190.0,127.95
+varicela,6,Doce de Octubre,2013,300.0,155.94
+varicela,7,Robledo,2013,308.0,182.65
+varicela,8,Villa Hermosa,2013,215.0,157.65
+varicela,9,Buenos Aires,2013,281.0,206.38
+varicela,10,La Candelaria,2013,179.0,209.79
+varicela,11,Laureles Estadio,2013,110.0,90.4
+varicela,12,La América,2013,108.0,113.06
+varicela,13,San Javier,2013,270.0,197.53
+varicela,14,El Poblado,2013,157.0,124.76
+varicela,16,Belén,2013,253.0,129.35
+varicela,50,Corregimiento de San Sebastián de Palmitas,2013,0.0,0.0
+varicela,60,Corregimiento de San Cristóbal,2013,60.0,83.89
+varicela,70,Corregimiento de Altavista,2013,30.0,89.64
+varicela,90,Corregimiento de Santa Elena,2013,20.0,120.37
+varicela,80,Corregimiento de San Antonio de Prado,2013,68.0,71.28
+varicela,15,Guayabal,2013,114.0,122.15
+varicela,1,Popular,2014,295.0,227.31
+varicela,2,Santa Cruz,2014,340.0,306.7
+varicela,3,Manrique,2014,457.0,287.64
+varicela,4,Aranjuez,2014,383.0,236.59
+varicela,5,Castilla,2014,289.0,193.79
+varicela,6,Doce de Octubre,2014,296.0,153.34
+varicela,7,Robledo,2014,658.0,386.65
+varicela,8,Villa Hermosa,2014,447.0,326.33
+varicela,9,Buenos Aires,2014,286.0,209.56
+varicela,10,La Candelaria,2014,171.0,200.19
+varicela,11,Laureles Estadio,2014,118.0,96.75
+varicela,12,La América,2014,153.0,159.51
+varicela,13,San Javier,2014,378.0,275.07
+varicela,14,El Poblado,2014,136.0,106.76
+varicela,16,Belén,2014,420.0,214.09
+varicela,50,Corregimiento de San Sebastián de Palmitas,2014,12.0,203.84
+varicela,60,Corregimiento de San Cristóbal,2014,245.0,324.53
+varicela,70,Corregimiento de Altavista,2014,43.0,122.94
+varicela,90,Corregimiento de Santa Elena,2014,18.0,103.9
+varicela,80,Corregimiento de San Antonio de Prado,2014,84.0,82.33
+varicela,15,Guayabal,2014,145.0,154.37
+varicela,1,Popular,2015,230.0,176.42
+varicela,2,Santa Cruz,2015,219.0,196.5
+varicela,3,Manrique,2015,321.0,201.05
+varicela,4,Aranjuez,2015,384.0,236.67
+varicela,5,Castilla,2015,263.0,175.62
+varicela,6,Doce de Octubre,2015,416.0,214.81
+varicela,7,Robledo,2015,353.0,205.64
+varicela,8,Villa Hermosa,2015,523.0,380.28
+varicela,9,Buenos Aires,2015,378.0,276.37
+varicela,10,La Candelaria,2015,284.0,332.14
+varicela,11,Laureles Estadio,2015,123.0,100.62
+varicela,12,La América,2015,164.0,170.34
+varicela,13,San Javier,2015,348.0,252.06
+varicela,14,El Poblado,2015,121.0,93.92
+varicela,16,Belén,2015,366.0,186.08
+varicela,50,Corregimiento de San Sebastián de Palmitas,2015,3.0,47.44
+varicela,60,Corregimiento de San Cristóbal,2015,110.0,138.44
+varicela,70,Corregimiento de Altavista,2015,123.0,337.33
+varicela,90,Corregimiento de Santa Elena,2015,63.0,349.51
+varicela,80,Corregimiento de San Antonio de Prado,2015,163.0,149.74
+varicela,15,Guayabal,2015,150.0,158.78
+varicela,1,Popular,2016,191.0,145.9
+varicela,2,Santa Cruz,2016,201.0,179.48
+varicela,3,Manrique,2016,487.0,303.66
+varicela,4,Aranjuez,2016,334.0,205.42
+varicela,5,Castilla,2016,208.0,138.35
+varicela,6,Doce de Octubre,2016,309.0,159.08
+varicela,7,Robledo,2016,278.0,160.62
+varicela,8,Villa Hermosa,2016,308.0,223.12
+varicela,9,Buenos Aires,2016,474.0,345.86
+varicela,10,La Candelaria,2016,228.0,266.4
+varicela,11,Laureles Estadio,2016,139.0,113.47
+varicela,12,La América,2016,165.0,170.78
+varicela,13,San Javier,2016,381.0,274.84
+varicela,14,El Poblado,2016,144.0,110.59
+varicela,16,Belén,2016,371.0,188.21
+varicela,50,Corregimiento de San Sebastián de Palmitas,2016,3.0,44.86
+varicela,60,Corregimiento de San Cristóbal,2016,159.0,184.21
+varicela,70,Corregimiento de Altavista,2016,62.0,165.43
+varicela,90,Corregimiento de Santa Elena,2016,53.0,282.08
+varicela,80,Corregimiento de San Antonio de Prado,2016,147.0,129.86
+varicela,15,Guayabal,2016,130.0,136.9
+varicela,1,Popular,2017,269.0,204.65
+varicela,2,Santa Cruz,2017,183.0,162.65
+varicela,3,Manrique,2017,387.0,240.27
+varicela,4,Aranjuez,2017,377.0,231.41
+varicela,5,Castilla,2017,294.0,194.86
+varicela,6,Doce de Octubre,2017,342.0,175.58
+varicela,7,Robledo,2017,364.0,208.71
+varicela,8,Villa Hermosa,2017,395.0,285.11
+varicela,9,Buenos Aires,2017,385.0,280.5
+varicela,10,La Candelaria,2017,207.0,241.66
+varicela,11,Laureles Estadio,2017,136.0,110.8
+varicela,12,La América,2017,132.0,136.2
+varicela,13,San Javier,2017,222.0,159.51
+varicela,14,El Poblado,2017,127.0,96.59
+varicela,16,Belén,2017,413.0,209.22
+varicela,50,Corregimiento de San Sebastián de Palmitas,2017,3.0,42.49
+varicela,60,Corregimiento de San Cristóbal,2017,247.0,265.39
+varicela,70,Corregimiento de Altavista,2017,60.0,155.55
+varicela,90,Corregimiento de Santa Elena,2017,36.0,184.06
+varicela,80,Corregimiento de San Antonio de Prado,2017,148.0,125.86
+varicela,15,Guayabal,2017,141.0,147.8
+varicela,1,Popular,2018,206.0,150.38
+varicela,2,Santa Cruz,2018,184.0,162.74
+varicela,3,Manrique,2018,213.0,129.2
+varicela,4,Aranjuez,2018,230.0,162.76
+varicela,5,Castilla,2018,208.0,167.75
+varicela,6,Doce de Octubre,2018,247.0,139.4
+varicela,7,Robledo,2018,363.0,191.82
+varicela,8,Villa Hermosa,2018,323.0,210.81
+varicela,9,Buenos Aires,2018,315.0,202.71
+varicela,10,La Candelaria,2018,206.0,271.36
+varicela,11,Laureles Estadio,2018,99.0,99.1
+varicela,12,La América,2018,92.0,107.71
+varicela,13,San Javier,2018,196.0,124.65
+varicela,14,El Poblado,2018,117.0,109.55
+varicela,16,Belén,2018,313.0,154.24
+varicela,50,Corregimiento de San Sebastián de Palmitas,2018,2.0,36.54
+varicela,60,Corregimiento de San Cristóbal,2018,85.0,73.01
+varicela,70,Corregimiento de Altavista,2018,31.0,79.78
+varicela,90,Corregimiento de Santa Elena,2018,21.0,89.48
+varicela,80,Corregimiento de San Antonio de Prado,2018,91.0,95.99
+varicela,15,Guayabal,2018,85.0,131.48
+varicela,1,Popular,2019,155.0,110.54
+varicela,2,Santa Cruz,2019,122.0,105.55
+varicela,3,Manrique,2019,224.0,132.76
+varicela,4,Aranjuez,2019,200.0,139.87
+varicela,5,Castilla,2019,160.0,127.72
+varicela,6,Doce de Octubre,2019,221.0,123.12
+varicela,7,Robledo,2019,262.0,135.02
+varicela,8,Villa Hermosa,2019,236.0,149.68
+varicela,9,Buenos Aires,2019,277.0,173.08
+varicela,10,La Candelaria,2019,185.0,240.09
+varicela,11,Laureles Estadio,2019,98.0,97.27
+varicela,12,La América,2019,93.0,107.64
+varicela,13,San Javier,2019,180.0,111.41
+varicela,14,El Poblado,2019,87.0,80.3
+varicela,16,Belén,2019,247.0,119.47
+varicela,50,Corregimiento de San Sebastián de Palmitas,2019,1.0,17.58
+varicela,60,Corregimiento de San Cristóbal,2019,94.0,76.12
+varicela,70,Corregimiento de Altavista,2019,32.0,79.7
+varicela,90,Corregimiento de Santa Elena,2019,10.0,40.08
+varicela,80,Corregimiento de San Antonio de Prado,2019,140.0,140.9
+varicela,15,Guayabal,2019,76.0,116.9
+varicela,1,Popular,2020,42.0,29.36
+varicela,2,Santa Cruz,2020,46.0,39.07
+varicela,3,Manrique,2020,52.0,30.22
+varicela,4,Aranjuez,2020,57.0,39.52
+varicela,5,Castilla,2020,55.0,43.58
+varicela,6,Doce de Octubre,2020,55.0,30.35
+varicela,7,Robledo,2020,78.0,39.34
+varicela,8,Villa Hermosa,2020,39.0,24.11
+varicela,9,Buenos Aires,2020,46.0,28.0
+varicela,10,La Candelaria,2020,43.0,55.18
+varicela,11,Laureles Estadio,2020,31.0,30.6
+varicela,12,La América,2020,35.0,40.17
+varicela,13,San Javier,2020,46.0,27.81
+varicela,14,El Poblado,2020,30.0,27.37
+varicela,16,Belén,2020,92.0,43.81
+varicela,50,Corregimiento de San Sebastián de Palmitas,2020,0.0,0.0
+varicela,60,Corregimiento de San Cristóbal,2020,28.0,21.45
+varicela,70,Corregimiento de Altavista,2020,10.0,24.18
+varicela,90,Corregimiento de Santa Elena,2020,6.0,22.67
+varicela,80,Corregimiento de San Antonio de Prado,2020,25.0,24.08
+varicela,15,Guayabal,2020,31.0,47.59
+varicela,1,Popular,2021,40.0,27.54
+varicela,2,Santa Cruz,2021,33.0,27.64
+varicela,3,Manrique,2021,43.0,24.61
+varicela,4,Aranjuez,2021,55.0,37.98
+varicela,5,Castilla,2021,49.0,38.71
+varicela,6,Doce de Octubre,2021,63.0,34.58
+varicela,7,Robledo,2021,72.0,35.7
+varicela,8,Villa Hermosa,2021,44.0,26.66
+varicela,9,Buenos Aires,2021,55.0,32.77
+varicela,10,La Candelaria,2021,42.0,53.52
+varicela,11,Laureles Estadio,2021,26.0,25.62
+varicela,12,La América,2021,28.0,32.0
+varicela,13,San Javier,2021,39.0,23.12
+varicela,14,El Poblado,2021,23.0,20.82
+varicela,16,Belén,2021,61.0,28.71
+varicela,50,Corregimiento de San Sebastián de Palmitas,2021,0.0,0.0
+varicela,60,Corregimiento de San Cristóbal,2021,30.0,21.85
+varicela,70,Corregimiento de Altavista,2021,14.0,32.99
+varicela,90,Corregimiento de Santa Elena,2021,5.0,17.91
+varicela,80,Corregimiento de San Antonio de Prado,2021,23.0,21.3
+varicela,15,Guayabal,2021,30.0,46.14
+varicela,1,Popular,2022,29.0,20.14
+varicela,2,Santa Cruz,2022,40.0,33.6
+varicela,3,Manrique,2022,72.0,41.35
+varicela,4,Aranjuez,2022,68.0,45.37
+varicela,5,Castilla,2022,44.0,33.34
+varicela,6,Doce de Octubre,2022,70.0,37.26
+varicela,7,Robledo,2022,52.0,26.04
+varicela,8,Villa Hermosa,2022,72.0,44.68
+varicela,9,Buenos Aires,2022,63.0,38.31
+varicela,10,La Candelaria,2022,39.0,48.14
+varicela,11,Laureles Estadio,2022,30.0,27.71
+varicela,12,La América,2022,21.0,22.87
+varicela,13,San Javier,2022,44.0,26.47
+varicela,14,El Poblado,2022,61.0,53.0
+varicela,16,Belén,2022,70.0,32.43
+varicela,50,Corregimiento de San Sebastián de Palmitas,2022,3.0,51.89
+varicela,60,Corregimiento de San Cristóbal,2022,30.0,24.6
+varicela,70,Corregimiento de Altavista,2022,10.0,24.54
+varicela,90,Corregimiento de Santa Elena,2022,5.0,20.38
+varicela,80,Corregimiento de San Antonio de Prado,2022,19.0,19.05
+varicela,15,Guayabal,2022,30.0,43.38
+violencia_genero,1,Popular,2013,214.0,165.71
+violencia_genero,2,Santa Cruz,2013,160.0,145.19
+violencia_genero,3,Manrique,2013,203.0,128.46
+violencia_genero,4,Aranjuez,2013,195.0,120.75
+violencia_genero,5,Castilla,2013,124.0,83.51
+violencia_genero,6,Doce de Octubre,2013,211.0,109.68
+violencia_genero,7,Robledo,2013,195.0,115.64
+violencia_genero,8,Villa Hermosa,2013,209.0,153.25
+violencia_genero,9,Buenos Aires,2013,169.0,124.12
+violencia_genero,10,La Candelaria,2013,97.0,113.69
+violencia_genero,11,Laureles Estadio,2013,47.0,38.63
+violencia_genero,12,La América,2013,35.0,36.64
+violencia_genero,13,San Javier,2013,169.0,123.64
+violencia_genero,14,El Poblado,2013,55.0,43.71
+violencia_genero,16,Belén,2013,139.0,71.07
+violencia_genero,50,Corregimiento de San Sebastián de Palmitas,2013,4.0,73.05
+violencia_genero,60,Corregimiento de San Cristóbal,2013,56.0,78.3
+violencia_genero,70,Corregimiento de Altavista,2013,22.0,65.74
+violencia_genero,90,Corregimiento de Santa Elena,2013,9.0,54.16
+violencia_genero,80,Corregimiento de San Antonio de Prado,2013,79.0,82.82
+violencia_genero,15,Guayabal,2013,37.0,39.65
+violencia_genero,1,Popular,2014,202.0,155.65
+violencia_genero,2,Santa Cruz,2014,133.0,119.97
+violencia_genero,3,Manrique,2014,181.0,113.92
+violencia_genero,4,Aranjuez,2014,165.0,101.92
+violencia_genero,5,Castilla,2014,162.0,108.63
+violencia_genero,6,Doce de Octubre,2014,247.0,127.95
+violencia_genero,7,Robledo,2014,246.0,144.55
+violencia_genero,8,Villa Hermosa,2014,174.0,127.03
+violencia_genero,9,Buenos Aires,2014,151.0,110.64
+violencia_genero,10,La Candelaria,2014,113.0,132.29
+violencia_genero,11,Laureles Estadio,2014,51.0,41.81
+violencia_genero,12,La América,2014,47.0,49.0
+violencia_genero,13,San Javier,2014,208.0,151.36
+violencia_genero,14,El Poblado,2014,35.0,27.48
+violencia_genero,16,Belén,2014,167.0,85.13
+violencia_genero,50,Corregimiento de San Sebastián de Palmitas,2014,5.0,84.93
+violencia_genero,60,Corregimiento de San Cristóbal,2014,68.0,90.07
+violencia_genero,70,Corregimiento de Altavista,2014,26.0,74.33
+violencia_genero,90,Corregimiento de Santa Elena,2014,10.0,57.72
+violencia_genero,80,Corregimiento de San Antonio de Prado,2014,101.0,99.0
+violencia_genero,15,Guayabal,2014,60.0,63.88
+violencia_genero,1,Popular,2015,232.0,177.96
+violencia_genero,2,Santa Cruz,2015,170.0,152.53
+violencia_genero,3,Manrique,2015,278.0,174.12
+violencia_genero,4,Aranjuez,2015,211.0,130.04
+violencia_genero,5,Castilla,2015,141.0,94.16
+violencia_genero,6,Doce de Octubre,2015,244.0,126.0
+violencia_genero,7,Robledo,2015,290.0,168.94
+violencia_genero,8,Villa Hermosa,2015,220.0,159.96
+violencia_genero,9,Buenos Aires,2015,203.0,148.42
+violencia_genero,10,La Candelaria,2015,161.0,188.29
+violencia_genero,11,Laureles Estadio,2015,59.0,48.26
+violencia_genero,12,La América,2015,58.0,60.24
+violencia_genero,13,San Javier,2015,221.0,160.07
+violencia_genero,14,El Poblado,2015,54.0,41.91
+violencia_genero,16,Belén,2015,206.0,104.73
+violencia_genero,50,Corregimiento de San Sebastián de Palmitas,2015,4.0,63.25
+violencia_genero,60,Corregimiento de San Cristóbal,2015,72.0,90.61
+violencia_genero,70,Corregimiento de Altavista,2015,33.0,90.5
+violencia_genero,90,Corregimiento de Santa Elena,2015,24.0,133.15
+violencia_genero,80,Corregimiento de San Antonio de Prado,2015,112.0,102.89
+violencia_genero,15,Guayabal,2015,92.0,97.39
+violencia_genero,1,Popular,2016,337.0,257.42
+violencia_genero,2,Santa Cruz,2016,247.0,220.55
+violencia_genero,3,Manrique,2016,321.0,200.15
+violencia_genero,4,Aranjuez,2016,274.0,168.52
+violencia_genero,5,Castilla,2016,173.0,115.07
+violencia_genero,6,Doce de Octubre,2016,300.0,154.45
+violencia_genero,7,Robledo,2016,314.0,181.42
+violencia_genero,8,Villa Hermosa,2016,298.0,215.87
+violencia_genero,9,Buenos Aires,2016,214.0,156.15
+violencia_genero,10,La Candelaria,2016,219.0,255.88
+violencia_genero,11,Laureles Estadio,2016,83.0,67.75
+violencia_genero,12,La América,2016,62.0,64.17
+violencia_genero,13,San Javier,2016,310.0,223.62
+violencia_genero,14,El Poblado,2016,65.0,49.92
+violencia_genero,16,Belén,2016,217.0,110.08
+violencia_genero,50,Corregimiento de San Sebastián de Palmitas,2016,6.0,89.73
+violencia_genero,60,Corregimiento de San Cristóbal,2016,154.0,178.42
+violencia_genero,70,Corregimiento de Altavista,2016,62.0,165.43
+violencia_genero,90,Corregimiento de Santa Elena,2016,42.0,223.54
+violencia_genero,80,Corregimiento de San Antonio de Prado,2016,101.0,89.22
+violencia_genero,15,Guayabal,2016,95.0,100.04
+violencia_genero,1,Popular,2017,448.0,340.83
+violencia_genero,2,Santa Cruz,2017,313.0,278.19
+violencia_genero,3,Manrique,2017,522.0,324.08
+violencia_genero,4,Aranjuez,2017,413.0,253.51
+violencia_genero,5,Castilla,2017,292.0,193.53
+violencia_genero,6,Doce de Octubre,2017,449.0,230.51
+violencia_genero,7,Robledo,2017,424.0,243.11
+violencia_genero,8,Villa Hermosa,2017,482.0,347.91
+violencia_genero,9,Buenos Aires,2017,360.0,262.29
+violencia_genero,10,La Candelaria,2017,245.0,286.02
+violencia_genero,11,Laureles Estadio,2017,111.0,90.43
+violencia_genero,12,La América,2017,122.0,125.88
+violencia_genero,13,San Javier,2017,426.0,306.09
+violencia_genero,14,El Poblado,2017,117.0,88.98
+violencia_genero,16,Belén,2017,327.0,165.65
+violencia_genero,50,Corregimiento de San Sebastián de Palmitas,2017,7.0,99.14
+violencia_genero,60,Corregimiento de San Cristóbal,2017,219.0,235.3
+violencia_genero,70,Corregimiento de Altavista,2017,55.0,142.58
+violencia_genero,90,Corregimiento de Santa Elena,2017,50.0,255.64
+violencia_genero,80,Corregimiento de San Antonio de Prado,2017,150.0,127.56
+violencia_genero,15,Guayabal,2017,155.0,162.48
+violencia_genero,1,Popular,2018,827.0,603.71
+violencia_genero,2,Santa Cruz,2018,578.0,511.21
+violencia_genero,3,Manrique,2018,1137.0,689.68
+violencia_genero,4,Aranjuez,2018,675.0,477.67
+violencia_genero,5,Castilla,2018,764.0,616.17
+violencia_genero,6,Doce de Octubre,2018,881.0,497.21
+violencia_genero,7,Robledo,2018,1062.0,561.2
+violencia_genero,8,Villa Hermosa,2018,1017.0,663.77
+violencia_genero,9,Buenos Aires,2018,902.0,580.47
+violencia_genero,10,La Candelaria,2018,484.0,637.57
+violencia_genero,11,Laureles Estadio,2018,312.0,312.3
+violencia_genero,12,La América,2018,285.0,333.66
+violencia_genero,13,San Javier,2018,829.0,527.21
+violencia_genero,14,El Poblado,2018,220.0,205.98
+violencia_genero,16,Belén,2018,982.0,483.91
+violencia_genero,50,Corregimiento de San Sebastián de Palmitas,2018,37.0,675.92
+violencia_genero,60,Corregimiento de San Cristóbal,2018,540.0,463.84
+violencia_genero,70,Corregimiento de Altavista,2018,196.0,504.43
+violencia_genero,90,Corregimiento de Santa Elena,2018,107.0,455.94
+violencia_genero,80,Corregimiento de San Antonio de Prado,2018,615.0,648.73
+violencia_genero,15,Guayabal,2018,321.0,496.51
+violencia_genero,1,Popular,2019,881.0,628.31
+violencia_genero,2,Santa Cruz,2019,793.0,686.06
+violencia_genero,3,Manrique,2019,1354.0,802.49
+violencia_genero,4,Aranjuez,2019,976.0,682.57
+violencia_genero,5,Castilla,2019,610.0,486.92
+violencia_genero,6,Doce de Octubre,2019,1050.0,584.98
+violencia_genero,7,Robledo,2019,1196.0,616.36
+violencia_genero,8,Villa Hermosa,2019,1231.0,780.75
+violencia_genero,9,Buenos Aires,2019,857.0,535.47
+violencia_genero,10,La Candelaria,2019,488.0,633.33
+violencia_genero,11,Laureles Estadio,2019,250.0,248.14
+violencia_genero,12,La América,2019,331.0,383.09
+violencia_genero,13,San Javier,2019,1010.0,625.15
+violencia_genero,14,El Poblado,2019,235.0,216.9
+violencia_genero,16,Belén,2019,968.0,468.21
+violencia_genero,50,Corregimiento de San Sebastián de Palmitas,2019,24.0,421.87
+violencia_genero,60,Corregimiento de San Cristóbal,2019,614.0,497.23
+violencia_genero,70,Corregimiento de Altavista,2019,225.0,560.4
+violencia_genero,90,Corregimiento de Santa Elena,2019,181.0,725.36
+violencia_genero,80,Corregimiento de San Antonio de Prado,2019,641.0,645.14
+violencia_genero,15,Guayabal,2019,367.0,564.52
+violencia_genero,1,Popular,2020,745.0,520.84
+violencia_genero,2,Santa Cruz,2020,545.0,462.87
+violencia_genero,3,Manrique,2020,980.0,569.47
+violencia_genero,4,Aranjuez,2020,758.0,525.54
+violencia_genero,5,Castilla,2020,452.0,358.16
+violencia_genero,6,Doce de Octubre,2020,640.0,353.13
+violencia_genero,7,Robledo,2020,911.0,459.47
+violencia_genero,8,Villa Hermosa,2020,881.0,544.74
+violencia_genero,9,Buenos Aires,2020,542.0,329.93
+violencia_genero,10,La Candelaria,2020,363.0,465.83
+violencia_genero,11,Laureles Estadio,2020,187.0,184.57
+violencia_genero,12,La América,2020,217.0,249.06
+violencia_genero,13,San Javier,2020,650.0,392.9
+violencia_genero,14,El Poblado,2020,138.0,125.91
+violencia_genero,16,Belén,2020,593.0,282.36
+violencia_genero,50,Corregimiento de San Sebastián de Palmitas,2020,13.0,220.9
+violencia_genero,60,Corregimiento de San Cristóbal,2020,420.0,321.8
+violencia_genero,70,Corregimiento de Altavista,2020,138.0,333.74
+violencia_genero,90,Corregimiento de Santa Elena,2020,105.0,396.77
+violencia_genero,80,Corregimiento de San Antonio de Prado,2020,399.0,384.31
+violencia_genero,15,Guayabal,2020,179.0,274.77
+violencia_genero,1,Popular,2021,812.0,559.09
+violencia_genero,2,Santa Cruz,2021,525.0,439.79
+violencia_genero,3,Manrique,2021,981.0,561.56
+violencia_genero,4,Aranjuez,2021,758.0,523.43
+violencia_genero,5,Castilla,2021,486.0,383.93
+violencia_genero,6,Doce de Octubre,2021,842.0,462.22
+violencia_genero,7,Robledo,2021,799.0,396.22
+violencia_genero,8,Villa Hermosa,2021,804.0,487.09
+violencia_genero,9,Buenos Aires,2021,658.0,391.99
+violencia_genero,10,La Candelaria,2021,432.0,550.47
+violencia_genero,11,Laureles Estadio,2021,221.0,217.79
+violencia_genero,12,La América,2021,296.0,338.33
+violencia_genero,13,San Javier,2021,738.0,437.6
+violencia_genero,14,El Poblado,2021,148.0,133.96
+violencia_genero,16,Belén,2021,649.0,305.44
+violencia_genero,50,Corregimiento de San Sebastián de Palmitas,2021,14.0,230.53
+violencia_genero,60,Corregimiento de San Cristóbal,2021,576.0,419.59
+violencia_genero,70,Corregimiento de Altavista,2021,158.0,372.27
+violencia_genero,90,Corregimiento de Santa Elena,2021,89.0,318.81
+violencia_genero,80,Corregimiento de San Antonio de Prado,2021,462.0,427.79
+violencia_genero,15,Guayabal,2021,305.0,469.06
+violencia_genero,1,Popular,2022,999.0,693.75
+violencia_genero,2,Santa Cruz,2022,661.0,555.2
+violencia_genero,3,Manrique,2022,1090.0,626.02
+violencia_genero,4,Aranjuez,2022,783.0,522.48
+violencia_genero,5,Castilla,2022,475.0,359.94
+violencia_genero,6,Doce de Octubre,2022,894.0,475.83
+violencia_genero,7,Robledo,2022,811.0,406.11
+violencia_genero,8,Villa Hermosa,2022,925.0,574.04
+violencia_genero,9,Buenos Aires,2022,581.0,353.29
+violencia_genero,10,La Candelaria,2022,445.0,549.25
+violencia_genero,11,Laureles Estadio,2022,313.0,289.16
+violencia_genero,12,La América,2022,218.0,237.37
+violencia_genero,13,San Javier,2022,747.0,449.38
+violencia_genero,14,El Poblado,2022,198.0,172.03
+violencia_genero,16,Belén,2022,689.0,319.17
+violencia_genero,50,Corregimiento de San Sebastián de Palmitas,2022,2.0,34.59
+violencia_genero,60,Corregimiento de San Cristóbal,2022,639.0,524.06
+violencia_genero,70,Corregimiento de Altavista,2022,151.0,370.5
+violencia_genero,90,Corregimiento de Santa Elena,2022,128.0,521.85
+violencia_genero,80,Corregimiento de San Antonio de Prado,2022,394.0,395.11
+violencia_genero,15,Guayabal,2022,366.0,529.29

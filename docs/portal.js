@@ -287,12 +287,14 @@
 
   /* ---------- Asistente (sin cambios de lógica) ---------- */
   const SUGERIDAS = [
+    "¿Qué preguntas puedo hacer?",
     "¿Cuál es el hallazgo principal?",
-    "¿Qué comunas deberían recibir mayor atención en salud?",
-    "¿Qué territorio tiene la menor tasa de mortalidad?",
-    "Si hay presupuesto para 3 territorios, ¿cuáles priorizar?",
+    "¿Qué factores se asocian a la mortalidad?",
     "¿Cómo varió la mortalidad entre 2012 y 2022?",
-    "¿Qué relación hay entre la contaminación del aire y la salud?",
+    "¿Cómo evolucionó el dengue en Robledo?",
+    "¿Dónde hay más inseguridad alimentaria?",
+    "Si hay presupuesto para 3 territorios, ¿cuáles priorizar?",
+    "¿Cómo ha cambiado el aire entre 2024 y 2025?",
     "¿De dónde provienen los datos del proyecto?",
   ];
   let enCurso = false;
@@ -310,7 +312,7 @@
     finally { enCurso = false; btn.disabled = false; }
     let html = `<h3>Respuesta</h3><p class="nota">Tu pregunta: «${esc(q)}»</p><div class="directa">${esc(r.respuesta_directa)}</div>`;
     if (r.via_ia) html += `<p class="nota">🤖 ${esc(r.via_ia)}</p>`;
-    if (!r.encontrado) html += `<p class="aviso">Sin cifra directa para esta consulta.</p>`;
+    if (!r.encontrado) html += `<p class="aviso">No encontré cifras para esa pregunta. Escribe «¿Qué preguntas puedo hacer?» para ver ejemplos.</p>`;
     if (r.evidencia && r.evidencia.length) {
       html += `<div class="bloque"><b>Evidencia</b><table><tr><th>Indicador</th><th>Valor</th><th>Año</th><th>Territorio</th><th>Fuente</th></tr>`;
       r.evidencia.forEach((e) => { html += `<tr><td>${esc(e.indicador)}</td><td>${esc(e.valor)}</td><td>${esc(e.anio ?? "")}</td><td>${esc(e.territorio ?? "")}</td><td>${esc(e.fuente ?? "")}</td></tr>`; });
@@ -324,12 +326,21 @@
     if (r.grafico) dibujarGrafico(r.grafico);
   }
   function dibujarGrafico(g) {
-    const esLinea = g.tipo === "line", ds = { label: g.etiqueta_eje, data: g.valores };
-    if (esLinea) Object.assign(ds, { borderColor: NAR, backgroundColor: NAR, tension: .25, fill: false, pointRadius: 4 });
-    else ds.backgroundColor = g.resaltar.map((on) => (on ? NAR : AZUL));
-    nuevoGrafico("chart", { type: g.tipo, data: { labels: g.labels, datasets: [ds] },
+    const esLinea = g.tipo === "line", COLORES = [NAR, AZUL, "#2f7d4f"];
+    let datasets;
+    if (esLinea && g.series && g.series.length) {
+      datasets = g.series.map((s, i) => ({ label: s.nombre, data: s.valores, borderColor: COLORES[i % 3],
+        backgroundColor: COLORES[i % 3], tension: .25, fill: false, pointRadius: 3, spanGaps: true,
+        borderDash: i === g.series.length - 1 && /Medellín/.test(s.nombre) && g.series.length > 1 ? [6, 4] : [] }));
+    } else {
+      const ds = { label: g.etiqueta_eje, data: g.valores };
+      if (esLinea) Object.assign(ds, { borderColor: NAR, backgroundColor: NAR, tension: .25, fill: false, pointRadius: 4 });
+      else ds.backgroundColor = g.resaltar.map((on) => (on ? NAR : AZUL));
+      datasets = [ds];
+    }
+    nuevoGrafico("chart", { type: g.tipo, data: { labels: g.labels, datasets: datasets },
       options: { indexAxis: esLinea ? "x" : "y", responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false }, title: { display: true, text: g.titulo } },
+        plugins: { legend: { display: datasets.length > 1 }, title: { display: true, text: g.titulo } },
         scales: esLinea ? { y: { title: { display: true, text: g.etiqueta_eje } } } : { x: { title: { display: true, text: g.etiqueta_eje } } } } });
   }
   SUGERIDAS.forEach((s) => {

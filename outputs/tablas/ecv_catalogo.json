@@ -1,0 +1,207 @@
+[
+  {
+    "clave": "ecv_jefes_hogar_suficiente_informacion_metodos_plani",
+    "nombre": "Porcentaje de jefes de hogar que tienen suficiente información sobre los métodos de planificación familiar",
+    "unidad": "%",
+    "tema": "salud sexual y reproductiva",
+    "hoja": "Bateria_Indicadores_ECV",
+    "nota_tecnica": "",
+    "anios_excluidos_ambiguos": []
+  },
+  {
+    "clave": "ecv_jefes_hogar_informante_calificado_planifica",
+    "nombre": "Porcentaje de jefes de hogar o informante calificado que planifica",
+    "unidad": "%",
+    "tema": "salud sexual y reproductiva",
+    "hoja": "Bateria_Indicadores_ECV",
+    "nota_tecnica": "",
+    "anios_excluidos_ambiguos": []
+  },
+  {
+    "clave": "ecv_jefes_hogar_informantes_calificados_concertan_me",
+    "nombre": "Porcentaje de jefes de hogar o informantes calificados que concertan el método de planificación",
+    "unidad": "%",
+    "tema": "salud sexual y reproductiva",
+    "hoja": "Bateria_Indicadores_ECV",
+    "nota_tecnica": "",
+    "anios_excluidos_ambiguos": []
+  },
+  {
+    "clave": "ecv_hombres_jefes_cabeza_hogar",
+    "nombre": "Porcentaje de hombres jefes cabeza de hogar",
+    "unidad": "%",
+    "tema": "hogares",
+    "hoja": "Bateria_Indicadores_ECV",
+    "nota_tecnica": "",
+    "anios_excluidos_ambiguos": []
+  },
+  {
+    "clave": "ecv_mujeres_jefes_cabeza_hogar",
+    "nombre": "Porcentaje de mujeres jefes cabeza de hogar",
+    "unidad": "%",
+    "tema": "hogares",
+    "hoja": "Bateria_Indicadores_ECV",
+    "nota_tecnica": "",
+    "anios_excluidos_ambiguos": []
+  },
+  {
+    "clave": "ecv_poblacion_practica_actividades_deportivas",
+    "nombre": "Porcentaje de población que practica actividades deportivas",
+    "unidad": "%",
+    "tema": "deporte y cultura",
+    "hoja": "Bateria_Indicadores_ECV",
+    "nota_tecnica": "",
+    "anios_excluidos_ambiguos": []
+  },
+  {
+    "clave": "ecv_poblacion_inscrita_programas_deportivos_recreati",
+    "nombre": "Porcentaje de población inscrita en programas deportivos, recreativos y/o lúdicos",
+    "unidad": "%",
+    "tema": "deporte y cultura",
+    "hoja": "Bateria_Indicadores_ECV",
+    "nota_tecnica": "",
+    "anios_excluidos_ambiguos": []
+  },
+  {
+    "clave": "ecv_poblacion_practica_actividades_deportivas_recrea",
+    "nombre": "Porcentaje de población que practica actividades deportivas, recreativas y lúdicas",
+    "unidad": "%",
+    "tema": "deporte y cultura",
+    "hoja": "Bateria_Indicadores_ECV",
+    "nota_tecnica": "",
+    "anios_excluidos_ambiguos": []
+  },
+  {
+    "clave": "ecv_personas_asiste_participa_programas_culturales",
+    "nombre": "Porcentaje de personas que asiste o participa a programas culturales",
+    "unidad": "%",
+    "tema": "deporte y cultura",
+    "hoja": "Bateria_Indicadores_ECV",
+    "nota_tecnica": "",
+    "anios_excluidos_ambiguos": []
+  },
+  {
+    "clave": "ecv_hogares_inseguridad_alimentaria",
+    "nombre": "Porcentaje de hogares con algún nivel de inseguridad alimentaria",
+    "unidad": "%",
+    "tema": "seguridad alimentaria",
+    "hoja": "Bateria_Indicadores_ECV",
+    "nota_tecnica": "",
+    "anios_excluidos_ambiguos": []
+  },
+  {
+    "clave": "ecv_hogares_inseguridad_alimentaria_alta",
+    "nombre": "Porcentaje de hogares con nivel de inseguridad alimentaria alta",
+    "unidad": "%",
+    "tema": "seguridad alimentaria",
+    "hoja": "Bateria_Indicadores_ECV",
+    "nota_tecnica": "",
+    "anios_excluidos_ambiguos": []
+  },
+  {
+    "clave": "ecv_hogares_inseguridad_alimentaria_moderada",
+    "nombre": "Porcentaje de hogares con nivel de inseguridad alimentaria moderada",
+    "unidad": "%",
+    "tema": "seguridad alimentaria",
+    "hoja": "Bateria_Indicadores_ECV",
+    "nota_tecnica": "",
+    "anios_excluidos_ambiguos": []
+  },
+  {
+    "clave": "ecv_hogares_inseguridad_alimentaria_leve",
+    "nombre": "Porcentaje de hogares con nivel de inseguridad alimentaria leve",
+    "unidad": "%",
+    "tema": "seguridad alimentaria",
+    "hoja": "Bateria_Indicadores_ECV",
+    "nota_tecnica": "",
+    "anios_excluidos_ambiguos": []
+  },
+  {
+    "clave": "ecv_t44",
+    "nombre": "Índice de dependencia económica",
+    "unidad": "%",
+    "tema": "demografía",
+    "hoja": "Indicadores para Publicar",
+    "nota_tecnica": "El cálculo difiere en la metodología, en el rango de edad el techo difiere en un año de acuerdo a la ficha técnica de 2019. En la publicación conjuntamente con la Ficha Técnica se coloca la nota de cálculo, identificando las variables y techos de la población que se toma como referencia.",
+    "anios_excluidos_ambiguos": [
+      2021
+    ]
+  },
+  {
+    "clave": "ecv_t48",
+    "nombre": "Índice de Masculinidad",
+    "unidad": "hombres por cada 100 mujeres",
+    "tema": "demografía",
+    "hoja": "Indicadores para Publicar",
+    "nota_tecnica": "El cálculo difiere los datos difieren respecto al factor de expansión de personas, por decimales, afectando la población final La Universidad de Antioquia debe ajustar el factor de expansión",
+    "anios_excluidos_ambiguos": [
+      2021
+    ]
+  },
+  {
+    "clave": "ecv_t98",
+    "nombre": "Tasa desempleo oculto",
+    "unidad": "por cada 100 personas",
+    "tema": "empleo",
+    "hoja": "Indicadores para Publicar",
+    "nota_tecnica": "El cálculo difiere en la metodología, son diferentes los denominadores, porque incluye una categoría adicional. de acuerdo a la ficha técnica de 2019. En la publicación conjuntamente con la Ficha Técnica se coloca la nota de cálculo, identificando las variables y categorías, que se toman como referencia.",
+    "anios_excluidos_ambiguos": [
+      2021
+    ]
+  },
+  {
+    "clave": "ecv_t99",
+    "nombre": "Tasa desempleo abierto",
+    "unidad": "por cada 100 personas",
+    "tema": "empleo",
+    "hoja": "Indicadores para Publicar",
+    "nota_tecnica": "El cálculo difiere. Los datos difieren respecto al factor de expansión de personas, por decimales, afectando la población final. La Universidad de Antioquia debe ajustar el factor de expansión",
+    "anios_excluidos_ambiguos": [
+      2021
+    ]
+  },
+  {
+    "clave": "ecv_t100",
+    "nombre": "Tasa desempleo población discapacitada",
+    "unidad": "por cada 100 personas",
+    "tema": "empleo",
+    "hoja": "Indicadores para Publicar",
+    "nota_tecnica": "El cálculo difiere en la metodología, son diferentes los denominadores, porque incluye una categoría adicional. de acuerdo a la ficha técnica de 2019. En la publicación conjuntamente con la Ficha Técnica se coloca la nota de cálculo, identificando las variables y categorías, que se toman como referencia.",
+    "anios_excluidos_ambiguos": [
+      2021
+    ]
+  },
+  {
+    "clave": "ecv_t103",
+    "nombre": "Tasa desempleo población afrodescendiente",
+    "unidad": "por cada 100 personas",
+    "tema": "empleo",
+    "hoja": "Indicadores para Publicar",
+    "nota_tecnica": "El cálculo difiere. Los datos difieren respecto al factor de expansión de personas, por decimales, afectando la población final. La Universidad de Antioquia debe ajustar el factor de expansión",
+    "anios_excluidos_ambiguos": [
+      2021
+    ]
+  },
+  {
+    "clave": "ecv_t104",
+    "nombre": "Tasa ocupación",
+    "unidad": "por cada 100 personas",
+    "tema": "empleo",
+    "hoja": "Indicadores para Publicar",
+    "nota_tecnica": "El cálculo difiere. Los datos difieren respecto al factor de expansión de personas, por decimales, afectando la población final. La Universidad de Antioquia debe ajustar el factor de expansión",
+    "anios_excluidos_ambiguos": [
+      2021
+    ]
+  },
+  {
+    "clave": "ecv_t113",
+    "nombre": "Tasa bruta de participación TBP",
+    "unidad": "por cada 100 personas",
+    "tema": "empleo",
+    "hoja": "Indicadores para Publicar",
+    "nota_tecnica": "El cálculo difiere. Los datos difieren respecto al factor de expansión de personas, por decimales, afectando la población final. La Universidad de Antioquia debe ajustar el factor de expansión",
+    "anios_excluidos_ambiguos": [
+      2021
+    ]
+  }
+]

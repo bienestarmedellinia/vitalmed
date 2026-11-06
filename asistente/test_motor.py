@@ -105,6 +105,94 @@ def test_comparar_dos():
                   and "Laureles Estadio" in r.respuesta_directa, r.respuesta_directa)
 
 
+def test_ayuda():
+    r = M.responder("¿Que preguntas te puedo realizar?")
+    return _check("ayuda: explica qué se puede preguntar (sin 'no identifiqué')",
+                  r.encontrado and "Ejemplos" in r.respuesta_directa
+                  and "indicadores de salud" in r.respuesta_directa, r.respuesta_directa)
+
+
+def test_territorio_anio():
+    r = M.responder("mortalidad en Robledo en 2016")
+    return _check("indicador + territorio + año histórico",
+                  r.encontrado and "Robledo" in r.respuesta_directa and "2016" in r.respuesta_directa,
+                  r.respuesta_directa)
+
+
+def test_anio_fuera_de_cobertura():
+    r = M.responder("mortalidad 2024")
+    return _check("año sin datos: lo dice y muestra el último disponible",
+                  r.encontrado and "no hay dato para 2024" in r.respuesta_directa
+                  and "Muestro 2022" in r.respuesta_directa, r.respuesta_directa)
+
+
+def test_otro_indicador_tendencia():
+    if not M.info("dengue"):
+        print("[SKIP] dengue no está en el KB (aún)")
+        return True
+    r = M.responder("¿Cómo evolucionó el dengue en Robledo?")
+    return _check("tendencia de otro indicador en un territorio",
+                  r.encontrado and "dengue" in r.respuesta_directa and "Robledo" in r.respuesta_directa,
+                  r.respuesta_directa)
+
+
+def test_factores():
+    if not (M.kb.get("series") or {}).get("correlaciones"):
+        print("[SKIP] correlaciones no están en el KB (aún)")
+        return True
+    r = M.responder("¿Qué factores se asocian a la mortalidad?")
+    return _check("factores asociados (correlación, no causalidad)",
+                  r.encontrado and "r = " in r.respuesta_directa
+                  and "causalidad" in (r.interpretacion + r.limitaciones), r.respuesta_directa)
+
+
+def test_forzado_ia():
+    r = M.responder("¿qué tan grave está el centro?",
+                    {"intencion": "territorio", "territorios": ["La Candelaria"],
+                     "indicador": "mortalidad", "anios": [], "causa": False})
+    return _check("interpretación de la IA (forzado) -> cifras del KB",
+                  r.encontrado and "1325.6" in r.respuesta_directa, r.respuesta_directa)
+
+
+PREGUNTAS_PARIDAD = [
+    "¿Que preguntas te puedo realizar?", "¿Cual es la causa de moratilidad en la Candelaria?",
+    "¿Cómo varió la mortalidad entre 2012 y 2022?", "mortalidad en Robledo en 2016",
+    "mortalidad 2024", "¿Cómo evolucionó el dengue en Robledo?",
+    "¿Qué factores se asocian a la mortalidad?", "¿Dónde hay más inseguridad alimentaria?",
+    "¿Cómo ha cambiado el aire?", "PM2.5 en 2024", "desempleo en comuna 1",
+    "Compara Popular y El Poblado en suicidio", "¿por qué mueren tantos?",
+    "¿De dónde vienen los datos?", "¿Cuál es el precio del dólar hoy?",
+    "¿qué explica la mortalidad en el centro?", "tuberculosis", "¿Cuál es el hallazgo principal?",
+    "Si hay presupuesto para 3 territorios, ¿cuáles priorizar?", "¿Qué territorio tiene la menor mortalidad?",
+    "violencia de género entre 2015 y 2020", "natalidad en Santa Elena 2030", "comparar Manrique y Laureles",
+    ["¿qué tan grave está el centro?", {"intencion": "territorio", "territorios": ["La Candelaria"],
+                                        "indicador": "mortalidad", "anios": [2019], "causa": True}],
+    ["¿ha mejorado el aire?", {"intencion": "tendencia", "territorios": [], "indicador": "pm25",
+                               "anios": [], "causa": False}],
+]
+
+
+def test_paridad_js():
+    """El motor web (JS) y este motor (Python) deben responder lo mismo."""
+    import json
+    import shutil
+    import subprocess
+    if not shutil.which("node"):
+        print("[SKIP] paridad JS: node no está instalado")
+        return True
+    js = json.loads(subprocess.run(
+        ["node", str(Path(__file__).with_name("paridad_js.cjs")), str(M.kb_path)],
+        input=json.dumps(PREGUNTAS_PARIDAD), capture_output=True, text=True, check=True).stdout)
+    difs = []
+    for p, j in zip(PREGUNTAS_PARIDAD, js):
+        r = M.responder(p[0], p[1]) if isinstance(p, list) else M.responder(p)
+        py = {"respuesta_directa": r.respuesta_directa, "encontrado": r.encontrado,
+              "n_evidencia": len(r.evidencia)}
+        if py != j:
+            difs.append(f"\n   Q: {p}\n   JS: {j}\n   PY: {py}")
+    return _check(f"paridad JS↔Python en {len(PREGUNTAS_PARIDAD)} preguntas", not difs, "".join(difs))
+
+
 def test_no_pii():
     """El KB no debe contener microdatos ni nombres de personas."""
     import json
@@ -118,7 +206,10 @@ def main() -> int:
     tests = [test_ranking_top, test_ranking_bottom, test_priorizacion_3,
              test_indice_multivariable,
              test_tendencia, test_hallazgo, test_fuentes, test_desconocida_no_inventa,
-             test_territorio_causa, test_territorio_simple, test_comparar_dos, test_no_pii]
+             test_territorio_causa, test_territorio_simple, test_comparar_dos,
+             test_ayuda, test_territorio_anio, test_anio_fuera_de_cobertura,
+             test_otro_indicador_tendencia, test_factores, test_forzado_ia, test_paridad_js,
+             test_no_pii]
     if not M.kb:
         print("ERROR: no hay knowledge_base.json. Ejecuta scripts/07_construir_kb.py")
         return 1

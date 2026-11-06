@@ -24,7 +24,8 @@ DOCS = Path(__file__).resolve().parent.parent / "docs"
 PREGUNTA = "¿qué tan grave está la situación en el centro?"   # el motor solo NO la entiende
 # El Worker real rechaza el origen localhost; en la prueba se simula su respuesta
 # (mismo contrato que worker/src/index.js) para probar el camino con IA.
-IA_SIMULADA = {"intencion": "territorio", "territorios": ["La Candelaria"], "causa": False}
+IA_SIMULADA = {"intencion": "territorio", "territorios": ["La Candelaria"], "indicador": "mortalidad",
+               "anios": [], "causa": False}
 
 
 def main() -> int:
@@ -61,6 +62,16 @@ def main() -> int:
             errores.append("No se usó (o no se declaró) la interpretación con IA")
         if pag.input_value("#q") != "":
             errores.append("El campo de pregunta no se limpió")
+
+        # Botón sugerido de ayuda (solo motor, sin IA) y gráfico de varias series.
+        pag.get_by_role("button", name="¿Qué preguntas puedo hacer?").click()
+        ayuda = pag.locator("#resp").inner_text()
+        if "Ejemplos" not in ayuda:
+            errores.append(f"La ayuda no respondió: {ayuda[:120]!r}")
+        pag.get_by_role("button", name="¿Cómo varió la mortalidad entre 2012 y 2022?").click()
+        n_series = pag.evaluate("Chart.getChart('chart') ? Chart.getChart('chart').data.datasets.length : 0")
+        if n_series < 2:
+            errores.append(f"La tendencia debería mostrar territorio + Medellín (series: {n_series})")
         nav.close()
     srv.shutdown()
 

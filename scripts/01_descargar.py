@@ -55,6 +55,13 @@ def descargar(url: str, destino: Path) -> dict:
                 "bytes": total,
                 "sha256": h.hexdigest(),
             }
+        except requests.HTTPError as e:
+            # 404 = el archivo no existe (p. ej. un mes de SIATA aún no publicado):
+            # reintentar no sirve y solo alarga el pipeline.
+            if e.response is not None and e.response.status_code == 404:
+                raise RuntimeError(f"No existe {url} (404)") from e
+            ultimo_error = e
+            log(f"intento {intento}/{RETRIES} fallo para {url}: {e}")
         except Exception as e:  # noqa: BLE001
             ultimo_error = e
             log(f"intento {intento}/{RETRIES} fallo para {url}: {e}")
