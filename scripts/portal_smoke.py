@@ -1,0 +1,66 @@
+#!/usr/bin/env python3
+"""
+portal_smoke.py — Prueba de humo del portal (docs/) en un Chromium real.
+
+Sirve docs/ en localhost, abre la página y FALLA si:
+  - hay errores de JavaScript o violaciones de la Content-Security-Policy,
+  - Chart.js no carga (p. ej. hash SRI incorrecto),
+  - el portal no pinta sus KPIs o el asistente no responde.
+
+Corre en GitHub Actions (workflow portal.yml), NO en la Raspberry Pi.
+Uso local (con playwright instalado):  python scripts/portal_smoke.py
+"""
+from __future__ import annotations
+import functools
+import http.server
+import sys
+import threading
+from pathlib import Path
+
+from playwright.sync_api import sync_playwright
+
+DOCS = Path(__file__).resolve().parent.parent / "docs"
+PREGUNTA = "¿Cual es la causa de mortalidad en la Candelaria?"
+
+
+def main() -> int:
+    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(DOCS))
+    srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    url = f"http://127.0.0.1:{srv.server_address[1]}/"
+
+    errores: list[str] = []
+    with sync_playwright() as p:
+        nav = p.chromium.launch()
+        pag = nav.new_page()
+        pag.on("pageerror", lambda e: errores.append(f"JS: {e}"))
+        pag.on("console", lambda m: m.type == "error" and errores.append(f"consola: {m.text}"))
+        pag.goto(url, wait_until="networkidle")
+
+        if not pag.evaluate("typeof window.Chart === 'function'"):
+            errores.append("Chart.js no cargó (¿hash SRI o CSP?)")
+        kpis = pag.locator("#kpis > *").count()
+        if kpis == 0:
+            errores.append("El portal no pintó los KPIs (¿falló portal.js o el KB?)")
+
+        pag.fill("#q", PREGUNTA)
+        pag.click("#btn-preguntar")
+        resp = pag.locator("#resp").inner_text()
+        if "La Candelaria" not in resp:
+            errores.append(f"El asistente no respondió como se esperaba: {resp[:120]!r}")
+        if pag.input_value("#q") != "":
+            errores.append("El campo de pregunta no se limpió")
+        nav.close()
+    srv.shutdown()
+
+    if errores:
+        print("PORTAL: FALLÓ")
+        for e in errores:
+            print("  ✗", e)
+        return 1
+    print(f"PORTAL: OK ({kpis} KPIs, asistente responde, sin errores JS/CSP)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,31 @@
+name: portal-smoke
+
+# Verifica el portal (docs/) en un Chromium real: errores JS, CSP y SRI.
+# Corre en los runners de GitHub (NO en la Raspberry Pi).
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "docs/**"
+      - "scripts/portal_smoke.py"
+      - ".github/workflows/portal.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Instalar Playwright + Chromium
+        run: |
+          pip install playwright==1.48.0
+          python -m playwright install --with-deps chromium
+      - name: Probar el portal
+        run: python scripts/portal_smoke.py
