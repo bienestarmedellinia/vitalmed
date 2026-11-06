@@ -64,6 +64,9 @@ def main() -> int:
         "sivigila": {"nombre": "SIVIGILA (vigilancia en salud pública)",
                      "entidad": "INS", "nivel": "municipio (Medellín)",
                      "variable": "casos semanales (ESI-IRAG, intento de suicidio)"},
+        "rips": {"nombre": "RIPS (prestación de servicios de salud)",
+                 "entidad": "MinSalud", "nivel": "municipio (Medellín)",
+                 "variable": "atenciones anuales por grupo CIE-10 (respiratorias, mentales)"},
     }
 
     # ── Hallazgo principal ──
@@ -207,6 +210,25 @@ def main() -> int:
             "total_anual": tot_anual,
         }
         log(f"SIVIGILA: {len(serie)} eventos, años {cob.get('eventos', {})}")
+
+    # ── RIPS: morbilidad anual por gran grupo CIE-10 (MinSalud, contexto) ──
+    rips_f = TAB / "rips_anual.csv"
+    if rips_f.exists():
+        rp = pd.read_csv(rips_f)
+        cob_f = TAB / "rips_cobertura.json"
+        cob = json.loads(cob_f.read_text(encoding="utf-8")) if cob_f.exists() else {}
+        serie = {}
+        for r in rp.itertuples():
+            serie.setdefault(r.nombre, {})[str(int(r.anio))] = int(r.atenciones)
+        kb["indicadores"]["rips"] = {
+            "unidad": "atenciones (conteo anual)",
+            "nivel": cob.get("nivel", "municipio (NO comuna)"),
+            "municipio": cob.get("municipio", "Medellín"),
+            "periodicidad": "anual",
+            "advertencia": cob.get("nota", ""),
+            "serie": serie,
+        }
+        log(f"RIPS: {len(serie)} grupos ({', '.join(serie)})")
 
     # ── Series completas por indicador y territorio (todas las fuentes) ──
     series = construir_series()
@@ -389,6 +411,14 @@ def exportar_datos_abiertos(kb: dict, destino: Path) -> None:
             pd.DataFrame(filas_s).sort_values(["evento", "anio", "semana"]),
             "Casos semanales SIVIGILA en Medellín (INS). ESI-IRAG (respiratorio "
             "centinela) e intento de suicidio. Nivel municipal (no comuna).")
+    rp = kb.get("indicadores", {}).get("rips") or {}
+    if rp.get("serie"):
+        filas_r = [{"grupo": g, "anio": int(a), "atenciones": v}
+                   for g, xa in rp["serie"].items() for a, v in xa.items()]
+        archivos["rips_anual.csv"] = (
+            pd.DataFrame(filas_r).sort_values(["grupo", "anio"]),
+            "Atenciones anuales RIPS en Medellín (MinSalud) por gran grupo CIE-10: "
+            "respiratorias (J) y trastornos mentales (F). Contexto, nivel municipal.")
     if cat:
         archivos["catalogo_indicadores.csv"] = (
             pd.DataFrame([{k: (", ".join(map(str, v)) if isinstance(v, list) else v)

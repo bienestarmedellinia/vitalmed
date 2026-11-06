@@ -71,6 +71,9 @@ jobs:
       - name: 6d) Procesar SIVIGILA (serie semanal INS)
         run: python scripts/11_sivigila.py
 
+      - name: 6e) Procesar RIPS (morbilidad anual MinSalud, contexto)
+        run: python scripts/12_rips.py
+
       - name: 7) Construir knowledge base del asistente (fase 2)
         run: python scripts/07_construir_kb.py
 

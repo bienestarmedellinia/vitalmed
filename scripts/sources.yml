@@ -145,3 +145,20 @@ sivigila:
   eventos:
     "345": {nombre: "ESI-IRAG (vigilancia centinela)", tema: "respiratorio"}
     "356": {nombre: "intento de suicidio", tema: "salud mental"}
+
+rips:
+  descripcion: >
+    RIPS (Registros Individuales de Prestación de Servicios de Salud), MinSalud,
+    dataset agregado y abierto en datos.gov.co. Atenciones por municipio × año ×
+    diagnóstico CIE-10. Se usa como CONTEXTO de carga de morbilidad respiratoria
+    (J00-J99) y mental (F00-F99) en Medellín (serie ANUAL). NO sirve para cruce
+    temporal fino con PM2.5 (granularidad anual).
+  licencia: "CC BY-SA 4.0 (ficha datos.gov.co, MinSalud)"
+  pagina_oficial: "https://www.datos.gov.co/d/4k9h-8qiu"
+  recurso_socrata: "4k9h-8qiu"
+  endpoint: "https://www.datos.gov.co/resource/4k9h-8qiu.json"
+  municipio_prefijo: "05001"
+  nombre_municipio: "Medellín"
+  grupos:
+    respiratorias: {prefijo_cie: "J", nombre: "respiratorias (J00-J99)"}
+    mentales:      {prefijo_cie: "F", nombre: "trastornos mentales (F00-F99)"}
