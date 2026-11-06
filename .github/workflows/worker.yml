@@ -1,0 +1,54 @@
+name: worker-ia
+
+# Prueba y despliega el Worker que interpreta preguntas con Gemini.
+# Corre en los runners de GitHub (NO en la Raspberry Pi: instalar wrangler la satura).
+# Secretos del repositorio necesarios (Settings → Secrets → Actions):
+#   CLOUDFLARE_API_TOKEN  token de cuenta: Workers Scripts:Edit + Account Settings:Read
+#   GEMINI_API_KEY        clave de Google AI Studio (se copia como secreto del Worker)
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "worker/**"
+      - ".github/workflows/worker.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  desplegar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: worker
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+
+      - name: Probar el Worker (sin red ni clave)
+        run: node test.mjs
+
+      - name: Desplegar en Cloudflare
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::error::Falta el secreto CLOUDFLARE_API_TOKEN (ver worker/README.md)"; exit 1
+          fi
+          npx --yes wrangler@4.158.0 deploy | tee despliegue.log
+          grep -o 'https://[a-z0-9.-]*workers.dev' despliegue.log | head -1 >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Cargar la clave de Gemini como secreto del Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "::warning::Falta GEMINI_API_KEY: el Worker responde 503 y el portal usa el modo determinista."
+            exit 0
+          fi
+          printf '%s' "$GEMINI_API_KEY" | npx --yes wrangler@4.158.0 secret put GEMINI_API_KEY

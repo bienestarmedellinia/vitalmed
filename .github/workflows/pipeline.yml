@@ -12,6 +12,8 @@ on:
       - "instrucciones.txt"
       - "scripts/portal_smoke.py"
       - ".github/workflows/portal.yml"
+      - "worker/**"
+      - ".github/workflows/worker.yml"
   workflow_dispatch:        # ejecución manual desde la pestaña Actions
   schedule:
     - cron: "0 7 1 * *"     # día 1 de cada mes (datos SIATA mensuales)

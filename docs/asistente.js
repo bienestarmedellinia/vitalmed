@@ -341,6 +341,68 @@ async function cargarKB() {
   return KB;
 }
 
+/* ── Interpretación con IA (opcional) ───────────────────────────────────
+ * Solo se usa si el motor determinista NO entendió la pregunta. El Worker
+ * (worker/src/index.js, Gemini) devuelve SOLO {intencion, territorios, causa};
+ * con eso se arma una consulta canónica y la responde el MISMO motor
+ * determinista: las cifras siempre salen del KB, nunca de la IA.
+ * Si IA_URL está vacío, falla o tarda, se devuelve la respuesta determinista. */
+const IA_URL = "";
+const CLAVE_INTENCION = {
+  hallazgo: "hallazgo principal", ambiental: "calidad del aire",
+  priorizacion: "priorizar", tendencia: "tendencia", fuentes: "fuentes",
+  ranking_top: "mayor mortalidad", ranking_bottom: "menor mortalidad",
+  territorio: "", fuera_de_alcance: "",
+};
+const NOMBRE_INTENCION = {
+  hallazgo: "hallazgo principal", ambiental: "calidad del aire",
+  priorizacion: "priorización territorial", tendencia: "tendencia en el tiempo",
+  fuentes: "fuentes de datos", ranking_top: "territorios con mayor mortalidad",
+  ranking_bottom: "territorios con menor mortalidad", territorio: "consulta por territorio",
+};
+
+async function interpretarIA(pregunta) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 9000);
+  try {
+    const r = await fetch(IA_URL, { method: "POST", signal: ctrl.signal,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ pregunta: pregunta.slice(0, 300) }) });
+    if (!r.ok) return null;
+    return await r.json();
+  } catch (e) {
+    return null;
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+/* Consulta canónica a partir de la interpretación (solo valores de listas cerradas). */
+function consultaCanonica(i) {
+  const terr = (i.territorios || []).filter((t) => ranking().some((x) => x.nombre === t));
+  return [...terr, CLAVE_INTENCION[i.intencion] || "", i.causa ? "causa" : ""]
+    .join(" ").trim();
+}
+
+/* Con IA activa, toda pregunta escrita se interpreta primero con IA (corrige
+ * errores, apodos y falsos positivos de palabras clave). Si la IA falla, tarda,
+ * o la considera fuera de alcance, se usa la respuesta determinista. */
+async function responderConIA(pregunta) {
+  const base = responder(pregunta);
+  if (!IA_URL || !KB) return base;
+  const i = await interpretarIA(pregunta);
+  if (!i || !i.intencion || i.intencion === "fuera_de_alcance") return base;
+  const q = consultaCanonica(i);
+  if (!q) return base;
+  const r = responder(q);
+  if (!r.encontrado) return base;
+  const partes = [NOMBRE_INTENCION[i.intencion], (i.territorios || []).join(" y "),
+                  i.causa ? "pregunta por causas" : ""].filter(Boolean);
+  r.via_ia = `Interpreté tu pregunta con IA (Gemini) como: ${partes.join(" · ")}. Las cifras provienen de la base de conocimiento, no de la IA.`;
+  return r;
+}
+
 /* Exponer para el HTML. */
-window.Asistente = { cargarKB, responder, detectarIntencion };
+window.Asistente = { cargarKB, responder, responderConIA, detectarIntencion,
+                     consultaCanonica, iaActiva: () => !!IA_URL };
 })();

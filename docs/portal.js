@@ -295,12 +295,21 @@
     "¿Qué relación hay entre la contaminación del aire y la salud?",
     "¿De dónde provienen los datos del proyecto?",
   ];
-  function preguntar() {
-    const q = $("q").value.trim(); if (!q) return;
-    const r = window.Asistente.responder(q), div = $("resp");
+  let enCurso = false;
+  // soloMotor=true para preguntas sugeridas: respuesta determinista instantánea.
+  async function preguntar(soloMotor) {
+    const q = $("q").value.trim(); if (!q || enCurso) return;
+    const div = $("resp"), btn = $("btn-preguntar");
     $("q").value = "";
     div.style.display = "block";
-    let html = `<h3>Respuesta</h3><div class="directa">${esc(r.respuesta_directa)}</div>`;
+    const usarIA = soloMotor !== true && window.Asistente.iaActiva();
+    if (usarIA) div.innerHTML = `<h3>Respuesta</h3><p class="aviso">Interpretando tu pregunta…</p>`;
+    enCurso = true; btn.disabled = true;
+    let r;
+    try { r = usarIA ? await window.Asistente.responderConIA(q) : window.Asistente.responder(q); }
+    finally { enCurso = false; btn.disabled = false; }
+    let html = `<h3>Respuesta</h3><p class="nota">Tu pregunta: «${esc(q)}»</p><div class="directa">${esc(r.respuesta_directa)}</div>`;
+    if (r.via_ia) html += `<p class="nota">🤖 ${esc(r.via_ia)}</p>`;
     if (!r.encontrado) html += `<p class="aviso">Sin cifra directa para esta consulta.</p>`;
     if (r.evidencia && r.evidencia.length) {
       html += `<div class="bloque"><b>Evidencia</b><table><tr><th>Indicador</th><th>Valor</th><th>Año</th><th>Territorio</th><th>Fuente</th></tr>`;
@@ -326,7 +335,7 @@
   SUGERIDAS.forEach((s) => {
     const b = document.createElement("button");
     b.type = "button"; b.textContent = s;
-    b.onclick = () => { $("q").value = s; preguntar(); };
+    b.onclick = () => { $("q").value = s; preguntar(true); };
     $("sugeridas").appendChild(b);
   });
   const RAPIDAS = [
@@ -339,13 +348,13 @@
     const b = document.createElement("button");
     b.type = "button"; b.textContent = txt;
     b.onclick = () => {
-      $("q").value = preg; preguntar();
+      $("q").value = preg; preguntar(true);
       $("asistente").scrollIntoView({ behavior: REDUCIR ? "auto" : "smooth" });
     };
     $("rapidas").appendChild(b);
   });
-  $("btn-preguntar").onclick = preguntar;
-  $("q").addEventListener("keydown", (e) => { if (e.key === "Enter") preguntar(); });
+  $("btn-preguntar").onclick = () => preguntar(false);
+  $("q").addEventListener("keydown", (e) => { if (e.key === "Enter") preguntar(false); });
 
   /* ---------- Revelado al hacer scroll ---------- */
   (function () {

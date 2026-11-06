@@ -1,0 +1,29 @@
+# Worker que interpreta preguntas con Gemini (la clave va como secreto, NUNCA aquí).
+# Despliegue: ver worker/README.md
+name = "bienestar-medellin-ia"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+account_id = "2d79373c3af403a1931e4699d556658d"
+workers_dev = true
+
+[vars]
+ORIGEN_PERMITIDO = "https://watabares.github.io"
+MODELO = "gemini-flash-lite-latest"
+
+# Por IP: 10 consultas/minuto (un salón entero puede compartir IP).
+[[ratelimits]]
+name = "LIMITE_IP"
+namespace_id = "7101"
+
+  [ratelimits.simple]
+  limit = 10
+  period = 60
+
+# Global: protege la cuota gratuita de Gemini.
+[[ratelimits]]
+name = "LIMITE_GLOBAL"
+namespace_id = "7102"
+
+  [ratelimits.simple]
+  limit = 30
+  period = 60
