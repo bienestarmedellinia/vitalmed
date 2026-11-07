@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-11-06 23:34",
+ "generado_utc": "2026-11-07 02:46",
  "archivos": [
   {
    "archivo": "indicadores_por_territorio.csv",
@@ -30,6 +30,11 @@
    "archivo": "mortalidad_dane_mensual.csv",
    "descripcion": "Mortalidad mensual en Medellín por causa CIE-10 (DANE EEVV). Nivel municipal (no comuna). respiratorias=J00-J99, circulatorias=I00-I99.",
    "filas": 180
+  },
+  {
+   "archivo": "mortalidad_dane_edad.csv",
+   "descripcion": "Mortalidad en Medellín por grupo de edad (ciclo vital) y causa CIE-10 (DANE EEVV). Nivel municipal. Permite comparativo etario.",
+   "filas": 101
   },
   {
    "archivo": "sivigila_semanal.csv",

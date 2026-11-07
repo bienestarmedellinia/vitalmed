@@ -3,7 +3,7 @@
     "proyecto": "Medellín, Bienestar Basado en Datos",
     "descripcion": "Knowledge base del asistente de inteligencia territorial. Todas las cifras provienen del pipeline reproducible; el asistente no inventa datos.",
     "territorios_oficiales": 21,
-    "generado_utc": "2026-11-06 23:34"
+    "generado_utc": "2026-11-07 02:46"
   },
   "indicadores": {
     "hallazgo_mortalidad": {
@@ -1295,7 +1295,184 @@
           "2023": 19400,
           "2024": 19883
         }
-      }
+      },
+      "por_edad": {
+        "circulatorias": {
+          "1 a 4 años": 7,
+          "15 a 29 años": 131,
+          "30 a 44 años": 496,
+          "45 a 64 años": 2939,
+          "5 a 14 años": 20,
+          "65 años y más": 25133,
+          "Menores de 1 año": 15
+        },
+        "respiratorias": {
+          "1 a 4 años": 12,
+          "15 a 29 años": 76,
+          "30 a 44 años": 227,
+          "45 a 64 años": 807,
+          "5 a 14 años": 38,
+          "65 años y más": 10359,
+          "Menores de 1 año": 63
+        },
+        "total": {
+          "1 a 4 años": 137,
+          "15 a 29 años": 2515,
+          "30 a 44 años": 5959,
+          "45 a 64 años": 15595,
+          "5 a 14 años": 443,
+          "65 años y más": 83349,
+          "Menores de 1 año": 1644
+        }
+      },
+      "por_edad_anio": {
+        "circulatorias": {
+          "2020": {
+            "1 a 4 años": 1,
+            "15 a 29 años": 29,
+            "30 a 44 años": 94,
+            "45 a 64 años": 592,
+            "5 a 14 años": 4,
+            "65 años y más": 5066,
+            "Menores de 1 año": 3
+          },
+          "2021": {
+            "1 a 4 años": 3,
+            "15 a 29 años": 23,
+            "30 a 44 años": 99,
+            "45 a 64 años": 636,
+            "5 a 14 años": 3,
+            "65 años y más": 5249,
+            "Menores de 1 año": 3
+          },
+          "2022": {
+            "15 a 29 años": 30,
+            "30 a 44 años": 110,
+            "45 a 64 años": 605,
+            "5 a 14 años": 7,
+            "65 años y más": 5423,
+            "Menores de 1 año": 5
+          },
+          "2023": {
+            "15 a 29 años": 30,
+            "30 a 44 años": 92,
+            "45 a 64 años": 577,
+            "5 a 14 años": 6,
+            "65 años y más": 4671,
+            "Menores de 1 año": 1
+          },
+          "2024": {
+            "1 a 4 años": 3,
+            "15 a 29 años": 19,
+            "30 a 44 años": 101,
+            "45 a 64 años": 529,
+            "65 años y más": 4724,
+            "Menores de 1 año": 3
+          }
+        },
+        "respiratorias": {
+          "2020": {
+            "1 a 4 años": 4,
+            "15 a 29 años": 13,
+            "30 a 44 años": 37,
+            "45 a 64 años": 136,
+            "5 a 14 años": 3,
+            "65 años y más": 1784,
+            "Menores de 1 año": 10
+          },
+          "2021": {
+            "1 a 4 años": 2,
+            "15 a 29 años": 15,
+            "30 a 44 años": 64,
+            "45 a 64 años": 211,
+            "5 a 14 años": 3,
+            "65 años y más": 2000,
+            "Menores de 1 año": 21
+          },
+          "2022": {
+            "1 a 4 años": 4,
+            "15 a 29 años": 14,
+            "30 a 44 años": 42,
+            "45 a 64 años": 149,
+            "5 a 14 años": 8,
+            "65 años y más": 2256,
+            "Menores de 1 año": 16
+          },
+          "2023": {
+            "15 a 29 años": 19,
+            "30 a 44 años": 38,
+            "45 a 64 años": 154,
+            "5 a 14 años": 9,
+            "65 años y más": 2130,
+            "Menores de 1 año": 9
+          },
+          "2024": {
+            "1 a 4 años": 2,
+            "15 a 29 años": 15,
+            "30 a 44 años": 46,
+            "45 a 64 años": 157,
+            "5 a 14 años": 15,
+            "65 años y más": 2189,
+            "Menores de 1 año": 7
+          }
+        },
+        "total": {
+          "2020": {
+            "1 a 4 años": 22,
+            "15 a 29 años": 490,
+            "30 a 44 años": 1073,
+            "45 a 64 años": 3076,
+            "5 a 14 años": 79,
+            "65 años y más": 16873,
+            "Menores de 1 año": 338
+          },
+          "2021": {
+            "1 a 4 años": 35,
+            "15 a 29 años": 484,
+            "30 a 44 años": 1497,
+            "45 a 64 años": 4569,
+            "5 a 14 años": 74,
+            "65 años y más": 20247,
+            "Menores de 1 año": 387
+          },
+          "2022": {
+            "1 a 4 años": 29,
+            "15 a 29 años": 577,
+            "30 a 44 años": 1137,
+            "45 a 64 años": 2681,
+            "5 a 14 años": 103,
+            "65 años y más": 16255,
+            "Menores de 1 año": 350
+          },
+          "2023": {
+            "1 a 4 años": 21,
+            "15 a 29 años": 512,
+            "30 a 44 años": 1130,
+            "45 a 64 años": 2599,
+            "5 a 14 años": 83,
+            "65 años y más": 14748,
+            "Menores de 1 año": 292
+          },
+          "2024": {
+            "1 a 4 años": 30,
+            "15 a 29 años": 452,
+            "30 a 44 años": 1122,
+            "45 a 64 años": 2670,
+            "5 a 14 años": 104,
+            "65 años y más": 15226,
+            "Menores de 1 año": 277
+          }
+        }
+      },
+      "orden_edad": [
+        "Menores de 1 año",
+        "1 a 4 años",
+        "5 a 14 años",
+        "15 a 29 años",
+        "30 a 44 años",
+        "45 a 64 años",
+        "65 años y más"
+      ]
     },
     "sivigila": {
       "unidad": "casos (conteo semanal)",
