@@ -1,10 +1,14 @@
-# Dependencias de la FASE 2 (asistente). Opcionales: el motor determinista
-# funciona solo con la librería estándar + el knowledge_base.json del pipeline.
+# Dependencias OPCIONALES de la FASE 2 (asistente por línea de comandos).
+# El motor determinista funciona solo con la librería estándar + el
+# knowledge_base.json del pipeline; esta dependencia es solo para la mejora
+# de redacción con un LLM (opcional):
 #
-#   - streamlit: interfaz web para el jurado (modo CLI no la requiere)
-#   - openai:    capa LLM OPCIONAL; sin OPENAI_API_KEY el asistente igual responde
+#   - openai: capa LLM OPCIONAL; sin OPENAI_API_KEY el asistente responde igual
+#             (cifras del motor determinista, sin inventar nada).
 #
-# Instalar solo si se quiere la interfaz web y/o la redacción con LLM:
+# La interfaz WEB del asistente es el portal publicado (GitHub Pages), que usa
+# el mismo motor en JavaScript y no requiere instalar nada.
+#
+# Instalar solo si se quiere la redacción con LLM:
 #   pip install -r asistente/requirements.txt
-streamlit==1.39.0
 openai==1.54.3

@@ -25,12 +25,13 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
    Pipeline (requirements.txt, versiones fijas):
      pandas==2.2.3 · openpyxl==3.1.5 · requests==2.32.3 · PyYAML==6.0.2
      pyarrow==17.0.0 · matplotlib==3.9.2
-   Asistente (asistente/requirements.txt, opcional):
-     streamlit==1.39.0 · openai==1.54.3 (la API key es OPCIONAL)
+   Asistente por línea de comandos (asistente/requirements.txt, OPCIONAL):
+     openai==1.54.3 (solo mejora la redacción; la API key es OPCIONAL)
 
 4. EJECUTARLO
-   # Opción A - Asistente en Windows: doble clic en EJECUTAR_ASISTENTE.bat
-   # Opción B - Asistente por comandos:
+   # Opción A (recomendada) - Probar en línea: abrir el portal web (no instala nada)
+   #   https://bienestarmedellinia.github.io/vitalmed/
+   # Opción B - Asistente por línea de comandos (local, sin navegador):
    python asistente/app.py --cli "¿Qué comunas priorizar en salud?"
    # Opción C - Pipeline completo (NO en equipos de poca RAM):
    pip install -r requirements.txt
@@ -80,6 +81,25 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
        - Intento de suicidio: verificada en su ficha MEData (id 1-026-22-000146,
          registros SIVIGILA, Secretaría de Salud, cobertura desde 2012).
      Atribución: Alcaldía de Medellín, Secretaría de Salud, MEData.
+   - DANE · Estadísticas Vitales (EEVV), defunciones no fetales · microdatos nacionales
+     Mortalidad MENSUAL de Medellín por causa CIE-10 (total, respiratorias J00-J99,
+     circulatorias I00-I99) y por grupo de edad, 2020-2024. Nivel municipio (no comuna).
+     https://microdatos.dane.gov.co/index.php/catalog/central?sk=Estad%C3%ADsticas%20Vitales
+     Fecha de consulta: 6 nov. 2026. Licencia: microdatos anonimizados de uso público
+     (gratuitos, con cita textual obligatoria al DANE).
+   - SIVIGILA (INS) vía datos.gov.co · Vigilancia en Salud Pública
+     Casos SEMANALES en Medellín (cod_mun_o 5001): ESI-IRAG (evento 345, centinela
+     respiratorio) e intento de suicidio (evento 356), 2008-2022.
+     https://www.datos.gov.co/d/4hyg-wa9d
+     Fecha de consulta: 6 nov. 2026. Licencia: CC BY-SA 4.0 (compartir igual).
+   - RIPS (MinSalud) vía datos.gov.co · Registros Individuales de Prestación de Servicios
+     Atenciones ANUALES en Medellín por grupo CIE-10: respiratorias (J) y trastornos
+     mentales (F), 2009-2021. Contexto de carga de morbilidad.
+     https://www.datos.gov.co/d/4k9h-8qiu
+     Fecha de consulta: 6 nov. 2026. Licencia: CC BY-SA 4.0 (compartir igual).
+   Nota metodológica: DANE, SIVIGILA y RIPS están a nivel de MUNICIPIO (Medellín), no
+   por comuna, y con periodicidad distinta (mensual/semanal/anual); se muestran por
+   separado, no se mezclan ni se atribuyen a comunas. 2020-2021 reflejan la COVID-19.
    Los microdatos NO se publican; el pipeline los descarga desde la fuente.
    Solo se publican tablas agregadas por comuna, sin datos personales.
 

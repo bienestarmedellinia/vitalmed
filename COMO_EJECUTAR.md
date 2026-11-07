@@ -33,28 +33,25 @@ Ejemplos de preguntas:
 
 ---
 
-## Opción C · Asistente en tu computador Windows (1 doble clic)
+## Opción C · Asistente en tu computador (línea de comandos)
+
+Requiere **Python 3.11**. No necesita instalar dependencias (el motor usa solo
+la librería estándar y el knowledge base incluido en el repositorio).
 
 1. En GitHub, botón verde **Code → Download ZIP**. Descomprime el archivo.
-2. Abre la carpeta descomprimida. Dentro verás `EJECUTAR_ASISTENTE.bat`
-   junto a las carpetas `asistente` y `outputs`.
-3. Haz **doble clic en `EJECUTAR_ASISTENTE.bat`**. Se abre una ventana negra
-   que te guía paso a paso y abre el asistente en el navegador.
+2. Abre una terminal en la carpeta descomprimida.
+3. Ejecuta una pregunta:
 
-**¿Funcionó?** Si en el navegador ves el título "Bienestar Medellín IA" y
-puedes escribir una pregunta, está listo.
+```
+python asistente/app.py --cli "¿Qué comunas priorizar en salud?"
+```
 
-### Si algo falla (solución rápida)
+**¿Funcionó?** Verás la respuesta "La Candelaria, Laureles Estadio, Manrique…"
+con su evidencia, fuente y limitaciones. También funciona en modo interactivo
+ejecutando `python asistente/app.py` sin argumentos.
 
-| Lo que ves | Qué hacer |
-|------------|-----------|
-| "No se encontró Python" | Instala Python desde python.org y marca *"Add Python to PATH"*. Vuelve a dar doble clic. |
-| Se abre la Microsoft Store | Cierra la Store. Instala Python desde python.org (no desde la Store). |
-| "Falta knowledge_base.json" | Descargaste el ZIP incompleto. Vuelve a descargarlo completo. |
-| "No se pudieron instalar las dependencias" | Revisa tu internet, o usa la **Opción B** (web, no instala nada). |
-| La ventana negra se cierra sola | Abre `cmd`, arrastra el `.bat` dentro y pulsa Enter para ver el mensaje. |
-
-> Si nada funciona, usa la **Opción B** (asistente web): no requiere instalar nada.
+> La interfaz **web** del asistente (Opción B) usa el mismo motor y no requiere
+> instalar nada; es la vía recomendada para el jurado.
 
 ---
 

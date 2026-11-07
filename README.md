@@ -104,11 +104,10 @@ Uso:
 # 1) generar el knowledge base (si no está): usa las tablas del pipeline
 python scripts/07_construir_kb.py
 
-# 2a) interfaz web (fase 2):
-pip install -r asistente/requirements.txt
-streamlit run asistente/app.py
+# 2a) interfaz web (fase 2): el portal publicado, sin instalar nada
+#     https://bienestarmedellinia.github.io/vitalmed/
 
-# 2b) modo CLI de respaldo (no requiere streamlit):
+# 2b) asistente local por línea de comandos (mismo motor, sin navegador):
 python asistente/app.py --cli "¿Qué comunas priorizar en salud?"
 
 # pruebas del asistente (verifican que responde con cifras reales):
