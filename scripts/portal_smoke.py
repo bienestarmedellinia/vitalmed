@@ -79,8 +79,8 @@ def main() -> int:
 
         pag.fill("#q", PREGUNTA)
         pag.click("#btn-preguntar")
-        pag.wait_for_function("!document.querySelector('#resp').innerText.includes('Interpretando')",
-                              timeout=15000)
+        # Esperar la respuesta final SIN evaluar JS (la CSP bloquea wait_for_function por 'unsafe-eval').
+        pag.locator("#resp", has_text="La Candelaria").wait_for(timeout=15000)
         resp = pag.locator("#resp").inner_text()
         if "La Candelaria" not in resp or "1325.6" not in resp:
             errores.append(f"El asistente no respondió como se esperaba: {resp[:120]!r}")
