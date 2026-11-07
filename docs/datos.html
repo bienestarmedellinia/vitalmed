@@ -82,6 +82,7 @@
       <a href="#serie">Serie histórica</a>
       <a href="#factores">Factores</a>
       <a href="#aire">Aire</a>
+      <a href="#ciudad-tiempo">Salud en el tiempo</a>
       <a href="#descargas">Descargas</a>
     </div>
   </nav>
@@ -157,8 +158,25 @@
       </div>
     </section>
 
+    <section id="ciudad-tiempo">
+      <h2>5 · Salud en el tiempo (fuentes nacionales)</h2>
+      <p class="sub">Series temporales de Medellín de fuentes nacionales: mortalidad por causa (DANE · mensual),
+        eventos de vigilancia (INS/SIVIGILA · semanal) y morbilidad por grupo CIE-10 (MinSalud/RIPS · anual).
+        Nivel municipal (no por comuna). Es asociación, no causalidad.</p>
+      <div class="caja">
+        <div class="controles">
+          <div><label for="ct-serie">Serie</label><select id="ct-serie"></select></div>
+        </div>
+        <div class="resumen" id="ct-resumen" aria-live="polite"></div>
+        <div class="lienzo bajo"><canvas id="c-ct" role="img" aria-label="Serie temporal de salud de Medellín seleccionada"></canvas></div>
+        <div class="tabla-wrap" style="margin-top:14px"><table id="t-ct"></table></div>
+        <p class="limit" id="lim-ct"></p>
+        <div class="acciones"><button type="button" class="sec" id="d-ct">Descargar serie (CSV)</button></div>
+      </div>
+    </section>
+
     <section id="descargas">
-      <h2>5 · Descargas y diccionario</h2>
+      <h2>6 · Descargas y diccionario</h2>
       <p class="sub">Archivos completos generados por el pipeline en cada ejecución (UTF-8, separados por comas). Datos agregados por territorio, sin datos personales.</p>
       <div class="caja">
         <ul class="descargas" id="lista-desc"></ul>
@@ -169,7 +187,7 @@
 
   <footer>
     <div class="wrap">
-      <p>Fuentes: MEData · Secretaría de Salud de Medellín; Encuesta de Calidad de Vida · Alcaldía de Medellín (Planeación); SIATA · Valle de Aburrá. Ver <a href="index.html#transparencia">transparencia y licencias</a>.</p>
+      <p>Fuentes: MEData · Secretaría de Salud de Medellín; Encuesta de Calidad de Vida · Alcaldía de Medellín (Planeación); SIATA · Valle de Aburrá; DANE (Estadísticas Vitales); INS (SIVIGILA); MinSalud (RIPS). Ver <a href="index.html#transparencia">transparencia y licencias</a>.</p>
       <p id="estado">Cargando datos…</p>
     </div>
   </footer>

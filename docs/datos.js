@@ -192,6 +192,71 @@ function pintarAire() {
   $("lim-aire").textContent = "⚠️ " + (pm.advertencia || "") + " " + (pm.criterio || "");
 }
 
+/* ── 5. Salud en el tiempo (DANE / SIVIGILA / RIPS) ─────────────────── */
+let CT = null;  // lista de series disponibles
+function construirSeriesCiudad() {
+  const ind = KB.indicadores || {}, out = [];
+  const puntosMensualSemanal = (serie) => {  // {anio:{periodo:valor}} → [{x,y}]
+    const pts = [];
+    Object.keys(serie).map(Number).sort((a, b) => a - b).forEach((a) => {
+      const sub = serie[a];
+      Object.keys(sub).map(Number).sort((x, y) => x - y).forEach((p) =>
+        pts.push({ x: `${a}-${String(p).padStart(2, "0")}`, y: Number(sub[p]) }));
+    });
+    return pts;
+  };
+  const puntosAnual = (serie) =>
+    Object.keys(serie).map(Number).sort((a, b) => a - b).map((a) => ({ x: String(a), y: Number(serie[a]) }));
+  const d = ind.mortalidad_dane;
+  if (d && d.serie) Object.keys(d.serie).forEach((causa) =>
+    out.push({ id: "dane_" + causa, etiqueta: `Mortalidad ${causa} (DANE, mensual)`,
+      fuente: "DANE · Estadísticas Vitales", unidad: "defunciones/mes", nota: d.advertencia || "",
+      col: causa === "respiratorias" ? NAR : (causa === "circulatorias" ? ROJO : AZUL),
+      puntos: puntosMensualSemanal(d.serie[causa]), xlab: "año-mes" }));
+  const sv = ind.sivigila;
+  if (sv && sv.serie) Object.keys(sv.serie).forEach((ev) =>
+    out.push({ id: "sivi_" + ev, etiqueta: `${ev} (SIVIGILA, semanal)`,
+      fuente: "INS · SIVIGILA", unidad: "casos/semana", nota: sv.advertencia || "", col: AZUL,
+      puntos: puntosMensualSemanal(sv.serie[ev]), xlab: "año-semana" }));
+  const rp = ind.rips;
+  if (rp && rp.serie) Object.keys(rp.serie).forEach((g) =>
+    out.push({ id: "rips_" + g, etiqueta: `${g} (RIPS, anual)`,
+      fuente: "MinSalud · RIPS", unidad: "atenciones/año", nota: rp.advertencia || "", col: NAR,
+      puntos: puntosAnual(rp.serie[g]), xlab: "año" }));
+  return out;
+}
+function pintarCiudadTiempo() {
+  CT = construirSeriesCiudad();
+  const sec = $("ciudad-tiempo");
+  if (!CT.length) { if (sec) sec.style.display = "none"; return; }
+  $("ct-serie").innerHTML = CT.map((s) => `<option value="${esc(s.id)}">${esc(s.etiqueta)}</option>`).join("");
+  const dibujar = () => {
+    const s = CT.find((x) => x.id === $("ct-serie").value) || CT[0];
+    $("ct-resumen").innerHTML = `<b>${esc(s.etiqueta)}</b> · Fuente: ${esc(s.fuente)} · ${esc(s.unidad)}
+      · ${s.puntos.length} puntos (${esc(s.puntos[0] ? s.puntos[0].x : "")}–${esc(s.puntos.length ? s.puntos[s.puntos.length - 1].x : "")}).`;
+    grafico("c-ct", { type: "line",
+      data: { labels: s.puntos.map((p) => p.x),
+        datasets: [{ label: s.etiqueta, data: s.puntos.map((p) => p.y), borderColor: s.col, backgroundColor: s.col,
+          tension: .2, pointRadius: s.puntos.length > 60 ? 0 : 3, borderWidth: 1.5, fill: false }] },
+      options: { responsive: true, maintainAspectRatio: false, animation: false,
+        plugins: { legend: { display: false }, title: { display: true, text: s.etiqueta } },
+        scales: { x: { ticks: { maxTicksLimit: 12, autoSkip: true }, title: { display: true, text: s.xlab } },
+          y: { beginAtZero: true, title: { display: true, text: s.unidad } } } } });
+    $("t-ct").innerHTML = `<caption>${esc(s.etiqueta)} — Medellín</caption>
+      <thead><tr><th scope="col">${esc(s.xlab)}</th><th scope="col">${esc(s.unidad)}</th></tr></thead><tbody>` +
+      s.puntos.map((p) => `<tr><td>${esc(p.x)}</td><td>${fmt(p.y, s.unidad.includes("defunciones") || s.unidad.includes("casos") || s.unidad.includes("atenciones") ? 0 : 1)}</td></tr>`).join("") +
+      "</tbody>";
+    $("lim-ct").textContent = "⚠️ " + s.nota;
+  };
+  $("ct-serie").onchange = dibujar;
+  $("d-ct").onclick = () => {
+    const s = CT.find((x) => x.id === $("ct-serie").value) || CT[0];
+    csv(`${s.id}_medellin.csv`, [s.xlab, "valor", "unidad", "fuente"],
+      s.puntos.map((p) => [p.x, p.y, s.unidad, s.fuente]));
+  };
+  dibujar();
+}
+
 /* ── 5. Descargas y diccionario ─────────────────────────────────────── */
 async function pintarDescargas() {
   let indice = null;
@@ -264,8 +329,10 @@ async function iniciar() {
 
   const sal = S.catalogo.filter(esSalud).length, soc = S.catalogo.length - sal;
   const pmA = Object.keys(((KB.indicadores || {}).pm25_siata || {}).promedio_estaciones || {}).sort();
+  const nCT = (typeof construirSeriesCiudad === "function") ? construirSeriesCiudad().length : 0;
   $("chips").innerHTML = [`${sal} indicadores de salud (MEData)`, `${soc} indicadores sociales (ECV)`,
     "21 territorios", pmA.length ? `PM2.5 ${pmA[0]}–${pmA[pmA.length - 1]}` : null,
+    nCT ? `${nCT} series DANE/SIVIGILA/RIPS` : null,
     `${(S.correlaciones || []).length} correlaciones`].filter(Boolean).map((t) => `<span class="chip">${esc(t)}</span>`).join("");
 
   llenarIndicadores(); llenarAnios(); llenarTerritorios();
@@ -278,7 +345,7 @@ async function iniciar() {
   $("f-res").onchange = pintarFactores; $("f-sig").onchange = pintarFactores;
   if (!resultados.length) $("factores").style.display = "none";
 
-  pintarIndicador(); pintarSerie(); if (resultados.length) pintarFactores(); pintarAire();
+  pintarIndicador(); pintarSerie(); if (resultados.length) pintarFactores(); pintarAire(); pintarCiudadTiempo();
   enlazarDescargas(); await pintarDescargas();
   $("estado").textContent = `Datos generados por el pipeline: ${(KB.meta || {}).generado_utc || "?"} UTC.`;
 }

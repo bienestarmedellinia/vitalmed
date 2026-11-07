@@ -103,6 +103,11 @@ def main() -> int:
             errores.append("Explorador: no respetó el indicador del enlace (#ind=dengue)")
         if pag2.locator("#lista-desc li").count() < 2:
             errores.append("Explorador: no listó las descargas de docs/datos/")
+        # Sección nueva: Salud en el tiempo (DANE/SIVIGILA/RIPS).
+        if pag2.locator("#ct-serie option").count() < 1:
+            errores.append("Explorador: la sección 'Salud en el tiempo' no listó series")
+        if not pag2.evaluate("Chart.getChart('c-ct') && Chart.getChart('c-ct').data.labels.length > 0"):
+            errores.append("Explorador: la serie temporal de ciudad (c-ct) no pintó")
         if pag2.evaluate("typeof window.Asistente") != "undefined":
             errores.append("Explorador: no debe cargar el asistente (módulos separados)")
         nav.close()
