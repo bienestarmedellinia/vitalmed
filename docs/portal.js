@@ -368,6 +368,165 @@
   $("q").addEventListener("keydown", (e) => { if (e.key === "Enter") preguntar(false); });
 
   /* ---------- Revelado al hacer scroll ---------- */
+  /* ---------- Panorama multidimensional (KB.series) ---------- */
+  const DIM_LABEL = { social: "Social y territorial", salud: "Salud", ambiental: "Ambiental" };
+  let PAN = null, panDim = null, panInd = null;
+  function prepararPanorama(KB) {
+    const s = KB.series || {}, cat = s.catalogo || [], datos = s.datos || {};
+    if (!cat.length) return null;
+    const terr = s.territorios || {};  // {codigo: nombre}
+    const porDim = {};
+    cat.forEach((c) => {
+      const d = datos[c.clave];
+      if (!d || !d.valores) return;  // solo indicadores con valores por territorio
+      (porDim[c.dimension] = porDim[c.dimension] || []).push(c);
+    });
+    return { cat, datos, porDim, terr };
+  }
+  function ultimoAnioDesde(valores) {
+    const anios = new Set();
+    Object.values(valores).forEach((serie) =>
+      Object.keys(serie).forEach((a) => anios.add(Number(a))));
+    const arr = [...anios].filter((n) => !isNaN(n));
+    return arr.length ? String(Math.max(...arr)) : null;
+  }
+  function pintarPanorama() {
+    if (!PAN || !panDim || !panInd) return;
+    const meta = PAN.cat.find((c) => c.clave === panInd) || {};
+    const valores = (PAN.datos[panInd] || {}).valores || {};
+    const anio = ultimoAnioDesde(valores);
+    const filas = Object.entries(valores)
+      .map(([cod, serie]) => ({ nombre: PAN.terr[cod] || cod, v: Number(serie[anio]) }))
+      .filter((x) => !isNaN(x.v))
+      .sort((a, b) => b.v - a.v);
+    $("pan-meta").innerHTML = `<b>${esc(meta.nombre || panInd)}</b> · ${esc(meta.unidad || "")} · ${anio || "s/d"}
+      · <small>Fuente: ${esc(meta.fuente || "")}</small>`;
+    $("pan-nota").textContent = (meta.tema ? "Tema: " + meta.tema + ". " : "")
+      + "Comparación entre territorios; asociación, no causalidad.";
+    nuevoGrafico("c-pan", {
+      type: "bar",
+      data: {
+        labels: filas.map((f) => corto(f.nombre)),
+        datasets: [{ data: filas.map((f) => f.v),
+          backgroundColor: filas.map((_f, i) => (i < 3 ? NAR : AZUL)) }],
+      },
+      options: {
+        indexAxis: "y", responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { x: { beginAtZero: true } },
+      },
+    });
+  }
+  function llenarIndicadores() {
+    const items = (PAN.porDim[panDim] || []);
+    $("pan-ind").innerHTML = items.map((c) =>
+      `<option value="${esc(c.clave)}">${esc(c.nombre)}</option>`).join("");
+    panInd = items.length ? items[0].clave : null;
+    pintarPanorama();
+  }
+  function iniciarPanorama(KB) {
+    PAN = prepararPanorama(KB);
+    if (!PAN || !Object.keys(PAN.porDim).length) {
+      const s = $("panorama"); if (s) s.style.display = "none"; return;
+    }
+    const dims = Object.keys(PAN.porDim)
+      .sort((a, b) => (PAN.porDim[b].length - PAN.porDim[a].length));
+    panDim = dims[0];
+    $("pan-dims").innerHTML = dims.map((d) =>
+      `<button type="button" data-d="${esc(d)}" aria-pressed="${d === panDim}">${esc(DIM_LABEL[d] || d)} (${PAN.porDim[d].length})</button>`).join("");
+    $("pan-dims").querySelectorAll("button").forEach((b) => {
+      b.onclick = () => {
+        panDim = b.dataset.d;
+        $("pan-dims").querySelectorAll("button").forEach((x) =>
+          x.setAttribute("aria-pressed", x.dataset.d === panDim));
+        llenarIndicadores();
+      };
+    });
+    $("pan-ind").onchange = (e) => { panInd = e.target.value; pintarPanorama(); };
+    llenarIndicadores();
+  }
+
+  /* ---------- 7. Salud en el tiempo (DANE / SIVIGILA / RIPS) ---------- */
+  function seriesSalud(ind) {
+    const out = [];
+    const dane = ind.mortalidad_dane;
+    if (dane && dane.serie && dane.serie.respiratorias) {
+      out.push({ id: "dane_resp", etiqueta: "Mortalidad respiratoria (mensual, DANE)",
+        tipo: "mensual", fuente: "DANE · Estadísticas Vitales",
+        unidad: "defunciones/mes (J00-J99)", data: dane.serie.respiratorias,
+        nota: dane.advertencia || "" });
+    }
+    const sv = ind.sivigila;
+    if (sv && sv.serie) {
+      Object.entries(sv.serie).forEach(([ev, serie]) => {
+        out.push({ id: "sivi_" + ev, etiqueta: ev + " (semanal, SIVIGILA)",
+          tipo: "semanal", fuente: "INS · SIVIGILA", unidad: "casos/semana",
+          data: serie, nota: sv.advertencia || "" });
+      });
+    }
+    const rp = ind.rips;
+    if (rp && rp.serie) {
+      Object.entries(rp.serie).forEach(([g, serie]) => {
+        out.push({ id: "rips_" + g, etiqueta: g + " (anual, RIPS)",
+          tipo: "anual", fuente: "MinSalud · RIPS", unidad: "atenciones/año",
+          data: serie, nota: rp.advertencia || "" });
+      });
+    }
+    return out;
+  }
+  function puntosSerie(s) {
+    // mensual/semanal: {anio:{periodo:valor}} → etiqueta "anio-periodo"; anual: {anio:valor}
+    const pts = [];
+    if (s.tipo === "anual") {
+      Object.keys(s.data).map(Number).sort((a, b) => a - b).forEach((a) =>
+        pts.push({ x: String(a), y: Number(s.data[a]) }));
+    } else {
+      Object.keys(s.data).map(Number).sort((a, b) => a - b).forEach((a) => {
+        const sub = s.data[a];
+        Object.keys(sub).map(Number).sort((x, y) => x - y).forEach((p) =>
+          pts.push({ x: `${a}-${String(p).padStart(2, "0")}`, y: Number(sub[p]) }));
+      });
+    }
+    return pts;
+  }
+  let SALUD = null, saludSel = null;
+  function pintarSaludTiempo() {
+    const s = SALUD.find((x) => x.id === saludSel); if (!s) return;
+    const pts = puntosSerie(s);
+    $("st-nota").textContent = s.nota;
+    $("st-fuente").innerHTML = `<h3>${esc(s.etiqueta)}</h3>
+      <p><b>Fuente:</b> ${esc(s.fuente)}<br><b>Unidad:</b> ${esc(s.unidad)}<br>
+      <b>Periodicidad:</b> ${esc(s.tipo)}<br><b>Nivel:</b> municipio (Medellín), no comuna.</p>
+      <p class="nota">${esc(s.nota)}</p>`;
+    nuevoGrafico("c-salud-tiempo", {
+      type: "line",
+      data: { labels: pts.map((p) => p.x),
+        datasets: [{ data: pts.map((p) => p.y), borderColor: AZUL, backgroundColor: AZUL,
+          pointRadius: s.tipo === "semanal" ? 0 : 2, borderWidth: 1.5, tension: 0.2 }] },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { x: { ticks: { maxTicksLimit: 12, autoSkip: true } }, y: { beginAtZero: true } },
+      },
+    });
+  }
+  function iniciarSaludTiempo(ind) {
+    SALUD = seriesSalud(ind);
+    if (!SALUD.length) { const s = $("salud-tiempo"); if (s) s.style.display = "none"; return; }
+    saludSel = SALUD[0].id;
+    $("st-series").innerHTML = SALUD.map((s) =>
+      `<button type="button" data-id="${esc(s.id)}" aria-pressed="${s.id === saludSel}">${esc(s.etiqueta)}</button>`).join("");
+    $("st-series").querySelectorAll("button").forEach((b) => {
+      b.onclick = () => {
+        saludSel = b.dataset.id;
+        $("st-series").querySelectorAll("button").forEach((x) =>
+          x.setAttribute("aria-pressed", x.dataset.id === saludSel));
+        pintarSaludTiempo();
+      };
+    });
+    pintarSaludTiempo();
+  }
+
   (function () {
     const els = document.querySelectorAll(".rev");
     if (!("IntersectionObserver" in window)) { els.forEach((e) => e.classList.add("vis")); return; }
@@ -471,6 +630,8 @@
     }
     pintarTendencia(ind.hallazgo_mortalidad || {});
     pintarAire(ind.pm25_siata);
+    iniciarPanorama(KB);
+    iniciarSaludTiempo(ind);
   }
   window.Asistente.cargarKB()
     .then((KB) => {

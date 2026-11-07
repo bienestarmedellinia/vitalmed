@@ -72,6 +72,16 @@ def main() -> int:
         n_series = pag.evaluate("Chart.getChart('chart') ? Chart.getChart('chart').data.datasets.length : 0")
         if n_series < 2:
             errores.append(f"La tendencia debería mostrar territorio + Medellín (series: {n_series})")
+        # Panorama multidimensional: debe pintar barras y ofrecer >1 dimensión.
+        if pag.locator("#pan-dims button").count() < 2:
+            errores.append("Panorama: deberían aparecer varias dimensiones (social/salud/…)")
+        if not pag.evaluate("Chart.getChart('c-pan') && Chart.getChart('c-pan').data.labels.length > 0"):
+            errores.append("Panorama: el gráfico por indicador no pintó")
+        # Salud en el tiempo (fuentes nuevas DANE/SIVIGILA/RIPS).
+        if pag.locator("#st-series button").count() < 1:
+            errores.append("Salud en el tiempo: no se listaron series (DANE/SIVIGILA/RIPS)")
+        if not pag.evaluate("Chart.getChart('c-salud-tiempo') && Chart.getChart('c-salud-tiempo').data.labels.length > 0"):
+            errores.append("Salud en el tiempo: la serie temporal no pintó")
         # Explorador de datos (módulo independiente del asistente).
         pag2 = nav.new_page()
         pag2.on("pageerror", lambda e: errores.append(f"datos.html JS: {e}"))

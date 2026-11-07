@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bienestar Medellín IA · Salud y bienestar basados en datos</title>
-  <meta name="description" content="Portal interactivo de inteligencia territorial para salud y bienestar en Medellín: mortalidad, salud mental y calidad del aire con datos abiertos reales (MEData, ECV, SIATA)." />
+  <meta name="description" content="Portal interactivo de inteligencia territorial para salud y bienestar en Medellín: bienestar multidimensional con datos abiertos reales (MEData, ECV, SIATA, DANE, SIVIGILA, RIPS): empleo, alimentación, deporte, cultura, aire y salud física/mental." />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://bienestar-medellin-ia.watabares.workers.dev; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <script src="init.js"></script>
@@ -178,8 +178,9 @@
   <header class="hero">
     <div class="wrap">
       <h1>Bienestar Medellín <span>IA</span></h1>
-      <p class="lema">Salud, salud mental y calidad del aire de Medellín sobre datos abiertos reales,
-        recalculados automáticamente. Explora, mueve los controles y cuestiona los resultados.</p>
+      <p class="lema">Bienestar multidimensional de Medellín sobre datos abiertos reales: empleo, seguridad
+        alimentaria, deporte y cultura, calidad del aire y salud (física, mental y mortalidad), recalculado
+        automáticamente. Explora las dimensiones, mueve los controles y cuestiona los resultados.</p>
       <div class="trio">
         <div class="tarjeta"><h2>Pregunta de investigación</h2>
           <p>¿Cómo usar el análisis de datos para identificar factores ambientales, sociales y territoriales que afectan la salud y el bienestar de Medellín?</p></div>
@@ -199,8 +200,24 @@
   <main id="contenido" class="wrap">
     <div class="kpis" id="kpis" aria-live="polite"></div>
 
+    <section id="panorama" class="rev">
+      <h2>1 · Panorama multidimensional del bienestar</h2>
+      <p class="sub">El bienestar no es una sola cifra. Elige una dimensión para ver sus indicadores por territorio
+        (último año disponible). Mortalidad y salud mental son parte del panorama, no todo el panorama.</p>
+      <div class="caja">
+        <div class="seg" role="group" aria-label="Dimensión" id="pan-dims"></div>
+        <div class="sim" style="margin-top:10px">
+          <label for="pan-ind">Indicador</label>
+          <select id="pan-ind"></select>
+          <div id="pan-meta" class="nota"></div>
+        </div>
+        <div class="alto"><canvas id="c-pan" role="img" aria-label="Barras horizontales: indicador seleccionado por territorio"></canvas></div>
+        <p class="nota" id="pan-nota"></p>
+      </div>
+    </section>
+
     <section id="mortalidad" class="rev">
-      <h2>1 · Desigualdad entre territorios</h2>
+      <h2>2 · Desigualdad entre territorios</h2>
       <p class="sub">Haz clic en una barra (o elige un territorio) para ver su ficha completa. La línea punteada es la tasa de toda la ciudad, calculada con los casos y la población implícita de cada territorio.</p>
       <div class="grid">
         <div class="caja">
@@ -216,7 +233,7 @@
     </section>
 
     <section id="doble" class="rev">
-      <h2>2 · Doble carga: mortalidad y salud mental</h2>
+      <h2>3 · Doble carga: mortalidad y salud mental</h2>
       <p class="sub">Cada punto es un territorio. Las líneas marcan la mediana de cada indicador: arriba a la derecha están los que superan la mediana en ambos.</p>
       <div class="caja">
         <div class="medio" style="height:480px"><canvas id="c-disp" role="img" aria-label="Dispersión: tasa de mortalidad contra tasa de intento de suicidio por territorio, con medianas"></canvas></div>
@@ -226,7 +243,7 @@
     </section>
 
     <section id="simulador" class="rev">
-      <h2>3 · ¿Qué pasa si cambia el criterio? Simulador de prioridades</h2>
+      <h2>4 · ¿Qué pasa si cambia el criterio? Simulador de prioridades</h2>
       <p class="sub">El índice combina mortalidad y salud mental. Mueve el control para dar más peso a uno u otro y mira si la lista cambia: así se prueba que la priorización no depende de una decisión arbitraria.</p>
       <div class="caja">
         <div class="sim">
@@ -242,7 +259,7 @@
     </section>
 
     <section id="tendencia" class="rev">
-      <h2>4 · Una brecha que crece</h2>
+      <h2>5 · Una brecha que crece</h2>
       <p class="sub" id="tend-sub"></p>
       <div class="caja">
         <div class="seg" role="group" aria-label="Escala">
@@ -255,7 +272,7 @@
     </section>
 
     <section id="aire" class="rev">
-      <h2>5 · Dimensión ambiental: PM2.5 (SIATA)</h2>
+      <h2>6 · Dimensión ambiental: PM2.5 (SIATA)</h2>
       <p class="sub">Media anual por estación, comparando dos años. La línea roja es la guía anual de la OMS 2021 (5 µg/m³).</p>
       <div class="caja">
         <div class="medio" style="height:400px"><canvas id="c-pm" role="img" aria-label="Barras agrupadas: PM2.5 anual por estación SIATA en dos años, con la guía de la OMS"></canvas></div>
@@ -264,8 +281,23 @@
       </div>
     </section>
 
+    <section id="salud-tiempo" class="rev">
+      <h2>7 · Salud en el tiempo: mortalidad, morbilidad y salud mental</h2>
+      <p class="sub">Series temporales de fuentes nacionales nuevas (DANE, INS y MinSalud) para Medellín.
+        Complementan el PM2.5: así se puede observar, con cautela, si la carga respiratoria acompaña al aire.
+        Nivel municipal (no comuna). Es asociación, no causalidad.</p>
+      <div class="grid">
+        <div class="caja">
+          <div class="seg" role="group" aria-label="Serie de salud" id="st-series"></div>
+          <div class="medio"><canvas id="c-salud-tiempo" role="img" aria-label="Serie temporal de salud seleccionada para Medellín"></canvas></div>
+          <p class="nota" id="st-nota"></p>
+        </div>
+        <div class="caja ficha" id="st-fuente" aria-live="polite"></div>
+      </div>
+    </section>
+
     <section id="asistente" class="rev">
-      <h2>6 · Pregunta a los datos</h2>
+      <h2>8 · Pregunta a los datos</h2>
       <p class="sub">Asistente que responde solo con cifras del pipeline: cada respuesta trae evidencia, fuente y limitaciones. No inventa datos. ¿Prefieres ver las tablas completas? Usa el <a href="datos.html">explorador de datos</a>.</p>
       <div class="caja">
         <label for="q">Escribe tu pregunta:</label>
@@ -279,7 +311,7 @@
     </section>
 
     <section id="metodo" class="rev">
-      <h2>7 · Método y automatización: cómo se construye cada cifra</h2>
+      <h2>9 · Método y automatización: cómo se construye cada cifra</h2>
       <p class="sub">Haz clic en cualquier paso, o pulsa «Reproducir flujo» para recorrerlo completo. Todo corre en GitHub Actions, sin intervención manual.</p>
       <div class="caja flujo">
         <div class="disparos"><b>Se activa con:</b>
@@ -302,12 +334,13 @@
           <li>MEData publica las series de salud por comuna hasta 2022 (desde 2008, 2012 o 2013 según el evento); la serie histórica de indicadores ECV llega a 2022; el aire tiene años completos válidos desde 2020 (SIATA publica desde junio de 2019). Las series no se mezclan en una sola cifra.</li>
           <li>Los factores asociados son correlaciones entre los 21 territorios, sin ajustar por edad: describen patrones, no causas. Se excluyen indicadores ECV que la propia fuente marca «no publicar» o cuyos valores por territorio suman el total de la ciudad.</li>
           <li>La población de cada territorio se deriva de casos ÷ tasa; sirve para la tasa de ciudad, no sustituye proyecciones oficiales del DANE.</li>
+          <li>Las series de salud nacionales (DANE, SIVIGILA, RIPS) están a nivel de municipio (Medellín), no por comuna, y con periodicidad distinta (mensual, semanal, anual); se muestran por separado, no se mezclan ni se atribuyen a comunas. Los años 2020–2021 reflejan el efecto de la COVID-19.</li>
         </ul>
       </div>
     </section>
 
     <section id="transparencia" class="rev">
-      <h2>8 · Transparencia de datos y uso de IA</h2>
+      <h2>10 · Transparencia de datos y uso de IA</h2>
       <p class="sub">Qué datasets se usaron, de dónde vienen, bajo qué condiciones y para qué. Cada cifra del portal se puede rastrear hasta una de estas fuentes.</p>
       <div class="caja tabla-wrap">
         <table class="transp">
@@ -338,6 +371,18 @@
               <td>Medias anuales por estación con ≥ 9 meses válidos (cada mes ≥ 75 % de horas válidas)</td>
               <td><a href="https://siata.gov.co/IDEAM/" rel="noopener noreferrer">siata.gov.co/IDEAM</a></td>
               <td>Datos validados publicados por SIATA; condiciones de uso en su sitio</td><td>Contexto ambiental por estación (fuera del índice)</td></tr>
+            <tr><td><span class="etq">Salud · nacional</span><br>Estadísticas Vitales — defunciones no fetales (2020–2024)</td><td>DANE</td>
+              <td>Mortalidad mensual de Medellín por causa CIE-10 (total, respiratorias J00–J99, circulatorias I00–I99)</td>
+              <td><a href="https://microdatos.dane.gov.co/index.php/catalog/central?sk=Estad%C3%ADsticas%20Vitales" rel="noopener noreferrer">Microdatos DANE</a></td>
+              <td>Microdatos anonimizados de uso público (gratuitos, con cita textual al DANE)</td><td>Serie temporal de salud (sección 7); contexto para el aire</td></tr>
+            <tr><td><span class="etq">Salud · nacional</span><br>SIVIGILA (2008–2022)</td><td>INS · datos.gov.co</td>
+              <td>Casos semanales en Medellín: ESI-IRAG (centinela respiratorio) e intento de suicidio</td>
+              <td><a href="https://www.datos.gov.co/d/4hyg-wa9d" rel="noopener noreferrer">datos.gov.co · 4hyg-wa9d</a></td>
+              <td>CC BY-SA 4.0</td><td>Serie semanal de salud (sección 7)</td></tr>
+            <tr><td><span class="etq">Salud · nacional</span><br>RIPS (2009–2021)</td><td>MinSalud · datos.gov.co</td>
+              <td>Atenciones anuales en Medellín por grupo CIE-10: respiratorias (J) y trastornos mentales (F)</td>
+              <td><a href="https://www.datos.gov.co/d/4k9h-8qiu" rel="noopener noreferrer">datos.gov.co · 4k9h-8qiu</a></td>
+              <td>CC BY-SA 4.0</td><td>Contexto anual de morbilidad (sección 7)</td></tr>
           </tbody>
         </table>
         <p class="nota">La licencia de MEData se verificó en las fichas «Mortalidad» e «Intento de suicidio» (Secretaría de Salud); la ECV, en la ficha de la misma encuesta; SIATA, del manifiesto del proyecto (<a href="https://github.com/bienestarmedellinia/vitalmed/blob/main/scripts/sources.yml" rel="noopener noreferrer">scripts/sources.yml</a>); consulta cada portal para las condiciones vigentes. Atribución: Alcaldía de Medellín, Secretaría de Salud, MEData. Referencia OMS: guías de calidad del aire 2021.</p>
