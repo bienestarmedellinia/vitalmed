@@ -183,6 +183,25 @@ def main() -> int:
             "serie": serie,
             "total_anual": resumen,
         }
+        # Desglose por grupo de edad (ciclo vital) — comparativo etario real.
+        edad_f = TAB / "dane_mortalidad_edad.csv"
+        if edad_f.exists():
+            de = pd.read_csv(edad_f)
+            # por_edad: {causa: {grupo_edad: defunciones_sumadas_todos_los_años}}
+            por_edad = {}
+            for r in de.itertuples():
+                por_edad.setdefault(r.causa, {})
+                por_edad[r.causa][r.grupo_edad] = por_edad[r.causa].get(r.grupo_edad, 0) + int(r.defunciones)
+            # por_edad_anio: {causa: {anio: {grupo_edad: defunciones}}}
+            por_edad_anio = {}
+            for r in de.itertuples():
+                por_edad_anio.setdefault(r.causa, {}).setdefault(str(int(r.anio)), {})[r.grupo_edad] = int(r.defunciones)
+            orden = cob.get("grupos_edad", [])
+            kb["indicadores"]["mortalidad_dane"]["por_edad"] = por_edad
+            kb["indicadores"]["mortalidad_dane"]["por_edad_anio"] = por_edad_anio
+            kb["indicadores"]["mortalidad_dane"]["orden_edad"] = orden
+            log(f"Mortalidad DANE por edad: {len(orden)} grupos, "
+                f"causas {sorted(por_edad)}")
         log(f"Mortalidad DANE: {len(anios)} años {anios}, "
             f"causas {sorted(serie)}")
 
@@ -402,6 +421,14 @@ def exportar_datos_abiertos(kb: dict, destino: Path) -> None:
             pd.DataFrame(filas_m).sort_values(["causa", "anio", "mes"]),
             "Mortalidad mensual en Medellín por causa CIE-10 (DANE EEVV). "
             "Nivel municipal (no comuna). respiratorias=J00-J99, circulatorias=I00-I99.")
+    if md.get("por_edad_anio"):
+        filas_e = [{"anio": int(a), "grupo_edad": ge, "causa": causa, "defunciones": v}
+                   for causa, xa in md["por_edad_anio"].items()
+                   for a, xg in xa.items() for ge, v in xg.items()]
+        archivos["mortalidad_dane_edad.csv"] = (
+            pd.DataFrame(filas_e).sort_values(["causa", "anio", "grupo_edad"]),
+            "Mortalidad en Medellín por grupo de edad (ciclo vital) y causa CIE-10 "
+            "(DANE EEVV). Nivel municipal. Permite comparativo etario.")
     sv = kb.get("indicadores", {}).get("sivigila") or {}
     if sv.get("serie"):
         filas_s = [{"evento": ev, "anio": int(a), "semana": int(s), "casos": v}

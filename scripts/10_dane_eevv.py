@@ -89,15 +89,45 @@ def resolver_fileid(ficha: int) -> int | None:
     return None
 
 
-def procesar_zip(data: bytes, cod_dpto: str, cod_munic: str) -> Counter:
-    """Agrega defunciones del municipio objetivo por (mes, causa) desde el CSV
-    interno del ZIP, leído en streaming (latin-1)."""
+def grupo_edad(gru_ed1: str) -> str | None:
+    """Mapea GRU_ED1 (quinquenal fino del DANE, '00'..'29') a grupos de ciclo
+    vital legibles. Códigos DANE: 00 = menor de 1 hora … 06 = <1 año; 07='1-4';
+    08='5-9'; 09='10-14'; 10='15-19'; 11='20-24' … cada +1 = +5 años; 28='105-109';
+    29='edad desconocida'. Agrupación por ciclo vital para comparar sin ruido."""
+    try:
+        g = int(gru_ed1)
+    except (TypeError, ValueError):
+        return None
+    if g <= 6:                 # 00-06: desde <1 hora hasta <1 año
+        return "Menores de 1 año"
+    if g == 7:                 # 07: 1-4
+        return "1 a 4 años"
+    if 8 <= g <= 9:            # 08-09: 5-14
+        return "5 a 14 años"
+    if 10 <= g <= 12:          # 10-12: 15-29
+        return "15 a 29 años"
+    if 13 <= g <= 15:          # 13-15: 30-44
+        return "30 a 44 años"
+    if 16 <= g <= 19:          # 16-19: 45-64
+        return "45 a 64 años"
+    if 20 <= g <= 28:          # 20-28: 65 y más
+        return "65 años y más"
+    return None                # 29 o desconocido: se excluye (se declara)
+
+
+def procesar_zip(data: bytes, cod_dpto: str, cod_munic: str) -> tuple[Counter, Counter]:
+    """Agrega defunciones del municipio objetivo desde el CSV interno del ZIP
+    (streaming, latin-1). Devuelve dos contadores:
+      - por (mes, causa): total / respiratorias(J) / circulatorias(I)
+      - por (grupo_edad, causa): mismas causas, para comparativo etario
+    """
     conteo: Counter = Counter()
+    por_edad: Counter = Counter()
     with zipfile.ZipFile(io.BytesIO(data)) as zf:
         nombre = next((n for n in zf.namelist() if n.lower().endswith(".csv")), None)
         if not nombre:
             log("el ZIP no contiene CSV")
-            return conteo
+            return conteo, por_edad
         with zf.open(nombre) as fh:
             texto = io.TextIOWrapper(fh, encoding="latin-1", newline="")
             r = csv.reader(texto)
@@ -108,7 +138,8 @@ def procesar_zip(data: bytes, cod_dpto: str, cod_munic: str) -> Counter:
                     ix["COD_DPTO"], ix["COD_MUNIC"], ix["MES"], ix["C_BAS1"])
             except KeyError as e:
                 log(f"columna faltante en CSV: {e}")
-                return conteo
+                return conteo, por_edad
+            i_ed = ix.get("GRU_ED1")
             dptos = {cod_dpto, cod_dpto.lstrip("0")}
             muns = {cod_munic, cod_munic.lstrip("0")}
             for row in r:
@@ -119,12 +150,18 @@ def procesar_zip(data: bytes, cod_dpto: str, cod_munic: str) -> Counter:
                     if not mes.isdigit():
                         continue
                     causa = (row[i_cau] or "").strip().upper()
+                    cau = ("respiratorias" if causa[:1] == "J"
+                           else "circulatorias" if causa[:1] == "I" else None)
                     conteo[(mes, "total")] += 1
-                    if causa[:1] == "J":
-                        conteo[(mes, "respiratorias")] += 1
-                    elif causa[:1] == "I":
-                        conteo[(mes, "circulatorias")] += 1
-    return conteo
+                    if cau:
+                        conteo[(mes, cau)] += 1
+                    # Comparativo por grupo de edad (ciclo vital).
+                    ge = grupo_edad(row[i_ed]) if i_ed is not None else None
+                    if ge:
+                        por_edad[(ge, "total")] += 1
+                        if cau:
+                            por_edad[(ge, cau)] += 1
+    return conteo, por_edad
 
 
 def main() -> int:
@@ -140,6 +177,7 @@ def main() -> int:
     base_dl = dane["base_descarga"]
 
     filas = []          # (anio, mes, causa, defunciones)
+    filas_edad = []     # (anio, grupo_edad, causa, defunciones)
     cobertura = {}      # anio -> nº de meses con datos
     for anio, meta in sorted(dane["anios"].items()):
         ficha = meta["ficha"]
@@ -152,7 +190,7 @@ def main() -> int:
             log(f"{anio}: descargando ficha {ficha} fileid {fileid} …")
             data = _http(url)
             log(f"{anio}: {len(data)/1e6:.1f} MB; procesando CSV en streaming …")
-            conteo = procesar_zip(data, cod_dpto, cod_munic)
+            conteo, por_edad = procesar_zip(data, cod_dpto, cod_munic)
         except Exception as e:  # noqa: BLE001
             log(f"{anio}: error ({e}); se omite")
             continue
@@ -161,6 +199,9 @@ def main() -> int:
         for (mes, causa), n in sorted(conteo.items()):
             filas.append({"anio": int(anio), "mes": mes, "causa": causa,
                           "defunciones": int(n)})
+        for (ge, causa), n in sorted(por_edad.items()):
+            filas_edad.append({"anio": int(anio), "grupo_edad": ge, "causa": causa,
+                               "defunciones": int(n)})
         tot = sum(n for (m, c), n in conteo.items() if c == "total")
         log(f"{anio}: {tot} defunciones en {obj['nombre']} ({len(meses)} meses)")
 
@@ -173,10 +214,21 @@ def main() -> int:
         w = csv.DictWriter(f, fieldnames=["anio", "mes", "causa", "defunciones"])
         w.writeheader()
         w.writerows(filas)
+    # Comparativo por grupo de edad (ciclo vital) — habilita análisis por edad real.
+    if filas_edad:
+        salida_e = OUT / "dane_mortalidad_edad.csv"
+        with open(salida_e, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=["anio", "grupo_edad", "causa", "defunciones"])
+            w.writeheader()
+            w.writerows(filas_edad)
+        log(f"Mortalidad por edad -> {salida_e} ({len(filas_edad)} filas)")
     (OUT / "dane_cobertura.json").write_text(
         json.dumps({"municipio": obj, "meses_por_anio": cobertura,
                     "nivel": "municipio de ocurrencia (NO comuna)",
                     "periodicidad": "mensual",
+                    "grupos_edad": ["Menores de 1 año", "1 a 4 años", "5 a 14 años",
+                                    "15 a 29 años", "30 a 44 años", "45 a 64 años",
+                                    "65 años y más"],
                     "causas": {"respiratorias": "CIE-10 J00-J99",
                                "circulatorias": "CIE-10 I00-I99",
                                "total": "todas las causas"}},
