@@ -1,148 +1,2694 @@
 {
-  "meta": {
-    "descripcion": "Banco curado de preguntas por categoría (observatorio por preguntas). Cada pregunta enlaza a datos REALES del portal: al explorador (datos.html#ind=…) o a una sección/gráfica del portal. No contiene cifras: estas se recuperan del knowledge_base.json al abrir el destino.",
-    "nota": "Reemplaza 'educación' (sin dato propio) por temas con datos reales: violencia de género, enfermedades transmisibles, demografía, salud sexual y reproductiva.",
-    "destinos": {
-      "explorador": "datos.html#ind=<clave>  → indicador por territorio (barras + tabla + descarga)",
-      "serie": "datos.html#ind=<clave>  → además serie histórica por territorio",
-      "aire": "index.html#aire  → PM2.5 por estación (SIATA)",
-      "salud_tiempo": "datos.html#ciudad-tiempo  → series DANE/SIVIGILA/RIPS",
-      "panorama": "index.html#panorama  → panorama multidimensional",
-      "tendencia": "index.html#tendencia  → tendencia de ciudad por indicador"
+ "meta": {
+  "descripcion": "Banco completo de 200 preguntas por categoría (observatorio por preguntas), recuperado de la sesión de diseño y verificado contra knowledge_base.json: cada pregunta cita al menos un indicador existente. Las cifras no están aquí; se recuperan del KB al abrir el modal.",
+  "total": 200,
+  "vistas": {
+   "territorio": "barras por territorio (último año) del indicador 'clave'",
+   "ciudad_tiempo": "serie temporal de ciudad (DANE/SIVIGILA/RIPS) según 'clave'",
+   "aire": "PM2.5 por estación (SIATA)",
+   "indice": "índice de priorización en salud"
+  }
+ },
+ "categorias": [
+  {
+   "id": "empleo",
+   "nombre": "Empleo y desarrollo económico",
+   "grupo": "Socioeconómicas",
+   "preguntas": [
+    {
+     "q": "¿Qué territorios presentan las mayores tasas de desempleo abierto y cómo se comparan con la tasa de ocupación en el mismo periodo?",
+     "tipo": "Territorial · Comparativo",
+     "indicadores": [
+      "Tasa desempleo abierto",
+      "Tasa ocupación",
+      "Tasa bruta de participación TBP"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t99",
+     "interpretacion": "Mide la proporción de población económicamente activa sin empleo y buscándolo (desempleo abierto) frente a la que sí está ocupada. Un valor alto de desempleo con baja ocupación señala vulnerabilidad económica estructural; un valor bajo con alta participación indica un mercado laboral dinámico. Riesgos: precarización, migración de ingresos, presión sobre programas sociales. Oportunidades: focalizar formación para el trabajo y empleabilidad en los territorios rezagados.",
+     "multitema": false
+    },
+    {
+     "q": "¿Existe relación territorial entre la tasa de desempleo abierto y la tasa de intento de suicidio?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Tasa desempleo abierto",
+      "Intento de suicidio"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t99",
+     "interpretacion": "Explora si los territorios con mayor desocupación coinciden con mayor carga de salud mental. Un patrón positivo sugiere que la vulnerabilidad económica acompaña el malestar psicológico; la ausencia de patrón indica que la salud mental responde a otros factores. Riesgo: subestimar determinantes sociales de la salud mental. Oportunidad: intervención intersectorial empleo–salud mental. Limitación: las ventanas temporales difieren (desempleo hasta 2019, intento de suicidio hasta 2022) y es asociación ecológica, no individual.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios presentan menor información y práctica de planificación familiar del jefe de hogar, como proxy de acceso a conocimiento en salud?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Jefes de hogar con suficiente información sobre métodos de planificación",
+      "Jefes de hogar o informante calificado que planifica"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_jefes_hogar_suficiente_informacion_metodos_plani",
+     "interpretacion": "VitalMed no incluye un indicador educativo formal por territorio; estos indicadores de información/planificación actúan como proxy de alfabetización en salud. Valor bajo: brechas de conocimiento y acceso; valor alto: mejor información reproductiva. Riesgo: embarazo no planeado, inequidad. Oportunidad: educación en salud sexual y reproductiva focalizada.",
+     "multitema": false
+    },
+    {
+     "q": "¿Qué brecha existe entre la tasa de desempleo de la población con discapacidad y la tasa general por territorio?",
+     "tipo": "Comparativo · Territorial",
+     "indicadores": [
+      "Tasa desempleo población discapacitada",
+      "Tasa desempleo abierto general"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t100",
+     "interpretacion": "Mide exclusión laboral de personas con discapacidad frente al promedio. Brecha amplia: barreras de acceso y discriminación; brecha nula: mercado inclusivo. Riesgo: exclusión estructural y dependencia económica. Oportunidad: inclusión laboral con ajustes razonables.",
+     "multitema": false
+    },
+    {
+     "q": "¿La población afrodescendiente enfrenta mayor desempleo que la general y en qué territorios se acentúa?",
+     "tipo": "Comparativo · Territorial",
+     "indicadores": [
+      "Tasa desempleo población afrodescendiente",
+      "Tasa desempleo abierto general"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t103",
+     "interpretacion": "Detecta inequidad étnica en el mercado laboral. Brecha positiva sostenida: discriminación estructural; equidad: mercado justo. Riesgo: reproducción de desigualdad racial. Oportunidad: política de inclusión con enfoque étnico.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo ha evolucionado la tasa de ocupación de la ciudad entre 2007 y 2019 y qué territorios lideran o rezagan?",
+     "tipo": "Temporal · Territorial",
+     "indicadores": [
+      "Tasa ocupación"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t104",
+     "interpretacion": "Mide la proporción de población en edad de trabajar que está empleada. Tendencia creciente: dinamismo económico; decreciente: pérdida de empleo. Riesgo: deterioro del ingreso de los hogares. Oportunidad: políticas de generación de empleo donde la ocupación cae.",
+     "multitema": false
+    },
+    {
+     "q": "¿La tasa bruta de participación laboral se relaciona con el índice de masculinidad, revelando sesgos de género en el mercado de trabajo?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Tasa bruta de participación TBP",
+      "Índice de masculinidad"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_t113",
+     "interpretacion": "Cruza participación laboral con composición por sexo. Permite inferir si la participación está condicionada por el perfil de género del territorio. Riesgo: baja participación femenina invisibilizada. Oportunidad: políticas de inclusión laboral de mujeres.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios presentan mayor desempleo oculto y cómo evolucionó en la serie 2008–2019?",
+     "tipo": "Territorial · Temporal",
+     "indicadores": [
+      "Tasa desempleo oculto"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t98",
+     "interpretacion": "Capta desaliento laboral (no busca empleo por desesperanza). Alto y creciente: inactividad forzada; bajo: mercado activo. Riesgo: pobreza invisible. Oportunidad: reenganche laboral.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con mayor desempleo registran mayor violencia de género?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Tasa desempleo abierto",
+      "Violencia de género"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t99",
+     "interpretacion": "Explora el estrés económico como contexto de violencia. Asociación positiva: vulnerabilidad combinada; nula: violencia con otros determinantes. Riesgo: lectura reduccionista. Oportunidad: prevención en territorios de doble vulnerabilidad.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo evolucionó la tasa de desempleo abierto de la ciudad a lo largo de la serie y qué años marcaron picos?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Tasa desempleo abierto"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t99",
+     "interpretacion": "Mide desocupación activa. Picos: crisis económicas; valles: expansión. Riesgo: deterioro del ingreso. Oportunidad: respuesta anticíclica de empleo.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con mayor tasa de ocupación presentan menor inseguridad alimentaria, confirmando el empleo como palanca de bienestar?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Tasa ocupación",
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t104",
+     "interpretacion": "Relación esperada inversa. Alta ocupación con baja inseguridad: empleo que protege el acceso a alimentos. Riesgo: empleo precario que no protege. Oportunidad: empleo de calidad.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo evolucionó el desempleo de la población con discapacidad en la serie y mantiene brecha con la tasa general?",
+     "tipo": "Temporal · Comparativo",
+     "indicadores": [
+      "Tasa desempleo población discapacitada",
+      "Tasa desempleo abierto general"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t100",
+     "interpretacion": "Evalúa si la exclusión laboral de personas con discapacidad se reduce o persiste. Brecha estable/creciente: barreras no superadas. Riesgo: exclusión estructural. Oportunidad: políticas de inclusión sostenidas.",
+     "multitema": false
+    },
+    {
+     "q": "¿La población afrodescendiente con mayor desempleo coincide con territorios de mayor intento de suicidio?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Tasa desempleo población afrodescendiente",
+      "Intento de suicidio"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_t103",
+     "interpretacion": "Cruza inequidad étnica laboral con salud mental. Coincidencia: doble vulnerabilidad étnica y psicológica. Riesgo: ignorar determinantes raciales en salud mental. Oportunidad: atención con enfoque diferencial.",
+     "multitema": true
+    },
+    {
+     "q": "¿La tasa de participación laboral y la de ocupación evolucionan de forma paralela o divergente en la serie?",
+     "tipo": "Temporal · Comparativo",
+     "indicadores": [
+      "Tasa bruta de participación TBP",
+      "Tasa ocupación"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t113",
+     "interpretacion": "Participación mide quién quiere trabajar; ocupación, quién lo logra. Divergencia (sube participación, no ocupación): presión laboral insatisfecha. Riesgo: desempleo creciente. Oportunidad: generación de empleo acorde a la oferta laboral.",
+     "multitema": false
+    },
+    {
+     "q": "¿El desempleo oculto se asocia con mayor inseguridad alimentaria, mostrando el costo del desaliento laboral?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Tasa desempleo oculto",
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t98",
+     "interpretacion": "El desaliento laboral implica pérdida de ingreso y acceso a alimentos. Coincidencia: hogares desvinculados y privados. Riesgo: pobreza invisible. Oportunidad: reenganche con soporte alimentario.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios mantienen desempleo abierto por encima de la mediana en todos los años de la serie, señalando rezago estructural?",
+     "tipo": "Temporal · Territorial",
+     "indicadores": [
+      "Tasa desempleo abierto"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t99",
+     "interpretacion": "Identifica rezago persistente (no coyuntural). Siempre sobre la mediana: problema estructural; ocasional: choque temporal. Riesgo: pobreza crónica. Oportunidad: política estructural, no solo de emergencia.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios de mayor ocupación presentan menor mortalidad, considerando el sesgo de edad?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Tasa ocupación",
+      "Mortalidad general"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_t104",
+     "interpretacion": "Relaciona condición económica con mortalidad. La relación esperada (más empleo, menos muerte) puede quedar enmascarada por la edad. Riesgo: conclusión sesgada. Oportunidad: estandarizar por edad para ver el efecto socioeconómico.",
+     "multitema": true
+    },
+    {
+     "q": "¿La brecha entre desempleo abierto y oculto revela cuánto desempleo queda \"invisible\" en cada territorio?",
+     "tipo": "Territorial · Comparativo",
+     "indicadores": [
+      "Tasa desempleo abierto",
+      "Tasa desempleo oculto"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_t99",
+     "interpretacion": "El oculto no aparece en las cifras oficiales de desempleo. Brecha grande: subestimación del problema laboral; pequeña: cifras más fieles. Riesgo: política basada en datos incompletos. Oportunidad: medir el desempleo real.",
+     "multitema": false
+    },
+    {
+     "q": "¿El desempleo de población con discapacidad se concentra en territorios de mayor dependencia económica?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Tasa desempleo población discapacitada",
+      "Índice de dependencia económica"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_t100",
+     "interpretacion": "Vincula exclusión laboral de personas con discapacidad con carga económica del hogar. Coincidencia: hogares doblemente presionados. Riesgo: pobreza de hogares con personas a cargo. Oportunidad: inclusión laboral con soporte al cuidado.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios muestran la mejor trayectoria de ocupación en la década y qué los diferencia?",
+     "tipo": "Temporal · Territorial",
+     "indicadores": [
+      "Tasa ocupación"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_t104",
+     "interpretacion": "Identifica trayectorias virtuosas de empleo. Mejora sostenida: dinamismo; estancamiento: rezago. Riesgo: no aprender de los exitosos. Oportunidad: replicar factores de los territorios que mejoran.",
+     "multitema": false
+    },
+    {
+     "q": "¿La participación cultural acompaña mejores condiciones laborales (menor desempleo) en la evolución de ciudad?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Personas que participan en programas culturales",
+      "Tasa desempleo abierto"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_personas_asiste_participa_programas_culturales",
+     "interpretacion": "Explora el vínculo entre capital cultural y mercado laboral en el tiempo. Evolución paralela favorable: bienestar integral. Riesgo: confusión con el ciclo económico. Oportunidad: cultura como parte del desarrollo.",
+     "multitema": true
     }
+   ]
   },
-  "categorias": [
+  {
+   "id": "seguridad_alimentaria",
+   "nombre": "Seguridad alimentaria",
+   "grupo": "Socioeconómicas",
+   "preguntas": [
     {
-      "id": "empleo",
-      "nombre": "Empleo y desarrollo económico",
-      "grupo": "Socioeconómicas",
-      "preguntas": [
-        {"q": "¿Qué territorios tienen la mayor tasa de desempleo abierto?", "tipo": "Territorial", "indicadores": ["Tasa desempleo abierto"], "destino": "datos.html#ind=ecv_t99"},
-        {"q": "¿Cómo ha evolucionado la tasa de ocupación de la ciudad?", "tipo": "Temporal", "indicadores": ["Tasa ocupación"], "destino": "datos.html#ind=ecv_t104"},
-        {"q": "¿Cuánto desempleo queda 'oculto' (desaliento) por territorio?", "tipo": "Territorial", "indicadores": ["Tasa desempleo oculto"], "destino": "datos.html#ind=ecv_t98"},
-        {"q": "¿Hay brecha de desempleo para la población con discapacidad?", "tipo": "Comparativo", "indicadores": ["Desempleo población discapacitada"], "destino": "datos.html#ind=ecv_t100"},
-        {"q": "¿Y para la población afrodescendiente?", "tipo": "Comparativo", "indicadores": ["Desempleo población afrodescendiente"], "destino": "datos.html#ind=ecv_t103"}
-      ]
+     "q": "¿Qué territorios concentran los mayores porcentajes de hogares con inseguridad alimentaria y cómo se distribuye entre niveles leve, moderado y alto?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Hogares con algún nivel de inseguridad alimentaria",
+      "Inseguridad alimentaria alta",
+      "Inseguridad alimentaria moderada"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria",
+     "interpretacion": "Mide la proporción de hogares que reportan dificultad de acceso a alimentos por falta de recursos. Un valor alto, sobre todo en el nivel \"alto\", indica privación severa; uno bajo refleja estabilidad alimentaria. Riesgos: desnutrición, impacto en desarrollo infantil y salud. Oportunidades: programas de complementación alimentaria y transferencias focalizadas.",
+     "multitema": false
     },
     {
-      "id": "seguridad_alimentaria",
-      "nombre": "Seguridad alimentaria",
-      "grupo": "Socioeconómicas",
-      "preguntas": [
-        {"q": "¿Qué territorios concentran más hogares con inseguridad alimentaria?", "tipo": "Territorial", "indicadores": ["Inseguridad alimentaria (total)"], "destino": "datos.html#ind=ecv_hogares_inseguridad_alimentaria"},
-        {"q": "¿Dónde es más severa la privación (nivel alto)?", "tipo": "Territorial", "indicadores": ["Inseguridad alimentaria alta"], "destino": "datos.html#ind=ecv_hogares_inseguridad_alimentaria_alta"},
-        {"q": "¿Cómo se reparte el nivel moderado?", "tipo": "Territorial", "indicadores": ["Inseguridad alimentaria moderada"], "destino": "datos.html#ind=ecv_hogares_inseguridad_alimentaria_moderada"},
-        {"q": "¿Cómo evolucionó la inseguridad alimentaria antes y después de 2020?", "tipo": "Temporal", "indicadores": ["Inseguridad alimentaria (total)"], "destino": "datos.html#ind=ecv_hogares_inseguridad_alimentaria"}
-      ]
+     "q": "¿Los territorios con mayor inseguridad alimentaria presentan también mayor mortalidad general?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Hogares con inseguridad alimentaria",
+      "Mortalidad general"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria",
+     "interpretacion": "Evalúa si la privación alimentaria coincide territorialmente con mayor mortalidad. Atención a la paradoja de la mortalidad bruta: comunas con población más envejecida muestran mayor mortalidad por estructura de edad, lo que puede invertir o enmascarar la relación esperada. Riesgo: lecturas erróneas sin estandarizar por edad. Oportunidad: cruzar con grupos de edad del DANE para análisis más fino.",
+     "multitema": true
     },
     {
-      "id": "bienestar",
-      "nombre": "Bienestar y calidad de vida",
-      "grupo": "Socioeconómicas",
-      "preguntas": [
-        {"q": "¿Cómo se ve el bienestar de la ciudad en varias dimensiones a la vez?", "tipo": "Multidimensional", "indicadores": ["Panorama multidimensional"], "destino": "index.html#panorama"},
-        {"q": "¿Cómo evoluciona cualquier indicador de ciudad en el tiempo?", "tipo": "Temporal", "indicadores": ["Tendencias por indicador"], "destino": "index.html#tendencia"},
-        {"q": "¿Qué territorios acumulan desventaja (alta dependencia económica)?", "tipo": "Territorial", "indicadores": ["Índice de dependencia económica"], "destino": "datos.html#ind=ecv_t44"}
-      ]
+     "q": "¿Cómo se reparten los niveles leve y moderado de inseguridad alimentaria entre territorios?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Inseguridad alimentaria leve",
+      "Inseguridad alimentaria moderada"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria_leve",
+     "interpretacion": "Distingue gradientes de privación. Predominio moderado: riesgo en ascenso; predominio leve: alerta temprana. Riesgo: progresión al nivel alto. Oportunidad: intervención antes de la privación severa.",
+     "multitema": false
     },
     {
-      "id": "calidad_aire",
-      "nombre": "Calidad del aire",
-      "grupo": "Ambientales",
-      "preguntas": [
-        {"q": "¿Qué estaciones superan la guía OMS de PM2.5?", "tipo": "Descriptivo", "indicadores": ["PM2.5 por estación (SIATA)"], "destino": "index.html#aire"},
-        {"q": "¿Cómo evolucionó el PM2.5 promedio de la ciudad (2020–2025)?", "tipo": "Temporal", "indicadores": ["PM2.5 promedio de estaciones"], "destino": "index.html#aire"},
-        {"q": "¿La morbilidad respiratoria acompaña al aire en el tiempo?", "tipo": "Correlacional", "indicadores": ["RIPS respiratorias", "PM2.5"], "destino": "datos.html#ciudad-tiempo"}
-      ]
+     "q": "¿Los territorios con mayor inseguridad alimentaria registran también mayor intento de suicidio?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Inseguridad alimentaria",
+      "Intento de suicidio"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria",
+     "interpretacion": "Explora el estrés económico-alimentario como factor de malestar mental. Asociación positiva: vulnerabilidad combinada; nula: salud mental con otros determinantes. Riesgo: subvalorar determinantes sociales. Oportunidad: intervención psicosocial-alimentaria.",
+     "multitema": true
     },
     {
-      "id": "salud_fisica",
-      "nombre": "Salud física",
-      "grupo": "Salud",
-      "preguntas": [
-        {"q": "¿Qué territorios tienen mayor tasa de mortalidad general?", "tipo": "Territorial", "indicadores": ["Mortalidad general"], "destino": "datos.html#ind=mortalidad"},
-        {"q": "¿Cómo se comporta la natalidad entre territorios?", "tipo": "Territorial", "indicadores": ["Natalidad"], "destino": "datos.html#ind=natalidad"},
-        {"q": "¿Cómo se distribuye la mortalidad por grupo de edad en la ciudad?", "tipo": "Descriptivo", "indicadores": ["Mortalidad por edad (DANE)"], "destino": "datos.html#ciudad-tiempo"}
-      ]
+     "q": "¿Cómo se distribuye la jefatura de hogar masculina y femenina entre territorios y qué implica para el bienestar?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Hombres jefes cabeza de hogar",
+      "Mujeres jefas cabeza de hogar"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_hombres_jefes_cabeza_hogar",
+     "interpretacion": "Describe la estructura de jefatura del hogar. Alta jefatura femenina puede asociarse a mayor vulnerabilidad económica en ciertos contextos. Riesgo: hogares monoparentales sin soporte. Oportunidad: protección social con enfoque de género.",
+     "multitema": true
     },
     {
-      "id": "salud_mental",
-      "nombre": "Salud mental",
-      "grupo": "Salud",
-      "preguntas": [
-        {"q": "¿Qué territorios concentran más intentos de suicidio?", "tipo": "Territorial", "indicadores": ["Intento de suicidio"], "destino": "datos.html#ind=intento_suicidio"},
-        {"q": "¿Cómo evolucionó el intento de suicidio semana a semana (SIVIGILA)?", "tipo": "Temporal", "indicadores": ["Intento de suicidio semanal"], "destino": "datos.html#ciudad-tiempo"},
-        {"q": "¿Cuánta atención por trastornos mentales se registra al año (RIPS)?", "tipo": "Temporal", "indicadores": ["Trastornos mentales RIPS"], "destino": "datos.html#ciudad-tiempo"}
-      ]
+     "q": "¿Cómo se relacionan los tres niveles de inseguridad alimentaria (leve, moderada, alta) en su evolución de ciudad?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Inseguridad alimentaria leve",
+      "Inseguridad alimentaria moderada",
+      "Inseguridad alimentaria alta"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria_leve",
+     "interpretacion": "Analiza la composición de la privación en el tiempo. Desplazamiento de leve hacia moderada/alta: deterioro; lo inverso: mejora. Riesgo: progresión a privación severa. Oportunidad: anticipar con intervención antes del nivel alto.",
+     "multitema": false
     },
     {
-      "id": "mortalidad",
-      "nombre": "Mortalidad",
-      "grupo": "Salud",
-      "preguntas": [
-        {"q": "¿Qué causas predominan en la mortalidad mensual (respiratoria vs circulatoria)?", "tipo": "Descriptivo", "indicadores": ["Mortalidad por causa (DANE)"], "destino": "datos.html#ciudad-tiempo"},
-        {"q": "¿Cómo cambió la tasa de mortalidad entre territorios en la década?", "tipo": "Temporal", "indicadores": ["Mortalidad general"], "destino": "datos.html#ind=mortalidad"},
-        {"q": "¿Qué grupos de edad concentran la mortalidad de la ciudad?", "tipo": "Descriptivo", "indicadores": ["Mortalidad por edad (DANE)"], "destino": "datos.html#ciudad-tiempo"}
-      ]
+     "q": "¿Los territorios con menor ocupación laboral presentan mayor inseguridad alimentaria?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Tasa ocupación",
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t104",
+     "interpretacion": "Vincula ingreso laboral con acceso a alimentos. Baja ocupación con alta inseguridad: la falta de empleo compromete la alimentación. Riesgo: hambre por desempleo. Oportunidad: empleo como palanca de seguridad alimentaria.",
+     "multitema": true
     },
     {
-      "id": "enfermedades_transmisibles",
-      "nombre": "Enfermedades transmisibles",
-      "grupo": "Salud",
-      "preguntas": [
-        {"q": "¿Cómo se distribuye el dengue entre territorios?", "tipo": "Territorial", "indicadores": ["Dengue"], "destino": "datos.html#ind=dengue"},
-        {"q": "¿Dónde se concentra la tuberculosis pulmonar?", "tipo": "Territorial", "indicadores": ["Tuberculosis pulmonar"], "destino": "datos.html#ind=tuberculosis_pulmonar"},
-        {"q": "¿Cómo se comporta la hepatitis A (marcador de saneamiento)?", "tipo": "Territorial", "indicadores": ["Hepatitis A"], "destino": "datos.html#ind=hepatitis_a"},
-        {"q": "¿Y las enfermedades infantiles como varicela?", "tipo": "Territorial", "indicadores": ["Varicela"], "destino": "datos.html#ind=varicela"}
-      ]
+     "q": "¿Qué territorios superan la mediana de ciudad en inseguridad alimentaria total?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria",
+     "interpretacion": "Ubica territorios sobre el punto medio. Alto: prioridad alimentaria; bajo: estabilidad. Riesgo: focos de hambre. Oportunidad: focalización presupuestal.",
+     "multitema": false
     },
     {
-      "id": "salud_sexual",
-      "nombre": "Salud sexual y reproductiva",
-      "grupo": "Salud",
-      "preguntas": [
-        {"q": "¿Qué territorios tienen menos información sobre planificación familiar?", "tipo": "Territorial", "indicadores": ["Información de planificación (jefe de hogar)"], "destino": "datos.html#ind=ecv_jefes_hogar_suficiente_informacion_metodos_plani"},
-        {"q": "¿Dónde se planifica más?", "tipo": "Territorial", "indicadores": ["Jefe de hogar que planifica"], "destino": "datos.html#ind=ecv_jefes_hogar_informante_calificado_planifica"},
-        {"q": "¿Dónde se concerta más el método de planificación?", "tipo": "Territorial", "indicadores": ["Concertación del método"], "destino": "datos.html#ind=ecv_jefes_hogar_informantes_calificados_concertan_me"}
-      ]
+     "q": "¿Los territorios con mayor dependencia económica presentan mayor inseguridad alimentaria?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Índice de dependencia económica",
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_t44",
+     "interpretacion": "Vincula carga de personas a cargo con acceso a alimentos. Alta dependencia y alta inseguridad: hogares sobrecargados. Riesgo: privación en hogares numerosos. Oportunidad: apoyos a hogares de alta dependencia.",
+     "multitema": true
     },
     {
-      "id": "cultura",
-      "nombre": "Cultura y participación",
-      "grupo": "Sociales",
-      "preguntas": [
-        {"q": "¿Qué territorios participan más en programas culturales?", "tipo": "Territorial", "indicadores": ["Participación cultural"], "destino": "datos.html#ind=ecv_personas_asiste_participa_programas_culturales"},
-        {"q": "¿Cómo evolucionó la participación cultural de la ciudad?", "tipo": "Temporal", "indicadores": ["Participación cultural"], "destino": "datos.html#ind=ecv_personas_asiste_participa_programas_culturales"}
-      ]
+     "q": "¿Qué territorios muestran mayor proporción de inseguridad alimentaria alta sostenida en el tiempo?",
+     "tipo": "Territorial · Temporal",
+     "indicadores": [
+      "Inseguridad alimentaria alta"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria_alta",
+     "interpretacion": "Identifica privación severa persistente. Alta y estable: hambre estructural; transitoria: choque puntual. Riesgo: daño nutricional crónico. Oportunidad: respuesta estructural, no solo de emergencia.",
+     "multitema": false
     },
     {
-      "id": "violencia_genero",
-      "nombre": "Violencia de género",
-      "grupo": "Sociales",
-      "preguntas": [
-        {"q": "¿Qué territorios concentran más violencia de género?", "tipo": "Territorial", "indicadores": ["Violencia de género"], "destino": "datos.html#ind=violencia_genero"},
-        {"q": "¿Cómo ha evolucionado la violencia de género desde 2013?", "tipo": "Temporal", "indicadores": ["Violencia de género"], "destino": "datos.html#ind=violencia_genero"}
-      ]
+     "q": "¿La inseguridad alimentaria se concentra en territorios con mayor incidencia de enfermedades infantiles (tosferina, parotiditis)?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Inseguridad alimentaria",
+      "Tosferina",
+      "Parotiditis"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria",
+     "interpretacion": "Vincula privación con vulnerabilidad infantil. Coincidencia: entorno adverso para la niñez. Riesgo: desnutrición y enfermedad pediátrica. Oportunidad: atención integral a la infancia.",
+     "multitema": true
     },
     {
-      "id": "demografia",
-      "nombre": "Demografía",
-      "grupo": "Territoriales",
-      "preguntas": [
-        {"q": "¿Cómo es la dependencia económica entre territorios?", "tipo": "Territorial", "indicadores": ["Índice de dependencia económica"], "destino": "datos.html#ind=ecv_t44"},
-        {"q": "¿Cómo se distribuye el índice de masculinidad?", "tipo": "Territorial", "indicadores": ["Índice de masculinidad"], "destino": "datos.html#ind=ecv_t48"},
-        {"q": "¿Cómo se reparte la jefatura de hogar por sexo?", "tipo": "Comparativo", "indicadores": ["Jefatura de hogar (H/M)"], "destino": "datos.html#ind=ecv_mujeres_jefes_cabeza_hogar"}
-      ]
+     "q": "¿Cómo cambió la composición leve/moderada/alta de la inseguridad alimentaria entre territorios en el último año disponible?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Inseguridad alimentaria leve",
+      "Inseguridad alimentaria moderada",
+      "Inseguridad alimentaria alta"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria_leve",
+     "interpretacion": "Compara el perfil de severidad entre territorios. Predominio del nivel alto: focos críticos; del leve: alerta temprana. Riesgo: focos de hambre severa. Oportunidad: respuesta graduada por severidad.",
+     "multitema": false
     },
     {
-      "id": "deporte",
-      "nombre": "Deporte y actividad física",
-      "grupo": "Hábitos Saludables",
-      "preguntas": [
-        {"q": "¿Qué territorios practican más deporte?", "tipo": "Territorial", "indicadores": ["Práctica deportiva"], "destino": "datos.html#ind=ecv_poblacion_practica_actividades_deportivas"},
-        {"q": "¿Dónde hay más inscripción en programas deportivos?", "tipo": "Territorial", "indicadores": ["Inscripción deportiva"], "destino": "datos.html#ind=ecv_poblacion_inscrita_programas_deportivos_recreati"},
-        {"q": "¿Cómo evolucionó la práctica deportiva tras 2021?", "tipo": "Temporal", "indicadores": ["Práctica deportiva"], "destino": "datos.html#ind=ecv_poblacion_practica_actividades_deportivas"}
-      ]
+     "q": "¿Los territorios con mayor inseguridad alimentaria presentan menor participación cultural, señalando exclusión múltiple?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Inseguridad alimentaria",
+      "Personas que participan en programas culturales"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria",
+     "interpretacion": "Relaciona privación material con exclusión cultural. Coincidencia: exclusión múltiple (material y simbólica). Riesgo: territorios marginados en todas las dimensiones. Oportunidad: intervención integral de bienestar.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios revirtieron (mejoraron) su inseguridad alimentaria tras el pico de 2021?",
+     "tipo": "Temporal · Territorial",
+     "indicadores": [
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria",
+     "interpretacion": "Identifica recuperación post-pico. Mejora: resiliencia o respuesta efectiva; estancamiento: privación persistente. Riesgo: cronificación. Oportunidad: aprender de territorios que se recuperaron.",
+     "multitema": false
+    },
+    {
+     "q": "¿El deterioro de la inseguridad alimentaria tras 2020 acompaña el aumento de trastornos mentales atendidos (RIPS)?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Inseguridad alimentaria",
+      "Trastornos mentales RIPS (rips · F00-F99)"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "rips",
+     "interpretacion": "Vincula privación material con demanda de salud mental. Aumento conjunto: crisis social con impacto psicológico. Riesgo: saturación de servicios. Oportunidad: respuesta psicosocial-alimentaria. Limitación: RIPS hasta 2021.",
+     "multitema": true
+    },
+    {
+     "q": "¿La inseguridad alimentaria de ciudad supera el 50% de los hogares de forma sostenida tras 2020?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria",
+     "interpretacion": "Evalúa si la privación se instaló como norma. Más del 50% sostenido: crisis alimentaria estructural. Riesgo: normalización del hambre. Oportunidad: política alimentaria de Estado, no de coyuntura.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con mayor inseguridad alimentaria tienen menor práctica deportiva, configurando perfil de riesgo para la salud?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Inseguridad alimentaria",
+      "Población que practica actividades deportivas"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria",
+     "interpretacion": "Combina mala nutrición con sedentarismo. Coincidencia: perfil de riesgo cardiometabólico y de bienestar. Riesgo: enfermedad crónica. Oportunidad: intervención conjunta nutrición-actividad.",
+     "multitema": true
+    },
+    {
+     "q": "¿La inseguridad alimentaria leve funciona como alerta temprana de la moderada y alta en la serie?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Inseguridad alimentaria leve",
+      "Inseguridad alimentaria moderada",
+      "Inseguridad alimentaria alta"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria_leve",
+     "interpretacion": "Evalúa si el nivel leve precede al deterioro. Aumento de leve seguido de moderada/alta: señal de alerta temprana. Riesgo: ignorar la fase leve. Oportunidad: intervenir en la fase inicial.",
+     "multitema": false
+    },
+    {
+     "q": "¿La recuperación del empleo (ocupación) tras una crisis se traduce en mejora de la seguridad alimentaria con rezago?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Tasa ocupación",
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_t104",
+     "interpretacion": "Explora el desfase entre recuperación económica y alimentaria. Mejora de empleo seguida de mejora alimentaria: transmisión con rezago. Riesgo: suponer efecto inmediato. Oportunidad: sostener apoyos durante el rezago.",
+     "multitema": true
+    },
+    {
+     "q": "¿La inseguridad alimentaria de ciudad volverá a niveles prepandemia según la trayectoria reciente?",
+     "tipo": "Temporal · Predictivo",
+     "indicadores": [
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria",
+     "interpretacion": "Proyecta de forma cualitativa la trayectoria. Descenso sostenido hacia niveles previos: recuperación; meseta alta: cronificación. Riesgo: normalizar la privación. Oportunidad: fijar meta de retorno a línea base. (Lectura de tendencia, no modelo estadístico.)",
+     "multitema": false
+    },
+    {
+     "q": "¿La inseguridad alimentaria sostenida se asocia con mayor incidencia de tuberculosis, como enfermedad ligada a la desnutrición?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Inseguridad alimentaria",
+      "Tuberculosis pulmonar"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria",
+     "interpretacion": "La desnutrición debilita la inmunidad y favorece la TB. Coincidencia: vínculo privación-enfermedad. Riesgo: ciclo desnutrición-TB. Oportunidad: soporte nutricional en control de TB.",
+     "multitema": true
     }
-  ]
+   ]
+  },
+  {
+   "id": "bienestar",
+   "nombre": "Bienestar y calidad de vida",
+   "grupo": "Socioeconómicas",
+   "preguntas": [
+    {
+     "q": "¿Cómo se distribuye la dependencia económica entre territorios y qué implica para la calidad de vida de los hogares?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Índice de dependencia económica",
+      "Tasa de ocupación"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_t44",
+     "interpretacion": "La dependencia económica relaciona población inactiva frente a la productiva. Valor alto: más personas a cargo por cada perceptor de ingresos, mayor presión sobre el hogar; valor bajo: hogares con más capacidad de sostén. Riesgo: pobreza y estrés económico. Oportunidad: apoyos a hogares con alta carga de dependencia.",
+     "multitema": false
+    },
+    {
+     "q": "¿Existen brechas de desempleo que afecten de forma desigual a población con discapacidad y afrodescendiente, como señal de inequidad en el bienestar?",
+     "tipo": "Comparativo · Territorial",
+     "indicadores": [
+      "Tasa desempleo población discapacitada",
+      "Tasa desempleo población afrodescendiente",
+      "Tasa desempleo abierto general"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t100",
+     "interpretacion": "Compara el desempleo de poblaciones específicas frente al general para detectar inequidad estructural. Brechas amplias indican discriminación o barreras de acceso; brechas pequeñas, mercado más inclusivo. Riesgo: exclusión sostenida de grupos vulnerables. Oportunidad: políticas de inclusión laboral con enfoque diferencial.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios combinan baja ocupación y alta dependencia económica como señal de fragilidad del bienestar material?",
+     "tipo": "Territorial · Correlacional",
+     "indicadores": [
+      "Tasa ocupación",
+      "Índice de dependencia económica"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t104",
+     "interpretacion": "Combina capacidad de generar ingreso con carga de personas a cargo. Baja ocupación y alta dependencia: fragilidad material; lo inverso: estabilidad. Riesgo: pobreza estructural. Oportunidad: empleo y cuidado integrados.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con mayor participación cultural muestran menor desempleo, como señal de capital social asociado al bienestar?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Personas que participan en programas culturales",
+      "Tasa desempleo abierto"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_personas_asiste_participa_programas_culturales",
+     "interpretacion": "Explora la relación entre capital cultural y condiciones económicas. Asociación inversa: cultura ligada a mejor contexto; nula: dimensiones independientes. Riesgo: confundir con nivel socioeconómico. Oportunidad: cultura como parte del bienestar integral.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios acumulan desventaja en salud (alta mortalidad e intento de suicidio) y en lo social (alto desempleo e inseguridad alimentaria)?",
+     "tipo": "Territorial · Correlacional",
+     "indicadores": [
+      "Mortalidad general",
+      "Intento de suicidio",
+      "Tasa desempleo abierto",
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "mortalidad",
+     "interpretacion": "Integra salud y condiciones sociales para detectar desventaja multidimensional. Acumulación en ambos planos: máxima prioridad; perfil equilibrado: menor urgencia. Riesgo: trampas de pobreza y enfermedad. Oportunidad: intervención intersectorial priorizada.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con mayor inseguridad alimentaria y menor práctica deportiva presentan mayor intento de suicidio?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Inseguridad alimentaria",
+      "Población que practica actividades deportivas",
+      "Intento de suicidio"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria",
+     "interpretacion": "Combina un estresor (privación alimentaria), la ausencia de un protector (deporte) y un desenlace de salud mental. Coincidencia: perfil de alto riesgo psicosocial. Riesgo: subestimar determinantes sociales. Oportunidad: intervención integral.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios muestran mejor perfil integral (baja mortalidad, bajo desempleo, baja inseguridad alimentaria, alta práctica deportiva) como referentes de bienestar?",
+     "tipo": "Territorial · Comparativo",
+     "indicadores": [
+      "Mortalidad general",
+      "Tasa desempleo abierto",
+      "Inseguridad alimentaria",
+      "Población que practica actividades deportivas"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "mortalidad",
+     "interpretacion": "Identifica territorios de ventaja multidimensional. Buen perfil en todo: referentes (con cautela por edad en mortalidad). Riesgo: idealizar sin ajuste. Oportunidad: aprender de buenas condiciones replicables.",
+     "multitema": false
+    },
+    {
+     "q": "¿Qué territorios combinan baja participación laboral (TBP) y alta inseguridad alimentaria como señal de exclusión económica?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Tasa bruta de participación TBP",
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t113",
+     "interpretacion": "Combina desvinculación del mercado laboral con privación alimentaria. Baja participación y alta inseguridad: exclusión económica profunda. Riesgo: pobreza persistente. Oportunidad: activación laboral con soporte alimentario.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo se distribuye el índice de priorización en salud del portal y qué aporta la salud mental frente a la mortalidad en el ordenamiento?",
+     "tipo": "Territorial · Comparativo",
+     "indicadores": [
+      "Índice de priorización (mortalidad + intento de suicidio)",
+      "Mortalidad general",
+      "Intento de suicidio"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "mortalidad",
+     "interpretacion": "El índice combina salud física y mental normalizadas. Territorios que suben por salud mental (y no solo por mortalidad) muestran el valor de la mirada multidimensional. Riesgo: priorizar solo por mortalidad. Oportunidad: índice robusto para decisiones.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con menor práctica deportiva y mayor inseguridad alimentaria muestran mayor carga de enfermedades crónicas proxy (mortalidad circulatoria de ciudad)?",
+     "tipo": "Correlacional · Temporal",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Inseguridad alimentaria",
+      "Mortalidad circulatoria mensual (mortalidad_dane · circulatorias)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Combina factores de riesgo cardiometabólico (sedentarismo, mala alimentación) con mortalidad circulatoria. Coincidencia: perfil de riesgo crónico. Riesgo: enfermedad cardiovascular prematura. Oportunidad: prevención integral. Limitación: escalas distintas (territorial vs municipal).",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios cambian de posición en el índice de priorización al dar más peso a la salud mental que a la mortalidad?",
+     "tipo": "Comparativo · Territorial",
+     "indicadores": [
+      "Índice de priorización (mortalidad + intento de suicidio)",
+      "Intento de suicidio",
+      "Mortalidad general"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "mortalidad",
+     "interpretacion": "Prueba la robustez del ordenamiento ante distintos pesos (simulador del portal). Territorios que ascienden con más peso a salud mental revelan necesidades no capturadas por mortalidad. Riesgo: decisiones sensibles al peso. Oportunidad: transparencia en la priorización.",
+     "multitema": false
+    },
+    {
+     "q": "¿La población con menor práctica deportiva está más expuesta a mala calidad del aire, configurando doble desventaja de salud?",
+     "tipo": "Correlacional · Temporal",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "PM2.5 promedio ciudad"
+     ],
+     "prioridad": "Media",
+     "vista": "aire",
+     "clave": "pm25_siata",
+     "interpretacion": "Combina ausencia de protector (deporte) con presencia de riesgo (aire). Doble desventaja: menor salud. Riesgo: carga respiratoria/cardiovascular. Oportunidad: entornos saludables que combinen aire limpio y actividad. Limitación: escalas distintas.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios presentan la mayor mejoría multidimensional en la última década (empleo, alimentación, deporte, salud)?",
+     "tipo": "Temporal · Territorial",
+     "indicadores": [
+      "Tasa ocupación",
+      "Inseguridad alimentaria",
+      "Población que practica actividades deportivas",
+      "Mortalidad general"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_t104",
+     "interpretacion": "Identifica trayectorias de mejora integral. Mejora en varias dimensiones: progreso de bienestar; retroceso: deterioro. Riesgo: celebrar mejoras aparentes sin ajuste. Oportunidad: aprender de territorios en progreso.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios de mayor desempleo coinciden con mayor exposición a contaminación, sumando desventajas económicas y ambientales?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Tasa desempleo abierto",
+      "PM2.5 por estación SIATA"
+     ],
+     "prioridad": "Media",
+     "vista": "aire",
+     "clave": "pm25_siata",
+     "interpretacion": "Combina desventaja económica y ambiental (en la medida en que las estaciones representen esas zonas). Coincidencia: injusticia socioambiental. Riesgo: cargas acumuladas en los más pobres. Oportunidad: justicia socioambiental. Limitación: PM2.5 es por estación, no por comuna.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios concentran simultáneamente las peores posiciones en salud, empleo, alimentación y participación, como núcleo de inequidad?",
+     "tipo": "Territorial · Correlacional",
+     "indicadores": [
+      "Mortalidad general",
+      "Tasa desempleo abierto",
+      "Inseguridad alimentaria",
+      "Personas que participan en programas culturales"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "mortalidad",
+     "interpretacion": "Integra cuatro dimensiones para detectar el núcleo duro de inequidad. Peores posiciones en todas: máxima prioridad; perfil mixto: menor urgencia. Riesgo: inequidad persistente. Oportunidad: focalizar la inversión pública.",
+     "multitema": false
+    },
+    {
+     "q": "¿Existe un perfil territorial de \"triple desventaja\" (alto desempleo, baja práctica deportiva y alto intento de suicidio)?",
+     "tipo": "Territorial · Correlacional",
+     "indicadores": [
+      "Tasa desempleo abierto",
+      "Población que practica actividades deportivas",
+      "Intento de suicidio"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "ecv_t99",
+     "interpretacion": "Integra desventaja económica, ausencia de protector y desenlace de salud mental. Triple desventaja: máximo riesgo psicosocial. Riesgo: deterioro severo del bienestar. Oportunidad: intervención intersectorial prioritaria.",
+     "multitema": true
+    },
+    {
+     "q": "¿El índice de priorización en salud del portal coincide con los territorios de mayor desventaja social, validando un enfoque integral?",
+     "tipo": "Territorial · Comparativo",
+     "indicadores": [
+      "Índice de priorización (mortalidad + intento de suicidio)",
+      "Tasa desempleo abierto",
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "mortalidad",
+     "interpretacion": "Contrasta la priorización sanitaria con la desventaja social. Coincidencia: el índice de salud también capta vulnerabilidad social; divergencia: cada dimensión aporta algo distinto. Riesgo: priorizar solo por salud. Oportunidad: índice ampliado de bienestar.",
+     "multitema": false
+    },
+    {
+     "q": "¿Cómo se ordenarían los territorios bajo un índice de bienestar integral que combine salud, empleo, alimentación, deporte y aire?",
+     "tipo": "Territorial · Correlacional",
+     "indicadores": [
+      "Mortalidad general",
+      "Intento de suicidio",
+      "Tasa desempleo abierto",
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "mortalidad",
+     "interpretacion": "Propone un índice de bienestar multidimensional más amplio que el de salud. Ordenamiento integral: visión completa del bienestar; dependiente de pesos: requiere transparencia. Riesgo: arbitrariedad de pesos. Oportunidad: priorización integral y transparente.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué cinco territorios debería priorizar la ciudad si integra todas las dimensiones disponibles en VitalMed, y con qué justificación basada en datos?",
+     "tipo": "Territorial · Correlacional",
+     "indicadores": [
+      "Índice de priorización (mortalidad + intento de suicidio)",
+      "Tasa desempleo abierto",
+      "Inseguridad alimentaria",
+      "Población que practica actividades deportivas"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "mortalidad",
+     "interpretacion": "Pregunta de síntesis para la toma de decisiones: integra salud, economía, alimentación, actividad física y violencia. Permite una recomendación accionable. Riesgo: decisión sensible a los pesos y al sesgo de edad en mortalidad. Oportunidad: evidencia consolidada para focalizar la inversión pública.",
+     "multitema": false
+    }
+   ]
+  },
+  {
+   "id": "calidad_aire",
+   "nombre": "Calidad del aire",
+   "grupo": "Ambientales",
+   "preguntas": [
+    {
+     "q": "¿Cómo ha evolucionado el PM2.5 promedio de la ciudad y qué tan lejos está de la guía de la OMS?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "PM2.5 promedio de estaciones SIATA"
+     ],
+     "prioridad": "Alta",
+     "vista": "aire",
+     "clave": "pm25_siata",
+     "interpretacion": "Mide la concentración media de material particulado fino, contaminante con mayor impacto en salud respiratoria y cardiovascular. Valor alto: mayor riesgo poblacional; valor bajo: aire más limpio. La guía OMS 2021 es 5 µg/m³. Riesgo: enfermedad respiratoria y muerte prematura. Oportunidad: políticas de movilidad y control de fuentes.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los años con mayor PM2.5 coinciden con mayor mortalidad respiratoria mensual registrada por el DANE?",
+     "tipo": "Correlacional · Temporal",
+     "indicadores": [
+      "PM2.5 promedio ciudad",
+      "Mortalidad respiratoria mensual (mortalidad_dane · respiratorias)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Cruza exposición ambiental con mortalidad por causa respiratoria (J00–J99). Una coincidencia temporal sugiere impacto del aire en mortalidad, aunque el traslape de series es corto (PM2.5 2020–2025; DANE 2020–2024) y 2020–2021 están marcados por COVID. Riesgo: atribución causal indebida. Oportunidad: vigilancia conjunta aire–salud.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué estaciones muestran mejoría o deterioro del PM2.5 en los dos últimos años disponibles?",
+     "tipo": "Temporal · Comparativo",
+     "indicadores": [
+      "PM2.5 por estación SIATA (pm25_siata · comparación interanual)"
+     ],
+     "prioridad": "Media",
+     "vista": "aire",
+     "clave": "pm25_siata",
+     "interpretacion": "Compara el último año frente al anterior por estación. Mejoría: menor exposición local; deterioro: fuente activa. Riesgo: focos crecientes sin control. Oportunidad: intervención donde el aire empeora.",
+     "multitema": false
+    },
+    {
+     "q": "¿La serie semanal de ESI-IRAG (SIVIGILA) presenta picos compatibles con periodos de mayor contaminación del aire?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "ESI-IRAG semanal",
+      "PM2.5 promedio ciudad"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "sivigila",
+     "interpretacion": "Cruza vigilancia centinela respiratoria con exposición ambiental. Picos coincidentes: posible efecto del aire sobre infección respiratoria grave. Riesgo: confusión con temporadas virales. Oportunidad: alerta temprana respiratoria. Limitación: centinela, municipal, COVID 2020–2021.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cuál es la trayectoria del PM2.5 en la estación de mayor exposición y cómo se compara con el promedio de ciudad?",
+     "tipo": "Temporal · Comparativo",
+     "indicadores": [
+      "PM2.5 por estación SIATA (pm25_siata · serie por estación)",
+      "PM2.5 promedio de ciudad (pm25_siata · promedio_estaciones)"
+     ],
+     "prioridad": "Media",
+     "vista": "aire",
+     "clave": "pm25_siata",
+     "interpretacion": "Contrasta el foco más expuesto con la media urbana. Brecha amplia y sostenida: desigualdad de exposición; convergencia: mejora homogénea. Riesgo: población cercana a la estación crítica. Oportunidad: control de fuentes en el foco.",
+     "multitema": false
+    },
+    {
+     "q": "¿La mortalidad total mensual (DANE) presenta meses de exceso que coincidan con episodios de contaminación?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Mortalidad total mensual (mortalidad_dane · total)",
+      "PM2.5 promedio de ciudad"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Busca exceso de mortalidad en meses de peor aire. Coincidencia: posible contribución ambiental a la mortalidad general. Riesgo: atribución sin control de confusores (temperatura, virus, COVID). Oportunidad: vigilancia de exceso de mortalidad.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cuántas estaciones superan la guía OMS de 5 µg/m³ en el último año disponible y en qué magnitud?",
+     "tipo": "Descriptivo · Comparativo",
+     "indicadores": [
+      "PM2.5 por estación SIATA (pm25_siata · ranking)"
+     ],
+     "prioridad": "Alta",
+     "vista": "aire",
+     "clave": "pm25_siata",
+     "interpretacion": "Cuantifica el incumplimiento del estándar OMS. Muchas estaciones muy por encima: exposición generalizada. Riesgo: carga respiratoria/cardiovascular ciudad. Oportunidad: metas de reducción vinculantes.",
+     "multitema": false
+    },
+    {
+     "q": "¿La morbilidad respiratoria anual (RIPS) y la serie ESI-IRAG (SIVIGILA) describen una carga respiratoria coherente en la ciudad?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Morbilidad respiratoria RIPS (rips · J00-J99)",
+      "ESI-IRAG semanal"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "rips",
+     "interpretacion": "Triangula dos fuentes respiratorias (atención vs vigilancia centinela). Coherencia: señal robusta de carga respiratoria; divergencia: diferencias de captación. Riesgo: subestimar la carga real. Oportunidad: vigilancia respiratoria integrada.",
+     "multitema": true
+    },
+    {
+     "q": "¿El promedio de PM2.5 de la ciudad muestra una tendencia de mejora sostenida entre 2020 y 2025?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "PM2.5 promedio de estaciones"
+     ],
+     "prioridad": "Alta",
+     "vista": "aire",
+     "clave": "pm25_siata",
+     "interpretacion": "Evalúa si el aire mejora en el tiempo. Descenso sostenido: políticas efectivas; estancamiento: fuentes no controladas. Riesgo: falsa sensación de mejora si no baja de la guía OMS. Oportunidad: acelerar reducción.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los años de mayor PM2.5 coinciden con mayor mortalidad respiratoria anual implícita (DANE)?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "PM2.5 promedio ciudad",
+      "Mortalidad respiratoria mensual agregada a año (mortalidad_dane · respiratorias)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Compara exposición anual con mortalidad respiratoria anual. Coincidencia: posible dosis-respuesta. Riesgo: confusión COVID 2020–2021. Oportunidad: argumento para control del aire. Limitación: pocos años de traslape.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué estaciones mantienen los niveles más estables de PM2.5 y cuáles los más volátiles entre años?",
+     "tipo": "Temporal · Comparativo",
+     "indicadores": [
+      "PM2.5 por estación SIATA (pm25_siata · serie)"
+     ],
+     "prioridad": "Media",
+     "vista": "aire",
+     "clave": "pm25_siata",
+     "interpretacion": "Analiza estabilidad vs volatilidad de la exposición por estación. Volatilidad alta: fuentes intermitentes; estabilidad alta: exposición crónica. Riesgo: subestimar picos en estaciones volátiles. Oportunidad: gestión diferenciada.",
+     "multitema": false
+    },
+    {
+     "q": "¿Existe coincidencia temporal entre episodios de alta contaminación y variaciones del intento de suicidio semanal (SIVIGILA)?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "PM2.5 promedio ciudad",
+      "Intento de suicidio semanal"
+     ],
+     "prioridad": "Baja",
+     "vista": "ciudad_tiempo",
+     "clave": "sivigila",
+     "interpretacion": "Explora la hipótesis emergente de que la contaminación afecta la salud mental. Coincidencia: posible efecto; ausencia: sin relación detectable. Riesgo: sobreinterpretar una señal débil. Oportunidad: investigación local. Limitación: escalas y confusores fuertes.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cuál fue el año de mejor y peor calidad del aire (PM2.5 ciudad) en la serie disponible?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "PM2.5 promedio de estaciones"
+     ],
+     "prioridad": "Media",
+     "vista": "aire",
+     "clave": "pm25_siata",
+     "interpretacion": "Identifica extremos de la serie. Mejor año: condiciones o políticas favorables; peor año: fuentes/clima adversos. Riesgo: no aprender de los extremos. Oportunidad: estudiar qué diferenció el mejor año.",
+     "multitema": false
+    },
+    {
+     "q": "¿La estacionalidad del ESI-IRAG (SIVIGILA) se superpone a la de otras enfermedades respiratorias virales como contexto de carga?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "ESI-IRAG semanal",
+      "PM2.5 promedio ciudad"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "sivigila",
+     "interpretacion": "Contextualiza la carga respiratoria grave con el ambiente. Superposición de picos: temporadas de alto riesgo respiratorio combinado. Riesgo: colapso asistencial estacional. Oportunidad: preparación en temporadas críticas.",
+     "multitema": true
+    },
+    {
+     "q": "¿La diferencia entre la estación más y menos contaminada revela inequidad de exposición dentro de la ciudad?",
+     "tipo": "Comparativo · Descriptivo",
+     "indicadores": [
+      "PM2.5 por estación SIATA (pm25_siata · ranking)"
+     ],
+     "prioridad": "Media",
+     "vista": "aire",
+     "clave": "pm25_siata",
+     "interpretacion": "Mide la brecha de exposición entre estaciones. Brecha amplia: inequidad ambiental; estrecha: exposición homogénea. Riesgo: población concentrada en focos. Oportunidad: justicia ambiental territorial.",
+     "multitema": false
+    },
+    {
+     "q": "¿La leve mejora del PM2.5 reciente se acompaña de alguna reducción de la mortalidad respiratoria mensual (DANE)?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "PM2.5 promedio ciudad",
+      "Mortalidad respiratoria mensual (mortalidad_dane · respiratorias)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Busca beneficio en salud de la mejora del aire. Reducción paralela: posible beneficio; sin cambio: mejora insuficiente o rezagada. Riesgo: esperar efectos inmediatos. Oportunidad: argumento para sostener la mejora. Limitación: pocos años, confusores.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cuántos años consecutivos ha incumplido la ciudad la guía OMS de PM2.5, evidenciando un problema estructural?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "PM2.5 promedio de estaciones"
+     ],
+     "prioridad": "Alta",
+     "vista": "aire",
+     "clave": "pm25_siata",
+     "interpretacion": "Cuantifica la persistencia del incumplimiento. Muchos años seguidos sobre 5 µg/m³: problema estructural, no coyuntural. Riesgo: daño acumulado en salud. Oportunidad: compromiso de reducción de largo plazo.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios de menor bienestar (alto desempleo, alta inseguridad alimentaria) tienen también menos acceso a entornos de aire limpio?",
+     "tipo": "Territorial · Correlacional",
+     "indicadores": [
+      "Tasa desempleo abierto",
+      "Inseguridad alimentaria",
+      "PM2.5 por estación SIATA"
+     ],
+     "prioridad": "Media",
+     "vista": "aire",
+     "clave": "pm25_siata",
+     "interpretacion": "Explora la concentración de desventajas sociales y ambientales. Coincidencia: injusticia ambiental sobre los más pobres. Riesgo: cargas acumuladas. Oportunidad: priorizar aire limpio donde hay más pobreza. Limitación: aire por estación, no por comuna.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué reducción anual de PM2.5 necesitaría la ciudad para alcanzar la guía OMS en una década?",
+     "tipo": "Predictivo · Descriptivo",
+     "indicadores": [
+      "PM2.5 promedio de estaciones"
+     ],
+     "prioridad": "Alta",
+     "vista": "aire",
+     "clave": "pm25_siata",
+     "interpretacion": "Calcula de forma simple la brecha hasta 5 µg/m³ y el ritmo necesario. Brecha grande: esfuerzo considerable; pequeña: alcanzable. Riesgo: metas poco realistas. Oportunidad: fijar una ruta de reducción medible. (Cálculo aritmético de brecha, no modelo predictivo.)",
+     "multitema": false
+    },
+    {
+     "q": "¿Qué beneficio en salud (menor mortalidad/morbilidad respiratoria) podría esperarse si la ciudad acercara su PM2.5 a la guía OMS?",
+     "tipo": "Predictivo · Correlacional",
+     "indicadores": [
+      "PM2.5 promedio ciudad",
+      "Mortalidad respiratoria mensual (mortalidad_dane · respiratorias)",
+      "Morbilidad respiratoria RIPS (rips · J00-J99)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Plantea de forma cualitativa el beneficio potencial de mejorar el aire. Relación positiva aire-enfermedad: reducir PM2.5 reduciría carga respiratoria. Riesgo: cuantificar sin modelo robusto. Oportunidad: argumento de salud pública. Limitación: requiere estudio formal para cifras.",
+     "multitema": true
+    }
+   ]
+  },
+  {
+   "id": "salud_fisica",
+   "nombre": "Salud física",
+   "grupo": "Salud",
+   "preguntas": [
+    {
+     "q": "¿Qué territorios presentan mayor tasa de mortalidad general y cómo se compara con el promedio de ciudad?",
+     "tipo": "Territorial · Comparativo",
+     "indicadores": [
+      "Mortalidad general"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "mortalidad",
+     "interpretacion": "Mide defunciones por 100.000 habitantes. Valor alto: mayor carga de muerte (influida por estructura de edad); valor bajo: menor carga. Riesgo: interpretar sin estandarizar por edad. Oportunidad: identificar territorios para intervención sanitaria. Es asociación, no causalidad.",
+     "multitema": false
+    },
+    {
+     "q": "¿Cómo se comporta la carga de enfermedades transmisibles (dengue, tuberculosis, hepatitis A) entre territorios?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Dengue",
+      "Tuberculosis pulmonar",
+      "Hepatitis A"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "dengue",
+     "interpretacion": "Miden incidencia por 100.000 habitantes de enfermedades sensibles a condiciones de vida y saneamiento. Valor alto: foco de transmisión y determinantes ambientales adversos; valor bajo: mejor control. Riesgo: brotes. Oportunidad: vigilancia y saneamiento focalizado.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con menor práctica deportiva muestran mayor mortalidad general, considerando el efecto de la edad?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Mortalidad general"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_practica_actividades_deportivas",
+     "interpretacion": "Vincula un factor protector con la mortalidad. La actividad física reduce riesgo cardiovascular, pero la mortalidad bruta está dominada por la edad, por lo que la relación puede no aparecer sin estandarizar. Riesgo: conclusión sesgada. Oportunidad: análisis ajustado por edad.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo se comporta la varicela entre territorios y qué sugiere sobre coberturas de inmunización?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Varicela"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "varicela",
+     "interpretacion": "Enfermedad inmunoprevenible; incidencia alta puede indicar baja cobertura o brotes escolares. Valor bajo: buena protección. Riesgo: brotes en población infantil. Oportunidad: reforzar vacunación donde la incidencia sube.",
+     "multitema": false
+    },
+    {
+     "q": "¿La incidencia de parotiditis y tosferina se concentra en territorios de mayor natalidad, señalando población infantil en riesgo?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Parotiditis",
+      "Tosferina",
+      "Natalidad"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "parotiditis",
+     "interpretacion": "Ambas afectan a población infantil; su concentración donde hay más natalidad señala mayor exposición pediátrica. Riesgo: brotes en primera infancia. Oportunidad: vacunación materno-infantil focalizada.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo ha evolucionado la natalidad de la ciudad y qué territorios muestran mayor descenso?",
+     "tipo": "Temporal · Territorial",
+     "indicadores": [
+      "Natalidad"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "natalidad",
+     "interpretacion": "Mide nacidos vivos por 100.000 habitantes. Descenso sostenido: transición demográfica y envejecimiento; aumento: población joven. Riesgo: cambio en demanda de servicios. Oportunidad: planear servicios según dinámica demográfica.",
+     "multitema": false
+    },
+    {
+     "q": "¿La tuberculosis y la mortalidad general comparten territorios críticos, señalando acumulación de riesgo sanitario?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Tuberculosis pulmonar",
+      "Mortalidad general"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "tuberculosis_pulmonar",
+     "interpretacion": "Cruza una enfermedad de la pobreza con la mortalidad. Coincidencia: acumulación de riesgo sanitario y social; divergencia (por edad): efecto demográfico. Riesgo: foco de carga sanitaria. Oportunidad: intervención integral de salud.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios concentran la mayor incidencia conjunta de enfermedades transmisibles (dengue, hepatitis A, varicela)?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Dengue",
+      "Hepatitis A",
+      "Varicela"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "dengue",
+     "interpretacion": "Identifica focos de carga transmisible múltiple. Alto en varias: determinantes ambientales y de cobertura adversos. Riesgo: brotes simultáneos. Oportunidad: intervención ambiental y de inmunización integral.",
+     "multitema": false
+    },
+    {
+     "q": "¿La tuberculosis se asocia con mayor mortalidad respiratoria mensual (DANE) en la ciudad?",
+     "tipo": "Correlacional · Temporal",
+     "indicadores": [
+      "Tuberculosis pulmonar",
+      "Mortalidad respiratoria mensual (mortalidad_dane · respiratorias)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Vincula una enfermedad respiratoria crónica con su desenlace fatal. Relación positiva: TB contribuyendo a mortalidad respiratoria. Riesgo: muerte evitable por TB mal tratada. Oportunidad: tratamiento supervisado. Limitación: escalas territorial vs municipal.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo evolucionó la incidencia de hepatitis A en la ciudad y qué sugiere sobre agua y saneamiento?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Hepatitis A"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "hepatitis_a",
+     "interpretacion": "Marcador de saneamiento. Descenso: mejora en agua/higiene o vacunación; picos: fallas de saneamiento. Riesgo: brotes entéricos. Oportunidad: inversión en WASH y vacunación.",
+     "multitema": false
+    },
+    {
+     "q": "¿La natalidad y la mortalidad general territorial permiten clasificar territorios por etapa de transición demográfica?",
+     "tipo": "Territorial · Comparativo",
+     "indicadores": [
+      "Natalidad",
+      "Mortalidad general"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "natalidad",
+     "interpretacion": "Combina entradas y salidas demográficas para tipificar territorios (jóvenes, maduros, envejecidos). Útil para planear servicios. Riesgo: mortalidad bruta sin ajuste. Oportunidad: planeación según etapa demográfica.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo evolucionó la incidencia de parotiditis en la ciudad y hay señales de brotes en años específicos?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Parotiditis"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "parotiditis",
+     "interpretacion": "Enfermedad inmunoprevenible; picos pueden indicar caídas de cobertura. Descenso sostenido: buena inmunización; picos: brotes. Riesgo: resurgimiento por baja vacunación. Oportunidad: reforzar coberturas.",
+     "multitema": false
+    },
+    {
+     "q": "¿La tuberculosis pulmonar se concentra en territorios con mayor inseguridad alimentaria alta?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Tuberculosis pulmonar",
+      "Inseguridad alimentaria alta"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "tuberculosis_pulmonar",
+     "interpretacion": "La desnutrición favorece la tuberculosis. Coincidencia: entorno de pobreza y malnutrición. Riesgo: ciclo enfermedad-desnutrición. Oportunidad: soporte nutricional en pacientes con TB.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué enfermedad transmisible muestra la tendencia más preocupante (creciente) en la serie de ciudad?",
+     "tipo": "Temporal · Comparativo",
+     "indicadores": [
+      "Dengue",
+      "Tuberculosis pulmonar",
+      "Hepatitis A"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "dengue",
+     "interpretacion": "Compara tendencias para priorizar vigilancia. Tendencia creciente: amenaza emergente; decreciente: control. Riesgo: desatender la que crece. Oportunidad: concentrar recursos en la de peor trayectoria.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con mayor tuberculosis presentan también mayor desempleo, confirmando la TB como enfermedad de la pobreza?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Tuberculosis pulmonar",
+      "Tasa desempleo abierto"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "tuberculosis_pulmonar",
+     "interpretacion": "Vincula una enfermedad socialmente determinada con el desempleo. Coincidencia: pobreza y enfermedad juntas. Riesgo: ciclo pobreza-enfermedad. Oportunidad: abordaje socioeconómico de la TB.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo se compara la carga de enfermedades transmisibles entre territorios jóvenes (alta natalidad) y envejecidos (alta mortalidad)?",
+     "tipo": "Territorial · Comparativo",
+     "indicadores": [
+      "Dengue",
+      "Varicela",
+      "Natalidad",
+      "Mortalidad general"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "dengue",
+     "interpretacion": "Relaciona perfil demográfico con tipo de enfermedad transmisible. Territorios jóvenes: más enfermedades infantiles; envejecidos: otro perfil. Riesgo: oferta no ajustada. Oportunidad: servicios según perfil demográfico-epidemiológico.",
+     "multitema": false
+    },
+    {
+     "q": "¿La carga respiratoria (RIPS) muestra relación con la exposición acumulada a PM2.5 en los años con datos coincidentes?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Morbilidad respiratoria RIPS (rips · J00-J99)",
+      "PM2.5 promedio ciudad"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "rips",
+     "interpretacion": "Relaciona exposición ambiental con demanda respiratoria. Mayor exposición y más morbilidad: coherencia dosis-respuesta. Riesgo: pocos años coincidentes (RIPS hasta 2021, PM2.5 desde 2020). Oportunidad: argumento de salud ambiental.",
+     "multitema": true
+    },
+    {
+     "q": "¿La natalidad de ciudad muestra una caída sostenida compatible con una transición demográfica avanzada?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Natalidad"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "natalidad",
+     "interpretacion": "Evalúa la fase de transición demográfica. Caída sostenida: envejecimiento y menor reemplazo; estabilidad: población joven. Riesgo: cambio en la demanda de servicios. Oportunidad: planeación de largo plazo.",
+     "multitema": false
+    },
+    {
+     "q": "¿La carga de enfermedades crónicas (mortalidad circulatoria) y la de salud mental (trastornos RIPS) crecen de forma paralela en la ciudad?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Mortalidad circulatoria mensual (mortalidad_dane · circulatorias)",
+      "Trastornos mentales RIPS (rips · F00-F99)"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Explora la doble carga de enfermedad crónica física y mental. Crecimiento paralelo: transición epidemiológica hacia crónicas. Riesgo: sistema no preparado para crónicas duales. Oportunidad: atención integral de la cronicidad.",
+     "multitema": true
+    },
+    {
+     "q": "¿La transición epidemiológica de la ciudad se refleja en el peso creciente de causas crónicas (circulatorias) frente a transmisibles?",
+     "tipo": "Temporal · Comparativo",
+     "indicadores": [
+      "Mortalidad circulatoria mensual (mortalidad_dane · circulatorias)",
+      "Dengue",
+      "Tuberculosis pulmonar"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Contrasta carga crónica vs transmisible para caracterizar la transición epidemiológica. Predominio crónico creciente: perfil de país de ingreso medio-alto. Riesgo: sistema no adaptado a crónicas. Oportunidad: reorientar hacia prevención crónica.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con mejor perfil de bienestar social presentan menor carga de enfermedades transmisibles?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Inseguridad alimentaria",
+      "Tasa ocupación",
+      "Dengue"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria",
+     "interpretacion": "Vincula bienestar social con enfermedades evitables. Mejor bienestar y menos transmisibles: entorno protector. Riesgo: confusión con factores ambientales. Oportunidad: bienestar social como prevención sanitaria.",
+     "multitema": true
+    }
+   ]
+  },
+  {
+   "id": "salud_mental",
+   "nombre": "Salud mental",
+   "grupo": "Salud",
+   "preguntas": [
+    {
+     "q": "¿Cómo ha evolucionado el intento de suicidio en la ciudad y qué territorios concentran la mayor carga?",
+     "tipo": "Temporal · Territorial",
+     "indicadores": [
+      "Intento de suicidio",
+      "Intento de suicidio semanal SIVIGILA"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "sivigila",
+     "interpretacion": "Mide casos por 100.000 habitantes (MEData) y casos semanales (SIVIGILA). Valor alto y creciente: deterioro de salud mental; valor bajo: mejor estado o subregistro. Riesgo: subnotificación y estigma. Oportunidad: fortalecer rutas de atención y líneas de crisis.",
+     "multitema": false
+    },
+    {
+     "q": "¿La carga de trastornos mentales atendidos (RIPS) acompaña la tendencia del intento de suicidio en la ciudad?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Trastornos mentales RIPS (rips · F00-F99)",
+      "Intento de suicidio semanal SIVIGILA"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "rips",
+     "interpretacion": "Relaciona demanda de atención en salud mental con conducta suicida. Un aumento conjunto confirma presión creciente sobre el sistema; divergencias pueden reflejar acceso o registro. Riesgo: capacidad de servicios insuficiente. Oportunidad: planear oferta según demanda. Limitación: RIPS es anual (2009–2021) y municipal.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios superan la mediana en intento de suicidio y requieren refuerzo de atención?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Intento de suicidio"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "intento_suicidio",
+     "interpretacion": "Identifica territorios por encima del punto medio de la ciudad. Valor alto: prioridad de salud mental; valor bajo: menor carga o subregistro. Riesgo: subnotificación. Oportunidad: focalizar recursos psicosociales.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con mayor violencia de género presentan también mayor carga de intento de suicidio?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Violencia de género",
+      "Intento de suicidio"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "violencia_genero",
+     "interpretacion": "Explora el vínculo entre violencia y salud mental. Asociación positiva: victimización y malestar psicológico coexisten. Riesgo: daño acumulado en víctimas. Oportunidad: atención integral violencia–salud mental.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo evolucionó la morbilidad por trastornos mentales atendida en RIPS en la última década?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Trastornos mentales RIPS (rips · F00-F99)"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "rips",
+     "interpretacion": "Mide atenciones anuales por trastornos mentales. Crecimiento: mayor demanda o mejor detección; caída (2020–2021): subregistro pandémico. Riesgo: capacidad insuficiente. Oportunidad: planear oferta de salud mental.",
+     "multitema": false
+    },
+    {
+     "q": "¿La tendencia de intento de suicidio semanal (SIVIGILA) acompaña el deterioro de la inseguridad alimentaria de la ciudad?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Intento de suicidio semanal",
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "sivigila",
+     "interpretacion": "Relaciona estrés socioeconómico con conducta suicida a escala ciudad. Tendencias paralelas al alza: vulnerabilidad combinada creciente. Riesgo: subestimar el peso social en la salud mental. Oportunidad: respuesta psicosocial-económica integrada. Limitación: periodicidades distintas.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué estacionalidad semanal muestra el ESI-IRAG frente al intento de suicidio (SIVIGILA), y qué implica para la planeación?",
+     "tipo": "Temporal · Comparativo",
+     "indicadores": [
+      "ESI-IRAG semanal",
+      "Intento de suicidio semanal"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "sivigila",
+     "interpretacion": "Compara la estacionalidad de una causa respiratoria y una de salud mental. Patrones distintos: picos de demanda en momentos diferentes del año. Riesgo: planear con un solo patrón. Oportunidad: capacidad flexible según temporada.",
+     "multitema": false
+    },
+    {
+     "q": "¿La tendencia del intento de suicidio coincide con los años de mayor desempleo en la serie disponible?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Intento de suicidio",
+      "Tasa desempleo abierto"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "intento_suicidio",
+     "interpretacion": "Cruza ciclos económicos con salud mental. Coincidencia: el desempleo como estresor; divergencia: otros factores. Riesgo: ignorar determinantes económicos. Oportunidad: salud mental anticíclica. Limitación: desempleo hasta 2019.",
+     "multitema": true
+    },
+    {
+     "q": "¿La morbilidad por trastornos mentales (RIPS) y el intento de suicidio (MEData) ofrecen una lectura consistente de la carga de salud mental?",
+     "tipo": "Correlacional · Temporal",
+     "indicadores": [
+      "Trastornos mentales RIPS (rips · F00-F99)",
+      "Intento de suicidio"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "rips",
+     "interpretacion": "Triangula demanda de atención y conducta suicida. Lectura consistente: carga robusta; divergencia: brechas de registro o acceso. Riesgo: subdimensionar la necesidad. Oportunidad: planeación basada en varias fuentes.",
+     "multitema": false
+    },
+    {
+     "q": "¿Qué años concentran los picos semanales más altos de intento de suicidio (SIVIGILA) y qué contexto los acompaña?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Intento de suicidio semanal"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "sivigila",
+     "interpretacion": "Identifica años y semanas de crisis de salud mental. Picos agudos: eventos o deterioro; tendencia: cambio estructural. Riesgo: no anticipar crisis. Oportunidad: respuesta reforzada en periodos críticos.",
+     "multitema": false
+    },
+    {
+     "q": "¿La tendencia del intento de suicidio semanal (SIVIGILA) se refleja en la mortalidad total mensual (DANE)?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Intento de suicidio semanal",
+      "Mortalidad total mensual (mortalidad_dane · total)"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "sivigila",
+     "interpretacion": "El intento de suicidio es antecedente de mortalidad por lesiones autoinfligidas. Relación: la conducta suicida alimenta parte de la mortalidad. Riesgo: subregistro de causa. Oportunidad: prevención del suicidio como política de mortalidad evitable.",
+     "multitema": true
+    },
+    {
+     "q": "¿La magnitud del intento de suicidio (MEData, territorial) y su vigilancia semanal (SIVIGILA, ciudad) son consistentes en tendencia?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Intento de suicidio",
+      "Intento de suicidio semanal"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "sivigila",
+     "interpretacion": "Triangula dos fuentes del mismo fenómeno. Consistencia: estimación robusta; divergencia: brechas de registro. Riesgo: subdimensionar el problema. Oportunidad: vigilancia integrada.",
+     "multitema": false
+    },
+    {
+     "q": "¿La estabilidad de la participación cultural se asocia con menor intento de suicidio, sugiriendo cohesión protectora?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Personas que participan en programas culturales",
+      "Intento de suicidio"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_personas_asiste_participa_programas_culturales",
+     "interpretacion": "Explora cohesión social como protector. Mayor participación estable y menor intento de suicidio: cultura protectora. Riesgo: confusión socioeconómica. Oportunidad: cultura en prevención del suicidio.",
+     "multitema": true
+    },
+    {
+     "q": "¿La carga de salud mental (intento de suicidio) está más concentrada territorialmente que la mortalidad general?",
+     "tipo": "Comparativo · Territorial",
+     "indicadores": [
+      "Intento de suicidio",
+      "Mortalidad general"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "intento_suicidio",
+     "interpretacion": "Compara la dispersión territorial de ambos indicadores. Salud mental más concentrada: focos claros para intervenir; más dispersa: fenómeno generalizado. Riesgo: mala focalización. Oportunidad: estrategia acorde al patrón.",
+     "multitema": false
+    },
+    {
+     "q": "¿La evolución de la violencia de género y del intento de suicidio en la ciudad sigue trayectorias similares?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Violencia de género",
+      "Intento de suicidio"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "violencia_genero",
+     "interpretacion": "Explora si violencia y conducta suicida crecen juntas como señales de deterioro social. Trayectorias paralelas: crisis de bienestar psicosocial. Riesgo: abordaje fragmentado. Oportunidad: política integral de violencias y salud mental.",
+     "multitema": true
+    },
+    {
+     "q": "¿La serie semanal de intento de suicidio (SIVIGILA) muestra aceleración en su crecimiento en años recientes?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Intento de suicidio semanal"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "sivigila",
+     "interpretacion": "Evalúa si el crecimiento se acelera (no solo si crece). Aceleración: agravamiento del problema; desaceleración: posible efecto de intervenciones. Riesgo: crisis creciente. Oportunidad: evaluar el efecto de políticas de salud mental.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con mayor práctica deportiva presentan menor intento de suicidio incluso controlando por participación cultural?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Personas que participan en programas culturales",
+      "Intento de suicidio"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_practica_actividades_deportivas",
+     "interpretacion": "Explora si el deporte aporta protección adicional a la cultura. Efecto del deporte más allá de la cultura: valor propio de la actividad física. Riesgo: colinealidad entre protectores. Oportunidad: estrategias combinadas de bienestar.",
+     "multitema": true
+    },
+    {
+     "q": "¿La magnitud actual del intento de suicidio justifica declararlo prioridad de salud pública en la ciudad?",
+     "tipo": "Descriptivo · Temporal",
+     "indicadores": [
+      "Intento de suicidio",
+      "Intento de suicidio semanal",
+      "Trastornos mentales RIPS (rips · F00-F99)"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "sivigila",
+     "interpretacion": "Sintetiza la carga de salud mental desde tres fuentes. Magnitud alta y creciente: prioridad de salud pública. Riesgo: respuesta insuficiente. Oportunidad: política de salud mental con recursos dedicados.",
+     "multitema": false
+    },
+    {
+     "q": "¿El deterioro social combinado (inseguridad alimentaria + desempleo) proyecta presión creciente sobre la salud mental?",
+     "tipo": "Temporal · Predictivo",
+     "indicadores": [
+      "Inseguridad alimentaria",
+      "Tasa desempleo abierto",
+      "Trastornos mentales RIPS (rips · F00-F99)"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "rips",
+     "interpretacion": "Relaciona estresores sociales con demanda futura de salud mental. Deterioro social sostenido: presión creciente sobre servicios. Riesgo: capacidad rebasada. Oportunidad: anticipar la oferta. (Lectura de tendencia, no modelo.)",
+     "multitema": true
+    }
+   ]
+  },
+  {
+   "id": "mortalidad",
+   "nombre": "Mortalidad",
+   "grupo": "Salud",
+   "preguntas": [
+    {
+     "q": "¿Qué causas de muerte (respiratorias vs circulatorias) predominan en la mortalidad mensual de la ciudad según el DANE?",
+     "tipo": "Descriptivo · Temporal",
+     "indicadores": [
+      "Mortalidad mensual por causa (mortalidad_dane · respiratorias, circulatorias, total)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Desagrega la mortalidad por grandes grupos CIE-10. Predominio circulatorio: perfil de enfermedad crónica; alta carga respiratoria estacional: vínculo con aire e infecciones. Riesgo: picos estacionales no anticipados. Oportunidad: planear capacidad hospitalaria por temporada.",
+     "multitema": false
+    },
+    {
+     "q": "¿Cómo se relaciona la mortalidad general territorial con la natalidad, como señal de perfil demográfico?",
+     "tipo": "Territorial · Correlacional",
+     "indicadores": [
+      "Mortalidad general",
+      "Natalidad"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "mortalidad",
+     "interpretacion": "Contrasta entradas y salidas demográficas. Alta mortalidad con baja natalidad: territorio envejecido; baja mortalidad con alta natalidad: territorio joven. Riesgo: lecturas sin contexto de edad. Oportunidad: planear servicios según perfil (geriatría vs materno-infantil).",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo se comporta la mortalidad circulatoria mensual (DANE) y qué estacionalidad presenta?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Mortalidad circulatoria mensual (mortalidad_dane · circulatorias)"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Las causas circulatorias (I00–I99) son la carga crónica de fondo. Niveles altos y estables: perfil de enfermedad crónica; picos: eventos agudos. Riesgo: muerte evitable por enfermedad cardiovascular. Oportunidad: prevención cardiometabólica.",
+     "multitema": false
+    },
+    {
+     "q": "¿La mortalidad respiratoria del DANE guarda proporción con la morbilidad respiratoria atendida en RIPS?",
+     "tipo": "Correlacional · Temporal",
+     "indicadores": [
+      "Mortalidad respiratoria mensual (mortalidad_dane · respiratorias)",
+      "Morbilidad respiratoria RIPS (rips · J00-J99)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Relaciona desenlace fatal con demanda de atención. Proporción estable: sistema que capta y trata; divergencia: barreras de acceso o severidad. Riesgo: mortalidad evitable por acceso tardío. Oportunidad: fortalecer atención respiratoria oportuna.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios se mantienen consistentemente con menor mortalidad general, como referentes positivos?",
+     "tipo": "Territorial · Temporal",
+     "indicadores": [
+      "Mortalidad general"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "mortalidad",
+     "interpretacion": "Identifica territorios de baja mortalidad sostenida. Pueden reflejar población joven o mejores condiciones. Riesgo: atribuir al azar lo que es efecto de edad. Oportunidad: aprender de territorios de referencia (con cautela).",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con mayor intento de suicidio presentan también mayor mortalidad general?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Intento de suicidio",
+      "Mortalidad general"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "intento_suicidio",
+     "interpretacion": "Explora si las dos cargas de salud coinciden territorialmente (base del índice de priorización). Coincidencia parcial: cada indicador aporta información distinta. Riesgo: priorizar solo por mortalidad. Oportunidad: índice que combine ambas.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo se compara la estacionalidad de la mortalidad total mensual (DANE) entre años pre y pospandemia?",
+     "tipo": "Temporal · Comparativo",
+     "indicadores": [
+      "Mortalidad total mensual (mortalidad_dane · total)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Analiza el patrón mensual de muerte y su alteración por COVID. Exceso 2020–2021: impacto pandémico; normalización posterior: retorno a línea base. Riesgo: subestimar secuelas. Oportunidad: preparación ante nuevas crisis.",
+     "multitema": false
+    },
+    {
+     "q": "¿La mortalidad circulatoria mensual (DANE) presenta meses de exceso compatibles con episodios de contaminación?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Mortalidad circulatoria mensual (mortalidad_dane · circulatorias)",
+      "PM2.5 promedio ciudad"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "El PM2.5 también impacta el sistema cardiovascular. Coincidencia de picos: posible efecto cardiovascular del aire. Riesgo: muerte cardiovascular ambientalmente atribuible. Oportunidad: protección de cardiópatas en episodios.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué peso relativo tienen las causas respiratorias frente a las circulatorias en la mortalidad total mensual (DANE)?",
+     "tipo": "Descriptivo · Temporal",
+     "indicadores": [
+      "Mortalidad respiratoria mensual (mortalidad_dane · respiratorias)",
+      "Mortalidad circulatoria mensual (mortalidad_dane · circulatorias)",
+      "Mortalidad total mensual (mortalidad_dane · total)"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Descompone la mortalidad por grandes causas. Predominio circulatorio: perfil crónico; alta fracción respiratoria estacional: vínculo ambiental/infeccioso. Riesgo: no anticipar picos. Oportunidad: priorizar prevención según peso de causa.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con mayor violencia de género presentan también mayor mortalidad general?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Violencia de género",
+      "Mortalidad general"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "violencia_genero",
+     "interpretacion": "Explora si la violencia acompaña mayor mortalidad territorial. Coincidencia: entorno de riesgo acumulado; divergencia (edad): efecto demográfico. Riesgo: confusión por estructura de edad. Oportunidad: lectura de entornos violentos.",
+     "multitema": true
+    },
+    {
+     "q": "¿El perfil mensual de mortalidad respiratoria (DANE) muestra meses sistemáticamente más críticos?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Mortalidad respiratoria mensual (mortalidad_dane · respiratorias)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Identifica meses recurrentes de mayor mortalidad respiratoria. Estacionalidad clara: planeación posible; aleatoria: vigilancia continua. Riesgo: saturación estacional. Oportunidad: preparar capacidad en meses críticos.",
+     "multitema": false
+    },
+    {
+     "q": "¿La caída de la natalidad anticipa cambios en la estructura de mortalidad por envejecimiento?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Natalidad",
+      "Mortalidad general"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "natalidad",
+     "interpretacion": "Relaciona transición demográfica con mortalidad. Natalidad en descenso + mortalidad creciente: envejecimiento poblacional. Riesgo: presión sobre servicios geriátricos. Oportunidad: planeación de largo plazo.",
+     "multitema": true
+    },
+    {
+     "q": "¿La mortalidad general de ciudad (MEData) y la mortalidad total del DANE ofrecen una lectura coherente del nivel de muerte?",
+     "tipo": "Comparativo · Temporal",
+     "indicadores": [
+      "Mortalidad general (mortalidad · ciudad)",
+      "Mortalidad total mensual agregada (mortalidad_dane · total)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Triangula dos fuentes de mortalidad (tasa MEData vs conteo DANE). Coherencia: confianza en la magnitud; divergencia: diferencias de definición/cobertura. Riesgo: inconsistencia de cifras. Oportunidad: validación cruzada.",
+     "multitema": false
+    },
+    {
+     "q": "¿La mortalidad respiratoria mensual (DANE) y la morbilidad respiratoria (RIPS) permiten estimar una letalidad respiratoria aproximada?",
+     "tipo": "Correlacional · Temporal",
+     "indicadores": [
+      "Mortalidad respiratoria mensual (mortalidad_dane · respiratorias)",
+      "Morbilidad respiratoria RIPS (rips · J00-J99)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Relaciona desenlaces fatales con atenciones para aproximar severidad. Letalidad alta: enfermedad grave o acceso tardío; baja: manejo oportuno. Riesgo: sobreinterpretar un cociente de fuentes distintas. Oportunidad: indicador de severidad respiratoria.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué fracción de la mortalidad total mensual (DANE) explican conjuntamente las causas respiratorias y circulatorias?",
+     "tipo": "Descriptivo · Temporal",
+     "indicadores": [
+      "Mortalidad respiratoria mensual (mortalidad_dane · respiratorias)",
+      "Mortalidad circulatoria mensual (mortalidad_dane · circulatorias)",
+      "Mortalidad total mensual (mortalidad_dane · total)"
+     ],
+     "prioridad": "Alta",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Cuantifica el peso de dos grandes grupos sobre el total. Alta fracción: dos causas dominan el perfil; baja: mortalidad diversa. Riesgo: desatender otras causas. Oportunidad: priorizar prevención en las dominantes.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con inseguridad alimentaria alta sostenida muestran mayor mortalidad, una vez considerada la edad?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Inseguridad alimentaria alta",
+      "Mortalidad general"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_hogares_inseguridad_alimentaria_alta",
+     "interpretacion": "Explora el impacto de la privación severa en la mortalidad. La relación puede estar enmascarada por la edad; hogares jóvenes privados no necesariamente registran más mortalidad bruta. Riesgo: conclusión errónea. Oportunidad: análisis ajustado por edad.",
+     "multitema": true
+    },
+    {
+     "q": "¿La mortalidad general de la ciudad muestra signos de recuperación (descenso) tras el pico de 2021?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Mortalidad general (mortalidad · ciudad)"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "mortalidad",
+     "interpretacion": "Evalúa el retorno a la línea base pospandemia. Descenso tras 2021: recuperación; meseta alta: secuelas. Riesgo: normalizar una mortalidad elevada. Oportunidad: verificar retorno a niveles previos.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con rezago laboral estructural (desempleo alto sostenido) muestran peor trayectoria de mortalidad?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Tasa desempleo abierto",
+      "Mortalidad general"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_t99",
+     "interpretacion": "Relaciona rezago económico persistente con la evolución de la mortalidad. Coincidencia: determinantes sociales adversos sostenidos. Riesgo: confusión por edad. Oportunidad: abordar determinantes sociales de la salud.",
+     "multitema": true
+    },
+    {
+     "q": "¿La mortalidad de ciudad, una vez pasado el efecto COVID, retorna a su tendencia de largo plazo o queda en un nivel superior?",
+     "tipo": "Temporal · Comparativo",
+     "indicadores": [
+      "Mortalidad general (mortalidad · ciudad)",
+      "Mortalidad total mensual (mortalidad_dane · total)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Evalúa secuelas de la pandemia en la mortalidad. Retorno a tendencia: recuperación; meseta superior: secuelas o envejecimiento. Riesgo: normalizar exceso. Oportunidad: vigilancia de exceso de mortalidad.",
+     "multitema": false
+    },
+    {
+     "q": "¿La combinación de mortalidad respiratoria estacional (DANE) y picos de PM2.5 define ventanas críticas para alertas de salud?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Mortalidad respiratoria mensual (mortalidad_dane · respiratorias)",
+      "PM2.5 promedio ciudad"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Identifica ventanas de mayor riesgo combinado para activar alertas. Coincidencia estacional: momentos críticos. Riesgo: no actuar a tiempo. Oportunidad: sistema de alerta aire-salud.",
+     "multitema": true
+    }
+   ]
+  },
+  {
+   "id": "enfermedades_transmisibles",
+   "nombre": "Enfermedades transmisibles",
+   "grupo": "Salud",
+   "preguntas": [
+    {
+     "q": "¿La hepatitis A se concentra en territorios con mayor inseguridad alimentaria moderada, apuntando a déficit de saneamiento?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Hepatitis A",
+      "Inseguridad alimentaria moderada"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "hepatitis_a",
+     "interpretacion": "Ambas comparten raíces en agua, saneamiento e higiene. Coincidencia: entorno insalubre. Riesgo: transmisión fecal-oral. Oportunidad: intervención WASH (agua, saneamiento e higiene) focalizada.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo ha evolucionado la incidencia de dengue en la ciudad y qué años muestran picos epidémicos?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Dengue"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "dengue",
+     "interpretacion": "Mide incidencia anual de una enfermedad vectorial cíclica. Picos: años epidémicos ligados a clima y control vectorial; valles: control efectivo. Riesgo: epidemias periódicas. Oportunidad: anticipar control en años de riesgo.",
+     "multitema": false
+    },
+    {
+     "q": "¿La incidencia respiratoria no transmisible y la varicela se comportan distinto frente a la estacionalidad ambiental?",
+     "tipo": "Temporal · Comparativo",
+     "indicadores": [
+      "Varicela",
+      "ESI-IRAG semanal"
+     ],
+     "prioridad": "Baja",
+     "vista": "ciudad_tiempo",
+     "clave": "sivigila",
+     "interpretacion": "Contrasta una enfermedad inmunoprevenible con vigilancia respiratoria centinela. Patrones distintos: mecanismos de transmisión diferentes. Riesgo: respuesta uniforme a riesgos distintos. Oportunidad: estrategias específicas por enfermedad.",
+     "multitema": true
+    },
+    {
+     "q": "¿La tosferina muestra patrón territorial compatible con brechas de vacunación en primera infancia?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Tosferina"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "tosferina",
+     "interpretacion": "La tosferina afecta a lactantes y refleja coberturas de vacunación. Alta en ciertos territorios: brechas de inmunización. Riesgo: muerte infantil evitable. Oportunidad: vacunación materna e infantil focalizada.",
+     "multitema": false
+    },
+    {
+     "q": "¿Las enfermedades infantiles (varicela, tosferina, parotiditis) se concentran en territorios de mayor natalidad reciente?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Varicela",
+      "Tosferina",
+      "Natalidad"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "varicela",
+     "interpretacion": "Relaciona carga infantil con presión reproductiva. Coincidencia: mayor población pediátrica expuesta. Riesgo: brotes en primera infancia. Oportunidad: vacunación donde hay más niños.",
+     "multitema": true
+    },
+    {
+     "q": "¿El dengue muestra correlación territorial con otras enfermedades sensibles a saneamiento (hepatitis A)?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Dengue",
+      "Hepatitis A"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "dengue",
+     "interpretacion": "Ambas se asocian a condiciones ambientales y saneamiento. Coincidencia: entorno insalubre común. Riesgo: focos ambientales múltiples. Oportunidad: intervención ambiental integral.",
+     "multitema": false
+    },
+    {
+     "q": "¿La varicela, como enfermedad inmunoprevenible, muestra control sostenido o repuntes que alerten sobre coberturas?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Varicela"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "varicela",
+     "interpretacion": "Evalúa la eficacia de la inmunización en el tiempo. Descenso sostenido: buena cobertura; repuntes: caídas de vacunación. Riesgo: resurgimiento. Oportunidad: reforzar coberturas ante repuntes.",
+     "multitema": false
+    },
+    {
+     "q": "¿La carga conjunta de enfermedades transmisibles sirve como indicador proxy de condiciones de vida por territorio?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Dengue",
+      "Hepatitis A",
+      "Tuberculosis pulmonar"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "dengue",
+     "interpretacion": "Usa la suma de transmisibles como proxy de determinantes ambientales y sociales. Alta carga conjunta: condiciones de vida adversas. Riesgo: simplificar. Oportunidad: indicador sintético de salubridad territorial.",
+     "multitema": true
+    }
+   ]
+  },
+  {
+   "id": "salud_sexual",
+   "nombre": "Salud sexual y reproductiva",
+   "grupo": "Salud",
+   "preguntas": [
+    {
+     "q": "¿Qué territorios muestran menor concertación del método de planificación familiar y cómo se relaciona con la información disponible?",
+     "tipo": "Territorial · Correlacional",
+     "indicadores": [
+      "Jefes/informantes que concertan el método de planificación",
+      "Jefes con suficiente información sobre planificación"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_jefes_hogar_informantes_calificados_concertan_me",
+     "interpretacion": "Mide decisión reproductiva compartida e informada. Baja concertación con baja información: déficit de autonomía reproductiva; alta: decisiones informadas. Riesgo: embarazo no planeado, inequidad de género. Oportunidad: educación y consejería.",
+     "multitema": false
+    },
+    {
+     "q": "¿La proporción de jefes de hogar que planifican se relaciona con la natalidad territorial?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Jefes de hogar o informante calificado que planifica",
+      "Natalidad"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_jefes_hogar_informante_calificado_planifica",
+     "interpretacion": "Vincula práctica de planificación con natalidad. Mayor planificación y menor natalidad: decisiones reproductivas efectivas; baja planificación y alta natalidad: brechas de acceso. Riesgo: embarazo no planeado. Oportunidad: acceso a métodos.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios tienen menor información del jefe de hogar sobre métodos de planificación y cómo cambió en el tiempo?",
+     "tipo": "Territorial · Temporal",
+     "indicadores": [
+      "Jefes de hogar con suficiente información sobre métodos de planificación"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_jefes_hogar_suficiente_informacion_metodos_plani",
+     "interpretacion": "Proxy de alfabetización en salud reproductiva. Baja y estancada: brecha persistente; creciente: mejora del acceso a información. Riesgo: decisiones no informadas. Oportunidad: educación sostenida.",
+     "multitema": false
+    },
+    {
+     "q": "¿Los territorios con mayor concertación del método de planificación muestran mejor perfil socioeconómico (menor dependencia económica)?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Jefes/informantes que concertan el método de planificación",
+      "Índice de dependencia económica"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_jefes_hogar_informantes_calificados_concertan_me",
+     "interpretacion": "Vincula autonomía reproductiva con carga económica. Mayor concertación y menor dependencia: hogares con más control sobre su planeación. Riesgo: inferir causalidad. Oportunidad: SSR como parte del bienestar.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo se relacionan la información, la planificación y la concertación del método entre territorios, como cadena de decisión reproductiva?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Jefes con suficiente información",
+      "Jefe que planifica",
+      "Jefes que concertan el método"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_jefes_hogar_suficiente_informacion_metodos_plani",
+     "interpretacion": "Analiza la cadena información→planificación→concertación. Caídas entre eslabones: pérdidas en la ruta reproductiva. Riesgo: brechas de autonomía. Oportunidad: reforzar el eslabón más débil.",
+     "multitema": false
+    },
+    {
+     "q": "¿La planificación familiar del jefe de hogar se asocia con menor inseguridad alimentaria, como señal de planeación del hogar?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Jefe de hogar que planifica",
+      "Inseguridad alimentaria"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_jefes_hogar_informante_calificado_planifica",
+     "interpretacion": "Explora la planeación reproductiva como proxy de planeación del hogar. Mayor planificación y menor inseguridad: hogares más organizados. Riesgo: inferir causalidad. Oportunidad: SSR integrada a bienestar del hogar.",
+     "multitema": true
+    },
+    {
+     "q": "¿La planificación familiar del jefe de hogar se asocia con la caída de la natalidad en los mismos territorios?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Jefe de hogar que planifica",
+      "Natalidad"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_jefes_hogar_informante_calificado_planifica",
+     "interpretacion": "Vincula la práctica reproductiva con la dinámica de natalidad. Mayor planificación y menor natalidad: decisiones reproductivas efectivas. Riesgo: inferir causalidad simple. Oportunidad: fortalecer SSR donde la natalidad sigue alta.",
+     "multitema": true
+    },
+    {
+     "q": "¿La cadena información–planificación–concertación mejoró en la ciudad durante la serie, señal de avance en autonomía reproductiva?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Jefes con suficiente información",
+      "Jefe que planifica",
+      "Jefes que concertan el método"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_jefes_hogar_suficiente_informacion_metodos_plani",
+     "interpretacion": "Evalúa el avance de la autonomía reproductiva en el tiempo. Mejora en los tres: progreso; estancamiento: brechas persistentes. Riesgo: retroceso en SSR. Oportunidad: sostener educación y acceso.",
+     "multitema": false
+    }
+   ]
+  },
+  {
+   "id": "cultura",
+   "nombre": "Cultura y participación",
+   "grupo": "Sociales",
+   "preguntas": [
+    {
+     "q": "¿Qué territorios muestran menor participación en programas culturales y cómo se relaciona con la participación deportiva?",
+     "tipo": "Territorial · Comparativo",
+     "indicadores": [
+      "Personas que asisten/participan en programas culturales",
+      "Población inscrita en programas deportivos/recreativos"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_personas_asiste_participa_programas_culturales",
+     "interpretacion": "Mide el acceso y uso de oferta cultural. Un valor bajo indica débil tejido cultural y posible exclusión; uno alto, cohesión y capital social. Riesgo: desigualdad en acceso a bienes culturales. Oportunidad: descentralizar la oferta cultural hacia territorios rezagados.",
+     "multitema": false
+    },
+    {
+     "q": "¿La participación cultural se asocia territorialmente con menores tasas de intento de suicidio, como posible factor protector?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Personas que participan en programas culturales",
+      "Intento de suicidio"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_personas_asiste_participa_programas_culturales",
+     "interpretacion": "Explora la cultura como factor protector de salud mental. Una asociación inversa (más cultura, menos intento de suicidio) apoyaría invertir en cohesión social. Riesgo: confundir con nivel socioeconómico. Oportunidad: integrar cultura en estrategias de salud mental comunitaria. Limitación: asociación ecológica, sin control de confusores.",
+     "multitema": true
+    },
+    {
+     "q": "¿La participación cultural y la inscripción deportiva se refuerzan mutuamente en los mismos territorios?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Personas que participan en programas culturales",
+      "Población inscrita en programas deportivos/recreativos"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_personas_asiste_participa_programas_culturales",
+     "interpretacion": "Evalúa si existe un \"tejido de participación\" común. Correlación alta: capital social fuerte; baja: participación fragmentada. Riesgo: territorios desconectados de toda oferta. Oportunidad: integrar cultura y recreación.",
+     "multitema": false
+    },
+    {
+     "q": "¿Cómo evolucionó la participación cultural de la ciudad y qué efecto tuvo 2021 sobre ella?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Personas que asisten/participan en programas culturales"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_personas_asiste_participa_programas_culturales",
+     "interpretacion": "Mide la evolución del acceso cultural. Caída en 2021: impacto pandémico sobre la vida cultural; recuperación: reactivación del tejido. Riesgo: pérdida de hábitos culturales. Oportunidad: reactivar la oferta cultural.",
+     "multitema": false
+    },
+    {
+     "q": "¿Qué territorios combinan baja participación cultural y baja inscripción deportiva, señalando exclusión de la oferta de bienestar?",
+     "tipo": "Territorial · Comparativo",
+     "indicadores": [
+      "Personas que participan en programas culturales",
+      "Población inscrita en programas deportivos/recreativos"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_personas_asiste_participa_programas_culturales",
+     "interpretacion": "Detecta territorios desconectados de toda oferta pública de bienestar. Baja en ambos: exclusión; alta: tejido activo. Riesgo: desigualdad de acceso. Oportunidad: llevar oferta integrada.",
+     "multitema": false
+    },
+    {
+     "q": "¿Qué territorios superan la mediana de participación cultural y pueden servir de modelo de dinamización?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Personas que participan en programas culturales"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_personas_asiste_participa_programas_culturales",
+     "interpretacion": "Identifica territorios culturalmente dinámicos. Alto: capital social fuerte; bajo: exclusión. Riesgo: brecha simbólica. Oportunidad: replicar modelos de dinamización.",
+     "multitema": false
+    },
+    {
+     "q": "¿La participación cultural se asocia con menor carga de trastornos mentales atendidos (RIPS) a escala de ciudad?",
+     "tipo": "Correlacional · Temporal",
+     "indicadores": [
+      "Personas que participan en programas culturales",
+      "Trastornos mentales RIPS (rips · F00-F99)"
+     ],
+     "prioridad": "Baja",
+     "vista": "ciudad_tiempo",
+     "clave": "rips",
+     "interpretacion": "Explora la cultura como protector de salud mental. Relación inversa: cultura ligada a menor demanda de atención. Riesgo: confusión por acceso a servicios. Oportunidad: cultura en salud mental comunitaria. Limitación: escalas distintas.",
+     "multitema": true
+    },
+    {
+     "q": "¿La participación cultural se distribuye de forma más o menos equitativa que la práctica deportiva entre territorios?",
+     "tipo": "Comparativo · Territorial",
+     "indicadores": [
+      "Personas que participan en programas culturales",
+      "Población que practica actividades deportivas"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_personas_asiste_participa_programas_culturales",
+     "interpretacion": "Compara la desigualdad territorial de dos ofertas de bienestar. Mayor dispersión en una: oferta más inequitativa. Riesgo: brechas concentradas. Oportunidad: equilibrar la oferta más desigual.",
+     "multitema": false
+    },
+    {
+     "q": "¿Qué territorios muestran la participación cultural más estable en el tiempo, señalando tejido cultural consolidado?",
+     "tipo": "Temporal · Territorial",
+     "indicadores": [
+      "Personas que participan en programas culturales"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_personas_asiste_participa_programas_culturales",
+     "interpretacion": "Estabilidad alta: tejido cultural consolidado; volatilidad: participación frágil. Riesgo: pérdida de tejido en los volátiles. Oportunidad: proteger y expandir el tejido consolidado.",
+     "multitema": false
+    },
+    {
+     "q": "¿Qué territorios no recuperaron su participación cultural prepandemia y requieren reactivación prioritaria?",
+     "tipo": "Temporal · Territorial",
+     "indicadores": [
+      "Personas que participan en programas culturales"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_personas_asiste_participa_programas_culturales",
+     "interpretacion": "Identifica rezago cultural post-pandemia. Sin recuperar: pérdida de tejido; recuperado: resiliencia. Riesgo: desconexión cultural permanente. Oportunidad: reactivación focalizada.",
+     "multitema": false
+    },
+    {
+     "q": "¿La participación cultural y la inscripción deportiva comparten los mismos territorios líderes, señalando polos de bienestar?",
+     "tipo": "Territorial · Comparativo",
+     "indicadores": [
+      "Personas que participan en programas culturales",
+      "Población inscrita en programas deportivos/recreativos"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_personas_asiste_participa_programas_culturales",
+     "interpretacion": "Identifica polos de alta participación en ambas ofertas. Coincidencia: concentración de bienestar; dispersión: oferta repartida. Riesgo: desigualdad de acceso concentrada. Oportunidad: llevar el modelo a territorios sin polos.",
+     "multitema": false
+    },
+    {
+     "q": "¿La participación cultural de ciudad recuperó su nivel prepandemia y cuál es su trayectoria proyectada?",
+     "tipo": "Temporal · Predictivo",
+     "indicadores": [
+      "Personas que participan en programas culturales"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_personas_asiste_participa_programas_culturales",
+     "interpretacion": "Evalúa recuperación y trayectoria cualitativa. Recuperación plena: resiliencia cultural; rezago: pérdida de tejido. Riesgo: desconexión cultural persistente. Oportunidad: metas de reactivación. (Lectura de tendencia, no modelo.)",
+     "multitema": false
+    }
+   ]
+  },
+  {
+   "id": "violencia_genero",
+   "nombre": "Violencia de género",
+   "grupo": "Sociales",
+   "preguntas": [
+    {
+     "q": "¿La violencia de género muestra una tendencia creciente o decreciente en la ciudad desde 2013?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Violencia de género"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "violencia_genero",
+     "interpretacion": "Tendencia ascendente: mayor incidencia o mejor denuncia; descendente: reducción o subregistro. Riesgo: normalización de la violencia. Oportunidad: evaluar efecto de políticas de prevención.",
+     "multitema": false
+    },
+    {
+     "q": "¿Qué territorios superan la mediana de violencia de género y requieren refuerzo de rutas de atención?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Violencia de género"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "violencia_genero",
+     "interpretacion": "Identifica territorios por encima del punto medio. Valor alto: mayor incidencia registrada o mejor denuncia; bajo: menor incidencia o subregistro. Riesgo: subnotificación. Oportunidad: fortalecer rutas donde la carga es mayor.",
+     "multitema": false
+    },
+    {
+     "q": "¿Qué territorios muestran el mayor aumento de violencia de género entre 2013 y 2022?",
+     "tipo": "Temporal · Territorial",
+     "indicadores": [
+      "Violencia de género"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "violencia_genero",
+     "interpretacion": "Mide la variación territorial de la violencia. Aumento marcado: deterioro o mejor denuncia; estable/decreciente: contención. Riesgo: focos crecientes. Oportunidad: priorizar prevención donde más crece.",
+     "multitema": false
+    },
+    {
+     "q": "¿La violencia de género mostró algún cambio de nivel tras 2020 que sugiera efecto del confinamiento?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Violencia de género"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "violencia_genero",
+     "interpretacion": "Evalúa el efecto del confinamiento sobre la violencia. Salto en 2020–2021: posible agravamiento por convivencia forzada; sin cambio: estabilidad o subregistro. Riesgo: subnotificación durante confinamiento. Oportunidad: preparación para futuras crisis.",
+     "multitema": false
+    },
+    {
+     "q": "¿La violencia de género se distribuye de forma concentrada o dispersa entre los 21 territorios?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Violencia de género"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "violencia_genero",
+     "interpretacion": "Evalúa concentración territorial. Muy concentrada: focos claros para intervenir; dispersa: fenómeno generalizado. Riesgo: mala focalización. Oportunidad: estrategia acorde al patrón espacial.",
+     "multitema": false
+    },
+    {
+     "q": "¿El nivel de violencia de género de ciudad en el último año disponible es mayor o menor que su promedio histórico?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Violencia de género"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "violencia_genero",
+     "interpretacion": "Compara el último dato con la media de la serie. Por encima: deterioro o mejor denuncia; por debajo: contención. Riesgo: lectura sin contexto de denuncia. Oportunidad: evaluación de la trayectoria.",
+     "multitema": false
+    },
+    {
+     "q": "¿La violencia de género por territorio se correlaciona con la jefatura de hogar masculina, como contraste con la femenina?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Violencia de género",
+      "Hombres jefes cabeza de hogar"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "violencia_genero",
+     "interpretacion": "Contrasta la estructura de jefatura con la violencia. Interpretación cuidadosa y no estigmatizante: busca patrones territoriales, no responsabilidades individuales. Riesgo: lectura sesgada. Oportunidad: prevención con enfoque de género informada por contexto.",
+     "multitema": false
+    },
+    {
+     "q": "¿La violencia de género por territorio se mantiene estable en su ranking a lo largo de la serie o cambian los territorios líderes?",
+     "tipo": "Temporal · Territorial",
+     "indicadores": [
+      "Violencia de género"
+     ],
+     "prioridad": "Alta",
+     "vista": "territorio",
+     "clave": "violencia_genero",
+     "interpretacion": "Evalúa la persistencia de los focos. Ranking estable: focos crónicos; cambiante: dinámica territorial. Riesgo: focos crónicos desatendidos. Oportunidad: intervención sostenida donde la carga persiste.",
+     "multitema": false
+    },
+    {
+     "q": "¿La violencia de género debería integrarse al índice de priorización del portal, hoy basado en mortalidad y salud mental?",
+     "tipo": "Comparativo · Territorial",
+     "indicadores": [
+      "Violencia de género",
+      "Índice de priorización (mortalidad + intento de suicidio)"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "violencia_genero",
+     "interpretacion": "Evalúa si añadir violencia de género cambiaría la priorización. Si reordena el ranking: aporta información nueva; si no: está capturada por los otros. Riesgo: índice incompleto. Oportunidad: índice de bienestar más robusto.",
+     "multitema": false
+    }
+   ]
+  },
+  {
+   "id": "demografia",
+   "nombre": "Demografía",
+   "grupo": "Territoriales",
+   "preguntas": [
+    {
+     "q": "¿Cómo evolucionó el índice de masculinidad de la ciudad y qué territorios se apartan del promedio?",
+     "tipo": "Temporal · Territorial",
+     "indicadores": [
+      "Índice de masculinidad"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_t48",
+     "interpretacion": "Mide hombres por cada 100 mujeres. Valores extremos: composición por sexo atípica (migración, mortalidad diferencial). Riesgo: servicios no ajustados al perfil. Oportunidad: planeación con enfoque de género.",
+     "multitema": false
+    },
+    {
+     "q": "¿La dependencia económica y el índice de masculinidad combinados identifican perfiles territoriales de vulnerabilidad?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Índice de dependencia económica",
+      "Índice de masculinidad"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_t44",
+     "interpretacion": "Combina carga económica y composición por sexo para tipificar territorios. Alta dependencia con composición atípica: perfiles de vulnerabilidad específicos. Riesgo: servicios genéricos. Oportunidad: planeación diferenciada.",
+     "multitema": true
+    }
+   ]
+  },
+  {
+   "id": "deporte",
+   "nombre": "Deporte y actividad física",
+   "grupo": "Hábitos Saludables",
+   "preguntas": [
+    {
+     "q": "¿Qué territorios registran la menor proporción de población que practica actividades deportivas y cómo ha evolucionado en la ciudad?",
+     "tipo": "Territorial · Temporal",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Población inscrita en programas deportivos/recreativos"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_practica_actividades_deportivas",
+     "interpretacion": "Mide el porcentaje de población que realiza actividad física regular. Un valor bajo señala sedentarismo y riesgo de enfermedad crónica; uno alto, hábitos protectores. Riesgos: obesidad, enfermedades cardiovasculares y metabólicas. Oportunidades: ampliar oferta deportiva comunitaria donde la práctica es baja.",
+     "multitema": false
+    },
+    {
+     "q": "¿Cómo se comporta la práctica deportiva frente a la carga de morbilidad respiratoria y la calidad del aire de la ciudad?",
+     "tipo": "Correlacional · Temporal",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "PM2.5 promedio de estaciones",
+      "Morbilidad respiratoria RIPS (rips · respiratorias J00-J99)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "rips",
+     "interpretacion": "Relaciona un factor protector (actividad física) con un factor ambiental de riesgo (PM2.5) y la carga respiratoria. Un aire más contaminado puede desincentivar el ejercicio al aire libre y agravar morbilidad respiratoria. Riesgo: exposición simultánea a sedentarismo y mala calidad del aire. Oportunidad: planear actividad física en horarios/zonas de menor contaminación.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo evolucionó la inscripción en programas deportivos y recreativos en la ciudad, con énfasis en la caída de 2021?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Población inscrita en programas deportivos/recreativos",
+      "Población que practica deporte, recreación y lúdica"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_inscrita_programas_deportivos_recreati",
+     "interpretacion": "Mide cobertura institucional de recreación. Caída marcada: retroceso de la oferta (pandemia); recuperación: reactivación. Riesgo: pérdida de hábitos saludables. Oportunidad: recuperar y ampliar cobertura.",
+     "multitema": false
+    },
+    {
+     "q": "¿La práctica deportiva se relaciona con el perfil de masculinidad territorial, revelando necesidades diferenciadas por sexo?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Índice de masculinidad"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_practica_actividades_deportivas",
+     "interpretacion": "Cruza práctica deportiva con composición por sexo. Permite detectar si la oferta deportiva responde al perfil poblacional. Riesgo: oferta sesgada por género. Oportunidad: programas deportivos con enfoque de género.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios muestran mayor diferencia entre practicar deporte y participar en actividades recreativas y lúdicas?",
+     "tipo": "Territorial · Comparativo",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Población que practica actividades deportivas, recreativas y lúdicas"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_practica_actividades_deportivas",
+     "interpretacion": "Distingue deporte estructurado de recreación amplia. Brecha grande: recreación informal sin deporte formal; pequeña: hábito consolidado. Riesgo: sedentarismo pese a recreación. Oportunidad: convertir recreación en actividad física efectiva.",
+     "multitema": false
+    },
+    {
+     "q": "¿La práctica deportiva se asocia con menor mortalidad circulatoria mensual a escala de ciudad?",
+     "tipo": "Correlacional · Temporal",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Mortalidad circulatoria mensual (mortalidad_dane · circulatorias)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Relaciona el principal factor protector cardiovascular con la mortalidad circulatoria. Más deporte, menor mortalidad circulatoria apoyaría la promoción de actividad física. Riesgo: confusión por edad y otros factores. Oportunidad: deporte como prevención cardiovascular. Limitación: escalas distintas (ECV territorial anual vs DANE municipal mensual).",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios superan la mediana en práctica deportiva como factor protector consolidado?",
+     "tipo": "Territorial · Descriptivo",
+     "indicadores": [
+      "Población que practica actividades deportivas"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_practica_actividades_deportivas",
+     "interpretacion": "Identifica territorios con hábito protector. Alto: cultura de actividad física; bajo: sedentarismo. Riesgo: enfermedad crónica donde es bajo. Oportunidad: ampliar oferta en los rezagados.",
+     "multitema": false
+    },
+    {
+     "q": "¿La morbilidad respiratoria anual (RIPS) y la práctica deportiva muestran relación inversa a escala de ciudad?",
+     "tipo": "Correlacional · Temporal",
+     "indicadores": [
+      "Morbilidad respiratoria RIPS (rips · J00-J99)",
+      "Población que practica actividades deportivas"
+     ],
+     "prioridad": "Baja",
+     "vista": "ciudad_tiempo",
+     "clave": "rips",
+     "interpretacion": "Explora el deporte como protector respiratorio. Relación inversa: actividad física asociada a menor morbilidad. Riesgo: confusión con aire y acceso a servicios. Oportunidad: promoción de actividad física. Limitación: escalas distintas.",
+     "multitema": true
+    },
+    {
+     "q": "¿Cómo evolucionó la práctica deportiva de la ciudad y qué territorios se recuperaron más tras 2021?",
+     "tipo": "Temporal · Territorial",
+     "indicadores": [
+      "Población que practica actividades deportivas"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_practica_actividades_deportivas",
+     "interpretacion": "Mide recuperación del hábito tras la caída pandémica. Recuperación fuerte: reactivación; rezago: pérdida persistente. Riesgo: sedentarismo instalado. Oportunidad: consolidar la reactivación.",
+     "multitema": false
+    },
+    {
+     "q": "¿La práctica deportiva se relaciona con la dependencia económica, revelando barreras de tiempo o recursos?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Índice de dependencia económica"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_practica_actividades_deportivas",
+     "interpretacion": "Cruza hábito saludable con carga económica. Alta dependencia y baja práctica: barreras de tiempo/recursos para el ejercicio. Riesgo: sedentarismo en hogares sobrecargados. Oportunidad: oferta gratuita y de proximidad.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios muestran mayor caída de la inscripción en programas deportivos entre su mejor año y 2022?",
+     "tipo": "Territorial · Temporal",
+     "indicadores": [
+      "Población inscrita en programas deportivos/recreativos"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_inscrita_programas_deportivos_recreati",
+     "interpretacion": "Mide pérdida de cobertura institucional. Caída fuerte: retroceso de oferta pública; estable: cobertura mantenida. Riesgo: pérdida de hábito. Oportunidad: recuperar cobertura donde más cayó.",
+     "multitema": false
+    },
+    {
+     "q": "¿La práctica deportiva se asocia con menor desempleo oculto, sugiriendo vínculo entre actividad y vinculación social?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Tasa desempleo oculto"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_practica_actividades_deportivas",
+     "interpretacion": "Explora si la actividad física acompaña mayor vinculación social y laboral. Relación inversa: deporte ligado a mayor actividad general. Riesgo: confusión socioeconómica. Oportunidad: deporte como vía de reactivación social.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué relación hay entre la práctica deportiva y la inscripción formal, como indicador de institucionalización del hábito?",
+     "tipo": "Correlacional · Territorial",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Población inscrita en programas deportivos/recreativos"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_practica_actividades_deportivas",
+     "interpretacion": "Alta práctica con baja inscripción: hábito informal; ambas altas: institucionalización. Riesgo: oferta pública que no capta la práctica. Oportunidad: formalizar el hábito para sostenerlo.",
+     "multitema": false
+    },
+    {
+     "q": "¿La recuperación post-2021 fue más rápida en deporte o en cultura a nivel de ciudad?",
+     "tipo": "Temporal · Comparativo",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Personas que participan en programas culturales"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_practica_actividades_deportivas",
+     "interpretacion": "Compara la resiliencia de dos ofertas de bienestar tras la pandemia. Recuperación desigual: una dimensión más frágil. Riesgo: rezago persistente en la más lenta. Oportunidad: impulsar la que se recupera más despacio.",
+     "multitema": true
+    },
+    {
+     "q": "¿La práctica deportiva de ciudad ya recuperó o superó su nivel prepandemia (2019)?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Población que practica actividades deportivas"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_practica_actividades_deportivas",
+     "interpretacion": "Compara el dato reciente con el nivel prepandemia. Recuperación completa: resiliencia; rezago: pérdida persistente. Riesgo: sedentarismo instalado. Oportunidad: metas de recuperación plena.",
+     "multitema": false
+    },
+    {
+     "q": "¿La caída de la práctica deportiva en 2021 coincidió con mayor carga de salud mental (trastornos RIPS / intento de suicidio)?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Trastornos mentales RIPS (rips · F00-F99)",
+      "Intento de suicidio"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "rips",
+     "interpretacion": "Explora la pérdida de un protector (deporte) junto al aumento de carga mental durante la pandemia. Coincidencia: confinamiento afectando ambos. Riesgo: subestimar el valor del deporte. Oportunidad: deporte como salud mental en crisis.",
+     "multitema": true
+    },
+    {
+     "q": "¿La práctica deportiva de ciudad muestra una tendencia de largo plazo creciente, estable o decreciente (2011–2022)?",
+     "tipo": "Temporal · Descriptivo",
+     "indicadores": [
+      "Población que practica actividades deportivas"
+     ],
+     "prioridad": "Media",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_practica_actividades_deportivas",
+     "interpretacion": "Evalúa la trayectoria de largo plazo del hábito. Creciente: cultura de actividad en ascenso; decreciente: sedentarización. Riesgo: tendencia adversa sostenida. Oportunidad: políticas de actividad física de largo aliento.",
+     "multitema": false
+    },
+    {
+     "q": "¿La tendencia de la práctica deportiva de ciudad se relaciona inversamente con la mortalidad circulatoria del DANE?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Mortalidad circulatoria mensual agregada (mortalidad_dane · circulatorias)"
+     ],
+     "prioridad": "Media",
+     "vista": "ciudad_tiempo",
+     "clave": "mortalidad_dane",
+     "interpretacion": "Relaciona el principal protector cardiovascular con su desenlace. Más deporte, menos mortalidad circulatoria: beneficio poblacional. Riesgo: confusión por edad y otros factores. Oportunidad: deporte como prevención. Limitación: escalas y años distintos.",
+     "multitema": true
+    },
+    {
+     "q": "¿Qué territorios combinan alta práctica y alta inscripción deportiva, como modelos de cultura física institucionalizada?",
+     "tipo": "Territorial · Comparativo",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Población inscrita en programas deportivos/recreativos"
+     ],
+     "prioridad": "Baja",
+     "vista": "territorio",
+     "clave": "ecv_poblacion_practica_actividades_deportivas",
+     "interpretacion": "Identifica territorios donde el hábito está institucionalizado. Ambas altas: modelo consolidado; divergencia: hábito informal o cobertura sin práctica. Riesgo: no replicar lo que funciona. Oportunidad: escalar el modelo.",
+     "multitema": false
+    },
+    {
+     "q": "¿La recuperación de la práctica deportiva tras 2021 se asocia con alguna mejora en la morbilidad respiratoria (RIPS)?",
+     "tipo": "Temporal · Correlacional",
+     "indicadores": [
+      "Población que practica actividades deportivas",
+      "Morbilidad respiratoria RIPS (rips · J00-J99)"
+     ],
+     "prioridad": "Baja",
+     "vista": "ciudad_tiempo",
+     "clave": "rips",
+     "interpretacion": "Explora si recuperar actividad física se refleja en salud respiratoria. Mejora paralela: beneficio; sin relación: otros factores dominan. Riesgo: sobreatribuir. Oportunidad: promover deporte como salud. Limitación: RIPS hasta 2021, escalas distintas.",
+     "multitema": true
+    }
+   ]
+  }
+ ]
 }

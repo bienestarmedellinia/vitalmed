@@ -99,7 +99,7 @@
     const t3 = (((ind.indice_priorizacion || {}).ranking) || []).slice(0, 3).map((x) => x.nombre);
     $("hero-propuesta").innerHTML = t3.length
       ? `<h2>Propuesta de mejora</h2><p>Concentrar intervenciones integrales (salud física + salud mental) en <b>${esc(t3.join(", "))}</b>
-         y monitorear ambos indicadores.</p><small>Según el índice de priorización; prueba otros pesos en el simulador.</small>`
+         y monitorear ambos indicadores.</p><small>Según el índice de priorización en salud (mortalidad + salud mental).</small>`
       : `<h2>Propuesta de mejora</h2><p>Priorizar intervenciones en los territorios de mayor mortalidad.</p>`;
     // KPIs MULTIDIMENSIÓN con CARRUSEL por año (todos los años del KB, sin inventar).
     const S = KB.series || {}, cat = {}, dat = S.datos || {};
@@ -622,37 +622,188 @@
     pintarSaludTiempo();
   }
 
-  /* ---------- Observatorio por preguntas (banco curado → datos reales) ---------- */
+  /* ---------- Observatorio por preguntas (banco de 200 → modal con datos reales) ---------- */
+  const CAT_ICONO = {
+    empleo: "💼", seguridad_alimentaria: "🍲", bienestar: "🌿", calidad_aire: "🌫️",
+    salud_fisica: "🩺", salud_mental: "🧠", mortalidad: "📉", enfermedades_transmisibles: "🦠",
+    salud_sexual: "👪", cultura: "🎭", violencia_genero: "⚖️", demografia: "🧮", deporte: "🏃",
+  };
+  let PREGS = null;      // {categorias:[...]}
+  let catSel = null;     // id de categoría abierta
+  let ultimoFoco = null; // para restaurar foco al cerrar el modal
+
   function iniciarPreguntas() {
-    const cont = $("preg-cats"), lista = $("preg-lista");
-    if (!cont || !lista) return;
+    const cont = $("preg-cats"), panel = $("preg-panel");
+    if (!cont || !panel) return;
     fetch("preguntas.json", { cache: "no-store" })
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status))))
       .then((data) => {
+        PREGS = data;
         const cats = data.categorias || [];
         if (!cats.length) { const s = $("preguntas"); if (s) s.style.display = "none"; return; }
-        let sel = cats[0].id;
-        const pintarBotones = () => {
-          cont.innerHTML = cats.map((c) =>
-            `<button type="button" data-id="${esc(c.id)}" aria-pressed="${c.id === sel}">${esc(c.nombre)} (${(c.preguntas || []).length})</button>`).join("");
-          cont.querySelectorAll("button").forEach((b) => {
-            b.onclick = () => { sel = b.dataset.id;
-              cont.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x.dataset.id === sel));
-              pintarLista(); };
-          });
-        };
-        const pintarLista = () => {
-          const c = cats.find((x) => x.id === sel) || cats[0];
-          lista.innerHTML = (c.preguntas || []).map((p) =>
-            `<a class="preg-card" href="${esc(p.destino)}">
-               <span class="q">${esc(p.q)}</span>
-               <span class="meta">${esc(p.tipo)} · ${esc((p.indicadores || []).join(", "))}</span>
-               <span class="ver">Ver los datos →</span>
-             </a>`).join("");
-        };
-        pintarBotones(); pintarLista();
+        pintarCategorias(cats);
+        prepararModal();
       })
       .catch((err) => { const s = $("preguntas"); if (s) s.style.display = "none"; console.error("preguntas.json:", err); });
+  }
+
+  function pintarCategorias(cats) {
+    const cont = $("preg-cats");
+    // agrupar por 'grupo' preservando el orden de aparición
+    const grupos = [];
+    cats.forEach((c) => { if (!grupos.includes(c.grupo || "Otras")) grupos.push(c.grupo || "Otras"); });
+    cont.innerHTML = grupos.map((g) => {
+      const items = cats.filter((c) => (c.grupo || "Otras") === g);
+      return `<div class="preg-grupo"><h3>${esc(g)}</h3><div class="cat-grid">` +
+        items.map((c) => {
+          const n = (c.preguntas || []).length;
+          return `<button type="button" class="cat-card" data-id="${esc(c.id)}" aria-expanded="false" aria-controls="preg-panel">
+            <span class="ico" aria-hidden="true">${CAT_ICONO[c.id] || "📊"}</span>
+            <span class="cn">${esc(c.nombre)}</span>
+            <span class="cnum">${n} <span>preguntas</span></span>
+          </button>`;
+        }).join("") + `</div></div>`;
+    }).join("");
+    cont.querySelectorAll(".cat-card").forEach((b) => {
+      b.onclick = () => abrirCategoria(b.dataset.id);
+    });
+  }
+
+  function abrirCategoria(id) {
+    catSel = id;
+    const cat = (PREGS.categorias || []).find((c) => c.id === id);
+    $("preg-cats").querySelectorAll(".cat-card").forEach((b) =>
+      b.setAttribute("aria-expanded", b.dataset.id === id));
+    const panel = $("preg-panel");
+    if (!cat) { panel.innerHTML = ""; return; }
+    panel.innerHTML = `<div class="preg-panel-head"><h3>${esc(cat.nombre)} · ${(cat.preguntas || []).length} preguntas</h3></div>
+      <div class="preg-lista">` +
+      (cat.preguntas || []).map((p, i) =>
+        `<button type="button" class="preg-card" data-idx="${i}">
+           <span class="q">${esc(p.q)}${p.multitema ? '<span class="mt">multitema</span>' : ""}</span>
+           <span class="meta">${esc(p.tipo || "")}${(p.indicadores || []).length ? " · " + esc(p.indicadores.join(", ")) : ""}</span>
+           <span class="ver">Ver la respuesta →</span>
+         </button>`).join("") + `</div>`;
+    panel.querySelectorAll(".preg-card").forEach((b) => {
+      b.onclick = () => abrirModal(cat, cat.preguntas[+b.dataset.idx], b);
+    });
+    panel.scrollIntoView({ behavior: REDUCIR ? "auto" : "smooth", block: "nearest" });
+  }
+
+  /* ----- Modal ----- */
+  function prepararModal() {
+    const ov = $("preg-modal"); if (!ov) return;
+    const cerrar = () => cerrarModal();
+    $("modal-x").onclick = cerrar;
+    ov.addEventListener("click", (e) => { if (e.target === ov) cerrar(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !ov.hidden) cerrar(); });
+  }
+  function cerrarModal() {
+    const ov = $("preg-modal"); if (!ov) return;
+    ov.hidden = true;
+    if (charts["modal-canvas"]) { charts["modal-canvas"].destroy(); delete charts["modal-canvas"]; }
+    if (ultimoFoco && ultimoFoco.focus) ultimoFoco.focus();
+  }
+  function abrirModal(cat, p, origen) {
+    const ov = $("preg-modal"); if (!ov || !p) return;
+    ultimoFoco = origen || null;
+    $("modal-q").textContent = p.q;
+    $("modal-interp").textContent = p.interpretacion || "";
+    $("modal-interp").style.display = p.interpretacion ? "" : "none";
+    const dibujada = dibujarModal(p);
+    $("modal-foot").innerHTML = enlaceExplorar(p);
+    ov.hidden = false;
+    $("modal-x").focus();
+    if (!dibujada) {
+      $("modal-meta").innerHTML = '<span class="aviso">No hay una gráfica disponible para esta vista; usa el enlace al explorador.</span>';
+    }
+  }
+  function enlaceExplorar(p) {
+    // enlace secundario al explorador/tablas para quien quiera profundizar
+    if (p.vista === "territorio") return `<a href="datos.html#ind=${esc(p.clave)}">Ver tabla y descargar en el explorador →</a>`;
+    if (p.vista === "ciudad_tiempo") return `<a href="datos.html#ciudad-tiempo">Ver series de ciudad en el explorador →</a>`;
+    return "";
+  }
+
+  // Dibuja en #modal-canvas según la vista; devuelve true si pintó algo
+  function dibujarModal(p) {
+    const KB = KBG || {}; const ind = KB.indicadores || {};
+    if (p.vista === "territorio") return modalTerritorio(KB, p.clave);
+    if (p.vista === "ciudad_tiempo") return modalCiudadTiempo(ind, p.clave);
+    if (p.vista === "aire") return modalAire(ind.pm25_siata);
+    if (p.vista === "indice") return modalIndice();
+    return false;
+  }
+
+  function modalTerritorio(KB, clave) {
+    const pan = prepararPanorama(KB); if (!pan) return false;
+    const meta = pan.cat.find((c) => c.clave === clave) || {};
+    const valores = (pan.datos[clave] || {}).valores || {};
+    const anio = ultimoAnioDesde(valores);
+    const filas = Object.entries(valores)
+      .map(([cod, serie]) => ({ nombre: pan.terr[cod] || cod, v: Number(serie[anio]) }))
+      .filter((x) => !isNaN(x.v)).sort((a, b) => b.v - a.v);
+    if (!filas.length) return false;
+    $("modal-meta").innerHTML = `<b>${esc(meta.nombre || clave)}</b>${meta.unidad ? " · " + esc(meta.unidad) : ""} · ${anio || "s/d"} · por territorio`;
+    $("modal-fuente").innerHTML = `<b>Fuente:</b> ${esc(meta.fuente || "Base de conocimiento del pipeline")} · Comparación entre territorios; asociación, no causalidad.`;
+    nuevoGrafico("modal-canvas", { type: "bar",
+      data: { labels: filas.map((f) => corto(f.nombre)),
+        datasets: [{ data: filas.map((f) => f.v), backgroundColor: filas.map((_f, i) => (i < 3 ? NAR : AZUL)) }] },
+      options: { indexAxis: "y", responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } } });
+    return true;
+  }
+
+  function modalCiudadTiempo(ind, clave) {
+    const todas = seriesSalud(ind);
+    // 'clave' es mortalidad_dane | sivigila | rips → tomar la primera serie de esa fuente
+    const pref = { mortalidad_dane: "dane", sivigila: "sivi", rips: "rips" }[clave] || "";
+    const s = todas.find((x) => x.id.startsWith(pref)) || todas[0];
+    if (!s) return false;
+    const pts = puntosSerie(s);
+    if (!pts.length) return false;
+    $("modal-meta").innerHTML = `<b>${esc(s.etiqueta)}</b> · nivel municipio (Medellín)`;
+    $("modal-fuente").innerHTML = `<b>Fuente:</b> ${esc(s.fuente)} · <b>Unidad:</b> ${esc(s.unidad)} · ${esc(s.nota || "")}`;
+    nuevoGrafico("modal-canvas", { type: "line",
+      data: { labels: pts.map((pt) => pt.x),
+        datasets: [{ data: pts.map((pt) => pt.y), borderColor: AZUL, backgroundColor: AZUL,
+          pointRadius: s.tipo === "semanal" ? 0 : 2, borderWidth: 1.5, tension: 0.2 }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+        scales: { x: { ticks: { maxTicksLimit: 12, autoSkip: true } }, y: { beginAtZero: true } } } });
+    return true;
+  }
+
+  function modalAire(pm) {
+    if (!pm || !pm.ranking || !pm.ranking.length) return false;
+    const cmp = pm.comparacion;
+    const est = cmp ? [...cmp.estaciones].sort((a, b) => b.actual - a.actual) : null;
+    const OMS = { eje: "y", valor: 5, color: ROJO, texto: "OMS 5 µg/m³" };
+    const datasets = est
+      ? [{ label: String(cmp.anio_anterior), data: est.map((e) => e.anterior), backgroundColor: "#a9c7e6" },
+         { label: String(cmp.anio_actual), data: est.map((e) => e.actual), backgroundColor: AZUL }]
+      : [{ label: String(pm.anio), data: pm.ranking.map((x) => x.media_pm25), backgroundColor: AZUL }];
+    $("modal-meta").innerHTML = `<b>PM2.5 media anual por estación (SIATA)</b>${cmp ? ` · ${cmp.anio_anterior} vs ${cmp.anio_actual}` : " · " + pm.anio}`;
+    $("modal-fuente").innerHTML = `<b>Fuente:</b> SIATA · ⚠️ ${esc(pm.advertencia || "")} Por estación, no por comuna.`;
+    nuevoGrafico("modal-canvas", { type: "bar",
+      data: { labels: (est || pm.ranking).map((x) => x.estacion), datasets },
+      options: { responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: !!est }, lineasRef: { lineas: [OMS] } },
+        scales: { y: { beginAtZero: true, title: { display: true, text: "PM2.5 media anual (µg/m³)" } } } },
+      plugins: [lineasRef] });
+    return true;
+  }
+
+  function modalIndice() {
+    if (!T.length || !T.every((t) => t.ts != null)) return false;
+    const datos = T.map((t) => ({ nombre: t.nombre, v: indiceCon(t, 50) })).sort((a, b) => b.v - a.v);
+    $("modal-meta").innerHTML = `<b>Índice de priorización en salud</b> · mortalidad 50 % + salud mental 50 % · 0–100`;
+    $("modal-fuente").innerHTML = `<b>Fuente:</b> MEData (mortalidad e intento de suicidio), normalizado min-max. Índice base del proyecto.`;
+    nuevoGrafico("modal-canvas", { type: "bar",
+      data: { labels: datos.map((d) => corto(d.nombre)),
+        datasets: [{ data: datos.map((d) => +d.v.toFixed(1)), backgroundColor: datos.map((_d, i) => (i < 3 ? NAR : AZUL)) }] },
+      options: { indexAxis: "y", responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } }, scales: { x: { min: 0, max: 100 } } } });
+    return true;
   }
 
   (function () {
@@ -743,24 +894,10 @@
   function pintarPortal(KB) {
     const ind = KB.indicadores || {};
     KBG = KB; pintarPaso();
-    construirTerritorios(ind);
+    construirTerritorios(ind);   // llena T (nm/ns/ts) → necesario para el índice en el modal
     pintarHero(KB);
-    if (T.length) {
-      sel = T[0].nombre;
-      $("m-tasa").onclick = () => { modoMort = "tasa"; $("m-tasa").setAttribute("aria-pressed", "true"); $("m-casos").setAttribute("aria-pressed", "false"); pintarMortalidad(); };
-      $("m-casos").onclick = () => { modoMort = "casos"; $("m-casos").setAttribute("aria-pressed", "true"); $("m-tasa").setAttribute("aria-pressed", "false"); pintarMortalidad(); };
-      pintarFicha(); pintarMortalidad();
-      if (T.every((t) => t.ts != null)) {
-        pintarDispersion(); pintarSimulador(); pintarRobustez();
-        $("peso").addEventListener("input", pintarSimulador);
-        resaltarDisp();
-      }
-    }
-    pintarTendencia(KB);
-    pintarAire(ind.pm25_siata);
-    iniciarPanorama(KB);
-    iniciarSaludTiempo(ind);
-    iniciarPreguntas();
+    if (T.length) sel = T[0].nombre;
+    iniciarPreguntas();          // observatorio: categorías + preguntas + modal (reusa datos del KB)
   }
   window.Asistente.cargarKB()
     .then((KB) => {

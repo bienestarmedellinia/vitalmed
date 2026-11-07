@@ -56,12 +56,45 @@
     .kpi .s { color:var(--gris); font-size:.8rem; margin-top:4px; }
     .kpi .kpi-anio { margin-top:6px; font-size:.72rem; font-weight:700; color:var(--nar); letter-spacing:.3px; }
     .kpi .n { transition:opacity .25s; }
-    .preg-lista { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px; margin-top:14px; }
-    .preg-card { display:block; background:#fff; border:1px solid #e2e8f0; border-left:4px solid var(--azul); border-radius:10px; padding:14px; text-decoration:none; color:inherit; transition:transform .15s, box-shadow .15s; }
+    /* Observatorio: grupos + tarjetas KPI de categoría */
+    .preg-grupo { margin-top:18px; }
+    .preg-grupo > h3 { margin:0 0 8px; font-size:.82rem; letter-spacing:.07em; text-transform:uppercase; color:var(--gris); }
+    .cat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; }
+    .cat-card { text-align:left; background:#fff; border:1px solid #e2e8f0; border-top:4px solid var(--azul); border-radius:12px; padding:14px; cursor:pointer; transition:transform .15s, box-shadow .15s, border-color .15s; display:flex; flex-direction:column; gap:4px; }
+    .cat-card:hover, .cat-card:focus { transform:translateY(-3px); box-shadow:0 6px 18px rgba(15,42,68,.16); border-top-color:var(--nar); }
+    .cat-card[aria-expanded=true] { border-top-color:var(--nar); background:#fff7ed; }
+    .cat-card .ico { font-size:1.6rem; line-height:1; }
+    .cat-card .cn { font-weight:700; color:var(--azul-osc); line-height:1.25; }
+    .cat-card .cnum { font-size:1.8rem; font-weight:800; color:var(--azul); line-height:1; }
+    .cat-card .cnum span { font-size:.78rem; font-weight:600; color:var(--gris); }
+    /* Lista de preguntas de la categoría abierta */
+    .preg-panel { margin-top:14px; }
+    .preg-panel-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
+    .preg-panel-head h3 { margin:0; color:var(--azul-osc); font-size:1.15rem; }
+    .preg-lista { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px; }
+    .preg-card { display:block; width:100%; text-align:left; background:#fff; border:1px solid #e2e8f0; border-left:4px solid var(--azul); border-radius:10px; padding:14px; color:inherit; cursor:pointer; transition:transform .15s, box-shadow .15s; }
     .preg-card:hover, .preg-card:focus { transform:translateY(-2px); box-shadow:0 6px 16px rgba(15,42,68,.15); border-left-color:var(--nar); }
     .preg-card .q { font-weight:600; line-height:1.3; }
     .preg-card .meta { color:var(--gris); font-size:.78rem; margin-top:8px; }
     .preg-card .ver { color:var(--nar); font-weight:700; font-size:.8rem; margin-top:8px; display:inline-block; }
+    .preg-card .mt { display:inline-block; font-size:.68rem; font-weight:700; background:#e3efe8; color:var(--verde); border-radius:20px; padding:1px 8px; margin-left:6px; }
+
+    /* Modal de respuesta */
+    .modal-ov { position:fixed; inset:0; background:rgba(15,42,68,.55); display:flex; align-items:center; justify-content:center; padding:16px; z-index:50; }
+    .modal-ov[hidden] { display:none; }
+    .modal { background:#fff; border-radius:16px; max-width:900px; width:100%; max-height:90vh; overflow:auto; box-shadow:0 20px 60px rgba(0,0,0,.35); }
+    .modal-head { position:sticky; top:0; background:#fff; border-bottom:1px solid #eceff3; padding:16px 18px; display:flex; align-items:flex-start; gap:12px; }
+    .modal-head h3 { margin:0; color:var(--azul-osc); font-size:1.15rem; line-height:1.3; flex:1; }
+    .modal-head .cerrar { background:#eef2f7; color:var(--azul-osc); border-radius:8px; width:36px; height:36px; padding:0; font-size:1.3rem; line-height:1; flex:0 0 auto; }
+    .modal-head .cerrar:hover { background:#dde6f0; }
+    .modal-body { padding:16px 18px; }
+    .modal-body .m-meta { color:var(--gris); font-size:.84rem; margin:0 0 10px; }
+    .modal-body .m-canvas { position:relative; height:380px; margin:8px 0; }
+    .modal-body .m-interp { background:#fff7ed; border-left:4px solid var(--nar); border-radius:8px; padding:10px 14px; font-size:.92rem; margin:12px 0; }
+    .modal-body .m-fuente { font-size:.82rem; color:var(--gris); }
+    .modal-body .m-fuente b { color:var(--azul-osc); }
+    .modal-foot { padding:0 18px 18px; }
+    .modal-foot a { font-size:.88rem; font-weight:600; }
 
     section { margin:44px 0; scroll-margin-top:56px; }
     section > h2 { color:var(--azul-osc); margin:0 0 4px; font-size:1.5rem; }
@@ -171,13 +204,8 @@
   <nav aria-label="Secciones">
     <div class="wrap">
       <b>Bienestar Medellín IA</b>
-      <a href="#preguntas">Preguntas</a>
-      <a href="#mortalidad">Mortalidad</a>
-      <a href="#doble">Doble carga</a>
-      <a href="#simulador">Simulador</a>
-      <a href="#tendencia">Tendencia</a>
-      <a href="#aire">Aire</a>
-      <a href="#asistente">Pregunta</a>
+      <a href="#preguntas">Observatorio</a>
+      <a href="#asistente">Pregunta libre</a>
       <a href="datos.html">Datos</a>
       <a href="#metodo">Método</a>
       <a href="#transparencia">Transparencia</a>
@@ -211,118 +239,34 @@
 
     <section id="preguntas" class="rev">
       <h2>Observatorio por preguntas</h2>
-      <p class="sub">Empieza por lo que necesitas saber. Elige una categoría y una pregunta: cada una te lleva
-        directamente a los datos, la gráfica y la evidencia reales del portal. Las cifras provienen del pipeline,
-        no se inventan.</p>
+      <p class="sub">Empieza por lo que necesitas saber. Elige una categoría y una de sus preguntas: cada una abre
+        la respuesta con su gráfica, su interpretación y la fuente, sin salir de esta página. Las cifras provienen
+        del pipeline, no se inventan. <b>200 preguntas</b> en 13 categorías.</p>
       <div class="caja">
-        <div class="seg" role="group" aria-label="Categoría" id="preg-cats"></div>
-        <div id="preg-lista" class="preg-lista" aria-live="polite"></div>
+        <div id="preg-cats"></div>
+        <div id="preg-panel" class="preg-panel" aria-live="polite"></div>
       </div>
     </section>
 
-    <section id="panorama" class="rev">
-      <h2>1 · Panorama multidimensional del bienestar</h2>
-      <p class="sub">El bienestar no es una sola cifra. Elige una dimensión para ver sus indicadores por territorio
-        (último año disponible). Mortalidad y salud mental son parte del panorama, no todo el panorama.</p>
-      <div class="caja">
-        <div class="seg" role="group" aria-label="Dimensión" id="pan-dims"></div>
-        <div class="sim" style="margin-top:10px">
-          <label for="pan-ind">Indicador</label>
-          <select id="pan-ind"></select>
-          <div id="pan-meta" class="nota"></div>
+    <div class="modal-ov" id="preg-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-q">
+      <div class="modal" role="document">
+        <div class="modal-head">
+          <h3 id="modal-q"></h3>
+          <button type="button" class="cerrar" id="modal-x" aria-label="Cerrar">×</button>
         </div>
-        <div class="alto"><canvas id="c-pan" role="img" aria-label="Barras horizontales: indicador seleccionado por territorio"></canvas></div>
-        <p class="nota" id="pan-nota"></p>
-      </div>
-    </section>
-
-    <section id="mortalidad" class="rev">
-      <h2>2 · Mirada a salud: mortalidad por territorio</h2>
-      <p class="sub">Haz clic en una barra (o elige un territorio) para ver su ficha completa. La línea punteada es la tasa de toda la ciudad, calculada con los casos y la población implícita de cada territorio.</p>
-      <div class="grid">
-        <div class="caja">
-          <div class="seg" role="group" aria-label="Métrica">
-            <button type="button" id="m-tasa" aria-pressed="true">Tasa por 100 mil</button>
-            <button type="button" id="m-casos" aria-pressed="false">Casos absolutos</button>
-          </div>
-          <div class="alto"><canvas id="c-mort" role="img" aria-label="Barras horizontales: mortalidad 2022 por comuna y corregimiento de Medellín"></canvas></div>
-          <p class="limit">⚠️ Tasas brutas, sin estandarizar por edad. Es asociación, no causalidad.</p>
+        <div class="modal-body">
+          <p class="m-meta" id="modal-meta"></p>
+          <div class="m-canvas"><canvas id="modal-canvas" role="img" aria-label="Gráfica de la respuesta"></canvas></div>
+          <div class="m-interp" id="modal-interp"></div>
+          <p class="m-fuente" id="modal-fuente"></p>
         </div>
-        <div class="caja ficha" id="ficha" aria-live="polite"></div>
+        <div class="modal-foot" id="modal-foot"></div>
       </div>
-    </section>
+    </div>
 
-    <section id="doble" class="rev">
-      <h2>3 · Mirada a salud mental: ¿acompaña a la mortalidad?</h2>
-      <p class="sub">Cada punto es un territorio. Las líneas marcan la mediana de cada indicador: arriba a la derecha están los que superan la mediana en ambos.</p>
-      <div class="caja">
-        <div class="medio" style="height:480px"><canvas id="c-disp" role="img" aria-label="Dispersión: tasa de mortalidad contra tasa de intento de suicidio por territorio, con medianas"></canvas></div>
-        <div class="insight" id="disp-insight"></div>
-        <p class="nota">La correlación entre 21 territorios describe la muestra; no permite inferir causalidad ni el comportamiento de individuos.</p>
-      </div>
-    </section>
-
-    <section id="simulador" class="rev">
-      <h2>4 · Índice de priorización en salud (explorable)</h2>
-      <p class="sub">El índice combina mortalidad y salud mental. Mueve el control para dar más peso a uno u otro y mira si la lista cambia: así se prueba que la priorización no depende de una decisión arbitraria.</p>
-      <div class="caja">
-        <div class="sim">
-          <label for="peso">Peso de mortalidad vs. salud mental</label>
-          <input type="range" id="peso" min="0" max="100" step="5" value="50" />
-          <div id="peso-txt" class="nota"></div>
-        </div>
-        <div class="alto"><canvas id="c-sim" role="img" aria-label="Barras: índice de priorización recalculado según el peso elegido"></canvas></div>
-        <div class="insight" id="rob-insight"></div>
-        <div class="chips" id="rob-chips"></div>
-        <p class="nota">Robustez: se recalcula el top 3 con 21 ponderaciones (0 %, 5 %, … 100 % de peso a mortalidad). Los porcentajes indican en cuántas aparece cada territorio.</p>
-      </div>
-    </section>
-
-    <section id="tendencia" class="rev">
-      <h2>5 · Tendencias de la ciudad por indicador</h2>
-      <p class="sub" id="tend-sub">Evolución del valor de ciudad de cualquier indicador disponible. Elige dimensión e indicador.</p>
-      <div class="caja">
-        <div class="seg" role="group" aria-label="Dimensión" id="tend-dims"></div>
-        <div class="sim" style="margin-top:10px">
-          <label for="tend-ind">Indicador</label>
-          <select id="tend-ind"></select>
-        </div>
-        <div class="seg" role="group" aria-label="Escala" style="margin-top:10px">
-          <button type="button" id="t-abs" aria-pressed="true">Valor</button>
-          <button type="button" id="t-base" aria-pressed="false">Índice base = 100</button>
-        </div>
-        <div class="medio"><canvas id="c-tend" role="img" aria-label="Línea: evolución del indicador seleccionado para la ciudad de Medellín"></canvas></div>
-        <p class="nota" id="tend-nota">El pico de 2021 en indicadores de salud coincide con la pandemia de COVID-19.</p>
-      </div>
-    </section>
-
-    <section id="aire" class="rev">
-      <h2>6 · Dimensión ambiental: PM2.5 (SIATA)</h2>
-      <p class="sub">Media anual por estación, comparando dos años. La línea roja es la guía anual de la OMS 2021 (5 µg/m³).</p>
-      <div class="caja">
-        <div class="medio" style="height:400px"><canvas id="c-pm" role="img" aria-label="Barras agrupadas: PM2.5 anual por estación SIATA en dos años, con la guía de la OMS"></canvas></div>
-        <div class="insight" id="pm-insight"></div>
-        <p class="limit" id="pm-adv"></p>
-      </div>
-    </section>
-
-    <section id="salud-tiempo" class="rev">
-      <h2>7 · Salud en el tiempo: mortalidad, morbilidad y salud mental</h2>
-      <p class="sub">Series temporales de fuentes nacionales nuevas (DANE, INS y MinSalud) para Medellín.
-        Complementan el PM2.5: así se puede observar, con cautela, si la carga respiratoria acompaña al aire.
-        Nivel municipal (no comuna). Es asociación, no causalidad.</p>
-      <div class="grid">
-        <div class="caja">
-          <div class="seg" role="group" aria-label="Serie de salud" id="st-series"></div>
-          <div class="medio"><canvas id="c-salud-tiempo" role="img" aria-label="Serie temporal de salud seleccionada para Medellín"></canvas></div>
-          <p class="nota" id="st-nota"></p>
-        </div>
-        <div class="caja ficha" id="st-fuente" aria-live="polite"></div>
-      </div>
-    </section>
 
     <section id="asistente" class="rev">
-      <h2>8 · Pregunta a los datos</h2>
+      <h2>1 · Pregunta libre a los datos</h2>
       <p class="sub">Asistente que responde solo con cifras del pipeline: cada respuesta trae evidencia, fuente y limitaciones. No inventa datos. ¿Prefieres ver las tablas completas? Usa el <a href="datos.html">explorador de datos</a>.</p>
       <div class="caja">
         <label for="q">Escribe tu pregunta:</label>
@@ -336,7 +280,7 @@
     </section>
 
     <section id="metodo" class="rev">
-      <h2>9 · Método y automatización: cómo se construye cada cifra</h2>
+      <h2>2 · Método y automatización: cómo se construye cada cifra</h2>
       <p class="sub">Haz clic en cualquier paso, o pulsa «Reproducir flujo» para recorrerlo completo. Todo corre en GitHub Actions, sin intervención manual.</p>
       <div class="caja flujo">
         <div class="disparos"><b>Se activa con:</b>
@@ -365,7 +309,7 @@
     </section>
 
     <section id="transparencia" class="rev">
-      <h2>10 · Transparencia de datos y uso de IA</h2>
+      <h2>3 · Transparencia de datos y uso de IA</h2>
       <p class="sub">Qué datasets se usaron, de dónde vienen, bajo qué condiciones y para qué. Cada cifra del portal se puede rastrear hasta una de estas fuentes.</p>
       <div class="caja tabla-wrap">
         <table class="transp">
