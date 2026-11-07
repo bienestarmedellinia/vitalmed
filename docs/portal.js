@@ -93,14 +93,16 @@
     const top = h.comuna_mayor_tasa, bajo = h.comuna_menor_tasa;
     if (!top || !bajo) return;
     $("hero-hallazgo").innerHTML =
-      `<h2>Hallazgo principal</h2><p><b>${esc(top.nombre)}</b> tiene una tasa de mortalidad <b>${fmt(h.brecha_veces, 2)}×</b> la de ${esc(bajo.nombre)}
-       (${fmt(top.tasa)} vs ${fmt(bajo.tasa)} por 100.000 hab., ${h.anio_referencia}).</p>
-       <small>Fuente: MEData · Secretaría de Salud. Asociación, no causalidad.</small>`;
+      `<h2>Hallazgo principal</h2><p>El bienestar en Medellín es <b>desigual por territorio</b>: la brecha de mortalidad
+       llega a <b>${fmt(h.brecha_veces, 2)}×</b> entre ${esc(top.nombre)} y ${esc(bajo.nombre)}, y se repiten patrones
+       en empleo, seguridad alimentaria, aire y salud mental.</p>
+       <small>Fuentes: MEData, ECV, SIATA, DANE/SIVIGILA/RIPS. Asociación, no causalidad.</small>`;
     const t3 = (((ind.indice_priorizacion || {}).ranking) || []).slice(0, 3).map((x) => x.nombre);
     $("hero-propuesta").innerHTML = t3.length
-      ? `<h2>Propuesta de mejora</h2><p>Concentrar intervenciones integrales (salud física + salud mental) en <b>${esc(t3.join(", "))}</b>
-         y monitorear ambos indicadores.</p><small>Según el índice de priorización en salud (mortalidad + salud mental).</small>`
-      : `<h2>Propuesta de mejora</h2><p>Priorizar intervenciones en los territorios de mayor mortalidad.</p>`;
+      ? `<h2>Propuesta de mejora</h2><p>Focalizar <b>intervenciones intersectoriales</b> (empleo, alimentación,
+         ambiente y salud física y mental) en los territorios de mayor carga —hoy <b>${esc(t3.join(", "))}</b>—
+         y monitorear el avance con estos mismos indicadores.</p><small>Prioridad según el índice de salud; el detalle, en cada pregunta del observatorio.</small>`
+      : `<h2>Propuesta de mejora</h2><p>Focalizar intervenciones intersectoriales en los territorios de mayor carga y monitorear su avance.</p>`;
     // KPIs MULTIDIMENSIÓN con CARRUSEL por año (todos los años del KB, sin inventar).
     const S = KB.series || {}, cat = {}, dat = S.datos || {};
     (S.catalogo || []).forEach((c) => (cat[c.clave] = c));
@@ -438,29 +440,8 @@
         plugins: { legend: { display: datasets.length > 1 }, title: { display: true, text: g.titulo } },
         scales: esLinea ? { y: { title: { display: true, text: g.etiqueta_eje } } } : { x: { title: { display: true, text: g.etiqueta_eje } } } } });
   }
-  SUGERIDAS.forEach((s) => {
-    const b = document.createElement("button");
-    b.type = "button"; b.textContent = s;
-    b.onclick = () => { $("q").value = s; preguntar(true); };
-    $("sugeridas").appendChild(b);
-  });
-  const RAPIDAS = [
-    ["Hallazgo principal", "¿Cuál es el hallazgo principal?"],
-    ["Qué territorios priorizar", "Si hay presupuesto para 3 territorios, ¿cuáles priorizar?"],
-    ["Análisis de calidad del aire", "¿Qué relación hay entre la contaminación del aire y la salud?"],
-    ["Evolución 2012–2022", "¿Cómo varió la mortalidad entre 2012 y 2022?"],
-  ];
-  RAPIDAS.forEach(([txt, preg]) => {
-    const b = document.createElement("button");
-    b.type = "button"; b.textContent = txt;
-    b.onclick = () => {
-      $("q").value = preg; preguntar(true);
-      $("asistente").scrollIntoView({ behavior: REDUCIR ? "auto" : "smooth" });
-    };
-    $("rapidas").appendChild(b);
-  });
-  $("btn-preguntar").onclick = () => preguntar(false);
-  $("q").addEventListener("keydown", (e) => { if (e.key === "Enter") preguntar(false); });
+  // (El asistente de preguntas libres se retiró del portal: el observatorio por preguntas lo absorbe.
+  //  La función preguntar() y SUGERIDAS quedan definidas por si se reactiva, pero no se enlazan a UI.)
 
   /* ---------- Revelado al hacer scroll ---------- */
   /* ---------- Panorama multidimensional (KB.series) ---------- */
@@ -676,7 +657,8 @@
       b.setAttribute("aria-expanded", b.dataset.id === id));
     const panel = $("preg-panel");
     if (!cat) { panel.innerHTML = ""; return; }
-    panel.innerHTML = `<div class="preg-panel-head"><h3>${esc(cat.nombre)} · ${(cat.preguntas || []).length} preguntas</h3></div>
+    panel.innerHTML = panelCategoria(cat) +
+      `<div class="preg-panel-head"><h3>Preguntas de ${esc(cat.nombre)} · ${(cat.preguntas || []).length}</h3></div>
       <div class="preg-lista">` +
       (cat.preguntas || []).map((p, i) =>
         `<button type="button" class="preg-card" data-idx="${i}">
@@ -688,6 +670,85 @@
       b.onclick = () => abrirModal(cat, cat.preguntas[+b.dataset.idx], b);
     });
     panel.scrollIntoView({ behavior: REDUCIR ? "auto" : "smooth", block: "nearest" });
+  }
+
+  /* ----- Panel de categoría: 5 módulos estándar desde datos reales del KB ----- */
+  // Analiza una serie de ciudad {anio:valor} → {actual, anio, prev, varPct, tendencia}
+  function analizarSerie(obj) {
+    const anios = Object.keys(obj || {}).map(Number).filter((n) => !isNaN(n)).sort((a, b) => a - b);
+    if (!anios.length) return null;
+    const a1 = anios[anios.length - 1], a0 = anios.length > 1 ? anios[anios.length - 2] : null;
+    const v1 = Number(obj[a1]), v0 = a0 != null ? Number(obj[a0]) : null;
+    const varPct = (v0 != null && v0 !== 0) ? (v1 - v0) / Math.abs(v0) * 100 : null;
+    // tendencia: pendiente del primer al último año (signo)
+    const vIni = Number(obj[anios[0]]);
+    const dir = v1 - vIni;
+    let tendencia = "estable";
+    if (Math.abs(dir) > Math.abs(vIni) * 0.02) tendencia = dir > 0 ? "sube" : "baja";
+    return { actual: v1, anio: a1, prev: v0, varPct, tendencia, nAnios: anios.length };
+  }
+  // ¿subir es bueno o malo? Para semáforo por tendencia. true = subir es MALO (rojo si sube).
+  function subirEsMalo(clave) {
+    const malos = ["mortalidad", "intento_suicidio", "dengue", "hepatitis_a", "parotiditis", "tosferina",
+      "tuberculosis_pulmonar", "varicela", "violencia_genero", "pm25_siata", "mortalidad_dane", "sivigila", "rips"];
+    if (malos.includes(clave)) return true;
+    if (clave.indexOf("inseguridad") >= 0 || clave.indexOf("desempleo") >= 0 || clave === "ecv_t44") return true;
+    return false;  // empleo/ocupación/deporte/cultura/planificación: subir es bueno
+  }
+  function panelCategoria(cat) {
+    const KB = KBG || {}; const S = KB.series || {}; const dat = S.datos || {}; const catl = S.catalogo || [];
+    const metaDe = (cl) => catl.find((c) => c.clave === cl) || {};
+    // indicadores únicos de la categoría con serie de CIUDAD (para los módulos de ciudad)
+    const claves = [...new Set((cat.preguntas || []).map((p) => p.clave).filter((c) => (dat[c] || {}).ciudad))];
+    // Módulo 2: indicadores clave con semáforo por tendencia
+    const filas = claves.map((cl) => {
+      const an = analizarSerie((dat[cl] || {}).ciudad); if (!an) return null;
+      const malo = subirEsMalo(cl);
+      const bueno = an.tendencia === "estable" ? "amb" : ((an.tendencia === "sube") === malo ? "mal" : "bien");
+      const semaforo = an.tendencia === "estable" ? "🟡" : (bueno === "bien" ? "🟢" : "🔴");
+      return { nombre: (metaDe(cl).nombre || cl), unidad: metaDe(cl).unidad || "", an, semaforo, bueno };
+    }).filter(Boolean);
+    // Módulo 1: resumen ejecutivo (narrativa a partir de lo anterior)
+    const empeoran = filas.filter((f) => f.bueno === "mal").map((f) => f.nombre);
+    const mejoran = filas.filter((f) => f.bueno === "bien").map((f) => f.nombre);
+    let resumen = `En <b>${esc(cat.nombre)}</b> se analizan ${filas.length || (cat.preguntas || []).length} indicador(es) con datos reales del pipeline. `;
+    if (mejoran.length) resumen += `Mejoran: <b>${esc(mejoran.slice(0, 3).join(", "))}</b>. `;
+    if (empeoran.length) resumen += `Requieren atención (tendencia desfavorable): <b>${esc(empeoran.slice(0, 3).join(", "))}</b>. `;
+    resumen += `La evidencia es a nivel de ${cat.grupo === "Ambientales" ? "estación/ciudad" : "territorio"}; asociación, no causalidad.`;
+    // Módulo 5: priorización territorial (usa el índice global de salud como proxy transversal)
+    const ix = ((KB.indicadores || {}).indice_priorizacion || {}).ranking || [];
+    const criticos = ix.slice(0, 5).map((x) => x.nombre);
+    const resilientes = ix.slice(-3).map((x) => x.nombre).reverse();
+    // Módulo 6: hallazgos IA (correlaciones del KB que tocan alguna clave de la categoría)
+    const corr = S.correlaciones || [];
+    const setCat = new Set(claves.concat((cat.preguntas || []).map((p) => p.clave)));
+    const hall = (Array.isArray(corr) ? corr : []).filter((c) =>
+      c && (setCat.has(c.resultado) || setCat.has(c.factor)) && (c.significativa || Math.abs(c.pearson || 0) >= 0.5))
+      .slice(0, 3).map((c) => {
+        const na = metaDe(c.resultado).nombre || c.resultado, nb = metaDe(c.factor).nombre || c.factor;
+        const signo = (c.pearson || 0) >= 0 ? "acompaña (misma dirección)" : "es inversa";
+        return `Entre los 21 territorios, <b>${esc(na)}</b> y <b>${esc(nb)}</b>: la relación ${signo} (r=${fmt(c.pearson, 2)}).`;
+      });
+
+    const modIndicadores = filas.length ? `
+      <h4>Indicadores clave (último año · variación · tendencia)</h4>
+      <div class="tabla-wrap"><table class="m-kpis"><thead><tr><th>Indicador</th><th>Valor</th><th>Variación anual</th><th>Tendencia</th></tr></thead>
+      <tbody>${filas.map((f) => `<tr><td>${esc(f.nombre)}</td>
+        <td>${fmt(f.an.actual, 1)}${f.unidad && f.unidad.indexOf("%") >= 0 ? "%" : ""} <small>(${f.an.anio})</small></td>
+        <td>${f.an.varPct == null ? "—" : (f.an.varPct >= 0 ? "+" : "") + fmt(f.an.varPct, 1) + "%"}</td>
+        <td>${f.semaforo} ${f.an.tendencia === "sube" ? "sube" : f.an.tendencia === "baja" ? "baja" : "estable"}</td></tr>`).join("")}</tbody></table></div>
+      <p class="nota">Semáforo por <b>tendencia</b> (🟢 evoluciona a favor · 🔴 en contra · 🟡 estable), no contra una meta (el proyecto no tiene metas oficiales).</p>` : "";
+
+    return `<div class="cat-panel">
+      <div class="cat-mod"><h4>Resumen ejecutivo</h4><p>${resumen}</p></div>
+      ${modIndicadores}
+      ${criticos.length ? `<div class="cat-mod"><h4>Priorización territorial (índice de salud)</h4>
+        <p><b>Territorios críticos:</b> ${esc(criticos.join(", "))}.<br>
+        <b>Mejores desempeños:</b> ${esc(resilientes.join(", "))}.</p></div>` : ""}
+      ${hall.length ? `<div class="cat-mod"><h4>Hallazgos automáticos (correlaciones del KB)</h4>
+        <ul>${hall.map((h) => `<li>${h}</li>`).join("")}</ul>
+        <p class="nota">Correlación entre 21 territorios; describe patrones, no causas.</p></div>` : ""}
+    </div>`;
   }
 
   /* ----- Modal ----- */
@@ -708,8 +769,25 @@
     const ov = $("preg-modal"); if (!ov || !p) return;
     ultimoFoco = origen || null;
     $("modal-q").textContent = p.q;
+    // Badges: tipo · prioridad · indicadores
+    const prioClase = { Alta: "b-prio-alta", Media: "b-prio-media", Baja: "b-prio-baja" }[p.prioridad] || "b-prio-media";
+    let badges = "";
+    if (p.tipo) badges += `<span class="b-tipo">${esc(p.tipo)}</span>`;
+    if (p.prioridad) badges += `<span class="${prioClase}">Prioridad ${esc(p.prioridad)}</span>`;
+    (p.indicadores || []).forEach((i) => { badges += `<span class="b-ind">${esc(i)}</span>`; });
+    $("modal-badges").innerHTML = badges;
+    // Ejemplo de respuesta analítica (lectura narrativa; las cifras exactas están en la gráfica/tabla)
+    $("modal-resp").innerHTML = p.ejemplo ? `<b>Lectura:</b> ${esc(p.ejemplo)}` : "";
+    $("modal-resp").style.display = p.ejemplo ? "" : "none";
+    // Interpretación técnica
     $("modal-interp").textContent = p.interpretacion || "";
     $("modal-interp").style.display = p.interpretacion ? "" : "none";
+    // Acciones derivadas
+    if (p.acciones && p.acciones.length) {
+      $("modal-acciones").innerHTML = `<h4>Posibles acciones derivadas</h4><ul>` +
+        p.acciones.map((a) => `<li>${esc(a)}</li>`).join("") + `</ul>`;
+      $("modal-acciones").style.display = "";
+    } else { $("modal-acciones").style.display = "none"; }
     const res = dibujarModal(p);   // {cols, filas, csv} o null
     pintarTablaModal(res);
     ov.hidden = false;

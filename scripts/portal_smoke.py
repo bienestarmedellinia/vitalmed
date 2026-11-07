@@ -54,18 +54,26 @@ def main() -> int:
         pag.locator("#preg-cats .cat-card").first.wait_for(timeout=8000)
         if pag.locator("#preg-cats .cat-card").count() < 5:
             errores.append("Observatorio: no se pintaron las tarjetas de categoría")
-        # Abrir la primera categoría y comprobar que lista preguntas.
+        # Abrir la primera categoría y comprobar módulos + preguntas.
         pag.locator("#preg-cats .cat-card").first.click()
         pag.locator("#preg-panel .preg-card").first.wait_for(timeout=8000)
+        # Módulos de categoría: debe aparecer el panel con resumen ejecutivo e indicadores clave.
+        if pag.locator("#preg-panel .cat-panel").count() < 1:
+            errores.append("Observatorio: la categoría no mostró el panel de módulos")
+        if pag.locator("#preg-panel table.m-kpis").count() < 1:
+            errores.append("Observatorio: no se pintaron los indicadores clave (semáforo por tendencia)")
         if pag.locator("#preg-panel .preg-card").count() < 1:
             errores.append("Observatorio: la categoría no mostró preguntas")
         else:
-            # Abrir una pregunta y validar que el modal aparece con gráfica, tabla y descarga.
+            # Abrir una pregunta y validar modal con formato completo: gráfica, badges, acciones, tabla, descarga.
             pag.locator("#preg-panel .preg-card").first.click()
             pag.locator("#preg-modal").wait_for(state="visible", timeout=8000)
             if pag.locator("#preg-modal #modal-canvas").count() < 1:
                 errores.append("Observatorio: el modal no contiene la gráfica")
-            # La tabla de datos debe tener al menos una fila y el botón de descarga debe existir.
+            if pag.locator("#preg-modal #modal-badges span").count() < 1:
+                errores.append("Observatorio: el modal no muestra badges (tipo/prioridad/indicadores)")
+            if pag.locator("#preg-modal #modal-acciones li").count() < 1:
+                errores.append("Observatorio: el modal no muestra acciones derivadas")
             if pag.locator("#preg-modal #modal-tabla table tr").count() < 1:
                 errores.append("Observatorio: el modal no muestra la tabla de datos")
             if pag.locator("#preg-modal #modal-csv").count() < 1:
@@ -77,28 +85,7 @@ def main() -> int:
         if not any("/" in t for t in anios_kpi):
             errores.append(f"Los KPIs no muestran el carrusel por año: {anios_kpi!r}")
 
-        pag.fill("#q", PREGUNTA)
-        pag.click("#btn-preguntar")
-        # Esperar la respuesta final SIN evaluar JS (la CSP bloquea wait_for_function por 'unsafe-eval').
-        pag.locator("#resp", has_text="La Candelaria").wait_for(timeout=15000)
-        resp = pag.locator("#resp").inner_text()
-        if "La Candelaria" not in resp or "1325.6" not in resp:
-            errores.append(f"El asistente no respondió como se esperaba: {resp[:120]!r}")
-        if "Interpreté tu pregunta con IA" not in resp:
-            errores.append("No se usó (o no se declaró) la interpretación con IA")
-        if pag.input_value("#q") != "":
-            errores.append("El campo de pregunta no se limpió")
-
-        # Botón sugerido de ayuda (solo motor, sin IA) y gráfico de varias series.
-        pag.get_by_role("button", name="¿Qué preguntas puedo hacer?").click()
-        ayuda = pag.locator("#resp").inner_text()
-        if "Ejemplos" not in ayuda:
-            errores.append(f"La ayuda no respondió: {ayuda[:120]!r}")
-        pag.get_by_role("button", name="¿Cómo varió la mortalidad entre 2012 y 2022?").click()
-        n_series = pag.evaluate("Chart.getChart('chart') ? Chart.getChart('chart').data.datasets.length : 0")
-        if n_series < 2:
-            errores.append(f"La tendencia debería mostrar territorio + Medellín (series: {n_series})")
-        # Explorador de datos (módulo independiente del asistente).
+        # Explorador de datos (módulo independiente, sigue disponible por URL directa).
         pag2 = nav.new_page()
         pag2.on("pageerror", lambda e: errores.append(f"datos.html JS: {e}"))
         pag2.on("console", lambda m: m.type == "error" and errores.append(f"datos.html consola: {m.text}"))
