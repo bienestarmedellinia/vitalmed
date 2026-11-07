@@ -7,6 +7,6 @@ matplotlib==3.9.2
 xlrd==2.0.1
 # Generación de guia_entrega.pdf (paso 7b)
 reportlab==4.2.5
-pillow==10.4.0
-# Interfaz del asistente (fase 2). Necesaria para desplegar en Streamlit Cloud.
-streamlit==1.39.0
+pillow==13.0.0
+# NOTA: streamlit (interfaz web local del asistente) vive en asistente/requirements.txt,
+# NO aquí: el pipeline no la usa y su pin pillow<11 bloqueaba los parches de seguridad de Pillow.
