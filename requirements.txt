@@ -6,7 +6,7 @@ pyarrow==17.0.0
 matplotlib==3.9.2
 xlrd==2.0.1
 # Generación de guia_entrega.pdf (paso 7b)
-reportlab==4.2.5
+reportlab==5.1.0
 pillow==13.0.0
 # NOTA: streamlit (interfaz web local del asistente) vive en asistente/requirements.txt,
 # NO aquí: el pipeline no la usa y su pin pillow<11 bloqueaba los parches de seguridad de Pillow.
