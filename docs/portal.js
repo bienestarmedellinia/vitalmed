@@ -710,40 +710,59 @@
     $("modal-q").textContent = p.q;
     $("modal-interp").textContent = p.interpretacion || "";
     $("modal-interp").style.display = p.interpretacion ? "" : "none";
-    const dibujada = dibujarModal(p);
-    $("modal-foot").innerHTML = enlaceExplorar(p);
+    const res = dibujarModal(p);   // {cols, filas, csv} o null
+    pintarTablaModal(res);
     ov.hidden = false;
     $("modal-x").focus();
-    if (!dibujada) {
-      $("modal-meta").innerHTML = '<span class="aviso">No hay una gráfica disponible para esta vista; usa el enlace al explorador.</span>';
+    if (!res) {
+      $("modal-meta").innerHTML = '<span class="aviso">No hay una gráfica disponible para esta pregunta.</span>';
     }
   }
-  function enlaceExplorar(p) {
-    // enlace secundario al explorador/tablas para quien quiera profundizar
-    if (p.vista === "territorio") return `<a href="datos.html#ind=${esc(p.clave)}">Ver tabla y descargar en el explorador →</a>`;
-    if (p.vista === "ciudad_tiempo") return `<a href="datos.html#ciudad-tiempo">Ver series de ciudad en el explorador →</a>`;
-    return "";
+
+  // Pinta la tabla dentro del modal y arma el botón de descarga (Blob, igual que el explorador)
+  function pintarTablaModal(res) {
+    const wrap = $("modal-tabla-wrap"), tabla = $("modal-tabla"), foot = $("modal-foot");
+    if (!res || !res.filas || !res.filas.length) {
+      if (wrap) wrap.style.display = "none";
+      if (foot) foot.innerHTML = "";
+      return;
+    }
+    wrap.style.display = "";
+    wrap.open = false;
+    tabla.innerHTML = `<table><thead><tr>${res.cols.map((c) => `<th>${esc(c)}</th>`).join("")}</tr></thead>
+      <tbody>${res.filas.map((f) => `<tr>${f.map((v) => `<td>${esc(v)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+    foot.innerHTML = `<button type="button" id="modal-csv">⬇ Descargar CSV</button>`;
+    $("modal-csv").onclick = () => descargarCSV(res.cols, res.filas, res.csv || "datos.csv");
+  }
+  function descargarCSV(cols, filas, nombre) {
+    const celda = (v) => { const s = (v === null || v === undefined) ? "" : String(v);
+      return /[",\n;]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+    const texto = "\ufeff" + [cols, ...filas].map((f) => f.map(celda).join(",")).join("\n");
+    const url = URL.createObjectURL(new Blob([texto], { type: "text/csv;charset=utf-8" }));
+    const a = document.createElement("a");
+    a.href = url; a.download = nombre; document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 0);
   }
 
-  // Dibuja en #modal-canvas según la vista; devuelve true si pintó algo
+  // Dibuja en #modal-canvas y devuelve {cols, filas, csv} para la tabla/descarga, o null
   function dibujarModal(p) {
     const KB = KBG || {}; const ind = KB.indicadores || {};
     if (p.vista === "territorio") return modalTerritorio(KB, p.clave);
     if (p.vista === "ciudad_tiempo") return modalCiudadTiempo(ind, p.clave);
     if (p.vista === "aire") return modalAire(ind.pm25_siata);
     if (p.vista === "indice") return modalIndice();
-    return false;
+    return null;
   }
 
   function modalTerritorio(KB, clave) {
-    const pan = prepararPanorama(KB); if (!pan) return false;
+    const pan = prepararPanorama(KB); if (!pan) return null;
     const meta = pan.cat.find((c) => c.clave === clave) || {};
     const valores = (pan.datos[clave] || {}).valores || {};
     const anio = ultimoAnioDesde(valores);
     const filas = Object.entries(valores)
       .map(([cod, serie]) => ({ nombre: pan.terr[cod] || cod, v: Number(serie[anio]) }))
       .filter((x) => !isNaN(x.v)).sort((a, b) => b.v - a.v);
-    if (!filas.length) return false;
+    if (!filas.length) return null;
     $("modal-meta").innerHTML = `<b>${esc(meta.nombre || clave)}</b>${meta.unidad ? " · " + esc(meta.unidad) : ""} · ${anio || "s/d"} · por territorio`;
     $("modal-fuente").innerHTML = `<b>Fuente:</b> ${esc(meta.fuente || "Base de conocimiento del pipeline")} · Comparación entre territorios; asociación, no causalidad.`;
     nuevoGrafico("modal-canvas", { type: "bar",
@@ -751,17 +770,17 @@
         datasets: [{ data: filas.map((f) => f.v), backgroundColor: filas.map((_f, i) => (i < 3 ? NAR : AZUL)) }] },
       options: { indexAxis: "y", responsive: true, maintainAspectRatio: false,
         plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } } });
-    return true;
+    return { cols: ["Territorio", `${meta.nombre || clave} (${anio || "s/d"})`],
+      filas: filas.map((f) => [f.nombre, f.v]), csv: `${clave}_${anio || "medellin"}.csv` };
   }
 
   function modalCiudadTiempo(ind, clave) {
     const todas = seriesSalud(ind);
-    // 'clave' es mortalidad_dane | sivigila | rips → tomar la primera serie de esa fuente
     const pref = { mortalidad_dane: "dane", sivigila: "sivi", rips: "rips" }[clave] || "";
     const s = todas.find((x) => x.id.startsWith(pref)) || todas[0];
-    if (!s) return false;
+    if (!s) return null;
     const pts = puntosSerie(s);
-    if (!pts.length) return false;
+    if (!pts.length) return null;
     $("modal-meta").innerHTML = `<b>${esc(s.etiqueta)}</b> · nivel municipio (Medellín)`;
     $("modal-fuente").innerHTML = `<b>Fuente:</b> ${esc(s.fuente)} · <b>Unidad:</b> ${esc(s.unidad)} · ${esc(s.nota || "")}`;
     nuevoGrafico("modal-canvas", { type: "line",
@@ -770,11 +789,12 @@
           pointRadius: s.tipo === "semanal" ? 0 : 2, borderWidth: 1.5, tension: 0.2 }] },
       options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
         scales: { x: { ticks: { maxTicksLimit: 12, autoSkip: true } }, y: { beginAtZero: true } } } });
-    return true;
+    return { cols: ["Periodo", s.unidad || "Valor"],
+      filas: pts.map((pt) => [pt.x, pt.y]), csv: `${s.id}_medellin.csv` };
   }
 
   function modalAire(pm) {
-    if (!pm || !pm.ranking || !pm.ranking.length) return false;
+    if (!pm || !pm.ranking || !pm.ranking.length) return null;
     const cmp = pm.comparacion;
     const est = cmp ? [...cmp.estaciones].sort((a, b) => b.actual - a.actual) : null;
     const OMS = { eje: "y", valor: 5, color: ROJO, texto: "OMS 5 µg/m³" };
@@ -790,11 +810,13 @@
         plugins: { legend: { display: !!est }, lineasRef: { lineas: [OMS] } },
         scales: { y: { beginAtZero: true, title: { display: true, text: "PM2.5 media anual (µg/m³)" } } } },
       plugins: [lineasRef] });
-    return true;
+    const cols = est ? ["Estación", String(cmp.anio_anterior), String(cmp.anio_actual)] : ["Estación", `PM2.5 ${pm.anio}`];
+    const filas = est ? est.map((e) => [e.estacion, e.anterior, e.actual]) : pm.ranking.map((x) => [x.estacion, x.media_pm25]);
+    return { cols, filas, csv: "pm25_estaciones.csv" };
   }
 
   function modalIndice() {
-    if (!T.length || !T.every((t) => t.ts != null)) return false;
+    if (!T.length || !T.every((t) => t.ts != null)) return null;
     const datos = T.map((t) => ({ nombre: t.nombre, v: indiceCon(t, 50) })).sort((a, b) => b.v - a.v);
     $("modal-meta").innerHTML = `<b>Índice de priorización en salud</b> · mortalidad 50 % + salud mental 50 % · 0–100`;
     $("modal-fuente").innerHTML = `<b>Fuente:</b> MEData (mortalidad e intento de suicidio), normalizado min-max. Índice base del proyecto.`;
@@ -803,7 +825,8 @@
         datasets: [{ data: datos.map((d) => +d.v.toFixed(1)), backgroundColor: datos.map((_d, i) => (i < 3 ? NAR : AZUL)) }] },
       options: { indexAxis: "y", responsive: true, maintainAspectRatio: false,
         plugins: { legend: { display: false } }, scales: { x: { min: 0, max: 100 } } } });
-    return true;
+    return { cols: ["Territorio", "Índice (0–100)"],
+      filas: datos.map((d) => [d.nombre, +d.v.toFixed(1)]), csv: "indice_priorizacion.csv" };
   }
 
   (function () {

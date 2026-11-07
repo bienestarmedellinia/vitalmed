@@ -60,11 +60,16 @@ def main() -> int:
         if pag.locator("#preg-panel .preg-card").count() < 1:
             errores.append("Observatorio: la categoría no mostró preguntas")
         else:
-            # Abrir una pregunta y validar que el modal aparece con un canvas dibujado.
+            # Abrir una pregunta y validar que el modal aparece con gráfica, tabla y descarga.
             pag.locator("#preg-panel .preg-card").first.click()
             pag.locator("#preg-modal").wait_for(state="visible", timeout=8000)
             if pag.locator("#preg-modal #modal-canvas").count() < 1:
                 errores.append("Observatorio: el modal no contiene la gráfica")
+            # La tabla de datos debe tener al menos una fila y el botón de descarga debe existir.
+            if pag.locator("#preg-modal #modal-tabla table tr").count() < 1:
+                errores.append("Observatorio: el modal no muestra la tabla de datos")
+            if pag.locator("#preg-modal #modal-csv").count() < 1:
+                errores.append("Observatorio: el modal no ofrece descarga CSV")
             # Cerrar el modal.
             pag.click("#modal-x")
         # Carrusel de años: al menos una tarjeta debe tener varios años (indicador «i/total»).
