@@ -101,14 +101,33 @@
       ? `<h2>Propuesta de mejora</h2><p>Concentrar intervenciones integrales (salud física + salud mental) en <b>${esc(t3.join(", "))}</b>
          y monitorear ambos indicadores.</p><small>Según el índice de priorización; prueba otros pesos en el simulador.</small>`
       : `<h2>Propuesta de mejora</h2><p>Priorizar intervenciones en los territorios de mayor mortalidad.</p>`;
-    const k = [
-      [top.tasa, 1, "", "", "Mayor tasa de mortalidad", `${top.nombre} · por 100.000 hab. · ${h.anio_referencia}`],
-      [h.brecha_veces, 2, "", "×", "Brecha entre territorios", `vs ${bajo.nombre}`],
-      [h.variacion_pct_2012_2022_comuna_top, 1, h.variacion_pct_2012_2022_comuna_top >= 0 ? "+" : "", "%", "Variación 2012–2022", top.nombre],
-    ];
-    if (ciudad) k.push([ciudad, 0, "", "", "Tasa de toda la ciudad", "defunciones por 100.000 hab. · 2022"]);
+    // KPIs MULTIDIMENSIÓN (no solo mortalidad): un dato de ciudad por dimensión, desde el KB.
+    const S = KB.series || {}, cat = {}, dat = S.datos || {};
+    (S.catalogo || []).forEach((c) => (cat[c.clave] = c));
+    const ciudadUlt = (clave) => {
+      const c = (dat[clave] || {}).ciudad; if (!c) return null;
+      const a = Object.keys(c).map(Number).filter((x) => !isNaN(x));
+      if (!a.length) return null; const y = String(Math.max(...a)); return { y, v: c[y] };
+    };
+    const k = [];
+    const addKPI = (clave, dec, suf, titulo) => {
+      const u = ciudadUlt(clave), meta = cat[clave]; if (!u || !meta) return;
+      k.push([u.v, dec, "", suf, titulo, `Medellín · ${meta.unidad || ""} · ${u.y}`]);
+    };
+    // Ambiental
     if (pm.ranking && pm.ranking.length)
-      k.push([pm.ranking[0].media_pm25, 1, "", "", "PM2.5 máx. (µg/m³)", `Estación ${pm.ranking[0].estacion} · ${pm.anio} · OMS: 5`]);
+      k.push([pm.ranking[0].media_pm25, 1, "", "", "PM2.5 (µg/m³)", `Máx. estación ${pm.ranking[0].estacion} · ${pm.anio} · OMS: 5`]);
+    // Social
+    addKPI("ecv_t99", 1, "%", "Desempleo abierto");
+    addKPI("ecv_hogares_inseguridad_alimentaria", 1, "%", "Inseguridad alimentaria (hogares)");
+    addKPI("ecv_poblacion_practica_actividades_deportivas", 1, "%", "Practica deporte");
+    // Salud (incluye el hallazgo, sin ser el único)
+    if (ciudad) k.push([ciudad, 0, "", "", "Mortalidad (ciudad)", `defunciones por 100.000 hab. · ${h.anio_referencia}`]);
+    // Respaldo: si por algún motivo no hubo series, mostrar el hallazgo clásico.
+    if (!k.length) {
+      k.push([top.tasa, 1, "", "", "Mayor tasa de mortalidad", `${top.nombre} · por 100.000 hab. · ${h.anio_referencia}`]);
+      k.push([h.brecha_veces, 2, "", "×", "Brecha entre territorios", `vs ${bajo.nombre}`]);
+    }
     $("kpis").innerHTML = k.map((x, i) =>
       `<div class="kpi"><div class="n" id="kn${i}">0</div><div class="t">${esc(x[4])}</div><div class="s">${esc(x[5])}</div></div>`).join("");
     k.forEach((x, i) => contar($("kn" + i), x[0], x[1], x[2], x[3]));
@@ -235,24 +254,62 @@
       `<span class="chip ${k === n ? "top" : ""}"><b>${Math.round(k / n * 100)}%</b> ${esc(nom)}</span>`).join("");
   }
 
-  /* ---------- 4. Tendencia ---------- */
-  function pintarTendencia(h) {
-    const s = h.serie_temporal_comuna_top, top = h.comuna_mayor_tasa; if (!s || !s.anios) return;
-    $("tend-sub").textContent = `${top ? top.nombre : "La comuna con mayor tasa"}: ${fmt(s.tasas[0])} en ${s.anios[0]} → ${fmt(s.tasas[s.tasas.length - 1])} en ${s.anios[s.anios.length - 1]} defunciones por 100.000 hab.`;
-    const dibujar = (base) => {
-      const vals = base ? s.tasas.map((v) => +(v / s.tasas[0] * 100).toFixed(1)) : s.tasas;
-      const i21 = s.anios.indexOf(2021);
-      nuevoGrafico("c-tend", { type: "line",
-        data: { labels: s.anios.map(String), datasets: [{ data: vals, borderColor: NAR, backgroundColor: "rgba(217,115,26,.15)", fill: true, tension: .25,
-          pointRadius: s.anios.map((_, i) => (i === i21 ? 8 : 4)), pointBackgroundColor: s.anios.map((_, i) => (i === i21 ? ROJO : NAR)) }] },
-        options: { responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { display: false }, lineasRef: { lineas: base ? [{ eje: "y", valor: 100, color: "#6b7280", texto: "2012 = 100" }] : [] } },
-          scales: { y: { title: { display: true, text: base ? "Índice (2012 = 100)" : "Defunciones por 100.000 hab." } } } },
-        plugins: [lineasRef] });
-    };
-    const alt = (base) => { $("t-abs").setAttribute("aria-pressed", String(!base)); $("t-base").setAttribute("aria-pressed", String(base)); dibujar(base); };
+  /* ---------- 4/5. Tendencia de ciudad por indicador (multidimensión) ---------- */
+  let TEND = null, tendDim = null, tendInd = null, tendBase = false;
+  function prepararTendencia(KB) {
+    const s = KB.series || {}, cat = s.catalogo || [], datos = s.datos || {};
+    const porDim = {};
+    cat.forEach((c) => {
+      const serie = (datos[c.clave] || {}).ciudad;
+      if (!serie || !Object.keys(serie).length) return;
+      (porDim[c.dimension] = porDim[c.dimension] || []).push(c);
+    });
+    return Object.keys(porDim).length ? { cat, datos, porDim } : null;
+  }
+  function pintarTendInd() {
+    if (!TEND || !tendInd) return;
+    const meta = TEND.cat.find((c) => c.clave === tendInd) || {};
+    const ciudad = (TEND.datos[tendInd] || {}).ciudad || {};
+    const anios = Object.keys(ciudad).map(Number).filter((n) => !isNaN(n)).sort((a, b) => a - b);
+    const vals0 = anios.map((a) => Number(ciudad[a]));
+    const base = tendBase && vals0[0] ? vals0.map((v) => +(v / vals0[0] * 100).toFixed(1)) : vals0;
+    const i21 = anios.indexOf(2021);
+    $("tend-sub").innerHTML = `<b>${esc(meta.nombre || tendInd)}</b> · ${esc(meta.unidad || "")}
+      · ${anios[0]}–${anios[anios.length - 1]} · <small>Fuente: ${esc(meta.fuente || "")}</small>`;
+    nuevoGrafico("c-tend", {
+      type: "line",
+      data: { labels: anios.map(String),
+        datasets: [{ data: base, borderColor: NAR, backgroundColor: "rgba(217,115,26,.15)", fill: true, tension: .25,
+          pointRadius: anios.map((_, i) => (i === i21 ? 7 : 3)),
+          pointBackgroundColor: anios.map((_, i) => (i === i21 ? ROJO : NAR)) }] },
+      options: { responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false },
+          lineasRef: { lineas: tendBase ? [{ eje: "y", valor: 100, color: "#6b7280", texto: "base = 100" }] : [] } },
+        scales: { y: { title: { display: true, text: tendBase ? "Índice (primer año = 100)" : (meta.unidad || "valor") } } } },
+      plugins: [lineasRef] });
+  }
+  function llenarTendInd() {
+    const items = TEND.porDim[tendDim] || [];
+    $("tend-ind").innerHTML = items.map((c) => `<option value="${esc(c.clave)}">${esc(c.nombre)}</option>`).join("");
+    tendInd = items.length ? items[0].clave : null;
+    pintarTendInd();
+  }
+  function pintarTendencia(KB) {
+    TEND = prepararTendencia(KB);
+    if (!TEND) { const s = $("tendencia"); if (s) s.style.display = "none"; return; }
+    const dims = Object.keys(TEND.porDim).sort((a, b) => TEND.porDim[b].length - TEND.porDim[a].length);
+    tendDim = dims[0];
+    $("tend-dims").innerHTML = dims.map((d) =>
+      `<button type="button" data-d="${esc(d)}" aria-pressed="${d === tendDim}">${esc(DIM_LABEL[d] || d)} (${TEND.porDim[d].length})</button>`).join("");
+    $("tend-dims").querySelectorAll("button").forEach((b) => {
+      b.onclick = () => { tendDim = b.dataset.d;
+        $("tend-dims").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x.dataset.d === tendDim));
+        llenarTendInd(); };
+    });
+    $("tend-ind").onchange = (e) => { tendInd = e.target.value; pintarTendInd(); };
+    const alt = (base) => { tendBase = base; $("t-abs").setAttribute("aria-pressed", String(!base)); $("t-base").setAttribute("aria-pressed", String(base)); pintarTendInd(); };
     $("t-abs").onclick = () => alt(false); $("t-base").onclick = () => alt(true);
-    dibujar(false);
+    llenarTendInd();
   }
 
   /* ---------- 5. Aire: comparación interanual ---------- */
@@ -628,7 +685,7 @@
         resaltarDisp();
       }
     }
-    pintarTendencia(ind.hallazgo_mortalidad || {});
+    pintarTendencia(KB);
     pintarAire(ind.pm25_siata);
     iniciarPanorama(KB);
     iniciarSaludTiempo(ind);

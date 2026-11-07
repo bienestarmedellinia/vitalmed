@@ -217,7 +217,7 @@
     </section>
 
     <section id="mortalidad" class="rev">
-      <h2>2 · Desigualdad entre territorios</h2>
+      <h2>2 · Mirada a salud: mortalidad por territorio</h2>
       <p class="sub">Haz clic en una barra (o elige un territorio) para ver su ficha completa. La línea punteada es la tasa de toda la ciudad, calculada con los casos y la población implícita de cada territorio.</p>
       <div class="grid">
         <div class="caja">
@@ -233,7 +233,7 @@
     </section>
 
     <section id="doble" class="rev">
-      <h2>3 · Doble carga: mortalidad y salud mental</h2>
+      <h2>3 · Mirada a salud mental: ¿acompaña a la mortalidad?</h2>
       <p class="sub">Cada punto es un territorio. Las líneas marcan la mediana de cada indicador: arriba a la derecha están los que superan la mediana en ambos.</p>
       <div class="caja">
         <div class="medio" style="height:480px"><canvas id="c-disp" role="img" aria-label="Dispersión: tasa de mortalidad contra tasa de intento de suicidio por territorio, con medianas"></canvas></div>
@@ -243,7 +243,7 @@
     </section>
 
     <section id="simulador" class="rev">
-      <h2>4 · ¿Qué pasa si cambia el criterio? Simulador de prioridades</h2>
+      <h2>4 · Índice de priorización en salud (explorable)</h2>
       <p class="sub">El índice combina mortalidad y salud mental. Mueve el control para dar más peso a uno u otro y mira si la lista cambia: así se prueba que la priorización no depende de una decisión arbitraria.</p>
       <div class="caja">
         <div class="sim">
@@ -259,15 +259,20 @@
     </section>
 
     <section id="tendencia" class="rev">
-      <h2>5 · Una brecha que crece</h2>
-      <p class="sub" id="tend-sub"></p>
+      <h2>5 · Tendencias de la ciudad por indicador</h2>
+      <p class="sub" id="tend-sub">Evolución del valor de ciudad de cualquier indicador disponible. Elige dimensión e indicador.</p>
       <div class="caja">
-        <div class="seg" role="group" aria-label="Escala">
-          <button type="button" id="t-abs" aria-pressed="true">Tasa</button>
-          <button type="button" id="t-base" aria-pressed="false">Índice base 2012 = 100</button>
+        <div class="seg" role="group" aria-label="Dimensión" id="tend-dims"></div>
+        <div class="sim" style="margin-top:10px">
+          <label for="tend-ind">Indicador</label>
+          <select id="tend-ind"></select>
         </div>
-        <div class="medio"><canvas id="c-tend" role="img" aria-label="Línea: evolución de la tasa de mortalidad de la comuna con mayor tasa, 2012 a 2022"></canvas></div>
-        <p class="nota">El pico de 2021 coincide con la pandemia de COVID-19.</p>
+        <div class="seg" role="group" aria-label="Escala" style="margin-top:10px">
+          <button type="button" id="t-abs" aria-pressed="true">Valor</button>
+          <button type="button" id="t-base" aria-pressed="false">Índice base = 100</button>
+        </div>
+        <div class="medio"><canvas id="c-tend" role="img" aria-label="Línea: evolución del indicador seleccionado para la ciudad de Medellín"></canvas></div>
+        <p class="nota" id="tend-nota">El pico de 2021 en indicadores de salud coincide con la pandemia de COVID-19.</p>
       </div>
     </section>
 

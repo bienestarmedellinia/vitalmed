@@ -82,6 +82,11 @@ def main() -> int:
             errores.append("Salud en el tiempo: no se listaron series (DANE/SIVIGILA/RIPS)")
         if not pag.evaluate("Chart.getChart('c-salud-tiempo') && Chart.getChart('c-salud-tiempo').data.labels.length > 0"):
             errores.append("Salud en el tiempo: la serie temporal no pintó")
+        # Tendencias por indicador (multidimensión): selector de dimensión + gráfico.
+        if pag.locator("#tend-dims button").count() < 2:
+            errores.append("Tendencias: deberían ofrecerse varias dimensiones")
+        if not pag.evaluate("Chart.getChart('c-tend') && Chart.getChart('c-tend').data.labels.length > 0"):
+            errores.append("Tendencias: el gráfico por indicador no pintó")
         # Explorador de datos (módulo independiente del asistente).
         pag2 = nav.new_page()
         pag2.on("pageerror", lambda e: errores.append(f"datos.html JS: {e}"))
