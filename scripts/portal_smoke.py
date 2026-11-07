@@ -51,7 +51,7 @@ def main() -> int:
         if kpis == 0:
             errores.append("El portal no pintó los KPIs (¿falló portal.js o el KB?)")
         # Observatorio por preguntas: categorías + tarjetas que enlazan a datos.
-        pag.wait_for_function("document.querySelectorAll('#preg-cats button').length >= 5", timeout=8000)
+        pag.locator("#preg-cats button").first.wait_for(timeout=8000)
         if pag.locator("#preg-cats button").count() < 5:
             errores.append("Preguntas: no se pintaron las categorías")
         tarjetas = pag.locator("#preg-lista a.preg-card")
