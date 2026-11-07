@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "descripcion": "Banco curado de preguntas por categoría (observatorio por preguntas). Cada pregunta enlaza a datos REALES del portal: al explorador (datos.html#ind=…) o a una sección/gráfica del portal. No contiene cifras: estas se recuperan del knowledge_base.json al abrir el destino.",
+    "nota": "Reemplaza 'educación' (sin dato propio) por temas con datos reales: violencia de género, enfermedades transmisibles, demografía, salud sexual y reproductiva.",
+    "destinos": {
+      "explorador": "datos.html#ind=<clave>  → indicador por territorio (barras + tabla + descarga)",
+      "serie": "datos.html#ind=<clave>  → además serie histórica por territorio",
+      "aire": "index.html#aire  → PM2.5 por estación (SIATA)",
+      "salud_tiempo": "datos.html#ciudad-tiempo  → series DANE/SIVIGILA/RIPS",
+      "panorama": "index.html#panorama  → panorama multidimensional",
+      "tendencia": "index.html#tendencia  → tendencia de ciudad por indicador"
+    }
+  },
+  "categorias": [
+    {
+      "id": "empleo",
+      "nombre": "Empleo y desarrollo económico",
+      "grupo": "Socioeconómicas",
+      "preguntas": [
+        {"q": "¿Qué territorios tienen la mayor tasa de desempleo abierto?", "tipo": "Territorial", "indicadores": ["Tasa desempleo abierto"], "destino": "datos.html#ind=ecv_t99"},
+        {"q": "¿Cómo ha evolucionado la tasa de ocupación de la ciudad?", "tipo": "Temporal", "indicadores": ["Tasa ocupación"], "destino": "datos.html#ind=ecv_t104"},
+        {"q": "¿Cuánto desempleo queda 'oculto' (desaliento) por territorio?", "tipo": "Territorial", "indicadores": ["Tasa desempleo oculto"], "destino": "datos.html#ind=ecv_t98"},
+        {"q": "¿Hay brecha de desempleo para la población con discapacidad?", "tipo": "Comparativo", "indicadores": ["Desempleo población discapacitada"], "destino": "datos.html#ind=ecv_t100"},
+        {"q": "¿Y para la población afrodescendiente?", "tipo": "Comparativo", "indicadores": ["Desempleo población afrodescendiente"], "destino": "datos.html#ind=ecv_t103"}
+      ]
+    },
+    {
+      "id": "seguridad_alimentaria",
+      "nombre": "Seguridad alimentaria",
+      "grupo": "Socioeconómicas",
+      "preguntas": [
+        {"q": "¿Qué territorios concentran más hogares con inseguridad alimentaria?", "tipo": "Territorial", "indicadores": ["Inseguridad alimentaria (total)"], "destino": "datos.html#ind=ecv_hogares_inseguridad_alimentaria"},
+        {"q": "¿Dónde es más severa la privación (nivel alto)?", "tipo": "Territorial", "indicadores": ["Inseguridad alimentaria alta"], "destino": "datos.html#ind=ecv_hogares_inseguridad_alimentaria_alta"},
+        {"q": "¿Cómo se reparte el nivel moderado?", "tipo": "Territorial", "indicadores": ["Inseguridad alimentaria moderada"], "destino": "datos.html#ind=ecv_hogares_inseguridad_alimentaria_moderada"},
+        {"q": "¿Cómo evolucionó la inseguridad alimentaria antes y después de 2020?", "tipo": "Temporal", "indicadores": ["Inseguridad alimentaria (total)"], "destino": "datos.html#ind=ecv_hogares_inseguridad_alimentaria"}
+      ]
+    },
+    {
+      "id": "bienestar",
+      "nombre": "Bienestar y calidad de vida",
+      "grupo": "Socioeconómicas",
+      "preguntas": [
+        {"q": "¿Cómo se ve el bienestar de la ciudad en varias dimensiones a la vez?", "tipo": "Multidimensional", "indicadores": ["Panorama multidimensional"], "destino": "index.html#panorama"},
+        {"q": "¿Cómo evoluciona cualquier indicador de ciudad en el tiempo?", "tipo": "Temporal", "indicadores": ["Tendencias por indicador"], "destino": "index.html#tendencia"},
+        {"q": "¿Qué territorios acumulan desventaja (alta dependencia económica)?", "tipo": "Territorial", "indicadores": ["Índice de dependencia económica"], "destino": "datos.html#ind=ecv_t44"}
+      ]
+    },
+    {
+      "id": "calidad_aire",
+      "nombre": "Calidad del aire",
+      "grupo": "Ambientales",
+      "preguntas": [
+        {"q": "¿Qué estaciones superan la guía OMS de PM2.5?", "tipo": "Descriptivo", "indicadores": ["PM2.5 por estación (SIATA)"], "destino": "index.html#aire"},
+        {"q": "¿Cómo evolucionó el PM2.5 promedio de la ciudad (2020–2025)?", "tipo": "Temporal", "indicadores": ["PM2.5 promedio de estaciones"], "destino": "index.html#aire"},
+        {"q": "¿La morbilidad respiratoria acompaña al aire en el tiempo?", "tipo": "Correlacional", "indicadores": ["RIPS respiratorias", "PM2.5"], "destino": "datos.html#ciudad-tiempo"}
+      ]
+    },
+    {
+      "id": "salud_fisica",
+      "nombre": "Salud física",
+      "grupo": "Salud",
+      "preguntas": [
+        {"q": "¿Qué territorios tienen mayor tasa de mortalidad general?", "tipo": "Territorial", "indicadores": ["Mortalidad general"], "destino": "datos.html#ind=mortalidad"},
+        {"q": "¿Cómo se comporta la natalidad entre territorios?", "tipo": "Territorial", "indicadores": ["Natalidad"], "destino": "datos.html#ind=natalidad"},
+        {"q": "¿Cómo se distribuye la mortalidad por grupo de edad en la ciudad?", "tipo": "Descriptivo", "indicadores": ["Mortalidad por edad (DANE)"], "destino": "datos.html#ciudad-tiempo"}
+      ]
+    },
+    {
+      "id": "salud_mental",
+      "nombre": "Salud mental",
+      "grupo": "Salud",
+      "preguntas": [
+        {"q": "¿Qué territorios concentran más intentos de suicidio?", "tipo": "Territorial", "indicadores": ["Intento de suicidio"], "destino": "datos.html#ind=intento_suicidio"},
+        {"q": "¿Cómo evolucionó el intento de suicidio semana a semana (SIVIGILA)?", "tipo": "Temporal", "indicadores": ["Intento de suicidio semanal"], "destino": "datos.html#ciudad-tiempo"},
+        {"q": "¿Cuánta atención por trastornos mentales se registra al año (RIPS)?", "tipo": "Temporal", "indicadores": ["Trastornos mentales RIPS"], "destino": "datos.html#ciudad-tiempo"}
+      ]
+    },
+    {
+      "id": "mortalidad",
+      "nombre": "Mortalidad",
+      "grupo": "Salud",
+      "preguntas": [
+        {"q": "¿Qué causas predominan en la mortalidad mensual (respiratoria vs circulatoria)?", "tipo": "Descriptivo", "indicadores": ["Mortalidad por causa (DANE)"], "destino": "datos.html#ciudad-tiempo"},
+        {"q": "¿Cómo cambió la tasa de mortalidad entre territorios en la década?", "tipo": "Temporal", "indicadores": ["Mortalidad general"], "destino": "datos.html#ind=mortalidad"},
+        {"q": "¿Qué grupos de edad concentran la mortalidad de la ciudad?", "tipo": "Descriptivo", "indicadores": ["Mortalidad por edad (DANE)"], "destino": "datos.html#ciudad-tiempo"}
+      ]
+    },
+    {
+      "id": "enfermedades_transmisibles",
+      "nombre": "Enfermedades transmisibles",
+      "grupo": "Salud",
+      "preguntas": [
+        {"q": "¿Cómo se distribuye el dengue entre territorios?", "tipo": "Territorial", "indicadores": ["Dengue"], "destino": "datos.html#ind=dengue"},
+        {"q": "¿Dónde se concentra la tuberculosis pulmonar?", "tipo": "Territorial", "indicadores": ["Tuberculosis pulmonar"], "destino": "datos.html#ind=tuberculosis_pulmonar"},
+        {"q": "¿Cómo se comporta la hepatitis A (marcador de saneamiento)?", "tipo": "Territorial", "indicadores": ["Hepatitis A"], "destino": "datos.html#ind=hepatitis_a"},
+        {"q": "¿Y las enfermedades infantiles como varicela?", "tipo": "Territorial", "indicadores": ["Varicela"], "destino": "datos.html#ind=varicela"}
+      ]
+    },
+    {
+      "id": "salud_sexual",
+      "nombre": "Salud sexual y reproductiva",
+      "grupo": "Salud",
+      "preguntas": [
+        {"q": "¿Qué territorios tienen menos información sobre planificación familiar?", "tipo": "Territorial", "indicadores": ["Información de planificación (jefe de hogar)"], "destino": "datos.html#ind=ecv_jefes_hogar_suficiente_informacion_metodos_plani"},
+        {"q": "¿Dónde se planifica más?", "tipo": "Territorial", "indicadores": ["Jefe de hogar que planifica"], "destino": "datos.html#ind=ecv_jefes_hogar_informante_calificado_planifica"},
+        {"q": "¿Dónde se concerta más el método de planificación?", "tipo": "Territorial", "indicadores": ["Concertación del método"], "destino": "datos.html#ind=ecv_jefes_hogar_informantes_calificados_concertan_me"}
+      ]
+    },
+    {
+      "id": "cultura",
+      "nombre": "Cultura y participación",
+      "grupo": "Sociales",
+      "preguntas": [
+        {"q": "¿Qué territorios participan más en programas culturales?", "tipo": "Territorial", "indicadores": ["Participación cultural"], "destino": "datos.html#ind=ecv_personas_asiste_participa_programas_culturales"},
+        {"q": "¿Cómo evolucionó la participación cultural de la ciudad?", "tipo": "Temporal", "indicadores": ["Participación cultural"], "destino": "datos.html#ind=ecv_personas_asiste_participa_programas_culturales"}
+      ]
+    },
+    {
+      "id": "violencia_genero",
+      "nombre": "Violencia de género",
+      "grupo": "Sociales",
+      "preguntas": [
+        {"q": "¿Qué territorios concentran más violencia de género?", "tipo": "Territorial", "indicadores": ["Violencia de género"], "destino": "datos.html#ind=violencia_genero"},
+        {"q": "¿Cómo ha evolucionado la violencia de género desde 2013?", "tipo": "Temporal", "indicadores": ["Violencia de género"], "destino": "datos.html#ind=violencia_genero"}
+      ]
+    },
+    {
+      "id": "demografia",
+      "nombre": "Demografía",
+      "grupo": "Territoriales",
+      "preguntas": [
+        {"q": "¿Cómo es la dependencia económica entre territorios?", "tipo": "Territorial", "indicadores": ["Índice de dependencia económica"], "destino": "datos.html#ind=ecv_t44"},
+        {"q": "¿Cómo se distribuye el índice de masculinidad?", "tipo": "Territorial", "indicadores": ["Índice de masculinidad"], "destino": "datos.html#ind=ecv_t48"},
+        {"q": "¿Cómo se reparte la jefatura de hogar por sexo?", "tipo": "Comparativo", "indicadores": ["Jefatura de hogar (H/M)"], "destino": "datos.html#ind=ecv_mujeres_jefes_cabeza_hogar"}
+      ]
+    },
+    {
+      "id": "deporte",
+      "nombre": "Deporte y actividad física",
+      "grupo": "Hábitos Saludables",
+      "preguntas": [
+        {"q": "¿Qué territorios practican más deporte?", "tipo": "Territorial", "indicadores": ["Práctica deportiva"], "destino": "datos.html#ind=ecv_poblacion_practica_actividades_deportivas"},
+        {"q": "¿Dónde hay más inscripción en programas deportivos?", "tipo": "Territorial", "indicadores": ["Inscripción deportiva"], "destino": "datos.html#ind=ecv_poblacion_inscrita_programas_deportivos_recreati"},
+        {"q": "¿Cómo evolucionó la práctica deportiva tras 2021?", "tipo": "Temporal", "indicadores": ["Práctica deportiva"], "destino": "datos.html#ind=ecv_poblacion_practica_actividades_deportivas"}
+      ]
+    }
+  ]
+}

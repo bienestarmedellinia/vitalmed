@@ -50,6 +50,15 @@ def main() -> int:
         kpis = pag.locator("#kpis > *").count()
         if kpis == 0:
             errores.append("El portal no pintó los KPIs (¿falló portal.js o el KB?)")
+        # Observatorio por preguntas: categorías + tarjetas que enlazan a datos.
+        pag.wait_for_function("document.querySelectorAll('#preg-cats button').length >= 5", timeout=8000)
+        if pag.locator("#preg-cats button").count() < 5:
+            errores.append("Preguntas: no se pintaron las categorías")
+        tarjetas = pag.locator("#preg-lista a.preg-card")
+        if tarjetas.count() < 1:
+            errores.append("Preguntas: la categoría no mostró tarjetas de pregunta")
+        elif not (tarjetas.first.get_attribute("href") or "").strip():
+            errores.append("Preguntas: la tarjeta no enlaza a ningún dato")
         # Carrusel de años: al menos una tarjeta debe tener varios años (indicador «i/total»).
         anios_kpi = pag.locator(".kpi .kpi-anio").all_inner_texts()
         if not any("/" in t for t in anios_kpi):

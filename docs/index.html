@@ -56,6 +56,12 @@
     .kpi .s { color:var(--gris); font-size:.8rem; margin-top:4px; }
     .kpi .kpi-anio { margin-top:6px; font-size:.72rem; font-weight:700; color:var(--nar); letter-spacing:.3px; }
     .kpi .n { transition:opacity .25s; }
+    .preg-lista { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px; margin-top:14px; }
+    .preg-card { display:block; background:#fff; border:1px solid #e2e8f0; border-left:4px solid var(--azul); border-radius:10px; padding:14px; text-decoration:none; color:inherit; transition:transform .15s, box-shadow .15s; }
+    .preg-card:hover, .preg-card:focus { transform:translateY(-2px); box-shadow:0 6px 16px rgba(15,42,68,.15); border-left-color:var(--nar); }
+    .preg-card .q { font-weight:600; line-height:1.3; }
+    .preg-card .meta { color:var(--gris); font-size:.78rem; margin-top:8px; }
+    .preg-card .ver { color:var(--nar); font-weight:700; font-size:.8rem; margin-top:8px; display:inline-block; }
 
     section { margin:44px 0; scroll-margin-top:56px; }
     section > h2 { color:var(--azul-osc); margin:0 0 4px; font-size:1.5rem; }
@@ -165,6 +171,7 @@
   <nav aria-label="Secciones">
     <div class="wrap">
       <b>Bienestar Medellín IA</b>
+      <a href="#preguntas">Preguntas</a>
       <a href="#mortalidad">Mortalidad</a>
       <a href="#doble">Doble carga</a>
       <a href="#simulador">Simulador</a>
@@ -201,6 +208,17 @@
 
   <main id="contenido" class="wrap">
     <div class="kpis" id="kpis" aria-live="polite"></div>
+
+    <section id="preguntas" class="rev">
+      <h2>Observatorio por preguntas</h2>
+      <p class="sub">Empieza por lo que necesitas saber. Elige una categoría y una pregunta: cada una te lleva
+        directamente a los datos, la gráfica y la evidencia reales del portal. Las cifras provienen del pipeline,
+        no se inventan.</p>
+      <div class="caja">
+        <div class="seg" role="group" aria-label="Categoría" id="preg-cats"></div>
+        <div id="preg-lista" class="preg-lista" aria-live="polite"></div>
+      </div>
+    </section>
 
     <section id="panorama" class="rev">
       <h2>1 · Panorama multidimensional del bienestar</h2>

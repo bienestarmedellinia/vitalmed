@@ -622,6 +622,39 @@
     pintarSaludTiempo();
   }
 
+  /* ---------- Observatorio por preguntas (banco curado → datos reales) ---------- */
+  function iniciarPreguntas() {
+    const cont = $("preg-cats"), lista = $("preg-lista");
+    if (!cont || !lista) return;
+    fetch("preguntas.json", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status))))
+      .then((data) => {
+        const cats = data.categorias || [];
+        if (!cats.length) { const s = $("preguntas"); if (s) s.style.display = "none"; return; }
+        let sel = cats[0].id;
+        const pintarBotones = () => {
+          cont.innerHTML = cats.map((c) =>
+            `<button type="button" data-id="${esc(c.id)}" aria-pressed="${c.id === sel}">${esc(c.nombre)} (${(c.preguntas || []).length})</button>`).join("");
+          cont.querySelectorAll("button").forEach((b) => {
+            b.onclick = () => { sel = b.dataset.id;
+              cont.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x.dataset.id === sel));
+              pintarLista(); };
+          });
+        };
+        const pintarLista = () => {
+          const c = cats.find((x) => x.id === sel) || cats[0];
+          lista.innerHTML = (c.preguntas || []).map((p) =>
+            `<a class="preg-card" href="${esc(p.destino)}">
+               <span class="q">${esc(p.q)}</span>
+               <span class="meta">${esc(p.tipo)} · ${esc((p.indicadores || []).join(", "))}</span>
+               <span class="ver">Ver los datos →</span>
+             </a>`).join("");
+        };
+        pintarBotones(); pintarLista();
+      })
+      .catch((err) => { const s = $("preguntas"); if (s) s.style.display = "none"; console.error("preguntas.json:", err); });
+  }
+
   (function () {
     const els = document.querySelectorAll(".rev");
     if (!("IntersectionObserver" in window)) { els.forEach((e) => e.classList.add("vis")); return; }
@@ -727,6 +760,7 @@
     pintarAire(ind.pm25_siata);
     iniciarPanorama(KB);
     iniciarSaludTiempo(ind);
+    iniciarPreguntas();
   }
   window.Asistente.cargarKB()
     .then((KB) => {
