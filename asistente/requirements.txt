@@ -6,5 +6,5 @@
 #
 # Instalar solo si se quiere la interfaz web y/o la redacción con LLM:
 #   pip install -r asistente/requirements.txt
-streamlit==1.39.0
+streamlit==1.54.0
 openai==1.54.3
