@@ -50,6 +50,10 @@ def main() -> int:
         kpis = pag.locator("#kpis > *").count()
         if kpis == 0:
             errores.append("El portal no pintó los KPIs (¿falló portal.js o el KB?)")
+        # Carrusel de años: al menos una tarjeta debe tener varios años (indicador «i/total»).
+        anios_kpi = pag.locator(".kpi .kpi-anio").all_inner_texts()
+        if not any("/" in t for t in anios_kpi):
+            errores.append(f"Los KPIs no muestran el carrusel por año: {anios_kpi!r}")
 
         pag.fill("#q", PREGUNTA)
         pag.click("#btn-preguntar")

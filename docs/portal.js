@@ -101,36 +101,74 @@
       ? `<h2>Propuesta de mejora</h2><p>Concentrar intervenciones integrales (salud física + salud mental) en <b>${esc(t3.join(", "))}</b>
          y monitorear ambos indicadores.</p><small>Según el índice de priorización; prueba otros pesos en el simulador.</small>`
       : `<h2>Propuesta de mejora</h2><p>Priorizar intervenciones en los territorios de mayor mortalidad.</p>`;
-    // KPIs MULTIDIMENSIÓN (no solo mortalidad): un dato de ciudad por dimensión, desde el KB.
+    // KPIs MULTIDIMENSIÓN con CARRUSEL por año (todos los años del KB, sin inventar).
     const S = KB.series || {}, cat = {}, dat = S.datos || {};
     (S.catalogo || []).forEach((c) => (cat[c.clave] = c));
-    const ciudadUlt = (clave) => {
-      const c = (dat[clave] || {}).ciudad; if (!c) return null;
-      const a = Object.keys(c).map(Number).filter((x) => !isNaN(x));
-      if (!a.length) return null; const y = String(Math.max(...a)); return { y, v: c[y] };
-    };
-    const k = [];
+    const serieAnios = (obj) => Object.keys(obj || {}).map(Number).filter((n) => !isNaN(n))
+      .sort((a, b) => a - b).map((y) => ({ y: String(y), v: Number(obj[String(y)]) }))
+      .filter((p) => !isNaN(p.v));
+    const kpis = [];  // {titulo, sub, dec, suf, anios:[{y,v}]}
     const addKPI = (clave, dec, suf, titulo) => {
-      const u = ciudadUlt(clave), meta = cat[clave]; if (!u || !meta) return;
-      k.push([u.v, dec, "", suf, titulo, `Medellín · ${meta.unidad || ""} · ${u.y}`]);
+      const meta = cat[clave]; if (!meta) return;
+      const anios = serieAnios((dat[clave] || {}).ciudad);
+      if (anios.length) kpis.push({ titulo, dec, suf, anios, unidad: meta.unidad || "", prefijo: "Medellín" });
     };
-    // Ambiental
-    if (pm.ranking && pm.ranking.length)
-      k.push([pm.ranking[0].media_pm25, 1, "", "", "PM2.5 (µg/m³)", `Máx. estación ${pm.ranking[0].estacion} · ${pm.anio} · OMS: 5`]);
+    // Ambiental: PM2.5 promedio de ciudad por año (2020–2025), más honesto que la estación máx.
+    const pmProm = serieAnios(pm.promedio_estaciones);
+    if (pmProm.length) kpis.push({ titulo: "PM2.5 (µg/m³)", dec: 1, suf: "", anios: pmProm,
+      unidad: "media de estaciones · OMS: 5", prefijo: "Medellín" });
     // Social
     addKPI("ecv_t99", 1, "%", "Desempleo abierto");
     addKPI("ecv_hogares_inseguridad_alimentaria", 1, "%", "Inseguridad alimentaria (hogares)");
     addKPI("ecv_poblacion_practica_actividades_deportivas", 1, "%", "Practica deporte");
-    // Salud (incluye el hallazgo, sin ser el único)
-    if (ciudad) k.push([ciudad, 0, "", "", "Mortalidad (ciudad)", `defunciones por 100.000 hab. · ${h.anio_referencia}`]);
-    // Respaldo: si por algún motivo no hubo series, mostrar el hallazgo clásico.
-    if (!k.length) {
-      k.push([top.tasa, 1, "", "", "Mayor tasa de mortalidad", `${top.nombre} · por 100.000 hab. · ${h.anio_referencia}`]);
-      k.push([h.brecha_veces, 2, "", "×", "Brecha entre territorios", `vs ${bajo.nombre}`]);
+    // Salud: mortalidad de ciudad por año (2012–2022)
+    const mortAnios = serieAnios((dat.mortalidad || {}).ciudad);
+    if (mortAnios.length) kpis.push({ titulo: "Mortalidad (ciudad)", dec: 0, suf: "", anios: mortAnios,
+      unidad: "defunciones por 100.000 hab.", prefijo: "Medellín" });
+    // Respaldo si no hubo series.
+    if (!kpis.length) {
+      kpis.push({ titulo: "Mayor tasa de mortalidad", dec: 1, suf: "", prefijo: top.nombre,
+        unidad: "por 100.000 hab.", anios: [{ y: String(h.anio_referencia), v: top.tasa }] });
     }
-    $("kpis").innerHTML = k.map((x, i) =>
-      `<div class="kpi"><div class="n" id="kn${i}">0</div><div class="t">${esc(x[4])}</div><div class="s">${esc(x[5])}</div></div>`).join("");
-    k.forEach((x, i) => contar($("kn" + i), x[0], x[1], x[2], x[3]));
+    arrancarCarruselKPIs(kpis);
+  }
+
+  /* ---------- Carrusel de KPIs (rota los años de cada tarjeta) ---------- */
+  let kpiTimer = null;
+  function arrancarCarruselKPIs(kpis) {
+    if (kpiTimer) { clearInterval(kpiTimer); kpiTimer = null; }
+    $("kpis").innerHTML = kpis.map((x, i) =>
+      `<div class="kpi" data-i="${i}">
+         <div class="n" id="kn${i}">0</div>
+         <div class="t">${esc(x.titulo)}</div>
+         <div class="s" id="ks${i}"></div>
+         <div class="kpi-anio" id="ka${i}" aria-hidden="true"></div>
+       </div>`).join("");
+    const idx = kpis.map((x) => x.anios.length - 1);  // arranca en el último año (más reciente)
+    const pintar = (i, animar) => {
+      const x = kpis[i], p = x.anios[idx[i]];
+      $("ks" + i).textContent = `${x.prefijo} · ${x.unidad} · ${p.y}`;
+      $("ka" + i).textContent = x.anios.length > 1 ? `${p.y}  (${idx[i] + 1}/${x.anios.length})` : p.y;
+      if (animar) contar($("kn" + i), p.v, x.dec, "", x.suf);
+      else $("kn" + i).textContent = fmt(p.v, x.dec) + x.suf;
+    };
+    kpis.forEach((_x, i) => pintar(i, true));
+    const multi = kpis.some((x) => x.anios.length > 1);
+    if (!multi || REDUCIR) return;  // respeta prefers-reduced-motion y evita rotar si no hay series
+    let paso = 0;
+    kpiTimer = setInterval(() => {
+      paso++;
+      // Escalonado: en cada tick avanza una tarjeta distinta (efecto carrusel, no todas a la vez).
+      const rotables = kpis.map((x, i) => (x.anios.length > 1 ? i : -1)).filter((i) => i >= 0);
+      if (!rotables.length) return;
+      const i = rotables[paso % rotables.length];
+      idx[i] = (idx[i] + 1) % kpis[i].anios.length;
+      pintar(i, false);
+    }, 1400);
+    // Pausa al pasar el cursor; reanuda al salir.
+    const cont = $("kpis");
+    cont.onmouseenter = () => { if (kpiTimer) { clearInterval(kpiTimer); kpiTimer = null; } };
+    cont.onmouseleave = () => { if (!kpiTimer && multi && !REDUCIR) arrancarCarruselKPIs(kpis); };
   }
 
   /* ---------- 1. Mortalidad + ficha ---------- */
