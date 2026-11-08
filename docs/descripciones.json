@@ -22,5 +22,10 @@
   "glosa_brecha": {
     "_nota": "coletilla que cierra la viñeta de la brecha: '...reflejando importantes desigualdades territoriales <glosa_brecha>'",
     "ecv_personas_asiste_participa_programas_culturales": "en el acceso y aprovechamiento de bienes y servicios culturales"
+  },
+  "fuentes_legibles": {
+    "_nota": "traduce el identificador técnico del campo 'fuente' del KB a su nombre institucional para la prosa de Consideraciones metodológicas",
+    "ECV - serie histórica de indicadores (Planeación)": "la Encuesta de Calidad de Vida (ECV) y la Serie Histórica de Indicadores de Planeación Municipal",
+    "MEData - Secretaría de Salud": "MEData, Secretaría de Salud de la Alcaldía de Medellín"
   }
 }

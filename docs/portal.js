@@ -884,7 +884,8 @@
     }
 
     // (h) Consideraciones metodológicas.
-    const fuentesProsa = fuentes.length ? esc(fuentes.join(" y ")) : "las fuentes del pipeline del proyecto";
+    const fuentesLeg = fuentes.map((f) => (FLEG || {})[f] || f);
+    const fuentesProsa = fuentesLeg.length ? esc(fuentesLeg.join(" y ")) : "las fuentes del pipeline del proyecto";
     const metodologia = `<p>El análisis se desarrolló utilizando información proveniente de ${fuentesProsa}, considerando los siguientes componentes:</p>
       <ul>
         <li>Cobertura temporal: ${aMin && aMax ? `${aMin}–${aMax}` : "según disponibilidad del indicador"}.</li>
@@ -1140,6 +1141,7 @@
   let TAPG = {};   // coletilla curada de apertura del análisis territorial por clave
   let GVALG = {};  // glosa curada del valor (magnitud | unidad glosada) por clave
   let GBRG = {};   // coletilla curada de la brecha por clave
+  let FLEG = {};   // nombres legibles de fuentes (identificador KB → nombre institucional)
   const PASOS = [
     { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py",
       desc: "Baja los datos únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia.",
@@ -1342,7 +1344,7 @@
       return fetch("descripciones.json", { cache: "no-store" })
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null)
-        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; GVALG = (desc && desc.glosa_valor) || {}; GBRG = (desc && desc.glosa_brecha) || {}; return KB; });
+        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; GVALG = (desc && desc.glosa_valor) || {}; GBRG = (desc && desc.glosa_brecha) || {}; FLEG = (desc && desc.fuentes_legibles) || {}; return KB; });
     })
     .then((KB) => {
       pintarPortal(KB);
