@@ -55,9 +55,11 @@
     @keyframes latido { to { stroke-dashoffset:-1420; } }
 
     /* Mapa/mosaico de territorios de Medellín (decorativo, SVG inline propio, sin dependencias) */
-    .hero-mapa { position:absolute; top:6%; right:1%; width:min(460px,46vw); height:auto; z-index:1;
+    .hero-mapa { position:absolute; top:2%; right:1%; width:min(430px,44vw); height:auto; z-index:1;
                  opacity:.6; pointer-events:none; filter:drop-shadow(0 8px 22px rgba(0,0,0,.28)); }
     .hero-mapa svg { width:100%; height:auto; display:block; }
+    .hero-mapa::after { content:"21 territorios · 16 comunas + 5 corregimientos"; display:block;
+      text-align:center; font-size:11px; font-weight:600; color:rgba(255,255,255,.8); margin-top:4px; }
     .hero-mapa .terr { fill:rgba(255,255,255,.12); stroke:rgba(255,255,255,.55); stroke-width:1;
                        vector-effect:non-scaling-stroke; stroke-linejoin:round; transition:fill .4s ease; }
     .hero-mapa .terr.alta { fill:rgba(217,115,26,.55); }   /* territorios de mayor carga (acento) */
@@ -303,10 +305,7 @@
       <!-- El mapa real de los 21 territorios (contorno oficial por comuna, GeoMedellín) lo
            inyecta portal.js tras cargar docs/mapa_comunas.svg (generado en Actions por
            scripts/13_mapa_hero.py). Fallback mínimo mientras carga / si falla la carga. -->
-      <svg viewBox="0 0 275 240" role="img" aria-label="Mapa de los territorios de Medellín">
-        <text class="leyenda" x="8" y="222">21 territorios</text>
-        <text class="leyenda-sub" x="8" y="234">16 comunas + 5 corregimientos</text>
-      </svg>
+      <svg viewBox="0 0 275 240" role="img" aria-label="Mapa de los territorios de Medellín"></svg>
     </div>
     <div class="latido" aria-hidden="true">
       <svg viewBox="0 0 1200 84" preserveAspectRatio="xMidYMid slice">
