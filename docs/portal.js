@@ -779,7 +779,7 @@
     const nivel = cat.grupo === "Ambientales" ? "estación de monitoreo (no comuna)"
       : (claves.length ? "21 territorios (16 comunas y 5 corregimientos)" : "ciudad");
 
-    /* ===== ANÁLISIS TÉCNICO AMPLIADO (estructura narrativa, 100 % derivada del KB) ===== */
+    /* ===== ANÁLISIS TÉCNICO (estructura narrativa, 100 % derivada del KB) ===== */
     // (d) Descripción del indicador.
     const dims = [...new Set(claves.map((cl) => metaDe(cl).dimension).filter(Boolean))];
     const unidades = [...new Set(claves.map((cl) => metaDe(cl).unidad).filter(Boolean))];
