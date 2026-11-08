@@ -51,10 +51,10 @@
 
     /* Mapa/mosaico de territorios de Medellín (decorativo, SVG inline propio, sin dependencias) */
     .hero-mapa { position:absolute; top:10px; right:2%; width:min(270px,30vw); height:auto; z-index:1;
-                 opacity:.5; pointer-events:none; filter:drop-shadow(0 8px 22px rgba(0,0,0,.28)); }
+                 opacity:.58; pointer-events:none; filter:drop-shadow(0 8px 22px rgba(0,0,0,.28)); }
     .hero-mapa svg { width:100%; height:auto; display:block; }
-    .hero-mapa .terr { fill:rgba(255,255,255,.10); stroke:rgba(255,255,255,.30); stroke-width:1.1;
-                       transition:fill .4s ease; }
+    .hero-mapa .terr { fill:rgba(255,255,255,.12); stroke:rgba(255,255,255,.55); stroke-width:0.6;
+                       stroke-linejoin:round; transition:fill .4s ease; }
     .hero-mapa .terr.alta { fill:rgba(217,115,26,.55); }   /* territorios de mayor carga (acento) */
     .hero-mapa .terr.media { fill:rgba(217,115,26,.28); }
     .hero-mapa .rio { fill:none; stroke:rgba(91,155,213,.75); stroke-width:4; stroke-linecap:round;
@@ -92,6 +92,8 @@
     .cat-mod ul { margin:4px 0 0; padding-left:18px; font-size:.92rem; }
     .cat-analisis { border-left:4px solid var(--azul); background:#f3f7fc; }
     .cat-analisis ul li { margin-bottom:5px; }
+    .cat-analisis h4.sub { font-size:.95rem; margin:14px 0 4px; color:var(--azul); font-weight:600; }
+    .cat-analisis h4.sub:first-of-type { margin-top:6px; }
     .cat-panel > h4 { margin:4px 0 0; font-size:.82rem; text-transform:uppercase; letter-spacing:.05em; color:var(--azul); }
     table.m-kpis { width:100%; font-size:.88rem; }
     table.m-kpis th { color:var(--gris); font-weight:600; }
@@ -271,42 +273,11 @@
         <div class="tarjeta" id="hero-propuesta" aria-live="polite"><h2>Propuesta de mejora</h2><p>Cargando…</p></div>
       </div>
     </div>
-    <div class="hero-mapa" aria-hidden="true">
-      <svg viewBox="0 0 240 320" role="img" aria-label="Mapa estilizado de los territorios de Medellín">
-        <!-- Mosaico de los 21 territorios (16 comunas + 5 corregimientos), disposición alargada
-             norte-sur del valle de Aburrá. Decorativo; el detalle real vive en el observatorio. -->
-        <g class="terr-grupo">
-          <!-- Fila 1 (norte) -->
-          <rect class="terr" x="78"  y="14"  width="40" height="34" rx="4"/>
-          <rect class="terr" x="120" y="14"  width="40" height="34" rx="4"/>
-          <!-- Fila 2 -->
-          <rect class="terr" x="60"  y="50"  width="38" height="34" rx="4"/>
-          <rect class="terr media" x="100" y="50" width="40" height="34" rx="4"/>
-          <rect class="terr" x="142" y="50"  width="40" height="34" rx="4"/>
-          <!-- Fila 3 -->
-          <rect class="terr" x="52"  y="86"  width="40" height="34" rx="4"/>
-          <rect class="terr alta" x="94"  y="86" width="40" height="34" rx="4"/>
-          <rect class="terr media" x="136" y="86" width="42" height="34" rx="4"/>
-          <!-- Fila 4 (centro) -->
-          <rect class="terr media" x="50"  y="122" width="42" height="34" rx="4"/>
-          <rect class="terr alta"  x="94"  y="122" width="40" height="34" rx="4"/>
-          <rect class="terr" x="136" y="122" width="44" height="34" rx="4"/>
-          <!-- Fila 5 -->
-          <rect class="terr" x="54"  y="158" width="42" height="34" rx="4"/>
-          <rect class="terr media" x="98"  y="158" width="40" height="34" rx="4"/>
-          <rect class="terr" x="140" y="158" width="40" height="34" rx="4"/>
-          <!-- Fila 6 -->
-          <rect class="terr" x="62"  y="194" width="40" height="34" rx="4"/>
-          <rect class="terr" x="104" y="194" width="40" height="34" rx="4"/>
-          <rect class="terr" x="146" y="194" width="36" height="34" rx="4"/>
-          <!-- Fila 7 (sur) -->
-          <rect class="terr" x="74"  y="230" width="40" height="34" rx="4"/>
-          <rect class="terr" x="116" y="230" width="40" height="34" rx="4"/>
-          <!-- Corregimiento aislado (occidente) -->
-          <rect class="terr" x="20"  y="140" width="26" height="30" rx="4"/>
-        </g>
-        <!-- Río Medellín: recorre el valle de norte a sur por el centro -->
-        <path class="rio" d="M130 6 C122 60 118 120 120 170 C122 220 112 270 104 316"/>
+    <div class="hero-mapa" id="hero-mapa" aria-hidden="true" data-src="mapa_comunas.svg">
+      <!-- El mapa real de los 21 territorios (contorno oficial por comuna, GeoMedellín) lo
+           inyecta portal.js tras cargar docs/mapa_comunas.svg (generado en Actions por
+           scripts/13_mapa_hero.py). Fallback mínimo mientras carga / si falla la carga. -->
+      <svg viewBox="0 0 240 320" role="img" aria-label="Mapa de los territorios de Medellín">
         <text class="leyenda" x="10" y="296">21 territorios</text>
         <text class="leyenda-sub" x="10" y="310">16 comunas + 5 corregimientos</text>
       </svg>

@@ -50,6 +50,13 @@ def main() -> int:
         kpis = pag.locator("#kpis > *").count()
         if kpis == 0:
             errores.append("El portal no pintó los KPIs (¿falló portal.js o el KB?)")
+        # Mapa real del hero: portal.js inyecta docs/mapa_comunas.svg → >=16 territorios (paths).
+        try:
+            pag.locator("#hero-mapa path.terr").first.wait_for(timeout=8000)
+            if pag.locator("#hero-mapa path.terr").count() < 16:
+                errores.append("Hero: el mapa real no se inyectó con los 21 territorios (paths.terr < 16)")
+        except Exception:
+            errores.append("Hero: no apareció el mapa real (#hero-mapa path.terr)")
         # Observatorio por preguntas: tarjetas de categoría → preguntas → modal con gráfica.
         pag.locator("#preg-cats .cat-card").first.wait_for(timeout=8000)
         if pag.locator("#preg-cats .cat-card").count() < 5:
@@ -60,6 +67,8 @@ def main() -> int:
         # Módulos de categoría: debe aparecer el panel con resumen ejecutivo e indicadores clave.
         if pag.locator("#preg-panel .cat-panel").count() < 1:
             errores.append("Observatorio: la categoría no mostró el panel de módulos")
+        if pag.locator("#preg-panel .cat-analisis").count() < 1:
+            errores.append("Observatorio: la categoría no mostró el módulo de análisis técnico (.cat-analisis)")
         if pag.locator("#preg-panel table.m-kpis").count() < 1:
             errores.append("Observatorio: no se pintaron los indicadores clave (semáforo por tendencia)")
         if pag.locator("#preg-panel .preg-card").count() < 1:

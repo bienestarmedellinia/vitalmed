@@ -801,10 +801,77 @@
     else if (corrCat.length) evidencia += `Se evaluaron ${corrCat.length} relación(es) entre territorios sin alcanzar significancia robusta`;
     evidencia += ". Método: tendencia por extremos de la serie, variación interanual y dispersión máx/mín entre territorios; asociación, no causalidad (no se controla estructura de edad ni confusores).";
 
+    /* ----- Secciones ejecutivas ampliadas (todas derivadas del KB / banco curado) ----- */
+    // (d) Descripción del indicador: de la metadata del catálogo + interpretación curada del banco.
+    const dims = [...new Set(claves.map((cl) => metaDe(cl).dimension).filter(Boolean))];
+    const unidades = [...new Set(claves.map((cl) => metaDe(cl).unidad).filter(Boolean))];
+    const interpPorClave = {};
+    (cat.preguntas || []).forEach((p) => { if (p.clave && p.interpretacion && !interpPorClave[p.clave]) interpPorClave[p.clave] = p.interpretacion; });
+    const nombresInd = claves.map((cl) => metaDe(cl).nombre || cl);
+    let descripcion = `Esta categoría agrupa <b>${claves.length || (cat.preguntas || []).length}</b> indicador(es)`;
+    if (nombresInd.length) descripcion += ` (${esc(nombresInd.slice(0, 4).join(", "))}${nombresInd.length > 4 ? ", …" : ""})`;
+    if (dims.length) descripcion += ` de la dimensión <b>${esc(dims.join(", "))}</b>`;
+    descripcion += ".";
+    const primeraInterp = claves.map((cl) => interpPorClave[cl]).find(Boolean);
+    if (primeraInterp) descripcion += ` ${esc(primeraInterp)}`;
+    if (unidades.length) descripcion += ` Unidad de medida: ${esc(unidades.join("; "))}.`;
+
+    // (e) Situaciones de atención: hallazgos estratégicos condicionados por el KB (sin inventar).
+    const situaciones = [];
+    filas.forEach((f) => {
+      if (f.bueno === "mal") {
+        const sentido = f.an.tendencia === "sube" ? "aumento" : "reducción";
+        situaciones.push(`Tendencia desfavorable en <b>${esc(f.nombre)}</b>: ${sentido} sostenido en la serie (último dato ${fmt(f.an.actual, 1)}${f.unidad && f.unidad.indexOf("%") >= 0 ? "%" : ""}, ${f.an.anio}).`);
+      }
+    });
+    claves.forEach((cl) => {
+      const disp = dispersionTerritorial(cl);
+      if (disp && disp.brecha && disp.brecha >= 2) {
+        const esPct = (metaDe(cl).unidad || "").indexOf("%") >= 0;
+        situaciones.push(`Amplia brecha territorial en <b>${esc(metaDe(cl).nombre || cl)}</b>: ${fmt(disp.brecha, 1)}× entre ${esc(disp.nombreMax)} (${fmt(disp.max, 1)}${esPct ? "%" : ""}) y ${esc(disp.nombreMin)} (${fmt(disp.min, 1)}${esPct ? "%" : ""}), lo que sugiere desigualdad de acceso u oportunidades.`);
+      }
+    });
+    if (corrSig.length) situaciones.push(`Se identifican <b>${corrSig.length}</b> asociación(es) estadísticamente significativa(s) entre territorios que merecen seguimiento.`);
+    const modSituaciones = situaciones.length ? `<h4 class="sub">Situaciones de atención</h4><ul>${situaciones.slice(0, 5).map((s) => `<li>${s}</li>`).join("")}</ul>` : "";
+
+    // (f) Implicaciones para la gestión pública: acciones curadas del banco (Opción 1), deduplicadas.
+    const accionesBanco = [...new Set((cat.preguntas || []).flatMap((p) => p.acciones || []).map((a) => String(a).trim()).filter(Boolean))];
+    const modImplic = accionesBanco.length ? `<h4 class="sub">Implicaciones para la gestión pública</h4>
+        <ul>${accionesBanco.slice(0, 6).map((a) => `<li>${esc(a)}</li>`).join("")}</ul>
+        <p class="nota">Líneas de acción sugeridas por el patrón observado; no constituyen prescripción.</p>` : "";
+
+    // (g) Conclusión ejecutiva: síntesis derivada (tendencia + cobertura + brecha + estado de correlaciones).
+    const empeoranN = filas.filter((f) => f.bueno === "mal").length;
+    const mejoranN = filas.filter((f) => f.bueno === "bien").length;
+    let brechaMaxCl = null, brechaMaxDisp = null;
+    claves.forEach((cl) => {
+      const d = dispersionTerritorial(cl);
+      if (d && d.brecha && (!brechaMaxDisp || d.brecha > brechaMaxDisp.brecha)) { brechaMaxDisp = d; brechaMaxCl = cl; }
+    });
+    let conclusion = `En <b>${esc(cat.nombre)}</b>, `;
+    if (empeoranN && !mejoranN) conclusion += `los indicadores muestran una evolución predominantemente desfavorable`;
+    else if (mejoranN && !empeoranN) conclusion += `los indicadores evolucionan de forma predominantemente favorable`;
+    else if (empeoranN && mejoranN) conclusion += `el panorama es mixto (${mejoranN} mejora(n), ${empeoranN} requiere(n) atención)`;
+    else conclusion += `los indicadores se mantienen relativamente estables`;
+    if (aMin && aMax) conclusion += ` en el período ${aMin}–${aMax}`;
+    conclusion += `. `;
+    if (brechaMaxDisp && brechaMaxDisp.brecha >= 1.5) conclusion += `La mayor desigualdad territorial se observa en <b>${esc(metaDe(brechaMaxCl).nombre || brechaMaxCl)}</b> (brecha ${fmt(brechaMaxDisp.brecha, 1)}×, de ${esc(brechaMaxDisp.nombreMin)} a ${esc(brechaMaxDisp.nombreMax)}). `;
+    conclusion += corrSig.length
+      ? `Existen asociaciones significativas que orientan la focalización. `
+      : `No se identifican relaciones estadísticamente robustas, por lo que los patrones deben leerse como descriptivos. `;
+    conclusion += `Se recomienda focalizar esfuerzos en los territorios rezagados para reducir las brechas observadas.`;
+
     const modAnalisis = (lineasAnalisis.length || fuentes.length) ? `
       <div class="cat-mod cat-analisis"><h4>Análisis técnico</h4>
-        ${lineasAnalisis.length ? `<ul>${lineasAnalisis.join("")}</ul>` : ""}
-        <p class="nota">${evidencia}</p></div>` : "";
+        <h4 class="sub">Descripción del indicador</h4>
+        <p>${descripcion}</p>
+        ${lineasAnalisis.length ? `<h4 class="sub">Comportamiento y dispersión territorial</h4><ul>${lineasAnalisis.join("")}</ul>` : ""}
+        <p class="nota">${evidencia}</p>
+        ${modSituaciones}
+        ${modImplic}
+        <h4 class="sub">Conclusión ejecutiva</h4>
+        <p>${conclusion}</p>
+      </div>` : "";
 
     return `<div class="cat-panel">
       <div class="cat-mod"><h4>Resumen ejecutivo</h4><p>${resumen}</p></div>
@@ -1060,11 +1127,24 @@
   iniciarFlujo();
 
   /* ---------- Arranque ---------- */
+  // Inyecta el mapa real de los 21 territorios (SVG propio generado en Actions por
+  // scripts/13_mapa_hero.py). connect-src 'self' permite el fetch; si falla, queda el fallback.
+  function cargarMapaHero() {
+    const cont = $("hero-mapa"); if (!cont) return;
+    const src = cont.getAttribute("data-src") || "mapa_comunas.svg";
+    fetch(src, { cache: "force-cache" })
+      .then((r) => (r.ok ? r.text() : Promise.reject(new Error("HTTP " + r.status))))
+      .then((svg) => {
+        if (svg.indexOf("<svg") >= 0 && svg.indexOf("</svg>") >= 0) cont.innerHTML = svg;
+      })
+      .catch((err) => { console.warn("mapa_comunas.svg no disponible, se usa el fallback:", err.message); });
+  }
   function pintarPortal(KB) {
     const ind = KB.indicadores || {};
     KBG = KB; pintarPaso();
     construirTerritorios(ind);   // llena T (nm/ns/ts) → necesario para el índice en el modal
     pintarHero(KB);
+    cargarMapaHero();            // mapa real del hero (contorno por comuna)
     if (T.length) sel = T[0].nombre;
     iniciarPreguntas();          // observatorio: categorías + preguntas + modal (reusa datos del KB)
   }
