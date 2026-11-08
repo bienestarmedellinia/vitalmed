@@ -760,28 +760,12 @@
       <p class="nota">Semáforo por <b>tendencia</b> (🟢 evoluciona a favor · 🔴 en contra · 🟡 estable), no contra una meta (el proyecto no tiene metas oficiales).</p>` : "";
 
     /* ----- Módulo: ANÁLISIS TÉCNICO (síntesis cuantitativa por categoría, 100 % derivada del KB) ----- */
-    // (a) Magnitud + dispersión territorial por indicador (brecha máx/mín entre los 21 territorios).
-    const lineasAnalisis = claves.map((cl) => {
-      const meta = metaDe(cl);
-      const nombre = meta.nombre || cl;
-      const esPct = (meta.unidad || "").indexOf("%") >= 0;
-      const an = analizarSerie((dat[cl] || {}).ciudad);
-      const disp = dispersionTerritorial(cl);
-      let txt = `<b>${esc(nombre)}</b>: `;
-      if (an) {
-        txt += `último dato de ciudad ${fmt(an.actual, 1)}${esPct ? "%" : ""} (${an.anio})`;
-        if (an.varPct != null) txt += `, variación interanual ${an.varPct >= 0 ? "+" : ""}${fmt(an.varPct, 1)}%`;
-        if (an.nAnios > 1) txt += `; serie ${an.nAnios} años con tendencia a ${an.tendencia === "sube" ? "aumentar" : an.tendencia === "baja" ? "disminuir" : "mantenerse estable"}`;
-        txt += ". ";
-      }
-      if (disp) {
-        txt += `Entre territorios (${disp.anio}): de ${fmt(disp.min, 1)}${esPct ? "%" : ""} en ${esc(disp.nombreMin)} a ${fmt(disp.max, 1)}${esPct ? "%" : ""} en ${esc(disp.nombreMax)}`;
-        if (disp.brecha && disp.brecha >= 1.05) txt += ` (brecha de ${fmt(disp.brecha, 1)}×)`;
-        txt += ".";
-      }
-      return (an || disp) ? `<li>${txt}</li>` : null;
-    }).filter(Boolean);
-    // (b) Relaciones: cuántas correlaciones significativas tocan la categoría (contexto estadístico).
+    // Helpers de redacción (texto natural, todo derivado del KB; sin inventar cifras).
+    const unidadSuf = (cl) => ((metaDe(cl).unidad || "").indexOf("%") >= 0 ? "%" : "");
+    const tendVerbo = (t) => (t === "sube" ? "ascendente" : t === "baja" ? "descendente" : "estable");
+    const tendGerundio = (t) => (t === "sube" ? "aumentar" : t === "baja" ? "disminuir" : "mantenerse estable");
+
+    // (b) Relaciones: correlaciones que tocan la categoría (contexto estadístico).
     const corrCat = (Array.isArray(corr) ? corr : []).filter((c) =>
       c && (setCat.has(c.resultado) || setCat.has(c.factor)));
     const corrSig = corrCat.filter((c) => c.significativa);
@@ -791,56 +775,110 @@
     const aMin = anios.length ? Math.min(...anios.map((a) => a[0])) : null;
     const aMax = anios.length ? Math.max(...anios.map((a) => a[a.length - 1])) : null;
     const nivel = cat.grupo === "Ambientales" ? "estación de monitoreo (no comuna)"
-      : (claves.length ? "21 territorios (16 comunas + 5 corregimientos)" : "ciudad");
-    let evidencia = `Se analizan <b>${claves.length || (cat.preguntas || []).length}</b> indicador(es)`;
-    if (aMin && aMax) evidencia += `, cobertura ${aMin}–${aMax}`;
-    evidencia += `, a nivel de ${nivel}`;
-    if (fuentes.length) evidencia += `. Fuentes: ${esc(fuentes.join("; "))}`;
-    evidencia += ". ";
-    if (corrSig.length) evidencia += `Se detectaron <b>${corrSig.length}</b> asociación(es) estadísticamente significativa(s) entre territorios (Pearson+Spearman, 95%)`;
-    else if (corrCat.length) evidencia += `Se evaluaron ${corrCat.length} relación(es) entre territorios sin alcanzar significancia robusta`;
-    evidencia += ". Método: tendencia por extremos de la serie, variación interanual y dispersión máx/mín entre territorios; asociación, no causalidad (no se controla estructura de edad ni confusores).";
+      : (claves.length ? "21 territorios (16 comunas y 5 corregimientos)" : "ciudad");
 
-    /* ----- Secciones ejecutivas ampliadas (todas derivadas del KB / banco curado) ----- */
-    // (d) Descripción del indicador: de la metadata del catálogo + interpretación curada del banco.
+    /* ===== ANÁLISIS TÉCNICO AMPLIADO (estructura narrativa, 100 % derivada del KB) ===== */
+    // (d) Descripción del indicador.
     const dims = [...new Set(claves.map((cl) => metaDe(cl).dimension).filter(Boolean))];
     const unidades = [...new Set(claves.map((cl) => metaDe(cl).unidad).filter(Boolean))];
     const interpPorClave = {};
     (cat.preguntas || []).forEach((p) => { if (p.clave && p.interpretacion && !interpPorClave[p.clave]) interpPorClave[p.clave] = p.interpretacion; });
     const nombresInd = claves.map((cl) => metaDe(cl).nombre || cl);
-    let descripcion = `Esta categoría agrupa <b>${claves.length || (cat.preguntas || []).length}</b> indicador(es)`;
-    if (nombresInd.length) descripcion += ` (${esc(nombresInd.slice(0, 4).join(", "))}${nombresInd.length > 4 ? ", …" : ""})`;
+    let descripcion = `La categoría <b>${esc(cat.nombre)}</b> agrupa <b>${claves.length || (cat.preguntas || []).length}</b> indicador(es)`;
+    if (nombresInd.length) descripcion += ` (${esc(nombresInd.slice(0, 4).join(", "))}${nombresInd.length > 4 ? ", entre otros" : ""})`;
     if (dims.length) descripcion += ` de la dimensión <b>${esc(dims.join(", "))}</b>`;
-    descripcion += ".";
+    descripcion += ". ";
     const primeraInterp = claves.map((cl) => interpPorClave[cl]).find(Boolean);
-    if (primeraInterp) descripcion += ` ${esc(primeraInterp)}`;
-    if (unidades.length) descripcion += ` Unidad de medida: ${esc(unidades.join("; "))}.`;
+    if (primeraInterp) descripcion += esc(primeraInterp) + " ";
+    if (unidades.length) descripcion += `Unidad de medida: ${esc(unidades.join("; "))}.`;
 
-    // (e) Situaciones de atención: hallazgos estratégicos condicionados por el KB (sin inventar).
+    // (e) Comportamiento histórico: un párrafo por indicador con serie de ciudad.
+    const parrafosHist = claves.map((cl) => {
+      const an = analizarSerie((dat[cl] || {}).ciudad); if (!an) return null;
+      const nombre = metaDe(cl).nombre || cl, suf = unidadSuf(cl);
+      let t = `<b>${esc(nombre)}</b>: el último dato disponible para la ciudad es <b>${fmt(an.actual, 1)}${suf}</b> (${an.anio})`;
+      if (an.varPct != null) {
+        const dir = an.varPct >= 0 ? "un aumento" : "una disminución";
+        t += `, lo que representa ${dir} interanual de ${fmt(Math.abs(an.varPct), 1)}% frente al año anterior`;
+      }
+      t += ". ";
+      if (an.nAnios > 2) {
+        t += `A lo largo de la serie (${an.nAnios} años) el indicador describe una trayectoria <b>${tendVerbo(an.tendencia)}</b>`;
+        t += an.tendencia === "estable"
+          ? ", sin cambios estructurales marcados entre los extremos del período. "
+          : `, es decir, no se trata de una fluctuación aislada sino de una tendencia a ${tendGerundio(an.tendencia)} sostenida en el tiempo. `;
+      }
+      return `<p>${t}</p>`;
+    }).filter(Boolean);
+    const histContexto = `<p class="nota">Las variaciones observadas pueden estar asociadas a factores no medidos en esta serie (cambios en la oferta institucional, condiciones económicas de los hogares, dinámicas demográficas o efectos posteriores a la pandemia 2020-2021); se presentan como hipótesis de contexto, no como relaciones comprobadas.</p>`;
+
+    // (f) Análisis territorial: dispersión máx/mín con nombres + brecha, por indicador.
+    const parrafosTerr = claves.map((cl) => {
+      const disp = dispersionTerritorial(cl); if (!disp) return null;
+      const nombre = metaDe(cl).nombre || cl, suf = unidadSuf(cl);
+      let t = `<b>${esc(nombre)}</b> (${disp.anio}): el mayor valor corresponde a <b>${esc(disp.nombreMax)}</b> con ${fmt(disp.max, 1)}${suf}, y el menor a <b>${esc(disp.nombreMin)}</b> con ${fmt(disp.min, 1)}${suf}`;
+      if (disp.brecha && disp.brecha >= 1.05) {
+        t += `. La diferencia entre ambos extremos equivale a una <b>brecha de ${fmt(disp.brecha, 1)} veces</b>`;
+        if (disp.brecha >= 2) t += ", lo que refleja desigualdades territoriales relevantes en el acceso a oportunidades o condiciones";
+      }
+      t += ".";
+      return `<p>${t}</p>`;
+    }).filter(Boolean);
+    const terrContexto = parrafosTerr.length
+      ? `<p class="nota">La distribución territorial presenta heterogeneidad entre comunas y corregimientos; el nivel de dispersión sugiere que condiciones socioeconómicas, disponibilidad de equipamientos y movilidad urbana podrían incidir en el comportamiento del indicador (asociación descriptiva).</p>`
+      : (cat.grupo === "Ambientales"
+        ? `<p class="nota">Esta categoría se mide por estación de monitoreo (no por comuna), por lo que no se calcula dispersión territorial entre los 21 territorios.</p>` : "");
+
+    // (g) Evaluación de relaciones territoriales.
+    let relaciones;
+    if (corrSig.length) {
+      const ej = corrSig.slice(0, 3).map((c) => {
+        const na = metaDe(c.resultado).nombre || c.resultado, nb = metaDe(c.factor).nombre || c.factor;
+        return `${esc(na)} ↔ ${esc(nb)} (r=${fmt(c.pearson, 2)}, ${(c.pearson || 0) >= 0 ? "directa" : "inversa"})`;
+      }).join("; ");
+      relaciones = `Se evaluaron relaciones entre los indicadores de la categoría y otras variables territoriales; <b>${corrSig.length}</b> alcanzaron significancia estadística (Pearson y Spearman al 95%): ${ej}. Estas asociaciones describen patrones conjuntos entre territorios, no relaciones de causa-efecto.`;
+    } else if (corrCat.length) {
+      relaciones = `Se analizaron ${corrCat.length} relación(es) entre el/los indicador(es) de la categoría y otras variables territoriales de los 21 territorios. Ninguna alcanzó niveles de significancia estadística que permitan establecer patrones consistentes, por lo que deben interpretarse únicamente como asociaciones descriptivas y no como evidencia de causalidad.`;
+    } else {
+      relaciones = `El esquema de correlaciones del proyecto se calcula sobre los indicadores de resultado en salud; para esta categoría no se dispone de relaciones territoriales calculadas en el conocimiento base, por lo que el análisis es descriptivo.`;
+    }
+
+    // (h) Consideraciones metodológicas.
+    const metodologia = `<ul>
+        <li>Cobertura temporal: ${aMin && aMax ? `${aMin}–${aMax}` : "según disponibilidad del indicador"}.</li>
+        <li>Cobertura espacial: ${nivel}.</li>
+        <li>Fuentes: ${fuentes.length ? esc(fuentes.join("; ")) : "pipeline del proyecto"}.</li>
+        <li>Evaluación de tendencias mediante comparación entre extremos de la serie.</li>
+        <li>Cálculo de variaciones interanuales.</li>
+        <li>Medición de dispersión territorial a partir de valores máximos y mínimos.</li>
+        <li>Exploración de asociaciones entre indicadores territoriales (Pearson y Spearman).</li>
+      </ul>
+      <p class="nota">El análisis no incorpora controles por variables demográficas o socioeconómicas (edad, nivel educativo, ingresos del hogar, composición poblacional o infraestructura disponible). En consecuencia, los hallazgos constituyen un análisis descriptivo exploratorio orientado a identificar patrones y desigualdades territoriales; asociación, no causalidad.</p>`;
+
+    // (i) Situaciones de atención.
     const situaciones = [];
     filas.forEach((f) => {
       if (f.bueno === "mal") {
         const sentido = f.an.tendencia === "sube" ? "aumento" : "reducción";
-        situaciones.push(`Tendencia desfavorable en <b>${esc(f.nombre)}</b>: ${sentido} sostenido en la serie (último dato ${fmt(f.an.actual, 1)}${f.unidad && f.unidad.indexOf("%") >= 0 ? "%" : ""}, ${f.an.anio}).`);
+        situaciones.push(`${sentido === "aumento" ? "Aumento" : "Reducción"} sostenido en <b>${esc(f.nombre)}</b> (último dato ${fmt(f.an.actual, 1)}${f.unidad && f.unidad.indexOf("%") >= 0 ? "%" : ""}, ${f.an.anio}), que podría indicar un debilitamiento de las condiciones asociadas al indicador.`);
       }
     });
     claves.forEach((cl) => {
       const disp = dispersionTerritorial(cl);
       if (disp && disp.brecha && disp.brecha >= 2) {
-        const esPct = (metaDe(cl).unidad || "").indexOf("%") >= 0;
-        situaciones.push(`Amplia brecha territorial en <b>${esc(metaDe(cl).nombre || cl)}</b>: ${fmt(disp.brecha, 1)}× entre ${esc(disp.nombreMax)} (${fmt(disp.max, 1)}${esPct ? "%" : ""}) y ${esc(disp.nombreMin)} (${fmt(disp.min, 1)}${esPct ? "%" : ""}), lo que sugiere desigualdad de acceso u oportunidades.`);
+        situaciones.push(`Amplias brechas territoriales en <b>${esc(metaDe(cl).nombre || cl)}</b>, donde algunos territorios presentan niveles hasta ${fmt(disp.brecha, 1)} veces superiores a otros (${esc(disp.nombreMax)} frente a ${esc(disp.nombreMin)}), con posible concentración en territorios de mayores condiciones.`);
       }
     });
-    if (corrSig.length) situaciones.push(`Se identifican <b>${corrSig.length}</b> asociación(es) estadísticamente significativa(s) entre territorios que merecen seguimiento.`);
+    if (corrSig.length) situaciones.push(`Presencia de <b>${corrSig.length}</b> asociación(es) estadísticamente significativa(s) entre territorios que merecen seguimiento.`);
     const modSituaciones = situaciones.length ? `<h4 class="sub">Situaciones de atención</h4><ul>${situaciones.slice(0, 5).map((s) => `<li>${s}</li>`).join("")}</ul>` : "";
 
-    // (f) Implicaciones para la gestión pública: acciones curadas del banco (Opción 1), deduplicadas.
+    // (j) Implicaciones para la gestión pública: acciones curadas del banco, deduplicadas.
     const accionesBanco = [...new Set((cat.preguntas || []).flatMap((p) => p.acciones || []).map((a) => String(a).trim()).filter(Boolean))];
     const modImplic = accionesBanco.length ? `<h4 class="sub">Implicaciones para la gestión pública</h4>
         <ul>${accionesBanco.slice(0, 6).map((a) => `<li>${esc(a)}</li>`).join("")}</ul>
         <p class="nota">Líneas de acción sugeridas por el patrón observado; no constituyen prescripción.</p>` : "";
 
-    // (g) Conclusión ejecutiva: síntesis derivada (tendencia + cobertura + brecha + estado de correlaciones).
+    // (k) Conclusión ejecutiva.
     const empeoranN = filas.filter((f) => f.bueno === "mal").length;
     const mejoranN = filas.filter((f) => f.bueno === "bien").length;
     let brechaMaxCl = null, brechaMaxDisp = null;
@@ -861,12 +899,16 @@
       : `No se identifican relaciones estadísticamente robustas, por lo que los patrones deben leerse como descriptivos. `;
     conclusion += `Se recomienda focalizar esfuerzos en los territorios rezagados para reducir las brechas observadas.`;
 
-    const modAnalisis = (lineasAnalisis.length || fuentes.length) ? `
-      <div class="cat-mod cat-analisis"><h4>Análisis técnico</h4>
+    const modAnalisis = (parrafosHist.length || parrafosTerr.length || fuentes.length) ? `
+      <div class="cat-mod cat-analisis"><h4>Análisis técnico ampliado</h4>
         <h4 class="sub">Descripción del indicador</h4>
         <p>${descripcion}</p>
-        ${lineasAnalisis.length ? `<h4 class="sub">Comportamiento y dispersión territorial</h4><ul>${lineasAnalisis.join("")}</ul>` : ""}
-        <p class="nota">${evidencia}</p>
+        ${parrafosHist.length ? `<h4 class="sub">Comportamiento histórico</h4>${parrafosHist.join("")}${histContexto}` : ""}
+        ${parrafosTerr.length || terrContexto ? `<h4 class="sub">Análisis territorial</h4>${parrafosTerr.join("")}${terrContexto}` : ""}
+        <h4 class="sub">Evaluación de relaciones territoriales</h4>
+        <p>${relaciones}</p>
+        <h4 class="sub">Consideraciones metodológicas</h4>
+        ${metodologia}
         ${modSituaciones}
         ${modImplic}
         <h4 class="sub">Conclusión ejecutiva</h4>
