@@ -1,0 +1,9 @@
+{
+  "_meta": {
+    "proposito": "Descripciones conceptuales curadas por indicador para la sección 'Descripción del indicador' del análisis técnico. Texto editorial revisado por el equipo (no derivado del KB). Si una clave no está aquí, el portal usa la descripción genérica (catálogo + interpretación del banco).",
+    "clave": "usar la 'clave' del catálogo del knowledge_base.json"
+  },
+  "descripciones": {
+    "ecv_personas_asiste_participa_programas_culturales": "El indicador \"Porcentaje de personas que asisten o participan en programas culturales\" mide el nivel de vinculación de la población a actividades, eventos y procesos de carácter cultural dentro del territorio. Este indicador constituye una aproximación al acceso efectivo a la oferta cultural, al aprovechamiento de equipamientos culturales y al grado de integración de la ciudadanía en dinámicas de formación, recreación e identidad comunitaria."
+  }
+}

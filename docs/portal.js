@@ -784,13 +784,23 @@
     const interpPorClave = {};
     (cat.preguntas || []).forEach((p) => { if (p.clave && p.interpretacion && !interpPorClave[p.clave]) interpPorClave[p.clave] = p.interpretacion; });
     const nombresInd = claves.map((cl) => metaDe(cl).nombre || cl);
-    let descripcion = `La categoría <b>${esc(cat.nombre)}</b> agrupa <b>${claves.length || (cat.preguntas || []).length}</b> indicador(es)`;
-    if (nombresInd.length) descripcion += ` (${esc(nombresInd.slice(0, 4).join(", "))}${nombresInd.length > 4 ? ", entre otros" : ""})`;
-    if (dims.length) descripcion += ` de la dimensión <b>${esc(dims.join(", "))}</b>`;
-    descripcion += ". ";
-    const primeraInterp = claves.map((cl) => interpPorClave[cl]).find(Boolean);
-    if (primeraInterp) descripcion += esc(primeraInterp) + " ";
-    if (unidades.length) descripcion += `Unidad de medida: ${esc(unidades.join("; "))}.`;
+    // Descripciones curadas por indicador (docs/descripciones.json); si existen, se priorizan.
+    const curadas = claves.map((cl) => (DESCG || {})[cl]).filter(Boolean);
+    let descripcion;
+    if (curadas.length) {
+      descripcion = curadas.join(" ");
+      // si quedan indicadores sin descripción curada, se completa con el genérico
+      const sinCurar = claves.filter((cl) => !(DESCG || {})[cl]).map((cl) => metaDe(cl).nombre || cl);
+      if (sinCurar.length) descripcion += ` La categoría incluye además: ${esc(sinCurar.join(", "))}.`;
+    } else {
+      descripcion = `La categoría <b>${esc(cat.nombre)}</b> agrupa <b>${claves.length || (cat.preguntas || []).length}</b> indicador(es)`;
+      if (nombresInd.length) descripcion += ` (${esc(nombresInd.slice(0, 4).join(", "))}${nombresInd.length > 4 ? ", entre otros" : ""})`;
+      if (dims.length) descripcion += ` de la dimensión <b>${esc(dims.join(", "))}</b>`;
+      descripcion += ". ";
+      const primeraInterp = claves.map((cl) => interpPorClave[cl]).find(Boolean);
+      if (primeraInterp) descripcion += esc(primeraInterp) + " ";
+      if (unidades.length) descripcion += `Unidad de medida: ${esc(unidades.join("; "))}.`;
+    }
 
     // (e) Comportamiento histórico: un párrafo por indicador con serie de ciudad.
     const parrafosHist = claves.map((cl) => {
@@ -1093,6 +1103,7 @@
 
   /* ---------- 7. Flujo interactivo del método ---------- */
   let KBG = null, pasoActual = 0, temporizador = null;
+  let DESCG = {};  // descripciones curadas por clave (docs/descripciones.json); {} si no carga
   const PASOS = [
     { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py",
       desc: "Baja los datos únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia.",
@@ -1291,6 +1302,12 @@
     iniciarMapa();               // sección Mapa: coropleta por indicador + red de correlaciones
   }
   window.Asistente.cargarKB()
+    .then((KB) => {
+      return fetch("descripciones.json", { cache: "no-store" })
+        .then((r) => (r.ok ? r.json() : null))
+        .catch(() => null)
+        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; return KB; });
+    })
     .then((KB) => {
       pintarPortal(KB);
       const g = (KB.meta || {}).generado_utc;
