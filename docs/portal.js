@@ -871,9 +871,10 @@
         const na = metaDe(c.resultado).nombre || c.resultado, nb = metaDe(c.factor).nombre || c.factor;
         return `${esc(na)} ↔ ${esc(nb)} (r=${fmt(c.pearson, 2)}, ${(c.pearson || 0) >= 0 ? "directa" : "inversa"})`;
       }).join("; ");
-      relaciones = `Se evaluaron relaciones entre los indicadores de la categoría y otras variables territoriales; <b>${corrSig.length}</b> alcanzaron significancia estadística (Pearson y Spearman al 95%): ${ej}. Estas asociaciones describen patrones conjuntos entre territorios, no relaciones de causa-efecto.`;
+      relaciones = `Se evaluaron relaciones entre el indicador de la categoría y otras variables territoriales disponibles para los 21 territorios de Medellín (16 comunas y 5 corregimientos). De ellas, <b>${corrSig.length}</b> alcanzaron significancia estadística (Pearson y Spearman al 95%): ${ej}. Estas asociaciones describen patrones conjuntos entre territorios y deben interpretarse como evidencia descriptiva, no como relaciones de causa-efecto.`;
     } else if (corrCat.length) {
-      relaciones = `Se analizaron ${corrCat.length} relación(es) entre el/los indicador(es) de la categoría y otras variables territoriales de los 21 territorios. Ninguna alcanzó niveles de significancia estadística que permitan establecer patrones consistentes, por lo que deben interpretarse únicamente como asociaciones descriptivas y no como evidencia de causalidad.`;
+      const cuantas = corrCat.length === 1 ? "una relación" : `${corrCat.length} relaciones`;
+      relaciones = `Se analizaron ${cuantas} entre el indicador de la categoría y otras variables territoriales disponibles para los 21 territorios de Medellín (16 comunas y 5 corregimientos). Sin embargo, las asociaciones identificadas no alcanzaron niveles de significancia estadística que permitan establecer patrones consistentes o relaciones robustas. Por tanto, los resultados observados deben interpretarse únicamente como asociaciones descriptivas y no como evidencia de causalidad.`;
     } else {
       relaciones = `El esquema de correlaciones del proyecto se calcula sobre los indicadores de resultado en salud; para esta categoría no se dispone de relaciones territoriales calculadas en el conocimiento base, por lo que el análisis es descriptivo.`;
     }
