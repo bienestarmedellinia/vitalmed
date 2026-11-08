@@ -886,6 +886,7 @@
     // (h) Consideraciones metodológicas.
     const fuentesLeg = fuentes.map((f) => (FLEG || {})[f] || f);
     const fuentesProsa = fuentesLeg.length ? esc(fuentesLeg.join(" y ")) : "las fuentes del pipeline del proyecto";
+    const infraMatiz = claves.map((cl) => (INFRAG || {})[cl]).find(Boolean) || "";
     const metodologia = `<p>El análisis se desarrolló utilizando información proveniente de ${fuentesProsa}, considerando los siguientes componentes:</p>
       <ul>
         <li>Cobertura temporal: ${aMin && aMax ? `${aMin}–${aMax}` : "según disponibilidad del indicador"}.</li>
@@ -895,7 +896,7 @@
         <li>Medición de dispersión territorial a partir de valores máximos y mínimos.</li>
         <li>Exploración de asociaciones entre indicadores territoriales (Pearson y Spearman).</li>
       </ul>
-      <p class="nota">Es importante señalar que el análisis no incorpora controles estadísticos asociados a variables demográficas o socioeconómicas tales como edad, nivel educativo, ingresos del hogar, composición poblacional o disponibilidad de infraestructura. En consecuencia, los hallazgos deben entenderse como un análisis descriptivo exploratorio orientado a identificar patrones y desigualdades territoriales; asociación, no causalidad.</p>`;
+      <p class="nota">Es importante señalar que el análisis no incorpora controles estadísticos asociados a variables demográficas o socioeconómicas tales como edad, nivel educativo, ingresos del hogar, composición poblacional o disponibilidad de infraestructura${infraMatiz ? " " + esc(infraMatiz) : ""}. En consecuencia, los hallazgos deben entenderse como un análisis descriptivo exploratorio orientado a identificar patrones y desigualdades territoriales.</p>`;
 
     // (i) Situaciones de atención.
     const situaciones = [];
@@ -1142,6 +1143,7 @@
   let GVALG = {};  // glosa curada del valor (magnitud | unidad glosada) por clave
   let GBRG = {};   // coletilla curada de la brecha por clave
   let FLEG = {};   // nombres legibles de fuentes (identificador KB → nombre institucional)
+  let INFRAG = {}; // matiz de infraestructura por clave (nota de controles ausentes)
   const PASOS = [
     { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py",
       desc: "Baja los datos únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia.",
@@ -1344,7 +1346,7 @@
       return fetch("descripciones.json", { cache: "no-store" })
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null)
-        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; GVALG = (desc && desc.glosa_valor) || {}; GBRG = (desc && desc.glosa_brecha) || {}; FLEG = (desc && desc.fuentes_legibles) || {}; return KB; });
+        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; GVALG = (desc && desc.glosa_valor) || {}; GBRG = (desc && desc.glosa_brecha) || {}; FLEG = (desc && desc.fuentes_legibles) || {}; INFRAG = (desc && desc.infraestructura) || {}; return KB; });
     })
     .then((KB) => {
       pintarPortal(KB);
