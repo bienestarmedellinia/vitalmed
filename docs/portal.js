@@ -804,19 +804,25 @@
 
     // (e) Comportamiento histórico: un párrafo por indicador con serie de ciudad.
     const parrafosHist = claves.map((cl) => {
-      const an = analizarSerie((dat[cl] || {}).ciudad); if (!an) return null;
+      const serieCiudad = (dat[cl] || {}).ciudad || {};
+      const an = analizarSerie(serieCiudad); if (!an) return null;
+      const aniosSerie = Object.keys(serieCiudad).map(Number).filter((n) => !isNaN(n)).sort((a, b) => a - b);
+      const a0 = aniosSerie.length ? aniosSerie[0] : null, a1 = aniosSerie.length ? aniosSerie[aniosSerie.length - 1] : an.anio;
       const nombre = metaDe(cl).nombre || cl, suf = unidadSuf(cl);
-      let t = `<b>${esc(nombre)}</b>: el último dato disponible para la ciudad es <b>${fmt(an.actual, 1)}${suf}</b> (${an.anio})`;
+      let t = `<b>${esc(nombre)}</b>. `;
+      if (an.nAnios > 2 && a0 != null) {
+        t += `Durante el período ${a0}–${a1}, el indicador evidencia una tendencia estructural `;
+        t += an.tendencia === "estable" ? "de estabilidad" : (an.tendencia === "sube" ? "de aumento" : "de disminución");
+        t += " en la ciudad. ";
+      }
+      t += `El último dato disponible para la ciudad corresponde a <b>${fmt(an.actual, 1)}${suf}</b> en ${an.anio}`;
       if (an.varPct != null) {
         const dir = an.varPct >= 0 ? "un aumento" : "una disminución";
-        t += `, lo que representa ${dir} interanual de ${fmt(Math.abs(an.varPct), 1)}% frente al año anterior`;
+        t += `, registrando ${dir} interanual de ${fmt(Math.abs(an.varPct), 1)}% frente al año inmediatamente anterior`;
       }
       t += ". ";
-      if (an.nAnios > 2) {
-        t += `A lo largo de la serie (${an.nAnios} años) el indicador describe una trayectoria <b>${tendVerbo(an.tendencia)}</b>`;
-        t += an.tendencia === "estable"
-          ? ", sin cambios estructurales marcados entre los extremos del período. "
-          : `, es decir, no se trata de una fluctuación aislada sino de una tendencia a ${tendGerundio(an.tendencia)} sostenida en el tiempo. `;
+      if (an.nAnios > 2 && an.tendencia !== "estable") {
+        t += `El análisis de la serie histórica muestra que ${an.tendencia === "baja" ? "la reducción" : "el aumento"} no corresponde a una fluctuación aislada, sino a una trayectoria sostenida observada a lo largo de ${an.nAnios} años. `;
       }
       return `<p>${t}</p>`;
     }).filter(Boolean);
