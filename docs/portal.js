@@ -837,9 +837,15 @@
       const nombre = metaDe(cl).nombre || cl, suf = unidadSuf(cl);
       const ap = (TAPG || {})[cl];
       let t = `<p><b>${esc(nombre)}</b>. La distribución territorial del indicador presenta una alta heterogeneidad entre comunas y corregimientos${ap ? ", " + esc(ap) : ""}. Para ${disp.anio} se observa que:</p>`;
+      // Glosa curada del valor: "magnitud|unidad glosada" → enriquece ambas viñetas.
+      const gv = (GVALG || {})[cl] || "";
+      const [gMag, gUni] = gv.split("|");
+      const mag = gMag ? ` ${esc(gMag.trim())}` : "";
+      const uni = gUni ? ` ${esc(gUni.trim())}` : "";
+      const apenas = (disp.brecha && disp.brecha >= 3) ? "apenas " : "";
       const items = [
-        `<b>${esc(disp.nombreMax)}</b> registra el mayor nivel con ${fmt(disp.max, 1)}${suf}.`,
-        `<b>${esc(disp.nombreMin)}</b> presenta el menor nivel con ${fmt(disp.min, 1)}${suf}.`,
+        `<b>${esc(disp.nombreMax)}</b> registra el mayor nivel${mag} con ${fmt(disp.max, 1)}${suf}${uni}.`,
+        `<b>${esc(disp.nombreMin)}</b> presenta el menor nivel${mag} con ${apenas}${fmt(disp.min, 1)}${suf}${uni}.`,
       ];
       if (disp.brecha && disp.brecha >= 1.05) {
         let b = `La diferencia entre ambos territorios representa una <b>brecha relativa de ${fmt(disp.brecha, 1)} veces</b>`;
@@ -1124,6 +1130,7 @@
   let CTXG = {};   // hipótesis de contexto curadas por clave (comportamiento histórico)
   let DISPG = {};  // hipótesis de dispersión territorial curadas por clave
   let TAPG = {};   // coletilla curada de apertura del análisis territorial por clave
+  let GVALG = {};  // glosa curada del valor (magnitud | unidad glosada) por clave
   const PASOS = [
     { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py",
       desc: "Baja los datos únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia.",
@@ -1326,7 +1333,7 @@
       return fetch("descripciones.json", { cache: "no-store" })
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null)
-        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; return KB; });
+        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; GVALG = (desc && desc.glosa_valor) || {}; return KB; });
     })
     .then((KB) => {
       pintarPortal(KB);

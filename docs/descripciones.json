@@ -14,5 +14,9 @@
   },
   "territorio_apertura": {
     "ecv_personas_asiste_participa_programas_culturales": "evidenciando diferencias significativas en las oportunidades y condiciones de acceso a actividades culturales"
+  },
+  "glosa_valor": {
+    "_formato": "'magnitud|unidad glosada' → '...el mayor nivel <magnitud> con X% <unidad glosada>'",
+    "ecv_personas_asiste_participa_programas_culturales": "de participación cultural|de la población vinculada a programas culturales"
   }
 }
