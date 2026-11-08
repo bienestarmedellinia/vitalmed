@@ -79,6 +79,9 @@ jobs:
         # no responde, no se tumba el pipeline: queda el mapa ya versionado en docs/.
         run: python scripts/13_mapa_hero.py || echo "mapa: se conserva docs/mapa_comunas.svg versionado"
 
+      - name: 6g) Descargar foto del banner (Wikimedia, CC BY-SA, sin procesar)
+        run: python scripts/14_foto_hero.py || echo "foto: se conserva docs/hero_medellin.jpg versionado"
+
       - name: 7) Construir knowledge base del asistente (fase 2)
         run: python scripts/07_construir_kb.py
 
@@ -106,7 +109,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f outputs/tablas/ outputs/graficos/ outputs/kb/ docs/knowledge_base.json docs/datos/ docs/mapa_comunas.svg guia_entrega.pdf
+          git add -f outputs/tablas/ outputs/graficos/ outputs/kb/ docs/knowledge_base.json docs/datos/ docs/mapa_comunas.svg docs/hero_medellin.jpg guia_entrega.pdf
           if git diff --cached --quiet; then
             echo "Sin cambios en outputs."
           else

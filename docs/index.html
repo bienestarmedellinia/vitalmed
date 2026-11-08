@@ -27,6 +27,11 @@
 
     .hero { position:relative; overflow:hidden; color:#fff; padding:44px 0 150px;
             background:radial-gradient(circle at 85% 10%, #2b6cb0 0%, transparent 45%), linear-gradient(135deg,#1f4e79 0%,#0f2a44 100%); }
+    /* Foto panorámica de Medellín como fondo del banner (CC BY-SA 4.0, Wikimedia; atribución en Transparencia).
+       Va en una capa propia con overlay oscuro para mantener legible el texto blanco. */
+    .hero::before { content:""; position:absolute; inset:0; z-index:0;
+      background:linear-gradient(135deg, rgba(15,42,68,.78), rgba(15,42,68,.62)), url("hero_medellin.jpg");
+      background-size:cover; background-position:center 38%; }
     .hero > .wrap { position:relative; z-index:3; }
     .hero h1 { margin:0 0 6px; font-size:clamp(2rem,6vw,3.3rem); letter-spacing:-1px; }
     .hero h1 span { color:#ffb36b; }
@@ -471,9 +476,10 @@
             <li><b>Privacidad:</b> no escribas datos personales en la pregunta. En la capa gratuita, Google puede usar el texto enviado para mejorar sus productos. El Worker no guarda las preguntas.</li>
             <li><b>Opcional, apagado por defecto:</b> <code>asistente/llm.py</code> (versión de línea de comandos) puede usar un modelo de OpenAI solo para redactar mejor una respuesta ya calculada. No genera cifras y no se usa en este portal web.</li>
           </ul></div>
+        <div class="caja"><span class="etq">Créditos de imagen</span><h3>Fotografía del banner</h3>
+          <p class="nota">La panorámica de fondo del encabezado es <a href="https://commons.wikimedia.org/wiki/File:Panor%C3%A1mica_de_Medell%C3%ADn_desde_el_Cerro_El_Picacho.jpg" rel="noopener noreferrer">«Panorámica de Medellín desde el Cerro El Picacho»</a>, autor <b>Luis90f</b>, vía Wikimedia Commons, bajo licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener noreferrer">CC BY-SA 4.0</a>. Imagen sin modificaciones salvo reescalado para web.</p></div>
       </div>
     </section>
-  </main>
 
   <footer>
     <div class="wrap">
