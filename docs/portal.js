@@ -835,7 +835,8 @@
     const parrafosTerr = claves.map((cl) => {
       const disp = dispersionTerritorial(cl); if (!disp) return null;
       const nombre = metaDe(cl).nombre || cl, suf = unidadSuf(cl);
-      let t = `<b>${esc(nombre)}</b>. La distribución territorial presenta heterogeneidad entre comunas y corregimientos. Para ${disp.anio} se observa que <b>${esc(disp.nombreMax)}</b> registra el mayor nivel con ${fmt(disp.max, 1)}${suf}, mientras que <b>${esc(disp.nombreMin)}</b> presenta el menor con ${fmt(disp.min, 1)}${suf}`;
+      const ap = (TAPG || {})[cl];
+      let t = `<b>${esc(nombre)}</b>. La distribución territorial del indicador presenta una alta heterogeneidad entre comunas y corregimientos${ap ? ", " + esc(ap) : ""}. Para ${disp.anio} se observa que <b>${esc(disp.nombreMax)}</b> registra el mayor nivel con ${fmt(disp.max, 1)}${suf}, mientras que <b>${esc(disp.nombreMin)}</b> presenta el menor con ${fmt(disp.min, 1)}${suf}`;
       if (disp.brecha && disp.brecha >= 1.05) {
         t += `. La diferencia entre ambos extremos representa una <b>brecha relativa de ${fmt(disp.brecha, 1)} veces</b>`;
         if (disp.brecha >= 2) t += ", lo que refleja desigualdades territoriales relevantes en el acceso a oportunidades o condiciones";
@@ -1117,6 +1118,7 @@
   let DESCG = {};  // descripciones curadas por clave (docs/descripciones.json); {} si no carga
   let CTXG = {};   // hipótesis de contexto curadas por clave (comportamiento histórico)
   let DISPG = {};  // hipótesis de dispersión territorial curadas por clave
+  let TAPG = {};   // coletilla curada de apertura del análisis territorial por clave
   const PASOS = [
     { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py",
       desc: "Baja los datos únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia.",
@@ -1319,7 +1321,7 @@
       return fetch("descripciones.json", { cache: "no-store" })
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null)
-        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; return KB; });
+        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; return KB; });
     })
     .then((KB) => {
       pintarPortal(KB);

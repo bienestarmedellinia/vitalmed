@@ -11,5 +11,8 @@
   },
   "dispersion": {
     "ecv_personas_asiste_participa_programas_culturales": "Este nivel de dispersión sugiere que la oferta cultural, la disponibilidad de equipamientos, las condiciones socioeconómicas y los niveles de movilidad urbana podrían estar influyendo significativamente en el comportamiento del indicador."
+  },
+  "territorio_apertura": {
+    "ecv_personas_asiste_participa_programas_culturales": "evidenciando diferencias significativas en las oportunidades y condiciones de acceso a actividades culturales"
   }
 }
