@@ -31,6 +31,10 @@
     "_nota": "coletilla específica de la 1ª situación de atención cuando la tendencia es desfavorable",
     "ecv_personas_asiste_participa_programas_culturales": "lo que podría indicar debilitamiento de los mecanismos de acceso o de apropiación de la oferta cultural"
   },
+  "actividad": {
+    "_nota": "adjetivo de la actividad en la viñeta de concentración: 'Concentración de la actividad <actividad> en territorios…'",
+    "ecv_personas_asiste_participa_programas_culturales": "cultural"
+  },
   "fuentes_legibles": {
     "_nota": "traduce el identificador técnico del campo 'fuente' del KB a su nombre institucional para la prosa de Consideraciones metodológicas",
     "ECV - serie histórica de indicadores (Planeación)": "la Encuesta de Calidad de Vida (ECV) y la Serie Histórica de Indicadores de Planeación Municipal",
