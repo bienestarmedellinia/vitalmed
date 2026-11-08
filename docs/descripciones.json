@@ -1,9 +1,12 @@
 {
   "_meta": {
-    "proposito": "Descripciones conceptuales curadas por indicador para la sección 'Descripción del indicador' del análisis técnico. Texto editorial revisado por el equipo (no derivado del KB). Si una clave no está aquí, el portal usa la descripción genérica (catálogo + interpretación del banco).",
+    "proposito": "Descripciones conceptuales e hipótesis de contexto curadas por indicador para el análisis técnico. Texto editorial revisado por el equipo (no derivado del KB). 'descripciones'=qué mide el indicador; 'contexto'=hipótesis de factores asociados a su comportamiento histórico (se muestran como hipótesis, no como relaciones comprobadas). Si una clave no está, el portal usa el texto genérico.",
     "clave": "usar la 'clave' del catálogo del knowledge_base.json"
   },
   "descripciones": {
     "ecv_personas_asiste_participa_programas_culturales": "El indicador \"Porcentaje de personas que asisten o participan en programas culturales\" mide el nivel de vinculación de la población a actividades, eventos y procesos de carácter cultural dentro del territorio. Este indicador constituye una aproximación al acceso efectivo a la oferta cultural, al aprovechamiento de equipamientos culturales y al grado de integración de la ciudadanía en dinámicas de formación, recreación e identidad comunitaria."
+  },
+  "contexto": {
+    "ecv_personas_asiste_participa_programas_culturales": "Este comportamiento podría estar asociado a cambios en los hábitos de consumo cultural, barreras de acceso territorial, limitaciones económicas de los hogares, modificaciones en la oferta institucional o efectos acumulados posteriores a la pandemia sobre las dinámicas de participación comunitaria."
   }
 }

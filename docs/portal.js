@@ -822,11 +822,14 @@
       }
       t += ". ";
       if (an.nAnios > 2 && an.tendencia !== "estable") {
-        t += `El análisis de la serie histórica muestra que ${an.tendencia === "baja" ? "la reducción" : "el aumento"} no corresponde a una fluctuación aislada, sino a una trayectoria sostenida observada a lo largo de ${an.nAnios} años. `;
+        t += `El análisis de la serie histórica muestra que ${an.tendencia === "baja" ? "la reducción" : "el aumento"} no corresponde a una fluctuación aislada, sino a una trayectoria sostenida observada a lo largo de los últimos ${an.nAnios} años. `;
       }
+      const ctx = (CTXG || {})[cl];
+      if (ctx) t += esc(ctx) + " ";
       return `<p>${t}</p>`;
     }).filter(Boolean);
-    const histContexto = `<p class="nota">Las variaciones observadas pueden estar asociadas a factores no medidos en esta serie (cambios en la oferta institucional, condiciones económicas de los hogares, dinámicas demográficas o efectos posteriores a la pandemia 2020-2021); se presentan como hipótesis de contexto, no como relaciones comprobadas.</p>`;
+    // Nota genérica de cierre: recuerda que las hipótesis no son relaciones comprobadas.
+    const histContexto = `<p class="nota">Las asociaciones mencionadas se presentan como hipótesis de contexto, no como relaciones comprobadas; pueden influir factores no medidos en esta serie (condiciones económicas de los hogares, oferta institucional, dinámicas demográficas o efectos posteriores a la pandemia 2020-2021).</p>`;
 
     // (f) Análisis territorial: dispersión máx/mín con nombres + brecha, por indicador.
     const parrafosTerr = claves.map((cl) => {
@@ -1110,6 +1113,7 @@
   /* ---------- 7. Flujo interactivo del método ---------- */
   let KBG = null, pasoActual = 0, temporizador = null;
   let DESCG = {};  // descripciones curadas por clave (docs/descripciones.json); {} si no carga
+  let CTXG = {};   // hipótesis de contexto curadas por clave (comportamiento histórico)
   const PASOS = [
     { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py",
       desc: "Baja los datos únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia.",
@@ -1312,7 +1316,7 @@
       return fetch("descripciones.json", { cache: "no-store" })
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null)
-        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; return KB; });
+        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; return KB; });
     })
     .then((KB) => {
       pintarPortal(KB);
