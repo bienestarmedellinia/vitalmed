@@ -865,16 +865,20 @@
         ? `<p class="nota">Esta categoría se mide por estación de monitoreo (no por comuna), por lo que no se calcula dispersión territorial entre los 21 territorios.</p>` : "");
 
     // (g) Evaluación de relaciones territoriales.
+    // Referencia al indicador: si hay glosa curada de magnitud (p. ej. "de participación cultural"),
+    // se nombra el indicador; si no, "de la categoría".
+    const gvRef = claves.map((cl) => ((GVALG || {})[cl] || "").split("|")[0]).find((s) => s && s.trim());
+    const indRef = gvRef ? `el indicador ${esc(gvRef.trim())}` : "el indicador de la categoría";
     let relaciones;
     if (corrSig.length) {
       const ej = corrSig.slice(0, 3).map((c) => {
         const na = metaDe(c.resultado).nombre || c.resultado, nb = metaDe(c.factor).nombre || c.factor;
         return `${esc(na)} ↔ ${esc(nb)} (r=${fmt(c.pearson, 2)}, ${(c.pearson || 0) >= 0 ? "directa" : "inversa"})`;
       }).join("; ");
-      relaciones = `Se evaluaron relaciones entre el indicador de la categoría y otras variables territoriales disponibles para los 21 territorios de Medellín (16 comunas y 5 corregimientos). De ellas, <b>${corrSig.length}</b> alcanzaron significancia estadística (Pearson y Spearman al 95%): ${ej}. Estas asociaciones describen patrones conjuntos entre territorios y deben interpretarse como evidencia descriptiva, no como relaciones de causa-efecto.`;
+      relaciones = `Se evaluaron relaciones entre ${indRef} y otras variables territoriales disponibles para los 21 territorios de Medellín (16 comunas y 5 corregimientos). De ellas, <b>${corrSig.length}</b> alcanzaron significancia estadística (Pearson y Spearman al 95%): ${ej}. Estas asociaciones describen patrones conjuntos entre territorios y deben interpretarse como evidencia descriptiva, no como relaciones de causa-efecto.`;
     } else if (corrCat.length) {
       const cuantas = corrCat.length === 1 ? "una relación" : `${corrCat.length} relaciones`;
-      relaciones = `Se analizaron ${cuantas} entre el indicador de la categoría y otras variables territoriales disponibles para los 21 territorios de Medellín (16 comunas y 5 corregimientos). Sin embargo, las asociaciones identificadas no alcanzaron niveles de significancia estadística que permitan establecer patrones consistentes o relaciones robustas. Por tanto, los resultados observados deben interpretarse únicamente como asociaciones descriptivas y no como evidencia de causalidad.`;
+      relaciones = `Se analizaron ${cuantas} entre ${indRef} y otras variables territoriales disponibles para los 21 territorios de Medellín (16 comunas y 5 corregimientos). Sin embargo, las asociaciones identificadas no alcanzaron niveles de significancia estadística que permitan establecer patrones consistentes o relaciones robustas. Por tanto, los resultados observados deben interpretarse únicamente como asociaciones descriptivas y no como evidencia de causalidad.`;
     } else {
       relaciones = `El esquema de correlaciones del proyecto se calcula sobre los indicadores de resultado en salud; para esta categoría no se dispone de relaciones territoriales calculadas en el conocimiento base, por lo que el análisis es descriptivo.`;
     }
