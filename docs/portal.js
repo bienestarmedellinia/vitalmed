@@ -1139,6 +1139,105 @@
       })
       .catch((err) => { console.warn("mapa_comunas.svg no disponible, se usa el fallback:", err.message); });
   }
+
+  // ----- Sección Mapa: coropleta por indicador (repinta el SVG real) + red de correlaciones -----
+  const RAMPA = [[44, 123, 182], [255, 255, 191], [215, 25, 28]];  // azul→amarillo→rojo
+  function rampaColor(t) {
+    const seg = t <= 0.5 ? 0 : 1, lt = t <= 0.5 ? t / 0.5 : (t - 0.5) / 0.5;
+    const a = RAMPA[seg], b = RAMPA[seg + 1];
+    const m = (i) => Math.round(a[i] + (b[i] - a[i]) * lt);
+    return `rgb(${m(0)},${m(1)},${m(2)})`;
+  }
+  const normNom = (s) => String(s || "").replace(/^Corregimiento de\s+/i, "").trim().toLowerCase();
+
+  function iniciarMapa() {
+    const cont = $("co-mapa"); if (!cont) return;
+    const KB = KBG || {}; const S = KB.series || {}; const dat = S.datos || {};
+    const terr = S.territorios || {}; const catl = S.catalogo || [];
+    const metaDe = (cl) => catl.find((c) => c.clave === cl) || {};
+    const idxNombre = {}; Object.keys(terr).forEach((k) => { idxNombre[normNom(terr[k])] = k; });
+
+    fetch("mapa_comunas.svg", { cache: "force-cache" })
+      .then((r) => (r.ok ? r.text() : Promise.reject(new Error("HTTP " + r.status))))
+      .then((svgTxt) => {
+        const selI = $("co-ind"), selA = $("co-anio");
+        const conVal = catl.filter((c) => (dat[c.clave] || {}).valores);
+        if (!conVal.length || !selI || !selA) return;
+        selI.innerHTML = conVal.map((c) => `<option value="${esc(c.clave)}">${esc(c.nombre)}</option>`).join("");
+        if (conVal.some((c) => c.clave === "mortalidad")) selI.value = "mortalidad";
+
+        const aniosDe = (cl) => {
+          const v = (dat[cl] || {}).valores || {}; const s = new Set();
+          Object.values(v).forEach((se) => Object.keys(se).forEach((a) => s.add(a)));
+          return [...s].sort();
+        };
+        const recargaAnios = () => {
+          const aa = aniosDe(selI.value);
+          selA.innerHTML = aa.map((a) => `<option value="${a}">${a}</option>`).join("");
+          if (aa.length) selA.value = aa[aa.length - 1];
+        };
+        const pintar = () => {
+          const cl = selI.value, anio = selA.value;
+          const vals = (dat[cl] || {}).valores || {};
+          const puntos = {}; let mn = Infinity, mx = -Infinity;
+          Object.keys(vals).forEach((cod) => {
+            const v = Number((vals[cod] || {})[anio]);
+            if (!isNaN(v)) { puntos[String(parseInt(cod, 10))] = v; mn = Math.min(mn, v); mx = Math.max(mx, v); }
+          });
+          cont.innerHTML = svgTxt;
+          const svgEl = cont.querySelector("svg"); if (!svgEl) return;
+          svgEl.querySelectorAll("path").forEach((p) => {
+            const titulo = (p.querySelector("title") || {}).textContent || "";
+            p.setAttribute("class", "ch-terr");
+            const codKB = idxNombre[normNom(titulo)];
+            const v = codKB != null ? puntos[String(parseInt(codKB, 10))] : undefined;
+            if (v == null || mx === mn) p.setAttribute("fill", "rgba(31,78,121,.10)");
+            else p.setAttribute("fill", rampaColor((v - mn) / (mx - mn)));
+            const t = p.querySelector("title"); if (t) t.textContent = titulo + (v != null ? `: ${fmt(v, 1)}` : " (sin dato)");
+          });
+          const u = metaDe(cl).unidad || "";
+          if ($("co-min")) $("co-min").textContent = isFinite(mn) ? `${fmt(mn, 1)} ${u}` : "";
+          if ($("co-max")) $("co-max").textContent = isFinite(mx) ? `${fmt(mx, 1)} ${u}` : "";
+          if ($("co-ley")) $("co-ley").textContent = `${metaDe(cl).nombre || cl} · ${anio} · 21 territorios`;
+        };
+        selI.onchange = () => { recargaAnios(); pintar(); };
+        selA.onchange = pintar;
+        recargaAnios(); pintar();
+      })
+      .catch((err) => { cont.textContent = "No se pudo cargar el mapa."; console.warn("mapa:", err.message); });
+
+    // Red de correlaciones significativas (radial desde los resultados de salud)
+    const destino = $("red-svg"); if (!destino) return;
+    const corr = (S.correlaciones || []).filter((c) => c && c.significativa);
+    const seen = new Set(), aristas = [];
+    corr.forEach((c) => { const k = [c.resultado, c.factor].sort().join("|"); if (!seen.has(k)) { seen.add(k); aristas.push(c); } });
+    if (!aristas.length) { destino.textContent = "Sin correlaciones significativas en el KB."; return; }
+    const nom = (k) => metaDe(k).nombre || k;
+    const resultados = [...new Set(aristas.map((a) => a.resultado))];
+    const factores = [...new Set(aristas.map((a) => a.factor))];
+    const W = 620, H = 440, cx = W / 2, cy = H / 2, R = 165;
+    const posR = {}; resultados.forEach((r, i) => { posR[r] = [cx + (resultados.length === 1 ? 0 : (i === 0 ? -80 : 80)), cy]; });
+    const posF = {}; factores.forEach((f, i) => { const ang = (-90 + i * (360 / factores.length)) * Math.PI / 180; posF[f] = [cx + R * Math.cos(ang), cy + R * Math.sin(ang)]; });
+    const maxr = Math.max(...aristas.map((a) => Math.abs(a.pearson || 0))) || 1;
+    const corto = (s) => (s.length > 24 ? s.slice(0, 22) + "…" : s);
+    let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Red de correlaciones significativas del KB">`;
+    aristas.forEach((a) => {
+      const pr = posR[a.resultado], pf = posF[a.factor]; if (!pr || !pf) return;
+      const w = 1 + 5 * Math.abs(a.pearson || 0) / maxr;
+      const cls = (a.pearson || 0) >= 0 ? "red-arista red-pos" : "red-arista red-neg";
+      svg += `<line class="${cls}" x1="${pr[0].toFixed(0)}" y1="${pr[1].toFixed(0)}" x2="${pf[0].toFixed(0)}" y2="${pf[1].toFixed(0)}" stroke-width="${w.toFixed(1)}"><title>${esc(nom(a.resultado))} ~ ${esc(nom(a.factor))} (r=${fmt(a.pearson, 2)})</title></line>`;
+    });
+    const dibNodo = (x, y, r, cls, lbl, anchor) => {
+      const tx = anchor === "start" ? x + 9 : anchor === "end" ? x - 9 : x;
+      return `<circle class="${cls}" cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${r}"><title>${esc(lbl)}</title></circle>` +
+        `<text class="red-lbl" x="${tx.toFixed(0)}" y="${(y - r - 4).toFixed(0)}" text-anchor="${anchor}">${esc(corto(lbl))}</text>`;
+    };
+    Object.entries(posF).forEach(([f, p]) => { svg += dibNodo(p[0], p[1], 6, "red-nodo", nom(f), p[0] > cx ? "start" : "end"); });
+    Object.entries(posR).forEach(([r, p]) => { svg += dibNodo(p[0], p[1], 11, "red-nodo salud", nom(r), "middle"); });
+    svg += "</svg>";
+    destino.innerHTML = svg;
+  }
+
   function pintarPortal(KB) {
     const ind = KB.indicadores || {};
     KBG = KB; pintarPaso();
@@ -1147,6 +1246,7 @@
     cargarMapaHero();            // mapa real del hero (contorno por comuna)
     if (T.length) sel = T[0].nombre;
     iniciarPreguntas();          // observatorio: categorías + preguntas + modal (reusa datos del KB)
+    iniciarMapa();               // sección Mapa: coropleta por indicador + red de correlaciones
   }
   window.Asistente.cargarKB()
     .then((KB) => {

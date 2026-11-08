@@ -97,6 +97,25 @@
     .cat-panel > h4 { margin:4px 0 0; font-size:.82rem; text-transform:uppercase; letter-spacing:.05em; color:var(--azul); }
     table.m-kpis { width:100%; font-size:.88rem; }
     table.m-kpis th { color:var(--gris); font-weight:600; }
+    /* ----- Sección Mapa interactivo (coropleta + red de correlaciones) ----- */
+    .mapa-grid { display:grid; grid-template-columns:1.25fr .9fr; gap:22px; align-items:start; }
+    @media (max-width:860px){ .mapa-grid { grid-template-columns:1fr; } }
+    .mapa-caja { background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:16px; }
+    .mapa-ctrl { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+    .mapa-ctrl select { font:inherit; padding:7px 10px; border-radius:8px; border:1px solid #cbd5e1; background:#fff; color:#1a1a1a; }
+    #co-mapa svg, #red-svg svg { width:100%; height:auto; display:block; }
+    .ch-terr { stroke:#fff; stroke-width:.8; vector-effect:non-scaling-stroke; transition:fill .3s; cursor:default; }
+    .ch-terr:hover { stroke:var(--azul); stroke-width:1.8; }
+    .ch-gradiente { height:12px; border-radius:6px; margin-top:12px;
+                    background:linear-gradient(90deg,#2c7bb6,#ffffbf,#d7191c); }
+    .ch-escala { display:flex; justify-content:space-between; font-size:.76rem; color:var(--gris); margin-top:4px; }
+    .ch-ley { font-size:.86rem; color:var(--gris); margin-top:8px; font-weight:600; }
+    .red-arista { fill:none; opacity:.85; }
+    .red-pos { stroke:var(--verde); }  .red-neg { stroke:var(--nar); }
+    .red-nodo { fill:var(--azul); stroke:#9fc3e8; stroke-width:1.2; }
+    .red-nodo.salud { fill:var(--nar); }
+    .red-lbl { fill:#1a1a1a; font-size:10px; font-weight:600; }
+    .red-leyenda .pill { display:inline-block; padding:2px 9px; border-radius:999px; font-size:.74rem; margin:2px 6px 2px 0; }
     table.m-kpis td small { color:var(--gris); }
     .preg-panel { margin-top:14px; }
     .preg-panel-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
@@ -255,6 +274,7 @@
     <div class="wrap">
       <b>Bienestar Medellín IA</b>
       <a href="#preguntas">Observatorio</a>
+      <a href="#mapa">Mapa</a>
       <a href="#metodo">Método</a>
       <a href="#transparencia">Transparencia</a>
     </div>
@@ -302,6 +322,38 @@
         <div id="preg-cats"></div>
         <div id="preg-panel" class="preg-panel" aria-live="polite"></div>
       </div>
+    </section>
+
+    <section id="mapa" class="rev">
+      <h2>Mapa interactivo del bienestar</h2>
+      <p class="sub">Un mismo territorio, muchas dimensiones. Elige un indicador y el mapa de los
+        <b>21 territorios</b> (16 comunas + 5 corregimientos) se repinta con sus valores reales
+        (coropleta). Al lado, la <b>red de hallazgos</b> muestra cómo se asocian los resultados de
+        salud con factores sociales y sanitarios. Todo del pipeline; asociación, no causalidad.</p>
+      <div class="mapa-grid">
+        <div class="mapa-caja">
+          <div class="mapa-ctrl">
+            <label>Indicador: <select id="co-ind"></select></label>
+            <label>Año: <select id="co-anio"></select></label>
+          </div>
+          <div id="co-mapa" aria-live="polite">Cargando mapa…</div>
+          <div class="ch-gradiente" aria-hidden="true"></div>
+          <div class="ch-escala"><span id="co-min"></span><span id="co-max"></span></div>
+          <div class="ch-ley" id="co-ley"></div>
+        </div>
+        <div class="mapa-caja">
+          <h3 style="margin:2px 0 6px;font-size:1rem;color:var(--azul)">Red de hallazgos (correlaciones significativas)</h3>
+          <div id="red-svg" aria-live="polite">Cargando…</div>
+          <div class="red-leyenda">
+            <span class="pill" style="background:#d7f0dd;color:#1b5e38">misma dirección</span>
+            <span class="pill" style="background:#fbe3d1;color:#8a4310">relación inversa</span>
+            <span class="nota">grosor ∝ fuerza (|r|) · Pearson+Spearman 95%</span>
+          </div>
+        </div>
+      </div>
+      <p class="nota">La red parte de los dos resultados de salud del proyecto (mortalidad e intento de
+        suicidio), que son los únicos indicadores “resultado” con correlaciones calculadas en el KB;
+        por eso es radial y no “todos con todos”. No se dibujan relaciones sin respaldo en los datos.</p>
     </section>
 
     <div class="modal-ov" id="preg-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-q">

@@ -94,6 +94,22 @@ def main() -> int:
         if not any("/" in t for t in anios_kpi):
             errores.append(f"Los KPIs no muestran el carrusel por año: {anios_kpi!r}")
 
+        # Sección Mapa: coropleta (SVG real repintado) + red de correlaciones.
+        try:
+            pag.locator("#co-mapa svg path.ch-terr").first.wait_for(timeout=8000)
+            if pag.locator("#co-mapa svg path.ch-terr").count() < 16:
+                errores.append("Mapa: la coropleta no pintó los 21 territorios (path.ch-terr < 16)")
+            # al menos un territorio con color de dato (fill rgb(...), no el gris de 'sin dato')
+            rellenos = pag.eval_on_selector_all(
+                "#co-mapa svg path.ch-terr",
+                "els => els.filter(e => (e.getAttribute('fill')||'').startsWith('rgb(')).length")
+            if rellenos < 16:
+                errores.append(f"Mapa: la coropleta no coloreó por valor ({rellenos} con fill rgb)")
+            if pag.locator("#red-svg svg line").count() < 1:
+                errores.append("Mapa: la red de correlaciones no dibujó aristas")
+        except Exception:
+            errores.append("Mapa: no apareció la coropleta (#co-mapa svg path.ch-terr)")
+
         # Explorador de datos (módulo independiente, sigue disponible por URL directa).
         pag2 = nav.new_page()
         pag2.on("pageerror", lambda e: errores.append(f"datos.html JS: {e}"))
