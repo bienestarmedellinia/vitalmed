@@ -884,16 +884,17 @@
     }
 
     // (h) Consideraciones metodológicas.
-    const metodologia = `<ul>
+    const fuentesProsa = fuentes.length ? esc(fuentes.join(" y ")) : "las fuentes del pipeline del proyecto";
+    const metodologia = `<p>El análisis se desarrolló utilizando información proveniente de ${fuentesProsa}, considerando los siguientes componentes:</p>
+      <ul>
         <li>Cobertura temporal: ${aMin && aMax ? `${aMin}–${aMax}` : "según disponibilidad del indicador"}.</li>
         <li>Cobertura espacial: ${nivel}.</li>
-        <li>Fuentes: ${fuentes.length ? esc(fuentes.join("; ")) : "pipeline del proyecto"}.</li>
         <li>Evaluación de tendencias mediante comparación entre extremos de la serie.</li>
         <li>Cálculo de variaciones interanuales.</li>
         <li>Medición de dispersión territorial a partir de valores máximos y mínimos.</li>
         <li>Exploración de asociaciones entre indicadores territoriales (Pearson y Spearman).</li>
       </ul>
-      <p class="nota">El análisis no incorpora controles por variables demográficas o socioeconómicas (edad, nivel educativo, ingresos del hogar, composición poblacional o infraestructura disponible). En consecuencia, los hallazgos constituyen un análisis descriptivo exploratorio orientado a identificar patrones y desigualdades territoriales; asociación, no causalidad.</p>`;
+      <p class="nota">Es importante señalar que el análisis no incorpora controles estadísticos asociados a variables demográficas o socioeconómicas tales como edad, nivel educativo, ingresos del hogar, composición poblacional o disponibilidad de infraestructura. En consecuencia, los hallazgos deben entenderse como un análisis descriptivo exploratorio orientado a identificar patrones y desigualdades territoriales; asociación, no causalidad.</p>`;
 
     // (i) Situaciones de atención.
     const situaciones = [];
