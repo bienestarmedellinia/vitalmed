@@ -925,10 +925,12 @@
     if (corrSig.length) situaciones.push(`Presencia de <b>${corrSig.length}</b> asociación(es) estadísticamente significativa(s) entre territorios que merecen seguimiento.`);
     const modSituaciones = situaciones.length ? `<h4 class="subsub">Situaciones de atención</h4><ul>${situaciones.slice(0, 5).map((s) => `<li>${s}</li>`).join("")}</ul>` : "";
 
-    // (j) Implicaciones para la gestión pública: acciones curadas del banco, deduplicadas.
+    // (j) Implicaciones para la gestión pública: curadas por indicador si existen; si no, acciones del banco.
+    const impCuradas = claves.flatMap((cl) => ((IMPG || {})[cl] || [])).map((a) => String(a).trim()).filter(Boolean);
     const accionesBanco = [...new Set((cat.preguntas || []).flatMap((p) => p.acciones || []).map((a) => String(a).trim()).filter(Boolean))];
-    const modImplic = accionesBanco.length ? `<h4 class="subsub">Implicaciones para la gestión pública</h4>
-        <ul>${accionesBanco.slice(0, 6).map((a) => `<li>${esc(a)}</li>`).join("")}</ul>
+    const implicItems = impCuradas.length ? [...new Set(impCuradas)] : accionesBanco;
+    const modImplic = implicItems.length ? `<h4 class="subsub">Implicaciones para la gestión pública</h4>
+        <ul>${implicItems.slice(0, 6).map((a) => `<li>${esc(a)}</li>`).join("")}</ul>
         <p class="nota">Líneas de acción sugeridas por el patrón observado; no constituyen prescripción.</p>` : "";
 
     // (k) Conclusión ejecutiva.
@@ -1157,6 +1159,7 @@
   let INFRAG = {}; // matiz de infraestructura por clave (nota de controles ausentes)
   let SREDG = {};  // coletilla curada de la situación de reducción por clave
   let ACTG = {};   // adjetivo de 'actividad' por clave (viñeta de concentración)
+  let IMPG = {};   // implicaciones de gestión curadas por clave (array de líneas)
   const PASOS = [
     { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py",
       desc: "Baja los datos únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia.",
@@ -1359,7 +1362,7 @@
       return fetch("descripciones.json", { cache: "no-store" })
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null)
-        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; GVALG = (desc && desc.glosa_valor) || {}; GBRG = (desc && desc.glosa_brecha) || {}; FLEG = (desc && desc.fuentes_legibles) || {}; INFRAG = (desc && desc.infraestructura) || {}; SREDG = (desc && desc.situacion_reduccion) || {}; ACTG = (desc && desc.actividad) || {}; return KB; });
+        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; GVALG = (desc && desc.glosa_valor) || {}; GBRG = (desc && desc.glosa_brecha) || {}; FLEG = (desc && desc.fuentes_legibles) || {}; INFRAG = (desc && desc.infraestructura) || {}; SREDG = (desc && desc.situacion_reduccion) || {}; ACTG = (desc && desc.actividad) || {}; IMPG = (desc && desc.implicaciones) || {}; return KB; });
     })
     .then((KB) => {
       pintarPortal(KB);

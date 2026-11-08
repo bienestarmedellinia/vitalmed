@@ -35,6 +35,16 @@
     "_nota": "adjetivo de la actividad en la viñeta de concentración: 'Concentración de la actividad <actividad> en territorios…'",
     "ecv_personas_asiste_participa_programas_culturales": "cultural"
   },
+  "implicaciones": {
+    "_nota": "líneas de acción curadas por indicador para 'Implicaciones para la gestión pública'; si existen, reemplazan las acciones del banco de preguntas.",
+    "ecv_personas_asiste_participa_programas_culturales": [
+      "Fortalecer estrategias de descentralización cultural hacia territorios con menores niveles de participación.",
+      "Priorizar intervenciones en comunas con indicadores persistentemente bajos.",
+      "Evaluar la cobertura y distribución territorial de equipamientos culturales.",
+      "Diseñar programas de promoción de la participación cultural dirigidos a grupos poblacionales con menor vinculación.",
+      "Complementar el análisis con variables socioeconómicas y demográficas para identificar factores explicativos de las brechas observadas."
+    ]
+  },
   "fuentes_legibles": {
     "_nota": "traduce el identificador técnico del campo 'fuente' del KB a su nombre institucional para la prosa de Consideraciones metodológicas",
     "ECV - serie histórica de indicadores (Planeación)": "la Encuesta de Calidad de Vida (ECV) y la Serie Histórica de Indicadores de Planeación Municipal",
