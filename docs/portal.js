@@ -960,7 +960,7 @@
     if (concCurada) conclusion = esc(concCurada);
 
     const modAnalisis = (parrafosHist.length || parrafosTerr.length || fuentes.length) ? `
-      <div class="cat-mod cat-analisis"><h4>Análisis técnico ampliado</h4>
+      <div class="cat-mod cat-analisis"><h4>Análisis técnico</h4>
         <h4 class="sub">Descripción del indicador</h4>
         <p>${descripcion}</p>
         ${parrafosHist.length ? `<h4 class="sub">Comportamiento histórico</h4>${parrafosHist.join("")}${histContexto}` : ""}

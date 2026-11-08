@@ -296,7 +296,7 @@
         automáticamente. Empieza por una pregunta en el observatorio y explora la evidencia.</p>
       <div class="trio">
         <div class="tarjeta"><h2>Pregunta de investigación</h2>
-          <p>¿Cómo usar el análisis de datos para identificar factores ambientales, sociales y territoriales que afectan la salud y el bienestar de Medellín?</p></div>
+          <p>¿Cómo pueden las técnicas de análisis de datos identificar y explicar la influencia de los factores ambientales, sociales y territoriales sobre las condiciones de salud y bienestar de la población de Medellín, con el fin de apoyar la toma de decisiones y la formulación de intervenciones basadas en evidencia?</p></div>
         <div class="tarjeta clave" id="hero-hallazgo" aria-live="polite"><h2>Hallazgo principal</h2><p>Cargando…</p></div>
         <div class="tarjeta" id="hero-propuesta" aria-live="polite"><h2>Propuesta de mejora</h2><p>Cargando…</p></div>
       </div>
@@ -472,9 +472,8 @@
         <div class="caja"><span class="etq">Declaración de IA</span><h3>Uso de inteligencia artificial</h3>
           <ul class="lim nota" style="padding-left:18px">
             <li><b>Desarrollo:</b> Kiro CLI (asistente de programación con IA) escribió los scripts, el portal y la documentación; el equipo revisa el resultado. ChatGPT y Gemini se usaron solo en consultas exploratorias iniciales (ideas y búsqueda de fuentes), sin generar código ni cifras.</li>
-            <li><b>Asistente de este portal:</b> las cifras salen siempre de un motor determinista que lee la base de conocimiento. Las preguntas <i>escritas</i> se envían a Google Gemini (capa gratuita, vía un Worker de Cloudflare) <b>solo para interpretarlas</b>: el modelo devuelve el tipo de consulta y los territorios mencionados, elegidos de listas cerradas, y nunca escribe números. Si la IA no responde, contesta el motor por sí solo. Las preguntas sugeridas no usan IA.</li>
-            <li><b>Privacidad:</b> no escribas datos personales en la pregunta. En la capa gratuita, Google puede usar el texto enviado para mejorar sus productos. El Worker no guarda las preguntas.</li>
-            <li><b>Opcional, apagado por defecto:</b> <code>asistente/llm.py</code> (versión de línea de comandos) puede usar un modelo de OpenAI solo para redactar mejor una respuesta ya calculada. No genera cifras y no se usa en este portal web.</li>
+            <li><b>Cómo responde el observatorio:</b> todas las cifras, textos e interpretaciones de este portal se calculan de forma determinista a partir de la base de conocimiento generada por el pipeline. No se consultan modelos de lenguaje en tiempo de ejecución ni se envía ningún dato a servicios de terceros al navegar.</li>
+            <li><b>Opcional, apagado por defecto:</b> <code>asistente/llm.py</code> (versión de línea de comandos, no usada en este portal web) puede usar un modelo de OpenAI solo para redactar mejor una respuesta ya calculada; no genera cifras.</li>
           </ul></div>
         <div class="caja"><span class="etq">Créditos de imagen</span><h3>Fotografía del banner</h3>
           <p class="nota">La panorámica de fondo del encabezado es <a href="https://commons.wikimedia.org/wiki/File:Panor%C3%A1mica_de_Medell%C3%ADn_desde_el_Cerro_El_Picacho.jpg" rel="noopener noreferrer">«Panorámica de Medellín desde el Cerro El Picacho»</a>, autor <b>Luis90f</b>, vía Wikimedia Commons, bajo licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener noreferrer">CC BY-SA 4.0</a>. Imagen sin modificaciones salvo reescalado para web.</p></div>
