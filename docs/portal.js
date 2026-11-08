@@ -849,7 +849,9 @@
       ];
       if (disp.brecha && disp.brecha >= 1.05) {
         let b = `La diferencia entre ambos territorios representa una <b>brecha relativa de ${fmt(disp.brecha, 1)} veces</b>`;
-        if (disp.brecha >= 2) b += ", lo que refleja desigualdades territoriales relevantes en el acceso a oportunidades o condiciones";
+        const gb = (GBRG || {})[cl];
+        if (gb) b += `, reflejando importantes desigualdades territoriales ${esc(gb)}`;
+        else if (disp.brecha >= 2) b += ", lo que refleja desigualdades territoriales relevantes en el acceso a oportunidades o condiciones";
         items.push(b + ".");
       }
       t += `<ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul>`;
@@ -1131,6 +1133,7 @@
   let DISPG = {};  // hipótesis de dispersión territorial curadas por clave
   let TAPG = {};   // coletilla curada de apertura del análisis territorial por clave
   let GVALG = {};  // glosa curada del valor (magnitud | unidad glosada) por clave
+  let GBRG = {};   // coletilla curada de la brecha por clave
   const PASOS = [
     { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py",
       desc: "Baja los datos únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia.",
@@ -1333,7 +1336,7 @@
       return fetch("descripciones.json", { cache: "no-store" })
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null)
-        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; GVALG = (desc && desc.glosa_valor) || {}; return KB; });
+        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; GVALG = (desc && desc.glosa_valor) || {}; GBRG = (desc && desc.glosa_brecha) || {}; return KB; });
     })
     .then((KB) => {
       pintarPortal(KB);

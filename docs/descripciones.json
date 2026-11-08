@@ -18,5 +18,9 @@
   "glosa_valor": {
     "_formato": "'magnitud|unidad glosada' → '...el mayor nivel <magnitud> con X% <unidad glosada>'",
     "ecv_personas_asiste_participa_programas_culturales": "de participación cultural|de la población vinculada a programas culturales"
+  },
+  "glosa_brecha": {
+    "_nota": "coletilla que cierra la viñeta de la brecha: '...reflejando importantes desigualdades territoriales <glosa_brecha>'",
+    "ecv_personas_asiste_participa_programas_culturales": "en el acceso y aprovechamiento de bienes y servicios culturales"
   }
 }
