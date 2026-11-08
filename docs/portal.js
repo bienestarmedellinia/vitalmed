@@ -726,7 +726,7 @@
       const malo = subirEsMalo(cl);
       const bueno = an.tendencia === "estable" ? "amb" : ((an.tendencia === "sube") === malo ? "mal" : "bien");
       const semaforo = an.tendencia === "estable" ? "🟡" : (bueno === "bien" ? "🟢" : "🔴");
-      return { nombre: (metaDe(cl).nombre || cl), unidad: metaDe(cl).unidad || "", an, semaforo, bueno };
+      return { clave: cl, nombre: (metaDe(cl).nombre || cl), unidad: metaDe(cl).unidad || "", an, semaforo, bueno };
     }).filter(Boolean);
     // Módulo 1: resumen ejecutivo (narrativa a partir de lo anterior)
     const empeoran = filas.filter((f) => f.bueno === "mal").map((f) => f.nombre);
@@ -902,14 +902,21 @@
     const situaciones = [];
     filas.forEach((f) => {
       if (f.bueno === "mal") {
-        const sentido = f.an.tendencia === "sube" ? "aumento" : "reducción";
-        situaciones.push(`${sentido === "aumento" ? "Aumento" : "Reducción"} sostenido en <b>${esc(f.nombre)}</b> (último dato ${fmt(f.an.actual, 1)}${f.unidad && f.unidad.indexOf("%") >= 0 ? "%" : ""}, ${f.an.anio}), que podría indicar un debilitamiento de las condiciones asociadas al indicador.`);
+        const sube = f.an.tendencia === "sube";
+        const titulo = sube ? "Aumento sostenido" : "Reducción sostenida";
+        const mag = ((GVALG || {})[f.clave] || "").split("|")[0];
+        const deQue = mag ? ` ${esc(mag.trim())}` : ` en <b>${esc(f.nombre)}</b>`;
+        const col = (SREDG || {})[f.clave] || "lo que podría indicar un debilitamiento de las condiciones asociadas al indicador";
+        situaciones.push(`${titulo}${deQue} en la ciudad (último dato ${fmt(f.an.actual, 1)}${f.unidad && f.unidad.indexOf("%") >= 0 ? "%" : ""}, ${f.an.anio}), ${esc(col)}.`);
       }
     });
     claves.forEach((cl) => {
       const disp = dispersionTerritorial(cl);
       if (disp && disp.brecha && disp.brecha >= 2) {
-        situaciones.push(`Amplias brechas territoriales en <b>${esc(metaDe(cl).nombre || cl)}</b>, donde algunos territorios presentan niveles hasta ${fmt(disp.brecha, 1)} veces superiores a otros (${esc(disp.nombreMax)} frente a ${esc(disp.nombreMin)}), con posible concentración en territorios de mayores condiciones.`);
+        const mag = ((GVALG || {})[cl] || "").split("|")[0];
+        const deQue = mag ? ` de ${esc(mag.trim()).replace(/^de /, "")}` : "";
+        situaciones.push(`Amplias brechas territoriales, donde algunos sectores presentan niveles${deQue} hasta ${fmt(disp.brecha, 1)} veces superiores a otros (${esc(disp.nombreMax)} frente a ${esc(disp.nombreMin)}).`);
+        situaciones.push(`Concentración de la actividad en territorios con mayores condiciones socioeconómicas, lo que sugiere posibles barreras de acceso en sectores con menores oportunidades.`);
       }
     });
     if (corrSig.length) situaciones.push(`Presencia de <b>${corrSig.length}</b> asociación(es) estadísticamente significativa(s) entre territorios que merecen seguimiento.`);
@@ -1145,6 +1152,7 @@
   let GBRG = {};   // coletilla curada de la brecha por clave
   let FLEG = {};   // nombres legibles de fuentes (identificador KB → nombre institucional)
   let INFRAG = {}; // matiz de infraestructura por clave (nota de controles ausentes)
+  let SREDG = {};  // coletilla curada de la situación de reducción por clave
   const PASOS = [
     { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py",
       desc: "Baja los datos únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia.",
@@ -1347,7 +1355,7 @@
       return fetch("descripciones.json", { cache: "no-store" })
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null)
-        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; GVALG = (desc && desc.glosa_valor) || {}; GBRG = (desc && desc.glosa_brecha) || {}; FLEG = (desc && desc.fuentes_legibles) || {}; INFRAG = (desc && desc.infraestructura) || {}; return KB; });
+        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; GVALG = (desc && desc.glosa_valor) || {}; GBRG = (desc && desc.glosa_brecha) || {}; FLEG = (desc && desc.fuentes_legibles) || {}; INFRAG = (desc && desc.infraestructura) || {}; SREDG = (desc && desc.situacion_reduccion) || {}; return KB; });
     })
     .then((KB) => {
       pintarPortal(KB);
