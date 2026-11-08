@@ -61,17 +61,19 @@ def construir_svg(data):
     if not feats:
         raise SystemExit("GeoJSON sin features")
     minx, miny, maxx, maxy = bbox(feats)
-    # Escala manteniendo proporción; se invierte Y (lat crece hacia el norte → arriba).
     ancho_geo, alto_geo = (maxx - minx) or 1e-9, (maxy - miny) or 1e-9
-    esc = min((W - 2 * PAD) / ancho_geo, (H - 2 * PAD) / alto_geo)
-    # Centrado
-    offx = (W - ancho_geo * esc) / 2.0
-    offy = (H - alto_geo * esc) / 2.0
+    # Lienzo ceñido al mapa real (proporción geográfica), con un pequeño margen.
+    # Escala arbitraria para tener coordenadas cómodas; el viewBox se ajusta al contenido.
+    ESC = 1000.0
+    ancho = ancho_geo * ESC
+    alto = alto_geo * ESC
+    vb_w = round(ancho + 2 * PAD, 1)
+    vb_h = round(alto + 2 * PAD, 1)
 
     def proj(lon, lat):
-        x = offx + (lon - minx) * esc
-        y = offy + (maxy - lat) * esc  # invertir Y
-        return round(x, 2), round(y, 2)
+        x = PAD + (lon - minx) * ESC
+        y = PAD + (maxy - lat) * ESC  # invertir Y (norte arriba)
+        return round(x, 1), round(y, 1)
 
     paths = []
     for f in sorted(feats, key=lambda z: z["properties"].get("codigo", "")):
@@ -93,13 +95,11 @@ def construir_svg(data):
             paths.append(f'<path class="{clase}" d="{" ".join(d)}"><title>{titulo}</title></path>')
 
     svg = []
-    svg.append(f'<svg viewBox="0 0 {int(W)} {int(H)}" role="img" '
+    svg.append(f'<svg viewBox="0 0 {vb_w} {vb_h}" role="img" '
                f'aria-label="Mapa de los 21 territorios de Medellín (contorno real por comuna)">')
     svg.append('<g class="terr-grupo">')
     svg.extend("  " + p for p in paths)
     svg.append('</g>')
-    svg.append('<text class="leyenda" x="10" y="296">21 territorios</text>')
-    svg.append('<text class="leyenda-sub" x="10" y="310">16 comunas + 5 corregimientos</text>')
     svg.append('</svg>')
     return "\n".join(svg) + "\n"
 
