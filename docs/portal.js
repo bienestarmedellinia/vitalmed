@@ -695,10 +695,30 @@
     if (clave.indexOf("inseguridad") >= 0 || clave.indexOf("desempleo") >= 0 || clave === "ecv_t44") return true;
     return false;  // empleo/ocupación/deporte/cultura/planificación: subir es bueno
   }
+  // Dispersión entre los 21 territorios en el último año con dato →
+  // {anio, min, max, brecha, nombreMax, nombreMin, n}
+  function dispersionTerritorial(clave) {
+    const S = (KBG || {}).series || {}; const dat = S.datos || {}; const terr = S.territorios || {};
+    const vals = (dat[clave] || {}).valores; if (!vals) return null;
+    let anio = null;
+    Object.values(vals).forEach((serie) => Object.keys(serie || {}).forEach((a) => {
+      const n = Number(a); if (!isNaN(n) && (anio == null || n > anio)) anio = n;
+    }));
+    if (anio == null) return null;
+    const puntos = [];
+    Object.keys(vals).forEach((cod) => {
+      const v = Number((vals[cod] || {})[String(anio)]);
+      if (!isNaN(v)) puntos.push({ v, nombre: terr[cod] || ("Territorio " + cod) });
+    });
+    if (puntos.length < 2) return null;
+    puntos.sort((a, b) => a.v - b.v);
+    const min = puntos[0], max = puntos[puntos.length - 1];
+    const brecha = (min.v > 0) ? max.v / min.v : null;
+    return { anio, min: min.v, max: max.v, nombreMin: min.nombre, nombreMax: max.nombre, brecha, n: puntos.length };
+  }
   function panelCategoria(cat) {
     const KB = KBG || {}; const S = KB.series || {}; const dat = S.datos || {}; const catl = S.catalogo || [];
     const metaDe = (cl) => catl.find((c) => c.clave === cl) || {};
-    // indicadores únicos de la categoría con serie de CIUDAD (para los módulos de ciudad)
     const claves = [...new Set((cat.preguntas || []).map((p) => p.clave).filter((c) => (dat[c] || {}).ciudad))];
     // Módulo 2: indicadores clave con semáforo por tendencia
     const filas = claves.map((cl) => {
@@ -739,9 +759,57 @@
         <td>${f.semaforo} ${f.an.tendencia === "sube" ? "sube" : f.an.tendencia === "baja" ? "baja" : "estable"}</td></tr>`).join("")}</tbody></table></div>
       <p class="nota">Semáforo por <b>tendencia</b> (🟢 evoluciona a favor · 🔴 en contra · 🟡 estable), no contra una meta (el proyecto no tiene metas oficiales).</p>` : "";
 
+    /* ----- Módulo: ANÁLISIS TÉCNICO (síntesis cuantitativa por categoría, 100 % derivada del KB) ----- */
+    // (a) Magnitud + dispersión territorial por indicador (brecha máx/mín entre los 21 territorios).
+    const lineasAnalisis = claves.map((cl) => {
+      const meta = metaDe(cl);
+      const nombre = meta.nombre || cl;
+      const esPct = (meta.unidad || "").indexOf("%") >= 0;
+      const an = analizarSerie((dat[cl] || {}).ciudad);
+      const disp = dispersionTerritorial(cl);
+      let txt = `<b>${esc(nombre)}</b>: `;
+      if (an) {
+        txt += `último dato de ciudad ${fmt(an.actual, 1)}${esPct ? "%" : ""} (${an.anio})`;
+        if (an.varPct != null) txt += `, variación interanual ${an.varPct >= 0 ? "+" : ""}${fmt(an.varPct, 1)}%`;
+        if (an.nAnios > 1) txt += `; serie ${an.nAnios} años con tendencia a ${an.tendencia === "sube" ? "aumentar" : an.tendencia === "baja" ? "disminuir" : "mantenerse estable"}`;
+        txt += ". ";
+      }
+      if (disp) {
+        txt += `Entre territorios (${disp.anio}): de ${fmt(disp.min, 1)}${esPct ? "%" : ""} en ${esc(disp.nombreMin)} a ${fmt(disp.max, 1)}${esPct ? "%" : ""} en ${esc(disp.nombreMax)}`;
+        if (disp.brecha && disp.brecha >= 1.05) txt += ` (brecha de ${fmt(disp.brecha, 1)}×)`;
+        txt += ".";
+      }
+      return (an || disp) ? `<li>${txt}</li>` : null;
+    }).filter(Boolean);
+    // (b) Relaciones: cuántas correlaciones significativas tocan la categoría (contexto estadístico).
+    const corrCat = (Array.isArray(corr) ? corr : []).filter((c) =>
+      c && (setCat.has(c.resultado) || setCat.has(c.factor)));
+    const corrSig = corrCat.filter((c) => c.significativa);
+    // (c) Fuentes y cobertura reales de los indicadores de la categoría.
+    const fuentes = [...new Set(claves.map((cl) => metaDe(cl).fuente).filter(Boolean))];
+    const anios = claves.map((cl) => (metaDe(cl).anios || [])).filter((a) => a.length);
+    const aMin = anios.length ? Math.min(...anios.map((a) => a[0])) : null;
+    const aMax = anios.length ? Math.max(...anios.map((a) => a[a.length - 1])) : null;
+    const nivel = cat.grupo === "Ambientales" ? "estación de monitoreo (no comuna)"
+      : (claves.length ? "21 territorios (16 comunas + 5 corregimientos)" : "ciudad");
+    let evidencia = `Se analizan <b>${claves.length || (cat.preguntas || []).length}</b> indicador(es)`;
+    if (aMin && aMax) evidencia += `, cobertura ${aMin}–${aMax}`;
+    evidencia += `, a nivel de ${nivel}`;
+    if (fuentes.length) evidencia += `. Fuentes: ${esc(fuentes.join("; "))}`;
+    evidencia += ". ";
+    if (corrSig.length) evidencia += `Se detectaron <b>${corrSig.length}</b> asociación(es) estadísticamente significativa(s) entre territorios (Pearson+Spearman, 95%)`;
+    else if (corrCat.length) evidencia += `Se evaluaron ${corrCat.length} relación(es) entre territorios sin alcanzar significancia robusta`;
+    evidencia += ". Método: tendencia por extremos de la serie, variación interanual y dispersión máx/mín entre territorios; asociación, no causalidad (no se controla estructura de edad ni confusores).";
+
+    const modAnalisis = (lineasAnalisis.length || fuentes.length) ? `
+      <div class="cat-mod cat-analisis"><h4>Análisis técnico</h4>
+        ${lineasAnalisis.length ? `<ul>${lineasAnalisis.join("")}</ul>` : ""}
+        <p class="nota">${evidencia}</p></div>` : "";
+
     return `<div class="cat-panel">
       <div class="cat-mod"><h4>Resumen ejecutivo</h4><p>${resumen}</p></div>
       ${modIndicadores}
+      ${modAnalisis}
       ${criticos.length ? `<div class="cat-mod"><h4>Priorización territorial (índice de salud)</h4>
         <p><b>Territorios críticos:</b> ${esc(criticos.join(", "))}.<br>
         <b>Mejores desempeños:</b> ${esc(resilientes.join(", "))}.</p></div>` : ""}
