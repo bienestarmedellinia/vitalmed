@@ -905,7 +905,9 @@
         const sube = f.an.tendencia === "sube";
         const titulo = sube ? "Aumento sostenido" : "Reducción sostenida";
         const mag = ((GVALG || {})[f.clave] || "").split("|")[0];
-        const deQue = mag ? ` ${esc(mag.trim())}` : ` en <b>${esc(f.nombre)}</b>`;
+        // En esta viñeta la magnitud lleva artículo: "de participación cultural" → "de la participación cultural".
+        const magArt = mag ? mag.trim().replace(/^de\s+/i, "de la ") : "";
+        const deQue = magArt ? ` ${esc(magArt)}` : ` en <b>${esc(f.nombre)}</b>`;
         const col = (SREDG || {})[f.clave] || "lo que podría indicar un debilitamiento de las condiciones asociadas al indicador";
         situaciones.push(`${titulo}${deQue} en la ciudad (último dato ${fmt(f.an.actual, 1)}${f.unidad && f.unidad.indexOf("%") >= 0 ? "%" : ""}, ${f.an.anio}), ${esc(col)}.`);
       }
