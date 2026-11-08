@@ -913,11 +913,11 @@
       }
     });
     if (corrSig.length) situaciones.push(`Presencia de <b>${corrSig.length}</b> asociación(es) estadísticamente significativa(s) entre territorios que merecen seguimiento.`);
-    const modSituaciones = situaciones.length ? `<h4 class="sub">Situaciones de atención</h4><ul>${situaciones.slice(0, 5).map((s) => `<li>${s}</li>`).join("")}</ul>` : "";
+    const modSituaciones = situaciones.length ? `<h4 class="subsub">Situaciones de atención</h4><ul>${situaciones.slice(0, 5).map((s) => `<li>${s}</li>`).join("")}</ul>` : "";
 
     // (j) Implicaciones para la gestión pública: acciones curadas del banco, deduplicadas.
     const accionesBanco = [...new Set((cat.preguntas || []).flatMap((p) => p.acciones || []).map((a) => String(a).trim()).filter(Boolean))];
-    const modImplic = accionesBanco.length ? `<h4 class="sub">Implicaciones para la gestión pública</h4>
+    const modImplic = accionesBanco.length ? `<h4 class="subsub">Implicaciones para la gestión pública</h4>
         <ul>${accionesBanco.slice(0, 6).map((a) => `<li>${esc(a)}</li>`).join("")}</ul>
         <p class="nota">Líneas de acción sugeridas por el patrón observado; no constituyen prescripción.</p>` : "";
 
@@ -952,6 +952,7 @@
         <p>${relaciones}</p>
         <h4 class="sub">Consideraciones metodológicas</h4>
         ${metodologia}
+        ${(modSituaciones || modImplic) ? `<h4 class="sub">Hallazgos estratégicos</h4>` : ""}
         ${modSituaciones}
         ${modImplic}
         <h4 class="sub">Conclusión ejecutiva</h4>
