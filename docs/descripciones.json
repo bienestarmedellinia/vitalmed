@@ -8,5 +8,8 @@
   },
   "contexto": {
     "ecv_personas_asiste_participa_programas_culturales": "Este comportamiento podría estar asociado a cambios en los hábitos de consumo cultural, barreras de acceso territorial, limitaciones económicas de los hogares, modificaciones en la oferta institucional o efectos acumulados posteriores a la pandemia sobre las dinámicas de participación comunitaria."
+  },
+  "dispersion": {
+    "ecv_personas_asiste_participa_programas_culturales": "Este nivel de dispersión sugiere que la oferta cultural, la disponibilidad de equipamientos, las condiciones socioeconómicas y los niveles de movilidad urbana podrían estar influyendo significativamente en el comportamiento del indicador."
   }
 }

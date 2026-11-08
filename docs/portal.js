@@ -835,16 +835,18 @@
     const parrafosTerr = claves.map((cl) => {
       const disp = dispersionTerritorial(cl); if (!disp) return null;
       const nombre = metaDe(cl).nombre || cl, suf = unidadSuf(cl);
-      let t = `<b>${esc(nombre)}</b> (${disp.anio}): el mayor valor corresponde a <b>${esc(disp.nombreMax)}</b> con ${fmt(disp.max, 1)}${suf}, y el menor a <b>${esc(disp.nombreMin)}</b> con ${fmt(disp.min, 1)}${suf}`;
+      let t = `<b>${esc(nombre)}</b>. La distribución territorial presenta heterogeneidad entre comunas y corregimientos. Para ${disp.anio} se observa que <b>${esc(disp.nombreMax)}</b> registra el mayor nivel con ${fmt(disp.max, 1)}${suf}, mientras que <b>${esc(disp.nombreMin)}</b> presenta el menor con ${fmt(disp.min, 1)}${suf}`;
       if (disp.brecha && disp.brecha >= 1.05) {
-        t += `. La diferencia entre ambos extremos equivale a una <b>brecha de ${fmt(disp.brecha, 1)} veces</b>`;
+        t += `. La diferencia entre ambos extremos representa una <b>brecha relativa de ${fmt(disp.brecha, 1)} veces</b>`;
         if (disp.brecha >= 2) t += ", lo que refleja desigualdades territoriales relevantes en el acceso a oportunidades o condiciones";
       }
-      t += ".";
+      t += ". ";
+      const dh = (DISPG || {})[cl];
+      if (dh) t += esc(dh) + " ";
       return `<p>${t}</p>`;
     }).filter(Boolean);
     const terrContexto = parrafosTerr.length
-      ? `<p class="nota">La distribución territorial presenta heterogeneidad entre comunas y corregimientos; el nivel de dispersión sugiere que condiciones socioeconómicas, disponibilidad de equipamientos y movilidad urbana podrían incidir en el comportamiento del indicador (asociación descriptiva).</p>`
+      ? `<p class="nota">La magnitud de la dispersión se interpreta como asociación descriptiva entre territorios, no como causalidad.</p>`
       : (cat.grupo === "Ambientales"
         ? `<p class="nota">Esta categoría se mide por estación de monitoreo (no por comuna), por lo que no se calcula dispersión territorial entre los 21 territorios.</p>` : "");
 
@@ -1114,6 +1116,7 @@
   let KBG = null, pasoActual = 0, temporizador = null;
   let DESCG = {};  // descripciones curadas por clave (docs/descripciones.json); {} si no carga
   let CTXG = {};   // hipótesis de contexto curadas por clave (comportamiento histórico)
+  let DISPG = {};  // hipótesis de dispersión territorial curadas por clave
   const PASOS = [
     { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py",
       desc: "Baja los datos únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia.",
@@ -1316,7 +1319,7 @@
       return fetch("descripciones.json", { cache: "no-store" })
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null)
-        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; return KB; });
+        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; return KB; });
     })
     .then((KB) => {
       pintarPortal(KB);
