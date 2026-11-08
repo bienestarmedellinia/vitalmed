@@ -720,6 +720,8 @@
     const KB = KBG || {}; const S = KB.series || {}; const dat = S.datos || {}; const catl = S.catalogo || [];
     const metaDe = (cl) => catl.find((c) => c.clave === cl) || {};
     const claves = [...new Set((cat.preguntas || []).map((p) => p.clave).filter((c) => (dat[c] || {}).ciudad))];
+    // Claves "propias" de la categoría = aparecen en alguna pregunta NO multitema (no entran solo de refilón).
+    const clavesPropias = new Set((cat.preguntas || []).filter((p) => !p.multitema && p.clave).map((p) => p.clave));
     // Módulo 2: indicadores clave con semáforo por tendencia
     const filas = claves.map((cl) => {
       const an = analizarSerie((dat[cl] || {}).ciudad); if (!an) return null;
@@ -926,7 +928,7 @@
     const modSituaciones = situaciones.length ? `<h4 class="subsub">Situaciones de atención</h4><ul>${situaciones.slice(0, 5).map((s) => `<li>${s}</li>`).join("")}</ul>` : "";
 
     // (j) Implicaciones para la gestión pública: curadas por indicador si existen; si no, acciones del banco.
-    const impCuradas = claves.flatMap((cl) => ((IMPG || {})[cl] || [])).map((a) => String(a).trim()).filter(Boolean);
+    const impCuradas = claves.filter((cl) => clavesPropias.has(cl)).flatMap((cl) => ((IMPG || {})[cl] || [])).map((a) => String(a).trim()).filter(Boolean);
     const accionesBanco = [...new Set((cat.preguntas || []).flatMap((p) => p.acciones || []).map((a) => String(a).trim()).filter(Boolean))];
     const implicItems = impCuradas.length ? [...new Set(impCuradas)] : accionesBanco;
     const modImplic = implicItems.length ? `<h4 class="subsub">Implicaciones para la gestión pública</h4>
@@ -953,6 +955,9 @@
       ? `Existen asociaciones significativas que orientan la focalización. `
       : `No se identifican relaciones estadísticamente robustas, por lo que los patrones deben leerse como descriptivos. `;
     conclusion += `Se recomienda focalizar esfuerzos en los territorios rezagados para reducir las brechas observadas.`;
+    // Si hay conclusión ejecutiva curada para un indicador PROPIO de la categoría, se prioriza.
+    const concCurada = claves.filter((cl) => clavesPropias.has(cl)).map((cl) => (CONCG || {})[cl]).find(Boolean);
+    if (concCurada) conclusion = esc(concCurada);
 
     const modAnalisis = (parrafosHist.length || parrafosTerr.length || fuentes.length) ? `
       <div class="cat-mod cat-analisis"><h4>Análisis técnico ampliado</h4>
@@ -1160,6 +1165,7 @@
   let SREDG = {};  // coletilla curada de la situación de reducción por clave
   let ACTG = {};   // adjetivo de 'actividad' por clave (viñeta de concentración)
   let IMPG = {};   // implicaciones de gestión curadas por clave (array de líneas)
+  let CONCG = {};  // conclusión ejecutiva curada por clave
   const PASOS = [
     { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py",
       desc: "Baja los datos únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia.",
@@ -1362,7 +1368,7 @@
       return fetch("descripciones.json", { cache: "no-store" })
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null)
-        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; GVALG = (desc && desc.glosa_valor) || {}; GBRG = (desc && desc.glosa_brecha) || {}; FLEG = (desc && desc.fuentes_legibles) || {}; INFRAG = (desc && desc.infraestructura) || {}; SREDG = (desc && desc.situacion_reduccion) || {}; ACTG = (desc && desc.actividad) || {}; IMPG = (desc && desc.implicaciones) || {}; return KB; });
+        .then((desc) => { DESCG = (desc && desc.descripciones) || {}; CTXG = (desc && desc.contexto) || {}; DISPG = (desc && desc.dispersion) || {}; TAPG = (desc && desc.territorio_apertura) || {}; GVALG = (desc && desc.glosa_valor) || {}; GBRG = (desc && desc.glosa_brecha) || {}; FLEG = (desc && desc.fuentes_legibles) || {}; INFRAG = (desc && desc.infraestructura) || {}; SREDG = (desc && desc.situacion_reduccion) || {}; ACTG = (desc && desc.actividad) || {}; IMPG = (desc && desc.implicaciones) || {}; CONCG = (desc && desc.conclusion) || {}; return KB; });
     })
     .then((KB) => {
       pintarPortal(KB);

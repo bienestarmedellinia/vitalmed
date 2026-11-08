@@ -45,6 +45,10 @@
       "Complementar el análisis con variables socioeconómicas y demográficas para identificar factores explicativos de las brechas observadas."
     ]
   },
+  "conclusion": {
+    "_nota": "conclusión ejecutiva curada por indicador; si existe, reemplaza la conclusión derivada automática.",
+    "ecv_personas_asiste_participa_programas_culturales": "La participación ciudadana en programas culturales presenta una tendencia descendente durante la última década y niveles de cobertura relativamente bajos para el conjunto de la ciudad. Adicionalmente, las diferencias entre comunas y corregimientos evidencian importantes desigualdades territoriales en el acceso a actividades culturales. Aunque no se identifican relaciones estadísticamente robustas con otras variables analizadas, la magnitud de las brechas observadas sugiere la necesidad de focalizar esfuerzos institucionales en los territorios con menor participación, fortaleciendo la equidad territorial y el acceso inclusivo a la oferta cultural de Medellín."
+  },
   "fuentes_legibles": {
     "_nota": "traduce el identificador técnico del campo 'fuente' del KB a su nombre institucional para la prosa de Consideraciones metodológicas",
     "ECV - serie histórica de indicadores (Planeación)": "la Encuesta de Calidad de Vida (ECV) y la Serie Histórica de Indicadores de Planeación Municipal",
