@@ -836,15 +836,20 @@
       const disp = dispersionTerritorial(cl); if (!disp) return null;
       const nombre = metaDe(cl).nombre || cl, suf = unidadSuf(cl);
       const ap = (TAPG || {})[cl];
-      let t = `<b>${esc(nombre)}</b>. La distribución territorial del indicador presenta una alta heterogeneidad entre comunas y corregimientos${ap ? ", " + esc(ap) : ""}. Para ${disp.anio} se observa que <b>${esc(disp.nombreMax)}</b> registra el mayor nivel con ${fmt(disp.max, 1)}${suf}, mientras que <b>${esc(disp.nombreMin)}</b> presenta el menor con ${fmt(disp.min, 1)}${suf}`;
+      let t = `<p><b>${esc(nombre)}</b>. La distribución territorial del indicador presenta una alta heterogeneidad entre comunas y corregimientos${ap ? ", " + esc(ap) : ""}. Para ${disp.anio} se observa que:</p>`;
+      const items = [
+        `<b>${esc(disp.nombreMax)}</b> registra el mayor nivel con ${fmt(disp.max, 1)}${suf}.`,
+        `<b>${esc(disp.nombreMin)}</b> presenta el menor nivel con ${fmt(disp.min, 1)}${suf}.`,
+      ];
       if (disp.brecha && disp.brecha >= 1.05) {
-        t += `. La diferencia entre ambos extremos representa una <b>brecha relativa de ${fmt(disp.brecha, 1)} veces</b>`;
-        if (disp.brecha >= 2) t += ", lo que refleja desigualdades territoriales relevantes en el acceso a oportunidades o condiciones";
+        let b = `La diferencia entre ambos territorios representa una <b>brecha relativa de ${fmt(disp.brecha, 1)} veces</b>`;
+        if (disp.brecha >= 2) b += ", lo que refleja desigualdades territoriales relevantes en el acceso a oportunidades o condiciones";
+        items.push(b + ".");
       }
-      t += ". ";
+      t += `<ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul>`;
       const dh = (DISPG || {})[cl];
-      if (dh) t += esc(dh) + " ";
-      return `<p>${t}</p>`;
+      if (dh) t += `<p>${esc(dh)}</p>`;
+      return t;
     }).filter(Boolean);
     const terrContexto = parrafosTerr.length
       ? `<p class="nota">La magnitud de la dispersión se interpreta como asociación descriptiva entre territorios, no como causalidad.</p>`
