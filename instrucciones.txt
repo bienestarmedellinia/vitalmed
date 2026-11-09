@@ -93,8 +93,8 @@ trabaja solo, y viste lo que produce. Lo que sigue más abajo es el detalle téc
         las etapas en orden y guarda el artefacto descargable "resultados-ecv".
       - Disparadores configurados (abrir el YAML, acredita que corre SIN intervención):
           https://github.com/bienestarmedellinia/vitalmed/blob/main/.github/workflows/pipeline.yml
-        on: push a main · workflow_dispatch (ejecución manual) · schedule cron "0 7 1 * *"
-        (automática el día 1 de cada mes).
+        on: push a main · workflow_dispatch (ejecución manual) · schedule (automático):
+        una ejecución diaria (~6:00 a.m. hora Colombia) y una el día 1 de cada mes.
       - Resultados publicados por el pipeline (se actualizan en cada ejecución):
           https://github.com/bienestarmedellinia/vitalmed/tree/main/outputs
         (outputs/tablas/hallazgo.json, analisis_mortalidad_comuna.csv, outputs/graficos/*.png)
