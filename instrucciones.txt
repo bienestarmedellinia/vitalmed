@@ -2,8 +2,9 @@ INSTRUCCIONES - Bienestar Medellín IA (Medellín, Bienestar Basado en Datos)
 Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
 
 1. QUÉ ES
-   Pipeline automático que descarga datos oficiales (ECV, SIATA y MEData),
-   valida, integra y analiza la salud y el bienestar por comuna de Medellín.
+   Pipeline automático que descarga datos oficiales de 6 fuentes (MEData, ECV, SIATA,
+   DANE, SIVIGILA y RIPS), valida, integra y analiza la salud y el bienestar por
+   comuna de Medellín.
    Combina mortalidad e intento de suicidio por comuna (MEData) en un índice de
    priorización territorial, y reporta la calidad del aire (PM2.5, SIATA) como
    contexto ambiental por estación; la ECV aporta la llave y cobertura territorial.
@@ -16,45 +17,77 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
    pipeline (cálculo determinista, sin modelos de lenguaje en tiempo de ejecución).
 
 2. PROBARLO EN LÍNEA
-   Portal web / observatorio (sin instalar nada): https://bienestarmedellinia.github.io/vitalmed/
-   Explorador de datos (todas las estadísticas, tablas y descargas CSV; módulo
-   independiente): https://bienestarmedellinia.github.io/vitalmed/datos.html
-   Descargas directas: carpeta docs/datos/ del repositorio (se regenera en cada run).
-   Pipeline: pestaña "Actions" del repo -> "pipeline-ecv" -> "Run workflow".
+   a) PIPELINE AUTOMÁTICO (modalidad principal) — ejecutar y ver la salida actualizada:
+      Repo -> pestaña "Actions" -> workflow "pipeline-ecv" -> botón "Run workflow".
+      El proceso corre COMPLETO en los servidores de GitHub (sin instalar nada ni usar
+      tu equipo) y, al terminar en verde, regenera los resultados y los publica en el
+      repositorio (commit automático "chore(outputs) ... [skip ci]").
+      Automatización acreditable: el workflow se dispara por 3 vías (ver .github/workflows/pipeline.yml):
+        - push a main (cuando cambia el código del pipeline),
+        - workflow_dispatch (el botón "Run workflow", ejecución manual del jurado),
+        - schedule cron "0 7 1 * *" (automática, día 1 de cada mes).
+      Evidencia: el historial de ejecuciones queda en la pestaña Actions; cada run
+      guarda sus registros y el artefacto "resultados-ecv" (tablas, gráficos, manifiesto).
+   b) VISUALIZACIÓN (valor agregado) — abrir el producto, sin instalar nada:
+      Portal web / observatorio: https://bienestarmedellinia.github.io/vitalmed/
+      Explorador de datos (tablas y descargas CSV): https://bienestarmedellinia.github.io/vitalmed/datos.html
+      El portal CONSUME los resultados del pipeline (docs/knowledge_base.json y docs/datos/),
+      que el commit automático del workflow mantiene actualizados.
 
 3. ENTORNO
    Lenguaje: Python 3.11
    Pipeline (requirements.txt, versiones fijas):
      pandas==2.2.3 · openpyxl==3.1.5 · requests==2.32.3 · PyYAML==6.0.2
-     pyarrow==17.0.0 · matplotlib==3.9.2
-   Asistente por línea de comandos (asistente/requirements.txt, OPCIONAL):
-     openai==1.54.3 (solo mejora la redacción; la API key es OPCIONAL)
+     pyarrow==17.0.0 · matplotlib==3.9.2 · xlrd==2.0.1
+     reportlab==4.2.5 · pillow==13.0.0  (solo para generar guia_entrega.pdf, paso 7b)
+   Prueba de paridad del motor (en el workflow): Node 22 (sin dependencias npm).
+   Motor por línea de comandos (asistente/requirements.txt, OPCIONAL):
+     openai==1.54.3 (solo mejora la redacción; la API key es OPCIONAL y está apagada)
 
 4. EJECUTARLO
-   # Opción A (recomendada) - Probar en línea: abrir el portal web (no instala nada)
-   #   https://bienestarmedellinia.github.io/vitalmed/
-   # Opción B - Motor determinista por línea de comandos (local, sin navegador):
-   python asistente/app.py --cli "¿Qué comunas priorizar en salud?"
-   # Opción C - Pipeline completo (NO en equipos de poca RAM):
-   pip install -r requirements.txt
-   python scripts/01_descargar.py
-   python scripts/03_validar.py
-   python scripts/02_limpiar.py
-   python scripts/04_integrar.py
-   python scripts/05_analizar.py
-   python scripts/06_visualizar.py
-   python scripts/07_construir_kb.py
-   python scripts/09_guia_entrega.py     # genera guia_entrega.pdf (datos del equipo en equipo.yml)
+   Vía 1 (RECOMENDADA para la modalidad Pipeline) - En GitHub Actions, sin instalar nada:
+     Repo -> "Actions" -> "pipeline-ecv" -> "Run workflow" (rama main) -> "Run workflow".
+     Verás las etapas ejecutarse en orden; al terminar en verde, los resultados quedan
+     commiteados en outputs/ y docs/, y disponibles como artefacto "resultados-ecv".
 
-5. QUÉ DEBE VER
-   - Motor (Opción B): ante "¿qué comuna priorizar?", responde "La Candelaria,
-     1325.6 defunciones por 100.000 hab. (2022)" con su evidencia y fuente.
-   - Portal: al abrir la URL se ven la pregunta de investigación, el hallazgo
-     (La Candelaria, 4,58 veces la tasa de Santa Elena), la propuesta, el
+   Vía 2 - Pipeline completo en local (requiere Python 3.11 y buena RAM/red; NO en equipos
+   de poca memoria: las bases ECV son grandes). Ejecutar los pasos EN ESTE ORDEN:
+     pip install -r requirements.txt
+     python scripts/01_descargar.py       # 1) descarga de las fuentes oficiales -> data/raw/
+     python scripts/03_validar.py         # 2) valida la llave territorial (16 comunas + 5 corregimientos)
+     python scripts/02_limpiar.py         # 3) homologa la variable territorial por año (p_006/P_007/A.7)
+     python scripts/04_integrar.py        # 4) tabla agregada por territorio -> outputs/tablas/
+     python scripts/05_analizar.py        # 5) hallazgo, ranking, correlaciones e índice de priorización
+     python scripts/06_visualizar.py      # 6) gráficos PNG + diagrama del pipeline
+     python scripts/08_siata.py           # 6b) PM2.5 por estación (SIATA)
+     python scripts/10_dane_eevv.py       # 6c) mortalidad mensual por causa + edad (DANE)
+     python scripts/11_sivigila.py        # 6d) series semanales ESI-IRAG e intento de suicidio (SIVIGILA/INS)
+     python scripts/12_rips.py            # 6e) morbilidad anual por CIE-10 (RIPS/MinSalud)
+     python scripts/13_mapa_hero.py       # 6f) mapa SVG de los 21 territorios (GeoMedellín) -> docs/
+     python scripts/14_foto_hero.py       # 6g) foto del banner (Wikimedia, CC BY-SA) -> docs/
+     python scripts/07_construir_kb.py    # 7) construye knowledge_base.json + datos abiertos (docs/datos/)
+     python scripts/09_guia_entrega.py    # 7b) genera guia_entrega.pdf (datos del equipo en equipo.yml)
+     python asistente/test_motor.py       # 8) pruebas del motor (19/19, incluye paridad JS/Python)
+
+   Vía 3 - Solo el motor determinista por línea de comandos (liviano, no procesa datos):
+     python asistente/app.py --cli "¿Qué comunas priorizar en salud?"
+
+5. QUÉ DEBE VER (criterios de éxito)
+   - Pipeline en Actions (Vía 1): el run "pipeline-ecv" termina en VERDE con todas las
+     etapas OK, en este orden: Descargar -> Validar ("VALIDACIÓN OK: llave territorial
+     consistente") -> Limpiar -> Integrar -> Analizar -> Visualizar -> SIATA -> DANE ->
+     SIVIGILA -> RIPS -> mapa -> foto -> Construir KB -> PDF -> Pruebas del motor (19/19).
+     Al final, el commit automático "chore(outputs) ... [skip ci]" actualiza outputs/,
+     docs/knowledge_base.json, docs/datos/ y guia_entrega.pdf. Tiempo típico ~3-4 min.
+   - Pipeline en local (Vía 2): se generan outputs/tablas/hallazgo.json y los gráficos
+     en outputs/graficos/; test_motor.py imprime "19/19".
+   - Portal (Visualización): al abrir la URL se ven la pregunta de investigación, el
+     hallazgo (La Candelaria, 4,58 veces la tasa de Santa Elena), la propuesta, el
      observatorio por categorías con su análisis técnico, el mapa interactivo
      (coropleta + red de hallazgos), el flujo del método y la transparencia de datos.
-   - Pipeline: "VALIDACIÓN OK: llave territorial consistente"; genera
-     outputs/tablas/hallazgo.json y los gráficos en outputs/graficos/.
+     La fecha "última actualización" del portal coincide con el último run del pipeline.
+   - Motor (Vía 3): ante "¿qué comuna priorizar?", responde "La Candelaria,
+     1325.6 defunciones por 100.000 hab. (2022)" con su evidencia y fuente.
 
 6. DATOS Y FUENTES
    - ECV · Encuesta de Calidad de Vida (microdatos) · Alcaldía de Medellín
