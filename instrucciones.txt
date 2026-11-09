@@ -19,8 +19,10 @@ Enlace:  https://bienestarmedellinia.github.io/vitalmed/
 
 Se abre una página web. Baja con el mouse y explora: hay un mapa de Medellín que
 cambia de color según el tema que elijas (empleo, aire, salud, deporte, cultura…),
-y tarjetas con 13 categorías, cada una con su explicación en palabras. La idea que
-queremos mostrar: el bienestar NO es igual en todos los barrios de la ciudad.
+y tarjetas con 13 categorías, cada una con un análisis detallado que permite entender
+qué pasa con ese indicador, cómo ha cambiado en el tiempo y cómo se distribuye entre
+los territorios, con las cifras y la fuente a la vista. La idea que queremos mostrar:
+el bienestar NO es igual en todos los barrios de la ciudad.
 No tienes que hacer nada más que mirar y hacer clic donde te llame la atención.
 
 ------------------------------------------------------------
