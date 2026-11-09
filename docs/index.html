@@ -419,6 +419,19 @@
     <section id="transparencia" class="rev">
       <h2>2 · Transparencia de datos y uso de IA</h2>
       <p class="sub">Qué datasets se usaron, de dónde vienen, bajo qué condiciones y para qué. Cada cifra del portal se puede rastrear hasta una de estas fuentes.</p>
+      <div class="caja" style="margin-bottom:16px">
+        <h3 style="margin:0 0 8px;font-size:1rem;color:var(--azul)">Resumen de datos</h3>
+        <p class="nota" style="margin:0 0 10px">La solución integra <b>6 fuentes oficiales</b> de datos abiertos y <b>~39 indicadores</b> (series reales, sin datos sintéticos):</p>
+        <ul class="lim nota" style="padding-left:18px;margin:0">
+          <li><b>MEData — Secretaría de Salud de Medellín (obligatoria):</b> 10 indicadores sanitarios por comuna (mortalidad, intento de suicidio, natalidad, dengue, hepatitis A, parotiditis, tosferina, tuberculosis pulmonar, varicela, violencia de género), 2008–2022.</li>
+          <li><b>ECV — Encuesta de Calidad de Vida, Alcaldía de Medellín:</b> 21 indicadores sociales por territorio (empleo, seguridad alimentaria, deporte, cultura, jefatura de hogar, demografía), serie 2007–2022.</li>
+          <li><b>SIATA — Valle de Aburrá:</b> 1 indicador ambiental (PM2.5) por estación, años completos 2020–2025.</li>
+          <li><b>DANE — Estadísticas Vitales:</b> mortalidad mensual por causa CIE-10 (total, respiratorias, circulatorias) y por grupo de edad, nivel municipio.</li>
+          <li><b>SIVIGILA — INS:</b> 2 series semanales (ESI-IRAG e intento de suicidio), nivel municipio.</li>
+          <li><b>RIPS — MinSalud:</b> atenciones anuales por grupo CIE-10 (respiratorias y mentales), nivel municipio.</li>
+        </ul>
+        <p class="nota" style="margin:10px 0 0">Conteo: <b>31 indicadores por territorio</b> (21 ECV + 10 MEData) más PM2.5 (SIATA) y las series de ciudad de DANE, SIVIGILA y RIPS. Nota honesta: el observatorio ofrece 200 preguntas, pero el conocimiento base tiene ~38–39 piezas mostrables distintas; varias preguntas exploran el mismo indicador desde otro ángulo.</p>
+      </div>
       <div class="caja tabla-wrap">
         <table class="transp">
           <caption class="solo-lector">Datasets utilizados</caption>
@@ -435,7 +448,7 @@
             <tr><td><span class="etq">MEData · obligatorio</span><br>VC_Datos_Enfermedades · las otras 8 capas: natalidad, dengue, hepatitis A, parotiditis, tosferina, tuberculosis pulmonar, varicela y violencia de género</td><td>Secretaría de Salud de Medellín</td>
               <td>Casos y tasa por comuna, 2008/2012/2013–2022</td>
               <td><a href="https://www.medellin.gov.co/servidormapas/rest/services/salud_protec_soc/VC_Datos_Enfermedades/MapServer" rel="noopener noreferrer">Servicio REST</a></td>
-              <td>Mismo servicio y entidad que las capas anteriores; consultar la ficha de cada evento en MEData</td><td>Consultas del asistente y factores asociados</td></tr>
+              <td>Mismo servicio y entidad que las capas anteriores; consultar la ficha de cada evento en MEData</td><td>Observatorio por preguntas y factores asociados</td></tr>
             <tr><td><span class="etq">Social</span><br>Encuesta de Calidad de Vida (ECV) 2022–2025</td><td>Alcaldía de Medellín</td>
               <td>Microdatos → solo conteos agregados por territorio</td>
               <td><a href="https://www.medellin.gov.co/es/centro-documental/encuesta-calidad-de-vida/" rel="noopener noreferrer">Centro documental</a></td>
@@ -443,7 +456,7 @@
             <tr><td><span class="etq">Social</span><br>ECV · Serie histórica de indicadores (2007–2022)</td><td>Alcaldía de Medellín · Planeación</td>
               <td>Indicadores oficiales por territorio: empleo, seguridad alimentaria, deporte, cultura, hogares, demografía</td>
               <td><a href="https://www.medellin.gov.co/es/centro-documental/encuesta-de-calidad-de-vida-2022/" rel="noopener noreferrer">Centro documental ECV 2022</a></td>
-              <td>Misma condición que la ECV</td><td>Factores sociales asociados y consultas del asistente</td></tr>
+              <td>Misma condición que la ECV</td><td>Factores sociales asociados y observatorio por preguntas</td></tr>
             <tr><td><span class="etq">Ambiental</span><br>Datos validados de calidad del aire (PM2.5), años completos desde 2020</td><td>SIATA · Valle de Aburrá</td>
               <td>Medias anuales por estación con ≥ 9 meses válidos (cada mes ≥ 75 % de horas válidas)</td>
               <td><a href="https://siata.gov.co/IDEAM/" rel="noopener noreferrer">siata.gov.co/IDEAM</a></td>
