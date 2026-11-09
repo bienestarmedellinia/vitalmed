@@ -116,7 +116,8 @@ verificadas** del knowledge base (`docs/knowledge_base.json`). No inventa datos.
   queda apagado por defecto y solo redactaría una respuesta ya calculada; no
   genera cifras.
 
-Uso local (opcional, sin instalar nada pesado; corre en la Raspberry Pi):
+Uso local (opcional, ligero: solo lee un JSON pequeño, no procesa datos pesados; corre en
+cualquier computador con Python 3.11):
 
 ```bash
 # el portal publicado no requiere instalar nada:
