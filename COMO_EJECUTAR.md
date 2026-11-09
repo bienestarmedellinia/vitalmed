@@ -36,26 +36,7 @@ Qué puedes hacer:
 
 ---
 
-## Opción C · Motor determinista en tu computador (línea de comandos)
-
-Requiere **Python 3.11**. No necesita instalar dependencias (el motor usa solo
-la librería estándar y el knowledge base incluido en el repositorio).
-
-1. En GitHub, botón verde **Code → Download ZIP**. Descomprime el archivo.
-2. Abre una terminal en la carpeta descomprimida.
-3. Ejecuta una pregunta:
-
-```
-python asistente/app.py --cli "¿Qué comunas priorizar en salud?"
-```
-
-**¿Funcionó?** Verás la respuesta "La Candelaria, Laureles Estadio, Manrique…"
-con su evidencia, fuente y limitaciones. Es el mismo motor determinista que usa
-el observatorio web; esta vía es solo una verificación local opcional.
-
----
-
-## Opción D · Verificar el pipeline completo (técnico)
+## Opción C · Verificar el pipeline completo (técnico)
 
 En la pestaña **Actions** del repositorio → workflow **pipeline-principal** →
 **Run workflow**. Verás los 8 pasos descargar los datos oficiales, validarlos,
