@@ -774,8 +774,29 @@
     // (c) Fuentes y cobertura reales de los indicadores de la categoría.
     const fuentes = [...new Set(claves.map((cl) => metaDe(cl).fuente).filter(Boolean))];
     const anios = claves.map((cl) => (metaDe(cl).anios || [])).filter((a) => a.length);
-    const aMin = anios.length ? Math.min(...anios.map((a) => a[0])) : null;
-    const aMax = anios.length ? Math.max(...anios.map((a) => a[a.length - 1])) : null;
+    // Cobertura temporal: sobre indicadores PROPIOS de la categoría (no arrastrados por
+    // preguntas multitema), para no exagerar el rango. calidad_aire usa SIATA (por estación).
+    const clavesCob = claves.filter((cl) => clavesPropias.has(cl));
+    const aniosCob = (clavesCob.length ? clavesCob : claves).map((cl) => (metaDe(cl).anios || [])).filter((a) => a.length);
+    let aMin = aniosCob.length ? Math.min(...aniosCob.map((a) => a[0])) : null;
+    let aMax = aniosCob.length ? Math.max(...aniosCob.map((a) => a[a.length - 1])) : null;
+    // ¿los indicadores propios tienen el mismo rango o rangos distintos dentro del total?
+    const subrangosDistintos = aniosCob.length > 1 &&
+      (new Set(aniosCob.map((a) => a[0] + "-" + a[a.length - 1])).size > 1);
+    let coberturaTxt;
+    if (cat.grupo === "Ambientales") {
+      const pm = (((KB.indicadores || {}).pm25_siata || {}).anios_completos) || [];
+      if (pm.length) { aMin = pm[0]; aMax = pm[pm.length - 1]; }
+      coberturaTxt = (aMin && aMax)
+        ? `${aMin}–${aMax} (PM2.5 por estación de monitoreo, SIATA; años completos)`
+        : "años completos disponibles de SIATA";
+    } else if (aMin && aMax) {
+      coberturaTxt = `${aMin}–${aMax}` + (subrangosDistintos
+        ? " (rango del conjunto de indicadores de la categoría; cada indicador puede cubrir un subperíodo dentro de ese rango según su fuente)"
+        : "");
+    } else {
+      coberturaTxt = "según la disponibilidad de cada indicador en su fuente oficial";
+    }
     const nivel = cat.grupo === "Ambientales" ? "estación de monitoreo (no comuna)"
       : (claves.length ? "21 territorios (16 comunas y 5 corregimientos)" : "ciudad");
 
@@ -891,7 +912,7 @@
     const infraMatiz = claves.map((cl) => (INFRAG || {})[cl]).find(Boolean) || "";
     const metodologia = `<p>El análisis se desarrolló utilizando información proveniente de ${fuentesProsa}, considerando los siguientes componentes:</p>
       <ul>
-        <li>Cobertura temporal: ${aMin && aMax ? `${aMin}–${aMax}` : "según disponibilidad del indicador"}.</li>
+        <li>Cobertura temporal: ${coberturaTxt}.</li>
         <li>Cobertura espacial: ${nivel}.</li>
         <li>Evaluación de tendencias mediante comparación entre extremos de la serie.</li>
         <li>Cálculo de variaciones interanuales.</li>
@@ -959,7 +980,24 @@
     const concCurada = claves.filter((cl) => clavesPropias.has(cl)).map((cl) => (CONCG || {})[cl]).find(Boolean);
     if (concCurada) conclusion = esc(concCurada);
 
-    const modAnalisis = (parrafosHist.length || parrafosTerr.length || fuentes.length) ? `
+    const esAmbiental = cat.grupo === "Ambientales";
+    const descAire = "La calidad del aire se mide con el material particulado fino PM2.5 (microgramos por m³) registrado por las estaciones de monitoreo de SIATA en el Valle de Aburrá. Es un indicador ambiental de exposición de la población a contaminación atmosférica.";
+    const metodoAire = `<p>El análisis del aire se desarrolló con los datos validados de PM2.5 de SIATA:</p>
+      <ul>
+        <li>Cobertura temporal: ${coberturaTxt}.</li>
+        <li>Cobertura espacial: estación de monitoreo (no por comuna); SIATA no mide por territorio.</li>
+        <li>Se promedian las mediciones por estación y año, con control de validez (meses y horas válidas).</li>
+      </ul>
+      <p class="nota">Por medirse por estación y no por comuna, esta categoría no incluye dispersión entre los 21 territorios ni correlaciones territoriales; se presenta como contexto ambiental de ciudad. Asociación, no causalidad.</p>`;
+
+    const modAnalisis = esAmbiental ? `
+      <div class="cat-mod cat-analisis"><h4>Análisis técnico</h4>
+        <h4 class="sub">Descripción del indicador</h4>
+        <p>${descAire}</p>
+        <h4 class="sub">Consideraciones metodológicas</h4>
+        ${metodoAire}
+      </div>`
+      : (parrafosHist.length || parrafosTerr.length || fuentes.length) ? `
       <div class="cat-mod cat-analisis"><h4>Análisis técnico</h4>
         <h4 class="sub">Descripción del indicador</h4>
         <p>${descripcion}</p>
