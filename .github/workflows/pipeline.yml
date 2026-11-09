@@ -120,5 +120,16 @@ jobs:
             echo "Sin cambios en outputs."
           else
             git commit -m "chore(outputs): actualiza tablas y gráficos [skip ci]"
-            git push
+            # Push robusto: si main avanzó durante la ejecución (p. ej. otro merge),
+            # reintegra los cambios remotos con rebase y reintenta (evita el rechazo
+            # "fetch first" por condición de carrera).
+            for intento in 1 2 3 4 5; do
+              if git push; then
+                echo "Push OK (intento $intento)."
+                break
+              fi
+              echo "Push rechazado; actualizando desde origin (intento $intento)…"
+              git pull --rebase --autostash origin main || true
+              sleep 5
+            done
           fi
