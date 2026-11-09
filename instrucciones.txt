@@ -28,22 +28,21 @@ No tienes que hacer nada más que mirar y hacer clic donde te llame la atención
 ------------------------------------------------------------
 PASO 2 · El PIPELINE que trabaja solo (la automatización)
 ------------------------------------------------------------
-Enlace:  https://github.com/bienestarmedellinia/vitalmed/actions
+Enlace:  https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
 
-Se abre una página con una LISTA. Cada fila es un registro de una ejecución
-automática del pipeline (nuestro proceso principal, llamado "pipeline-principal").
-Lo único que tienes que fijarte:
+Este enlace abre directamente la lista de ejecuciones de NUESTRO pipeline
+("pipeline-principal"), sin mezclarla con otros procesos del proyecto. Cada fila es
+un registro de una ejecución automática. Lo único que tienes que fijarte:
    • Un ícono de CHECK (✓) a la izquierda de la fila = esa ejecución terminó bien.
      (En GitHub ese check se ve en color gris, no verde; igual significa "correcto".
       Un ícono con una X roja significaría que falló.)
    • La fecha y hora a la derecha = cuándo se ejecutó.
-Para identificar nuestro pipeline: a la izquierda de la página hay una lista de
-procesos; haz clic en "pipeline-principal" para ver solo sus ejecuciones.
+Que haya varias filas con check = el pipeline se ejecuta solo y de forma repetible.
+
 Si quieres ver el detalle de una (opcional): haz clic sobre el TÍTULO en azul de la
 primera fila. Se abre otra pantalla; en el recuadro gris de la izquierda haz clic en
 "pipeline". Verás la lista de tareas (descargar, validar, limpiar, analizar…), cada
 una con su check: son los pasos que hizo en orden, sin que nadie lo operara.
-Conclusión: ver varias filas con check = el pipeline se ejecuta solo y de forma repetible.
 
 ------------------------------------------------------------
 PASO 3 · Lo que el pipeline produce (los resultados)
