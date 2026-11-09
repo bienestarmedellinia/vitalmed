@@ -47,7 +47,8 @@ ejecuta solo, una y otra vez, sin que nadie lo opere a mano. Eso es un "pipeline
    2. En la pantalla que se abre, haz clic en la palabra "pipeline".
    3. Verás la lista de tareas que hizo, en orden: descargar, validar, limpiar,
       integrar, analizar, generar gráficos, procesar las otras fuentes (aire, DANE,
-      SIVIGILA, RIPS) y armar los resultados. Cada tarea tiene su check.
+      SIVIGILA, RIPS) y armar los resultados. Cada tarea tiene su check (aquí dentro
+      el check se ve gris; también significa "hecho correctamente").
 
 ------------------------------------------------------------
 PASO 3 · Lo que el pipeline produce (los resultados)
