@@ -2,10 +2,14 @@
 # Complétalos y vuelve a generar la guía (ver COMO_EJECUTAR.md o el workflow).
 # Mientras un valor empiece por "[", la guía lo marca como POR COMPLETAR.
 
-nombre_equipo: "[NOMBRE DEL EQUIPO]"
-categoria: "[Interna o Externa]"          # según las reglas: Interna (ITM) / Externa
-lider_nombre: "[Nombre del líder]"
-lider_correo: "[correo del líder]"
+nombre_equipo: "MCC GLOBAL SOLUTIONS"
+categoria: "Interna"                       # Interna (ITM) / Externa
+lider_nombre: "Walter Andrés Tabares"
+lider_correo: "waltertabares31943@correo.itm.edu.co"
 integrantes:
-  - nombre: "[Nombre integrante 1]"
-    programa: "[Programa / IES]"
+  - nombre: "Walter Andrés Tabares"
+    programa: "ITM · Ingeniería de Sistemas (9° semestre)"
+    rol: "Líder"
+  - nombre: "Jorge Alexander Marin"
+    programa: "ITM · Ingeniería de Sistemas (9° semestre)"
+    rol: "Integrante"
