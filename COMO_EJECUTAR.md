@@ -57,7 +57,7 @@ el observatorio web; esta vía es solo una verificación local opcional.
 
 ## Opción D · Verificar el pipeline completo (técnico)
 
-En la pestaña **Actions** del repositorio → workflow **pipeline-ecv** →
+En la pestaña **Actions** del repositorio → workflow **pipeline-principal** →
 **Run workflow**. Verás los 8 pasos descargar los datos oficiales, validarlos,
 integrarlos, analizarlos y generar los resultados. Al terminar, descarga el
 artefacto **resultados-ecv**.
