@@ -66,9 +66,9 @@ conforme a la Cláusula de Ética y Transparencia de la Hackathon.
 
 ## Nota de arquitectura
 
-El desarrollo local se hace en una Raspberry Pi, que **no procesa los datos**
-(leer las bases completas la satura). Todo el cómputo pesado corre en GitHub
-Actions. La RPi solo edita código y hace `git push`.
+El desarrollo local se hace en una Raspberry Pi, que **no procesa los datos**.
+Todo el cómputo pesado corre en GitHub Actions. La RPi solo edita código y hace
+`git push`.
 
 ## Hallazgo principal
 

@@ -125,6 +125,10 @@
     .red-nodo.salud { fill:var(--nar); }
     .red-lbl { fill:#1a1a1a; font-size:10px; font-weight:600; }
     .red-leyenda .pill { display:inline-block; padding:2px 9px; border-radius:999px; font-size:.74rem; margin:2px 6px 2px 0; }
+    .red-analisis { margin-top:14px; border-top:1px solid #e2e8f0; padding-top:12px; font-size:.9rem; color:#1a1a1a; }
+    .red-analisis h4 { margin:0 0 6px; font-size:.95rem; color:var(--azul); }
+    .red-analisis ul { margin:6px 0; padding-left:18px; }
+    .red-analisis li { margin-bottom:4px; }
     table.m-kpis td small { color:var(--gris); }
     .preg-panel { margin-top:14px; }
     .preg-panel-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
@@ -364,6 +368,7 @@
           <span class="pill" style="background:#fbe3d1;color:#8a4310">relación inversa</span>
           <span class="nota">grosor ∝ fuerza (|r|) · Pearson+Spearman 95%</span>
         </div>
+        <div id="red-analisis" class="red-analisis" aria-live="polite"></div>
       </div>
       <p class="nota">La red parte de los dos resultados de salud del proyecto (mortalidad e intento de
         suicidio), que son los únicos indicadores “resultado” con correlaciones calculadas en el KB;

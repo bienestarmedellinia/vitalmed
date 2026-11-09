@@ -1351,6 +1351,46 @@
     Object.entries(posR).forEach(([r, p]) => { svg += dibNodo(p[0], p[1], 11, "red-nodo salud", nom(r), "middle"); });
     svg += "</svg>";
     destino.innerHTML = svg;
+
+    // Análisis de la red (debajo del grafo), 100 % derivado de las correlaciones significativas del KB.
+    const contAna = $("red-analisis");
+    if (contAna) {
+      const nDir = aristas.filter((a) => (a.pearson || 0) >= 0).length;
+      const nInv = aristas.length - nDir;
+      const rs = aristas.map((a) => Math.abs(a.pearson || 0));
+      const rMin = Math.min(...rs), rMax = Math.max(...rs);
+      const fuerte = aristas.slice().sort((a, b) => Math.abs(b.pearson || 0) - Math.abs(a.pearson || 0))[0];
+      // factor que más veces aparece
+      const cuenta = {};
+      aristas.forEach((a) => { cuenta[a.factor] = (cuenta[a.factor] || 0) + 1; });
+      const topFactor = Object.entries(cuenta).sort((x, y) => y[1] - x[1])[0];
+      const porResultado = {};
+      resultados.forEach((r) => { porResultado[r] = aristas.filter((a) => a.resultado === r).length; });
+      const detalleRes = Object.entries(porResultado)
+        .map(([r, n]) => `<b>${esc(nom(r))}</b> (${n})`).join(" y ");
+
+      let html = `<h4>Lectura de la red</h4>`;
+      html += `<p>Se detectaron <b>${aristas.length}</b> asociaciones estadísticamente significativas entre los 21 territorios `;
+      html += `(Pearson y Spearman al 95%): ${nDir} en la misma dirección y ${nInv} inversa(s). `;
+      html += `La intensidad va de r=${fmt(rMin, 2)} a r=${fmt(rMax, 2)}. `;
+      html += `Las relaciones parten de los resultados de salud: ${detalleRes}.</p>`;
+      html += `<ul>`;
+      if (fuerte) {
+        const signo = (fuerte.pearson || 0) >= 0 ? "directa" : "inversa";
+        html += `<li>Asociación más fuerte: <b>${esc(nom(fuerte.resultado))}</b> y <b>${esc(nom(fuerte.factor))}</b> (r=${fmt(fuerte.pearson, 2)}, ${signo}).</li>`;
+      }
+      if (topFactor && topFactor[1] > 1) {
+        html += `<li>Factor con más vínculos: <b>${esc(nom(topFactor[0]))}</b>, asociado en ${topFactor[1]} relaciones.</li>`;
+      }
+      if (nInv) {
+        const inv = aristas.filter((a) => (a.pearson || 0) < 0)
+          .map((a) => `${esc(nom(a.resultado))}–${esc(nom(a.factor))}`).join("; ");
+        html += `<li>Relación(es) inversa(s): ${inv}. Un signo negativo puede reflejar efectos de composición (p. ej. estructura de edad del territorio), no protección causal.</li>`;
+      }
+      html += `</ul>`;
+      html += `<p class="nota">Lectura ecológica entre territorios: describe patrones conjuntos, no causalidad. No se controla por estructura de edad ni otros confusores.</p>`;
+      contAna.innerHTML = html;
+    }
   }
 
   function pintarPortal(KB) {
