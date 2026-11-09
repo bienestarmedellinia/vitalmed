@@ -1,6 +1,36 @@
 INSTRUCCIONES - Bienestar Medellín IA (Medellín, Bienestar Basado en Datos)
 Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
 
+====================================================================
+INICIO RÁPIDO (3 pasos, sin instalar nada, sin crear cuenta)
+====================================================================
+Solo tienes que abrir enlaces en el navegador. Copia y pega.
+
+PASO 1 · Ver el PRODUCTO (el tablero para explorar los datos)
+   Abre:  https://bienestarmedellinia.github.io/vitalmed/
+   Qué verás: la pregunta del proyecto, el hallazgo principal (la comuna La
+   Candelaria tiene la mayor mortalidad de la ciudad), un mapa que cambia de color
+   según el indicador, y 13 categorías con sus análisis. Haz clic y explora.
+
+PASO 2 · Ver que el PIPELINE se ejecuta solo y genera los datos
+   Abre:  https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
+   Qué verás: la lista de "ejecuciones" del proceso. Una marca verde = se ejecutó
+   bien. Haz clic en la de más arriba para ver las etapas (descargar, validar,
+   limpiar, analizar, etc.) una debajo de otra, todas en verde.
+
+PASO 3 · Ver los RESULTADOS que generó el proceso
+   Abre:  https://github.com/bienestarmedellinia/vitalmed/tree/main/outputs
+   Qué verás: las carpetas con los resultados (tablas y gráficos) que produce el
+   pipeline automáticamente. Por ejemplo, outputs/tablas/hallazgo.json tiene la
+   cifra principal del proyecto.
+
+¿Eso es todo? Sí. Con esos 3 enlaces ya viste el producto, la automatización y los
+resultados. El resto del documento es el detalle técnico (fuentes, licencias, cómo
+correrlo en tu propio computador, uso de IA).
+====================================================================
+
+--- DETALLE TÉCNICO (para quien quiera profundizar) ---
+
 1. QUÉ ES
    Pipeline automático que descarga datos oficiales de 6 fuentes (MEData, ECV, SIATA,
    DANE, SIVIGILA y RIPS), valida, integra y analiza la salud y el bienestar por
