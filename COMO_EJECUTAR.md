@@ -3,7 +3,8 @@
 Este proyecto tiene **dos partes**:
 1. Un **pipeline automático** que descarga y procesa datos oficiales (corre en
    GitHub, no hace falta instalar nada para verlo).
-2. Un **asistente** que responde preguntas sobre salud y bienestar por comuna.
+2. Un **observatorio web** que presenta la salud y el bienestar por territorio a
+   partir de las cifras del pipeline (cálculo determinista, sin inventar datos).
 
 Elige la opción que prefieras, de la más simple a la más técnica.
 
@@ -20,20 +21,22 @@ No requiere Windows, ni Python, ni comandos.
 
 ---
 
-## Opción B · Asistente en la web (0 instalación)  ← recomendado
+## Opción B · Observatorio en la web (0 instalación)  ← recomendado
 
-Abre este enlace en cualquier navegador y escribe preguntas:
+Abre este enlace en cualquier navegador y explora:
 
 >  **https://bienestarmedellinia.github.io/vitalmed/**
 
-Ejemplos de preguntas:
-- ¿Qué comunas deberían recibir mayor atención en salud?
-- Si hay presupuesto para 3 territorios, ¿cuáles priorizar?
-- ¿Cómo varió la mortalidad entre 2012 y 2022?
+Qué puedes hacer:
+- Recorrer las **13 categorías** del observatorio; cada una abre su análisis
+  técnico y sus preguntas, con gráfica, tabla y descarga CSV.
+- Usar el **mapa interactivo**: colorear los 21 territorios por indicador y año,
+  y ver la red de hallazgos (correlaciones significativas).
+- Consultar el **explorador de datos**: https://bienestarmedellinia.github.io/vitalmed/datos.html
 
 ---
 
-## Opción C · Asistente en tu computador (línea de comandos)
+## Opción C · Motor determinista en tu computador (línea de comandos)
 
 Requiere **Python 3.11**. No necesita instalar dependencias (el motor usa solo
 la librería estándar y el knowledge base incluido en el repositorio).
@@ -47,11 +50,8 @@ python asistente/app.py --cli "¿Qué comunas priorizar en salud?"
 ```
 
 **¿Funcionó?** Verás la respuesta "La Candelaria, Laureles Estadio, Manrique…"
-con su evidencia, fuente y limitaciones. También funciona en modo interactivo
-ejecutando `python asistente/app.py` sin argumentos.
-
-> La interfaz **web** del asistente (Opción B) usa el mismo motor y no requiere
-> instalar nada; es la vía recomendada para el jurado.
+con su evidencia, fuente y limitaciones. Es el mismo motor determinista que usa
+el observatorio web; esta vía es solo una verificación local opcional.
 
 ---
 

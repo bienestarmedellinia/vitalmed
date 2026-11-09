@@ -9,14 +9,16 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
    contexto ambiental por estación; la ECV aporta la llave y cobertura territorial.
    Carga la totalidad de las series oficiales disponibles: las 10 capas de salud
    de MEData por comuna (2008-2022), la serie histórica de indicadores sociales de
-   la ECV (2007-2022) y el PM2.5 de SIATA (años completos 2020-2025), y calcula los factores
-   asociados (correlaciones entre territorios). Incluye un portal web interactivo
-   con un asistente que responde preguntas SOLO con las cifras del pipeline.
+   la ECV (2007-2022), el PM2.5 de SIATA (años completos 2020-2025) y tres fuentes
+   nacionales de salud (DANE Estadísticas Vitales, SIVIGILA/INS y RIPS/MinSalud), y
+   calcula los factores asociados (correlaciones entre territorios). Incluye un
+   observatorio web interactivo que presenta los resultados SOLO con las cifras del
+   pipeline (cálculo determinista, sin modelos de lenguaje en tiempo de ejecución).
 
 2. PROBARLO EN LÍNEA
-   Portal web + asistente (sin instalar nada): https://bienestarmedellinia.github.io/vitalmed/
+   Portal web / observatorio (sin instalar nada): https://bienestarmedellinia.github.io/vitalmed/
    Explorador de datos (todas las estadísticas, tablas y descargas CSV; módulo
-   independiente del asistente): https://bienestarmedellinia.github.io/vitalmed/datos.html
+   independiente): https://bienestarmedellinia.github.io/vitalmed/datos.html
    Descargas directas: carpeta docs/datos/ del repositorio (se regenera en cada run).
    Pipeline: pestaña "Actions" del repo -> "pipeline-ecv" -> "Run workflow".
 
@@ -31,7 +33,7 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
 4. EJECUTARLO
    # Opción A (recomendada) - Probar en línea: abrir el portal web (no instala nada)
    #   https://bienestarmedellinia.github.io/vitalmed/
-   # Opción B - Asistente por línea de comandos (local, sin navegador):
+   # Opción B - Motor determinista por línea de comandos (local, sin navegador):
    python asistente/app.py --cli "¿Qué comunas priorizar en salud?"
    # Opción C - Pipeline completo (NO en equipos de poca RAM):
    pip install -r requirements.txt
@@ -45,11 +47,12 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
    python scripts/09_guia_entrega.py     # genera guia_entrega.pdf (datos del equipo en equipo.yml)
 
 5. QUÉ DEBE VER
-   - Asistente: ante "¿qué comuna priorizar?", responde "La Candelaria,
+   - Motor (Opción B): ante "¿qué comuna priorizar?", responde "La Candelaria,
      1325.6 defunciones por 100.000 hab. (2022)" con su evidencia y fuente.
    - Portal: al abrir la URL se ven la pregunta de investigación, el hallazgo
-     (La Candelaria, 4,58 veces la tasa de Santa Elena), la propuesta, gráficos
-     interactivos, el flujo del método y la tabla de transparencia de datos.
+     (La Candelaria, 4,58 veces la tasa de Santa Elena), la propuesta, el
+     observatorio por categorías con su análisis técnico, el mapa interactivo
+     (coropleta + red de hallazgos), el flujo del método y la transparencia de datos.
    - Pipeline: "VALIDACIÓN OK: llave territorial consistente"; genera
      outputs/tablas/hallazgo.json y los gráficos en outputs/graficos/.
 
@@ -106,21 +109,14 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
 7. USO DE IA
    Herramientas y para qué se usó cada una:
    - Kiro CLI (asistente de programación con IA): apoyo en el DESARROLLO.
-     Escribió y refactorizó scripts del pipeline, el motor del asistente, el
-     portal web y la documentación. El equipo revisa, ejecuta y puede explicar
-     el resultado.
-   - Asistente del portal web (docs/asistente.js) y de línea de comandos
-     (asistente/motor.py): las cifras salen SIEMPRE de un motor determinista de
-     reglas que las recupera del knowledge base generado por el pipeline.
-     No inventan datos.
-   - Google Gemini (capa gratuita, modelo gemini-flash-lite-latest): en el
-     portal web, las preguntas ESCRITAS se envían a un Worker de Cloudflare
-     (worker/src/index.js) que usa Gemini SOLO para interpretarlas: devuelve el
-     tipo de consulta y los territorios mencionados, elegidos de listas
-     cerradas; nunca devuelve cifras. Luego responde el motor determinista. Si
-     la IA falla, responde el motor solo. Las preguntas sugeridas no usan IA.
-     En la capa gratuita, Google puede usar el texto enviado para mejorar sus
-     productos; el Worker no guarda las preguntas.
+     Escribió y refactorizó scripts del pipeline, el portal web y la
+     documentación. El equipo revisa, ejecuta y puede explicar el resultado.
+   - Observatorio del portal web (docs/portal.js) y motor de línea de comandos
+     (asistente/motor.py): todas las cifras, textos e interpretaciones salen
+     SIEMPRE de un motor determinista de reglas que las recupera del knowledge
+     base generado por el pipeline. No inventan datos. El portal NO consulta
+     modelos de lenguaje en tiempo de ejecución ni envía datos a terceros al
+     navegar.
    - Opcional, desactivado por defecto: asistente/llm.py puede usar un modelo de
      OpenAI (gpt-4o-mini por defecto) SOLO si existe OPENAI_API_KEY, y solo para
      redactar con más fluidez una respuesta que el motor ya calculó. No genera

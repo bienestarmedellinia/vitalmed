@@ -1,36 +1,61 @@
 # Medellín, Bienestar Basado en Datos
 
 Proyecto para la **Hackathon de Datos 2026 · Institución Universitaria ITM**.
-Modalidad: **Pipeline automático**. Temática: **Salud y bienestar**.
+Modalidad: **Pipeline automático + Fase 2 (observatorio sobre sus resultados)**.
+Temática: **Salud y bienestar**.
 
-> *¿Cómo podemos utilizar el análisis de datos para identificar los factores
-> ambientales, sociales y territoriales que afectan la salud y el bienestar de
-> los habitantes de Medellín?*
+> *¿Cómo pueden las técnicas de análisis de datos identificar y explicar la
+> influencia de los factores ambientales, sociales y territoriales sobre las
+> condiciones de salud y bienestar de la población de Medellín, con el fin de
+> apoyar la toma de decisiones y la formulación de intervenciones basadas en
+> evidencia?*
+
+Portal publicado: **https://bienestarmedellinia.github.io/vitalmed/**
 
 ## Qué hace
 
-Un pipeline que, sin intervención manual, **descarga** datos oficiales,
-**valida** su consistencia, los **homologa** e **integra** en una tabla por
-comuna y corregimiento. Se ejecuta íntegramente en **GitHub Actions**.
+Un pipeline que, sin intervención manual, **descarga** datos oficiales de varias
+fuentes, **valida** su consistencia, los **homologa**, **integra** y **analiza**
+por territorio, y construye un **conocimiento base** (KB) que alimenta un portal
+web (observatorio) y un explorador de datos. Se ejecuta íntegramente en
+**GitHub Actions**.
 
 ```
 scripts/
-  sources.yml        Manifiesto de URLs oficiales (ECV, SIATA, MEData)
-  01_descargar.py    Descarga desde la fuente oficial -> data/raw/
-  03_validar.py      Valida la llave territorial (16 comunas + 5 corregimientos)
-  02_limpiar.py      Homologa p_006 / P_007 / A.7 -> territorio_cod
-  04_integrar.py     Tabla agregada publicable -> outputs/tablas/
+  sources.yml          Manifiesto de URLs oficiales
+  01_descargar.py      Descarga desde las fuentes -> data/raw/
+  02_limpiar.py        Homologa la llave territorial (p_006/P_007/A.7 -> territorio_cod)
+  03_validar.py        Valida 16 comunas + 5 corregimientos
+  04_integrar.py       Tabla agregada publicable -> outputs/tablas/
+  05_analizar.py       Hallazgo, ranking, correlaciones e índice de priorización
+  06_visualizar.py     Gráficos PNG
+  08_siata.py          PM2.5 por estación (SIATA)
+  10_dane_eevv.py      Mortalidad mensual por causa + edad (DANE)
+  11_sivigila.py       Series semanales ESI-IRAG e intento de suicidio (SIVIGILA/INS)
+  12_rips.py           Morbilidad anual por CIE-10 (RIPS/MinSalud)
+  07_construir_kb.py   Integra todo al KB + exporta datos abiertos (docs/datos/)
+  13_mapa_hero.py      Mapa SVG de los 21 territorios (GeoMedellín)
+  14_foto_hero.py      Foto panorámica del banner (Wikimedia, CC BY-SA)
+  09_guia_entrega.py   PDF de la ficha de entrega
 .github/workflows/
-  pipeline.yml       Orquesta los 4 pasos en el runner
+  pipeline.yml         Orquesta todos los pasos en el runner
+  portal.yml           Prueba de humo del portal en Chromium (Playwright)
 ```
 
-## Fuentes
+## Fuentes (6)
 
-| Fuente | Dimensión | Enlace |
-|--------|-----------|--------|
-| ECV (Alcaldía de Medellín) | Social, salud, territorial | https://www.medellin.gov.co/es/centro-documental/encuesta-calidad-de-vida/ |
-| SIATA | Ambiental (PM2.5) | https://siata.gov.co/IDEAM/ |
-| MEData | Sanitaria (obligatoria) | https://medata.app.medellin.gov.co/ |
+| Fuente | Entidad | Dimensión | Indicadores | Enlace |
+|--------|---------|-----------|-------------|--------|
+| **MEData** (obligatoria) | Secretaría de Salud de Medellín | Sanitaria | 10 por comuna, 2008–2022 | https://medata.app.medellin.gov.co/ |
+| **ECV** | Alcaldía de Medellín · Planeación | Social / territorial | 21 por territorio, 2007–2022 | https://www.medellin.gov.co/es/centro-documental/encuesta-calidad-de-vida/ |
+| **SIATA** | SIATA · Valle de Aburrá | Ambiental (PM2.5) | 1 por estación, 2020–2025 | https://siata.gov.co/IDEAM/ |
+| **DANE EEVV** | DANE | Mortalidad mensual por causa CIE-10 + edad | municipio | https://microdatos.dane.gov.co/ |
+| **SIVIGILA** | INS | ESI-IRAG, intento de suicidio (semanal) | municipio | datos.gov.co (4hyg-wa9d) |
+| **RIPS** | MinSalud | Atenciones anuales por CIE-10 | municipio | datos.gov.co (4k9h-8qiu) |
+
+En total ~39 indicadores (31 por territorio + series de ciudad). Datos reales,
+sin datos sintéticos. Detalle y licencias en la sección Transparencia del portal
+y en `instrucciones.txt`.
 
 ## Privacidad
 
@@ -45,10 +70,6 @@ El desarrollo local se hace en una Raspberry Pi, que **no procesa los datos**
 (leer las bases completas la satura). Todo el cómputo pesado corre en GitHub
 Actions. La RPi solo edita código y hace `git push`.
 
-## Cómo ejecutarlo
-
-Ver `instrucciones.txt`.
-
 ## Hallazgo principal
 
 > En 2022, **La Candelaria (comuna 10)** presentó la **mayor tasa de mortalidad
@@ -60,7 +81,7 @@ Fuente: MEData — Secretaría de Salud de Medellín (servicio `VC_Datos_Enferme
 datos agregados por comuna, sin datos personales. Los 21 territorios oficiales
 (16 comunas + 5 corregimientos); se excluye la categoría residual "Sin información".
 
-Artefactos generados por el pipeline (descargables desde la pestaña Actions):
+Artefactos generados por el pipeline (en `outputs/` del repo y como artefacto de Actions):
 - `outputs/tablas/hallazgo.json` — la cifra principal para la ficha de entrega.
 - `outputs/tablas/analisis_mortalidad_comuna.csv` — ranking completo por comuna.
 - `outputs/graficos/ranking_mortalidad_2022.png` — ranking por comuna.
@@ -68,51 +89,46 @@ Artefactos generados por el pipeline (descargables desde la pestaña Actions):
 - `outputs/graficos/pipeline.png` — diagrama del funcionamiento del pipeline.
 
 > Nota metodológica: una asociación territorial no implica causalidad. La tasa
-> de mortalidad general está influida por la estructura de edad de cada comuna
-> (p. ej. La Candelaria y Laureles tienen población más envejecida).
+> de mortalidad general está influida por la estructura de edad de cada comuna.
 
+## Fase 2 — Observatorio de bienestar
 
-## Fase 2 — Asistente de inteligencia territorial
+Sobre los resultados del pipeline se construye un **observatorio web** que
+presenta el bienestar multidimensional de Medellín **usando solo las cifras
+verificadas** del knowledge base (`docs/knowledge_base.json`). No inventa datos.
 
-Sobre los resultados del pipeline se construye un asistente que responde
-preguntas en lenguaje natural **usando solo las cifras verificadas** del
-knowledge base (`outputs/kb/knowledge_base.json`). No inventa datos.
+- **Observatorio por preguntas** (`docs/index.html` + `docs/portal.js`): 13
+  categorías temáticas; cada una abre un panel con resumen, indicadores clave
+  (semáforo por tendencia), un **análisis técnico** narrativo por indicador
+  (descripción, comportamiento histórico, análisis territorial, relaciones,
+  metodología, hallazgos y conclusión) y 200 preguntas con su gráfica, tabla y
+  descarga CSV. Todo se calcula de forma **determinista** a partir del KB; no se
+  consultan modelos de lenguaje en tiempo de ejecución ni se envían datos a
+  terceros al navegar.
+- **Mapa interactivo**: coropleta de los 21 territorios que se repinta por
+  indicador/año, y una **red de hallazgos** con las correlaciones significativas
+  del KB (Pearson+Spearman 95%).
+- **Explorador de datos** (`docs/datos.html`): tablas, gráficos y CSV de todos
+  los indicadores por territorio y año, factores asociados y PM2.5. Archivos
+  abiertos en `docs/datos/`.
+- **Motor local opcional** (`asistente/motor.py`, `app.py --cli`): el mismo
+  motor determinista por línea de comandos, para verificación. `llm.py` (OpenAI)
+  queda apagado por defecto y solo redactaría una respuesta ya calculada; no
+  genera cifras.
 
-Arquitectura en dos capas:
-
-1. **Motor determinista** (`asistente/motor.py`) — sin IA, sin API key.
-   Detecta la intención de la pregunta y recupera la cifra del KB. **Siempre
-   funciona**, por lo que el jurado puede ejecutarlo sin configurar nada.
-2. **Capa LLM opcional** (`asistente/llm.py`) — si existe `OPENAI_API_KEY`,
-   mejora la redacción tomando *solo* las cifras ya recuperadas (no genera
-   números). Sin la key, se omite y responde el motor determinista.
-3. **Explorador de datos** (`docs/datos.html`) — módulo independiente del
-   asistente: tablas, gráficos y CSV de todos los indicadores por territorio y
-   año, factores asociados y PM2.5. Archivos abiertos en `docs/datos/`
-   (generados por `07_construir_kb.py` desde el mismo KB).
-4. **Interpretación con IA en el portal web** (`worker/`) — un Worker de
-   Cloudflare usa Gemini para clasificar la pregunta escrita (intención y
-   territorios, de listas cerradas; nunca cifras). Luego responde el motor
-   determinista. Despliegue y verificación: `worker/README.md`.
-
-Cada respuesta entrega: respuesta directa · evidencia (indicador, valor, año,
-territorio, fuente) · interpretación · recomendación · limitaciones.
-
-Uso:
+Uso local (opcional, sin instalar nada pesado; corre en la Raspberry Pi):
 
 ```bash
-# 1) generar el knowledge base (si no está): usa las tablas del pipeline
-python scripts/07_construir_kb.py
+# el portal publicado no requiere instalar nada:
+#   https://bienestarmedellinia.github.io/vitalmed/
 
-# 2a) interfaz web (fase 2): el portal publicado, sin instalar nada
-#     https://bienestarmedellinia.github.io/vitalmed/
-
-# 2b) asistente local por línea de comandos (mismo motor, sin navegador):
+# motor determinista por línea de comandos (mismo cálculo que el portal):
 python asistente/app.py --cli "¿Qué comunas priorizar en salud?"
 
-# pruebas del asistente (verifican que responde con cifras reales):
+# pruebas del motor (verifican que responde con cifras reales + paridad JS/Py):
 python asistente/test_motor.py
 ```
 
-El asistente es liviano (solo lee un JSON pequeño), por lo que corre sin
-problema en la Raspberry Pi; el cómputo pesado sigue siendo del pipeline.
+## Cómo ejecutarlo
+
+Ver `instrucciones.txt` y `COMO_EJECUTAR.md`.
