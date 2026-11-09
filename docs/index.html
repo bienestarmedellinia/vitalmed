@@ -106,12 +106,13 @@
     table.m-kpis { width:100%; font-size:.88rem; }
     table.m-kpis th { color:var(--gris); font-weight:600; }
     /* ----- Sección Mapa interactivo (coropleta + red de correlaciones) ----- */
-    .mapa-grid { display:grid; grid-template-columns:1.25fr .9fr; gap:22px; align-items:start; }
+    .mapa-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:22px; align-items:start; }
     @media (max-width:860px){ .mapa-grid { grid-template-columns:1fr; } }
     .mapa-caja { background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:16px; }
     .mapa-ctrl { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
     .mapa-ctrl select { font:inherit; padding:7px 10px; border-radius:8px; border:1px solid #cbd5e1; background:#fff; color:#1a1a1a; }
     #co-mapa svg, #red-svg svg { width:100%; height:auto; display:block; }
+    #red-svg svg { min-height:360px; }
     .ch-terr { stroke:#fff; stroke-width:.8; vector-effect:non-scaling-stroke; transition:fill .3s; cursor:default; }
     .ch-terr:hover { stroke:var(--azul); stroke-width:1.8; }
     .ch-gradiente { height:12px; border-radius:6px; margin-top:12px;
