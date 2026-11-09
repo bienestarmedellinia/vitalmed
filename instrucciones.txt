@@ -28,31 +28,26 @@ No tienes que hacer nada más que mirar y hacer clic donde te llame la atención
 ------------------------------------------------------------
 PASO 2 · El PIPELINE que trabaja solo (la automatización)
 ------------------------------------------------------------
-Enlace:  https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
+Abre este enlace:
+   https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
 
-Este enlace abre directamente la lista de ejecuciones de NUESTRO pipeline
-("pipeline-principal"), sin mezclarla con otros procesos del proyecto. Cada fila es
-un registro de una ejecución automática. Lo único que tienes que fijarte:
-   • Un ícono de CHECK (✓) a la izquierda de la fila = esa ejecución terminó bien.
-     (En GitHub ese check se ve en color gris, no verde; igual significa "correcto".
-      Un ícono con una X roja significaría que falló.)
-   • La fecha y hora a la derecha = cuándo se ejecutó.
-Conclusión: que haya varias filas con check demuestra que el pipeline se ejecuta solo,
-de forma repetible y sin intervención manual (eso es lo que pide la modalidad "pipeline automático").
+Verás una lista. Cada fila es una vez que el proceso se ejecutó por sí mismo.
 
-Con lo anterior ya es suficiente. Si además quieres ver el detalle de una ejecución
-(totalmente opcional): haz clic sobre el TÍTULO en azul de la primera fila de la lista.
-Aclaración: ese título en azul es solo una descripción de qué cambió esa vez (por
-ejemplo, "Merge pull request #21 from ..." o un mensaje parecido) y cambia en cada
-ejecución; no te fijes en ese texto. Lo importante es que TODAS las filas de esta
-lista son ejecuciones de nuestro pipeline-principal (el nombre "pipeline-principal"
-aparece en gris, al lado del título). Así que puedes abrir cualquiera.
-Al hacer clic, se abre otra pantalla. Debajo del título verás un bloque llamado
-"pipeline" (es el trabajo que se ejecutó); haz clic en esa palabra "pipeline". Se
-desplegará la lista de tareas en el orden real: descargar los datos, validar, limpiar,
-integrar, analizar, generar gráficos y procesar las demás fuentes (aire, DANE, SIVIGILA,
-RIPS), construir la base de conocimiento y los resultados. Cada tarea tiene su check:
-son los pasos que el proceso hizo en orden, él solo, sin que nadie lo operara.
+Qué comprobar (30 segundos):
+   1. Mira el símbolo al inicio de cada fila.
+      - Si es un CHECK (✓, se ve gris) = esa ejecución salió bien.
+      - Si fuera una X roja = habría fallado.
+   2. Verás varias filas con check, en distintas fechas.
+
+Eso es todo lo que necesitas: varias filas con check significan que el proceso se
+ejecuta solo, una y otra vez, sin que nadie lo opere a mano. Eso es un "pipeline automático".
+
+¿Quieres ver por dentro una ejecución? (opcional, puedes saltarlo):
+   1. Haz clic en el texto azul de la primera fila (no importa qué diga).
+   2. En la pantalla que se abre, haz clic en la palabra "pipeline".
+   3. Verás la lista de tareas que hizo, en orden: descargar, validar, limpiar,
+      integrar, analizar, generar gráficos, procesar las otras fuentes (aire, DANE,
+      SIVIGILA, RIPS) y armar los resultados. Cada tarea tiene su check.
 
 ------------------------------------------------------------
 PASO 3 · Lo que el pipeline produce (los resultados)
