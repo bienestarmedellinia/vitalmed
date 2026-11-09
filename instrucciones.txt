@@ -8,9 +8,11 @@ Solo tienes que abrir enlaces en el navegador. Copia y pega.
 
 PASO 1 · Ver el PRODUCTO (el tablero para explorar los datos)
    Abre:  https://bienestarmedellinia.github.io/vitalmed/
-   Qué verás: la pregunta del proyecto, el hallazgo principal (la comuna La
-   Candelaria tiene la mayor mortalidad de la ciudad), un mapa que cambia de color
-   según el indicador, y 13 categorías con sus análisis. Haz clic y explora.
+   Qué verás: la pregunta del proyecto y un observatorio del bienestar de Medellín en
+   varias dimensiones (empleo, seguridad alimentaria, calidad del aire, salud física y
+   mental, deporte, cultura, entre otras). Hay un mapa de los 21 territorios que cambia
+   de color según el indicador que elijas y 13 categorías, cada una con su análisis. El
+   mensaje central es que el bienestar es DESIGUAL entre territorios. Haz clic y explora.
 
 PASO 2 · Ver que el PIPELINE se ejecuta solo y genera los datos
    Abre:  https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
@@ -123,11 +125,13 @@ correrlo en tu propio computador, uso de IA).
      docs/knowledge_base.json, docs/datos/ y guia_entrega.pdf. Tiempo típico ~3-4 min.
    - Pipeline en local (Vía 2): se generan outputs/tablas/hallazgo.json y los gráficos
      en outputs/graficos/; test_motor.py imprime "19/19".
-   - Portal (Visualización): al abrir la URL se ven la pregunta de investigación, el
-     hallazgo (La Candelaria, 4,58 veces la tasa de Santa Elena), la propuesta, el
-     observatorio por categorías con su análisis técnico, el mapa interactivo
-     (coropleta + red de hallazgos), el flujo del método y la transparencia de datos.
-     La fecha "última actualización" del portal coincide con el último run del pipeline.
+   - Portal (Visualización): al abrir la URL se ven la pregunta de investigación, un
+     observatorio del bienestar MULTIDIMENSIONAL (empleo, alimentación, aire, salud
+     física y mental, deporte, cultura…) con 13 categorías y su análisis técnico, el
+     mapa interactivo (coropleta por indicador + red de hallazgos), el flujo del método
+     y la transparencia de datos. El mensaje es la DESIGUALDAD territorial del bienestar;
+     la brecha de mortalidad (La Candelaria 4,58 veces la de Santa Elena) es UNO de los
+     ejemplos, no el único. La fecha "última actualización" coincide con el último run.
    - Motor (Vía 3): ante "¿qué comuna priorizar?", responde "La Candelaria,
      1325.6 defunciones por 100.000 hab. (2022)" con su evidencia y fuente.
 
