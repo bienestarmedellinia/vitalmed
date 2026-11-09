@@ -43,8 +43,10 @@ Con lo anterior ya es suficiente. Si además quieres ver el detalle de una ejecu
 (totalmente opcional): haz clic sobre el TÍTULO en azul de la primera fila de la lista.
 Se abre otra pantalla. Debajo del título verás un bloque llamado "pipeline" (es el
 trabajo que se ejecutó); haz clic en esa palabra "pipeline". Se desplegará la lista de
-tareas (descargar, validar, limpiar, analizar…), cada una con su check: son los pasos
-que el proceso hizo en orden, él solo, sin que nadie lo operara.
+tareas en el orden real: descargar los datos, validar, limpiar, integrar, analizar,
+generar gráficos y procesar las demás fuentes (aire, DANE, SIVIGILA, RIPS), construir la
+base de conocimiento y los resultados. Cada tarea tiene su check: son los pasos que el
+proceso hizo en orden, él solo, sin que nadie lo operara.
 
 ------------------------------------------------------------
 PASO 3 · Lo que el pipeline produce (los resultados)
