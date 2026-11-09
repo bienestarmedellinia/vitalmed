@@ -16,21 +16,30 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
    observatorio web interactivo que presenta los resultados SOLO con las cifras del
    pipeline (cálculo determinista, sin modelos de lenguaje en tiempo de ejecución).
 
-2. PROBARLO EN LÍNEA
-   a) PIPELINE AUTOMÁTICO (modalidad principal) — ejecutar y ver la salida actualizada:
-      Repo -> pestaña "Actions" -> workflow "pipeline-ecv" -> botón "Run workflow".
-      El proceso corre COMPLETO en los servidores de GitHub (sin instalar nada ni usar
-      tu equipo) y, al terminar en verde, regenera los resultados y los publica en el
-      repositorio (commit automático "chore(outputs) ... [skip ci]").
-      Automatización acreditable: el workflow se dispara por 3 vías (ver .github/workflows/pipeline.yml):
-        - push a main (cuando cambia el código del pipeline),
-        - workflow_dispatch (el botón "Run workflow", ejecución manual del jurado),
-        - schedule cron "0 7 1 * *" (automática, día 1 de cada mes).
-      Evidencia: el historial de ejecuciones queda en la pestaña Actions; cada run
-      guarda sus registros y el artefacto "resultados-ecv" (tablas, gráficos, manifiesto).
+2. PROBARLO EN LÍNEA (no requiere cuenta ni iniciar sesión)
+   Repositorio:  https://github.com/bienestarmedellinia/vitalmed
+
+   a) PIPELINE AUTOMÁTICO (modalidad principal) — ver que corre solo y genera salida:
+      - Historial de ejecuciones (EVIDENCIA de la automatización), abrir:
+          https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
+        Ahí se ve la lista de ejecuciones del workflow "pipeline-ecv" con su estado
+        (verde = éxito), fecha y duración (~3-4 min). Cada ejecución, al abrirla, muestra
+        las etapas en orden y guarda el artefacto descargable "resultados-ecv".
+      - Disparadores configurados (abrir el YAML, acredita que corre SIN intervención):
+          https://github.com/bienestarmedellinia/vitalmed/blob/main/.github/workflows/pipeline.yml
+        on: push a main · workflow_dispatch (ejecución manual) · schedule cron "0 7 1 * *"
+        (automática el día 1 de cada mes).
+      - Resultados publicados por el pipeline (se actualizan en cada ejecución):
+          https://github.com/bienestarmedellinia/vitalmed/tree/main/outputs
+        (outputs/tablas/hallazgo.json, analisis_mortalidad_comuna.csv, outputs/graficos/*.png)
+      NOTA: el botón "Run workflow" (ejecución manual en vivo) solo aparece para usuarios
+      con permiso de escritura e iniciados sesión; por eso, en la sustentación es el EQUIPO
+      quien lanza una ejecución en vivo. Sin iniciar sesión, el jurado igual verifica la
+      automatización con el historial de ejecuciones y los disparadores del YAML anteriores.
+
    b) VISUALIZACIÓN (valor agregado) — abrir el producto, sin instalar nada:
-      Portal web / observatorio: https://bienestarmedellinia.github.io/vitalmed/
-      Explorador de datos (tablas y descargas CSV): https://bienestarmedellinia.github.io/vitalmed/datos.html
+      Portal web / observatorio:  https://bienestarmedellinia.github.io/vitalmed/
+      Explorador de datos (tablas y descargas CSV):  https://bienestarmedellinia.github.io/vitalmed/datos.html
       El portal CONSUME los resultados del pipeline (docs/knowledge_base.json y docs/datos/),
       que el commit automático del workflow mantiene actualizados.
 
@@ -45,10 +54,13 @@ Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
      openai==1.54.3 (solo mejora la redacción; la API key es OPCIONAL y está apagada)
 
 4. EJECUTARLO
-   Vía 1 (RECOMENDADA para la modalidad Pipeline) - En GitHub Actions, sin instalar nada:
-     Repo -> "Actions" -> "pipeline-ecv" -> "Run workflow" (rama main) -> "Run workflow".
-     Verás las etapas ejecutarse en orden; al terminar en verde, los resultados quedan
-     commiteados en outputs/ y docs/, y disponibles como artefacto "resultados-ecv".
+   Vía 1 (el EQUIPO, con sesión y permiso) - Ejecutar en vivo en GitHub Actions:
+     Abrir https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
+     -> botón "Run workflow" (arriba a la derecha) -> rama main -> "Run workflow".
+     Corre completo en los servidores de GitHub; al terminar en verde, los resultados
+     quedan commiteados en outputs/ y docs/, y disponibles como artefacto "resultados-ecv".
+     (El jurado, sin iniciar sesión, verifica lo mismo con el historial de ejecuciones y
+      los disparadores del YAML indicados en el punto 2a.)
 
    Vía 2 - Pipeline completo en local (requiere Python 3.11 y buena RAM/red; NO en equipos
    de poca memoria: las bases ECV son grandes). Ejecutar los pasos EN ESTE ORDEN:
