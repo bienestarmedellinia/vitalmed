@@ -2,33 +2,55 @@ INSTRUCCIONES - Bienestar Medellín IA (Medellín, Bienestar Basado en Datos)
 Equipo: [NOMBRE DEL EQUIPO] · Hackathon de Datos 2026
 
 ====================================================================
-INICIO RÁPIDO (3 pasos, sin instalar nada, sin crear cuenta)
+INICIO RÁPIDO (3 pasos · solo abrir enlaces en el navegador)
 ====================================================================
-Solo tienes que abrir enlaces en el navegador. Copia y pega.
+No necesitas instalar nada, ni crear cuenta, ni saber programar.
+Copia cada enlace, pégalo en el navegador (Chrome, Edge, etc.) y mira.
 
-PASO 1 · Ver el PRODUCTO (el tablero para explorar los datos)
-   Abre:  https://bienestarmedellinia.github.io/vitalmed/
-   Qué verás: la pregunta del proyecto y un observatorio del bienestar de Medellín en
-   varias dimensiones (empleo, seguridad alimentaria, calidad del aire, salud física y
-   mental, deporte, cultura, entre otras). Hay un mapa de los 21 territorios que cambia
-   de color según el indicador que elijas y 13 categorías, cada una con su análisis. El
-   mensaje central es que el bienestar es DESIGUAL entre territorios. Haz clic y explora.
+En una frase: nuestro proyecto es una "fábrica de datos" que, sola, recoge
+información oficial de salud y bienestar de Medellín y la convierte en un sitio web
+fácil de explorar. Los 3 pasos te muestran: (1) el sitio web, (2) que la fábrica
+trabaja sola, y (3) lo que produce.
 
-PASO 2 · Ver que el PIPELINE se ejecuta solo y genera los datos
-   Abre:  https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
-   Qué verás: la lista de "ejecuciones" del proceso. Una marca verde = se ejecutó
-   bien. Haz clic en la de más arriba para ver las etapas (descargar, validar,
-   limpiar, analizar, etc.) una debajo de otra, todas en verde.
+------------------------------------------------------------
+PASO 1 · El sitio web (lo que ve el público)
+------------------------------------------------------------
+Enlace:  https://bienestarmedellinia.github.io/vitalmed/
 
-PASO 3 · Ver los RESULTADOS que generó el proceso
-   Abre:  https://github.com/bienestarmedellinia/vitalmed/tree/main/outputs
-   Qué verás: las carpetas con los resultados (tablas y gráficos) que produce el
-   pipeline automáticamente. Por ejemplo, outputs/tablas/hallazgo.json tiene la
-   cifra principal del proyecto.
+Se abre una página web. Baja con el mouse y explora: hay un mapa de Medellín que
+cambia de color según el tema que elijas (empleo, aire, salud, deporte, cultura…),
+y tarjetas con 13 temas, cada una con su explicación en palabras. La idea que
+queremos mostrar: el bienestar NO es igual en todos los barrios de la ciudad.
+No tienes que hacer nada más que mirar y hacer clic donde te llame la atención.
 
-¿Eso es todo? Sí. Con esos 3 enlaces ya viste el producto, la automatización y los
-resultados. El resto del documento es el detalle técnico (fuentes, licencias, cómo
-correrlo en tu propio computador, uso de IA).
+------------------------------------------------------------
+PASO 2 · La "fábrica" que trabaja sola (la automatización)
+------------------------------------------------------------
+Enlace:  https://github.com/bienestarmedellinia/vitalmed/actions
+
+Se abre una página con una LISTA. Cada fila es una vez que la fábrica se puso a
+trabajar por su cuenta. Lo único que tienes que fijarte:
+   • Un círculo/chulo VERDE al lado de una fila = esa vez funcionó bien.
+   • La fecha y hora a la derecha = cuándo trabajó.
+Si quieres ver el detalle (opcional): haz clic sobre el texto de la primera fila
+de la lista. Se abre otra pantalla; busca un recuadro llamado "pipeline" y haz clic.
+Verás una lista de tareas (descargar, validar, limpiar, analizar…), todas con un
+chulo verde: son los pasos que la fábrica hizo, en orden, sin que nadie la tocara.
+Conclusión: ver varias filas verdes = el proceso funciona solo y de forma repetible.
+
+------------------------------------------------------------
+PASO 3 · Lo que la fábrica produce (los resultados)
+------------------------------------------------------------
+Enlace:  https://github.com/bienestarmedellinia/vitalmed/tree/main/outputs
+
+Se abren unas carpetas ("graficos", "kb", "tablas"). Son los archivos de resultados
+que la fábrica genera sola cada vez que trabaja: tablas de cifras y gráficas. Puedes
+entrar a "graficos" y hacer clic en una imagen para verla. Eso confirma que el
+proyecto no es solo un dibujo bonito, sino datos reales producidos por el proceso.
+
+¿Eso es todo? Sí. Con esos 3 enlaces viste el sitio web, comprobaste que el proceso
+trabaja solo, y viste lo que produce. Lo que sigue más abajo es el detalle técnico
+(para quien quiera revisar fuentes, licencias o correrlo en su propio computador).
 ====================================================================
 
 --- DETALLE TÉCNICO (para quien quiera profundizar) ---
