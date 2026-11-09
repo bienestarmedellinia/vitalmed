@@ -35,9 +35,11 @@ Lo único que tienes que fijarte:
      (En GitHub ese check se ve en color gris, no verde; igual significa "correcto".
       Un ícono con una X roja significaría que falló.)
    • La fecha y hora a la derecha = cuándo se ejecutó.
-Si quieres ver el detalle (opcional): haz clic sobre el texto de la primera fila
-de la lista. Se abre otra pantalla; busca un recuadro llamado "pipeline" y haz clic.
-Verás la lista de tareas del pipeline (descargar, validar, limpiar, analizar…), cada
+Para identificar nuestro pipeline: a la izquierda de la página hay una lista de
+procesos; haz clic en "pipeline-principal" para ver solo sus ejecuciones.
+Si quieres ver el detalle de una (opcional): haz clic sobre el TÍTULO en azul de la
+primera fila. Se abre otra pantalla; en el recuadro gris de la izquierda haz clic en
+"pipeline". Verás la lista de tareas (descargar, validar, limpiar, analizar…), cada
 una con su check: son los pasos que hizo en orden, sin que nadie lo operara.
 Conclusión: ver varias filas con check = el pipeline se ejecuta solo y de forma repetible.
 
