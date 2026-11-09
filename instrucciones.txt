@@ -43,7 +43,7 @@ Eso es todo lo que necesitas: varias filas con check significan que el proceso s
 ejecuta solo, una y otra vez, sin que nadie lo opere a mano. Eso es un "pipeline automático".
 
 ¿Quieres ver por dentro una ejecución? (opcional, puedes saltarlo):
-   1. Haz clic en el texto azul de la primera fila (no importa qué diga).
+   1. Haz clic sobre el pipeline-principal de la primera fila.
    2. En la pantalla que se abre, haz clic en la palabra "pipeline".
    3. Verás la lista de tareas que hizo, en orden: descargar, validar, limpiar,
       integrar, analizar, generar gráficos, procesar las otras fuentes (aire, DANE,
