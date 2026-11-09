@@ -39,10 +39,12 @@ un registro de una ejecución automática. Lo único que tienes que fijarte:
    • La fecha y hora a la derecha = cuándo se ejecutó.
 Que haya varias filas con check = el pipeline se ejecuta solo y de forma repetible.
 
-Si quieres ver el detalle de una (opcional): haz clic sobre el TÍTULO en azul de la
-primera fila. Se abre otra pantalla; en el recuadro gris de la izquierda haz clic en
-"pipeline". Verás la lista de tareas (descargar, validar, limpiar, analizar…), cada
-una con su check: son los pasos que hizo en orden, sin que nadie lo operara.
+Con lo anterior ya es suficiente. Si además quieres ver el detalle de una ejecución
+(totalmente opcional): haz clic sobre el TÍTULO en azul de la primera fila de la lista.
+Se abre otra pantalla. Debajo del título verás un bloque llamado "pipeline" (es el
+trabajo que se ejecutó); haz clic en esa palabra "pipeline". Se desplegará la lista de
+tareas (descargar, validar, limpiar, analizar…), cada una con su check: son los pasos
+que el proceso hizo en orden, él solo, sin que nadie lo operara.
 
 ------------------------------------------------------------
 PASO 3 · Lo que el pipeline produce (los resultados)
