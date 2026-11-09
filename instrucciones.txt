@@ -35,7 +35,7 @@ Verás una lista. Cada fila es una vez que el proceso se ejecutó por sí mismo.
 
 Qué comprobar (30 segundos):
    1. Mira el símbolo al inicio de cada fila.
-      - Si es un CHECK (✓, se ve gris) = esa ejecución salió bien.
+      - Si es un CHECK (✓, se ve verde) = esa ejecución salió bien.
       - Si fuera una X roja = habría fallado.
    2. Verás varias filas con check, en distintas fechas.
 
