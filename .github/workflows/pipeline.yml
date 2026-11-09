@@ -77,10 +77,12 @@ jobs:
       - name: 6f) Generar mapa del hero (SVG de los 21 territorios, GeoMedellín)
         # Procesamiento geográfico en el runner (NO en la Raspberry Pi). Si GeoMedellín
         # no responde, no se tumba el pipeline: queda el mapa ya versionado en docs/.
-        run: python scripts/13_mapa_hero.py || echo "mapa: se conserva docs/mapa_comunas.svg versionado"
+        run: |
+          python scripts/13_mapa_hero.py || echo "mapa - se conserva docs/mapa_comunas.svg versionado"
 
       - name: 6g) Descargar foto del banner (Wikimedia, CC BY-SA, sin procesar)
-        run: python scripts/14_foto_hero.py || echo "foto: se conserva docs/hero_medellin.jpg versionado"
+        run: |
+          python scripts/14_foto_hero.py || echo "foto - se conserva docs/hero_medellin.jpg versionado"
 
       - name: 7) Construir knowledge base del asistente (fase 2)
         run: python scripts/07_construir_kb.py
