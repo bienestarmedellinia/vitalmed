@@ -1,0 +1,31 @@
+INSTRUCCIONES FÁCILES - Bienestar Medellín IA
+Equipo: MCC GLOBAL SOLUTIONS
+
+No necesitas instalar nada ni crear cuenta. Solo abre los enlaces en
+el navegador (Chrome, Edge o el que uses) y mira. Son 3 pasos.
+
+PASO 1 · Mira el sitio web
+   https://bienestarmedellinia.github.io/vitalmed/
+Se abre una página sobre la salud y el bienestar de Medellín. Baja con
+el mouse. Hay un mapa que cambia de color según el tema (empleo, aire,
+salud...) y tarjetas con 13 temas. Haz clic donde te llame la atención.
+La idea: el bienestar NO es igual en todos los barrios de la ciudad.
+
+PASO 2 · Comprueba que el proceso trabaja solo
+   https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
+Verás una lista. Cada fila es una vez que el proceso se ejecutó solo.
+Mira el símbolo al inicio de cada fila: un CHECK (✓) significa que salió
+bien. Varias filas con check = el proceso se repite solo, sin que nadie
+lo opere a mano. Eso es un "pipeline automático".
+
+PASO 3 · Mira lo que produce
+   https://github.com/bienestarmedellinia/vitalmed/tree/main/outputs
+Se abren carpetas (graficos, kb, tablas). Son los resultados que el
+proceso genera cada vez: tablas y gráficas. Entra a "graficos" y haz
+clic en una imagen para verla.
+
+¡Listo! Con esos 3 enlaces viste el sitio web, comprobaste que trabaja
+solo y viste lo que produce. Todo con datos reales y oficiales de
+Medellín.
+
+Contacto: Walter Andrés Tabares · waltertabares31943@correo.itm.edu.co

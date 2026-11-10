@@ -5,7 +5,7 @@ PyYAML==6.0.2
 pyarrow==17.0.0
 matplotlib==3.9.2
 xlrd==2.0.1
-# Generación de guia_entrega.pdf (paso 7b)
+# Generación de ficha_hallazgos.pdf (paso 7b)
 reportlab==4.2.5
 pillow==13.0.0
 # NOTA: streamlit (interfaz web local del asistente) vive en asistente/requirements.txt,

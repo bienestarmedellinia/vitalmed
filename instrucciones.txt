@@ -114,7 +114,7 @@ trabaja solo, y viste lo que produce. Lo que sigue más abajo es el detalle téc
    Pipeline (requirements.txt, versiones fijas):
      pandas==2.2.3 · openpyxl==3.1.5 · requests==2.32.3 · PyYAML==6.0.2
      pyarrow==17.0.0 · matplotlib==3.9.2 · xlrd==2.0.1
-     reportlab==4.2.5 · pillow==13.0.0  (solo para generar guia_entrega.pdf, paso 7b)
+     reportlab==4.2.5 · pillow==13.0.0  (solo para generar ficha_hallazgos.pdf, paso 7b)
    Prueba de paridad del motor (en el workflow): Node 22 (sin dependencias npm).
    Motor por línea de comandos (asistente/requirements.txt, OPCIONAL):
      openai==1.54.3 (solo mejora la redacción; la API key es OPCIONAL y está apagada)
@@ -144,7 +144,7 @@ trabaja solo, y viste lo que produce. Lo que sigue más abajo es el detalle téc
      python scripts/13_mapa_hero.py       # 6f) mapa SVG de los 21 territorios (GeoMedellín) -> docs/
      python scripts/14_foto_hero.py       # 6g) foto del banner (Wikimedia, CC BY-SA) -> docs/
      python scripts/07_construir_kb.py    # 7) construye knowledge_base.json + datos abiertos (docs/datos/)
-     python scripts/09_guia_entrega.py    # 7b) genera guia_entrega.pdf (datos del equipo en equipo.yml)
+     python scripts/09_guia_entrega.py    # 7b) genera ficha_hallazgos.pdf (datos del equipo en equipo.yml)
      python asistente/test_motor.py       # 8) pruebas del motor (19/19, incluye paridad JS/Python)
 
    Vía 3 - Solo el motor determinista por línea de comandos (liviano, no procesa datos):
@@ -156,7 +156,7 @@ trabaja solo, y viste lo que produce. Lo que sigue más abajo es el detalle téc
      consistente") -> Limpiar -> Integrar -> Analizar -> Visualizar -> SIATA -> DANE ->
      SIVIGILA -> RIPS -> mapa -> foto -> Construir KB -> PDF -> Pruebas del motor (19/19).
      Al final, el commit automático "chore(outputs) ... [skip ci]" actualiza outputs/,
-     docs/knowledge_base.json, docs/datos/ y guia_entrega.pdf. Tiempo típico ~3-4 min.
+     docs/knowledge_base.json, docs/datos/ y ficha_hallazgos.pdf. Tiempo típico ~3-4 min.
    - Pipeline en local (Vía 2): se generan outputs/tablas/hallazgo.json y los gráficos
      en outputs/graficos/; test_motor.py imprime "19/19".
    - Portal (Visualización): al abrir la URL se ven la pregunta de investigación, un

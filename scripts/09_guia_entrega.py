@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-09_guia_entrega.py — Genera guia_entrega.pdf (guía de entrega + ficha de hallazgos).
+09_guia_entrega.py — Genera ficha_hallazgos.pdf (ficha de hallazgos del artefacto).
 
-Entregable obligatorio de la Hackathon de Datos 2026. Todas las cifras se leen
-de outputs/kb/knowledge_base.json (generado por el pipeline): nada se escribe a
+Entregable de apoyo de la Hackathon de Datos 2026 (el formulario oficial del ITM
+es guia_entrega.pdf, documento aparte). Todas las cifras se leen de
+outputs/kb/knowledge_base.json (generado por el pipeline): nada se escribe a
 mano. Los datos del equipo vienen de equipo.yml.
 
-Salida: guia_entrega.pdf (raíz del repo)
+Salida: ficha_hallazgos.pdf (raíz del repo)
 
 Se ejecuta en GitHub Actions tras el paso 07. Requiere reportlab (liviano) y
 usa los PNG de outputs/graficos/ si existen.
@@ -34,7 +35,7 @@ BASE = Path(__file__).resolve().parent.parent
 KB_F = BASE / "outputs" / "kb" / "knowledge_base.json"
 EQUIPO_F = BASE / "equipo.yml"
 GRA = BASE / "outputs" / "graficos"
-SALIDA = BASE / "guia_entrega.pdf"
+SALIDA = BASE / "ficha_hallazgos.pdf"
 
 REPO = "https://github.com/bienestarmedellinia/vitalmed"
 PORTAL = "https://bienestarmedellinia.github.io/vitalmed/"
