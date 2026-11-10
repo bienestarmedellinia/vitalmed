@@ -1,31 +1,42 @@
-INSTRUCCIONES FÁCILES - Bienestar Medellín IA
-Equipo: MCC GLOBAL SOLUTIONS
+INSTRUCCIONES - Bienestar Medellín IA (Vitalmed)
+Equipo: MCC GLOBAL SOLUTIONS · Hackathon de Datos 2026
 
-No necesitas instalar nada ni crear cuenta. Solo abre los enlaces en
-el navegador (Chrome, Edge o el que uses) y mira. Son 3 pasos.
+1. QUÉ ES
+   Un proceso automático que recoge datos oficiales de salud y bienestar de
+   Medellín y los muestra en un sitio web fácil de explorar por territorio.
 
-PASO 1 · Mira el sitio web
-   https://bienestarmedellinia.github.io/vitalmed/
-Se abre una página sobre la salud y el bienestar de Medellín. Baja con
-el mouse. Hay un mapa que cambia de color según el tema (empleo, aire,
-salud...) y tarjetas con 13 temas. Haz clic donde te llame la atención.
-La idea: el bienestar NO es igual en todos los barrios de la ciudad.
+2. PROBARLO EN LÍNEA
+   Portal web:  https://bienestarmedellinia.github.io/vitalmed/
+   No necesitas instalar nada ni crear cuenta. Solo abre el enlace y mira.
 
-PASO 2 · Comprueba que el proceso trabaja solo
-   https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
-Verás una lista. Cada fila es una vez que el proceso se ejecutó solo.
-Mira el símbolo al inicio de cada fila: un CHECK (✓) significa que salió
-bien. Varias filas con check = el proceso se repite solo, sin que nadie
-lo opere a mano. Eso es un "pipeline automático".
+3. ENTORNO
+   Lenguaje: Python 3.11 (solo si lo corres en tu computador).
+   Dependencias con versión fija en el archivo: requirements.txt
+   Para solo verlo en línea (sección 2) no necesitas nada de esto.
 
-PASO 3 · Mira lo que produce
-   https://github.com/bienestarmedellinia/vitalmed/tree/main/outputs
-Se abren carpetas (graficos, kb, tablas). Son los resultados que el
-proceso genera cada vez: tablas y gráficas. Entra a "graficos" y haz
-clic en una imagen para verla.
+4. EJECUTARLO
+   Para verlo: abre los 3 enlaces de la sección 5 en el navegador.
+   Para correr el proceso en tu PC (opcional, requiere Python 3.11):
+     pip install -r requirements.txt
+     python scripts/01_descargar.py
+     python scripts/07_construir_kb.py
 
-¡Listo! Con esos 3 enlaces viste el sitio web, comprobaste que trabaja
-solo y viste lo que produce. Todo con datos reales y oficiales de
-Medellín.
+5. QUÉ DEBE VER
+   a) El sitio web con un mapa de Medellín que cambia de color por tema y
+      13 categorías con su análisis:
+      https://bienestarmedellinia.github.io/vitalmed/
+   b) El proceso que corre solo: filas con un check (✓) = salió bien:
+      https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
+   c) Los resultados que genera (tablas y gráficas):
+      https://github.com/bienestarmedellinia/vitalmed/tree/main/outputs
 
-Contacto: Walter Andrés Tabares · waltertabares31943@correo.itm.edu.co
+6. DATOS Y FUENTES
+   Datos reales y oficiales de Medellín: MEData, ECV, SIATA, DANE, SIVIGILA
+   y RIPS. Enlaces y licencias detallados en instrucciones.txt (sección 6).
+
+7. USO DE IA
+   Kiro CLI (asistente de programación) apoyó el desarrollo. El sitio web
+   NO usa IA al navegar: solo muestra las cifras reales del proceso.
+
+8. CONTACTO
+   Walter Andrés Tabares (líder) · waltertabares31943@correo.itm.edu.co
