@@ -12,23 +12,43 @@ Equipo: MCC GLOBAL SOLUTIONS · Hackathon de Datos 2026
    No requiere instalar nada, ni cuenta, ni iniciar sesión.
 
 3. ENTORNO
-   El pipeline se ejecuta solo en GitHub Actions (Python 3.11; dependencias con
-   versión fija en requirements.txt). No requiere que el jurado instale nada:
-   corre por cron (diario ~6 a.m. y mensual), en cada push a main, o manual.
-   Etapas, en orden: descargar → validar → limpiar → integrar → analizar →
-   visualizar → fuentes SIATA/DANE/SIVIGILA/RIPS → base de conocimiento →
-   publicar. También es reproducible en local (ver instrucciones.txt).
+   El pipeline se ejecuta ÚNICAMENTE en GitHub Actions (servidores de GitHub);
+   el jurado no instala nada. Corre por cron (diario ~6 a.m. y mensual, hora
+   Colombia), en cada push a main, o de forma manual.
+   Lenguaje: Python 3.11
+   Pipeline (requirements.txt, versiones fijas):
+     pandas==2.2.3 · openpyxl==3.1.5 · requests==2.32.3 · PyYAML==6.0.2
+     pyarrow==17.0.0 · matplotlib==3.9.2 · xlrd==2.0.1
+     reportlab==4.2.5 · pillow==13.0.0  (solo para generar ficha_hallazgos.pdf, paso 7b)
+   Prueba de paridad del motor (en el workflow): Node 22 (sin dependencias npm).
+   Motor por línea de comandos (asistente/requirements.txt, OPCIONAL):
+     openai==1.54.3 (solo mejora la redacción; la API key es OPCIONAL y está apagada)
 
 4. EJECUTARLO
    Ver la automatización y sus ejecuciones (check ✓ = corrió bien):
      https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
 
+   Ver el log / trazabilidad paso a paso de una ejecución (ej. una fila que dice
+   "pipeline succeeded 7 hours ago in 3m 44s"):
+     1. Abrir la URL anterior.
+     2. Clic en el primer "pipeline-principal" de la lista.
+     3. En la pantalla siguiente, dentro del recuadro "pipeline.yml", clic en el
+        botón "pipeline".
+     4. Se muestra el detalle paso a paso de toda la ejecución del job.
+   Nota: las horas que muestra GitHub están en UTC; para hora local reste 5 horas
+   (GMT-5, America/Bogotá).
+
 5. QUÉ DEBE VER
    a) En Actions: ejecuciones del "pipeline-principal" con check (✓).
    b) Resultados que produce (tablas y gráficas):
       https://github.com/bienestarmedellinia/vitalmed/tree/main/outputs
-   c) En el portal: el mapa por territorio, las 13 categorías con su análisis
-      y el hallazgo (La Candelaria, mayor tasa de mortalidad 2022).
+   c) Portal (Visualización): al abrir la URL se ven la pregunta de investigación, un
+      observatorio del bienestar MULTIDIMENSIONAL (empleo, alimentación, aire, salud
+      física y mental, deporte, cultura…) con 13 categorías y su análisis técnico, el
+      mapa interactivo (coropleta por indicador + red de hallazgos), el flujo del método
+      y la transparencia de datos. El mensaje es la DESIGUALDAD territorial del bienestar;
+      la brecha de mortalidad (La Candelaria 4,58 veces la de Santa Elena) es UNO de los
+      ejemplos, no el único. La fecha "última actualización" coincide con el último run.
 
 6. DATOS Y FUENTES
    Datos reales y oficiales de Medellín: MEData (obligatoria), ECV, SIATA, DANE,
@@ -38,6 +58,10 @@ Equipo: MCC GLOBAL SOLUTIONS · Hackathon de Datos 2026
    Kiro CLI (asistente de programación) apoyó el desarrollo. El portal es
    determinista: no usa modelos de lenguaje al navegar; solo muestra las cifras
    reales que calcula el pipeline.
+   - ChatGPT (OpenAI) y Gemini (Google): consultas exploratorias puntuales en la
+     etapa inicial (ideas y búsqueda de fuentes). No generaron el código, las
+     cifras ni los análisis del artefacto; todo el desarrollo se hizo con Kiro CLI
+     y el equipo verificó las fuentes contra los portales oficiales.
 
 8. CONTACTO
    Walter Andrés Tabares (líder) · waltertabares31943@correo.itm.edu.co
