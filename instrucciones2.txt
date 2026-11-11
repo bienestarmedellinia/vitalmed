@@ -2,41 +2,42 @@ INSTRUCCIONES - Bienestar Medellín IA (Vitalmed)
 Equipo: MCC GLOBAL SOLUTIONS · Hackathon de Datos 2026
 
 1. QUÉ ES
-   Un proceso automático que recoge datos oficiales de salud y bienestar de
-   Medellín y los muestra en un sitio web fácil de explorar por territorio.
+   Un pipeline de datos automatizado que descarga, valida, integra y analiza
+   datos oficiales de salud y bienestar de Medellín (6 fuentes) por territorio.
+   Como valor agregado, publica un portal web (observatorio) que visualiza sus
+   resultados: mapa interactivo, 13 categorías y el hallazgo principal.
 
 2. PROBARLO EN LÍNEA
-   Portal web:  https://bienestarmedellinia.github.io/vitalmed/
-   No necesitas instalar nada ni crear cuenta. Solo abre el enlace y mira.
+   Portal web (observatorio):  https://bienestarmedellinia.github.io/vitalmed/
+   No requiere instalar nada, ni cuenta, ni iniciar sesión.
 
 3. ENTORNO
-   Lenguaje: Python 3.11 (solo si lo corres en tu computador).
-   Dependencias con versión fija en el archivo: requirements.txt
-   Para solo verlo en línea (sección 2) no necesitas nada de esto.
+   El pipeline se ejecuta solo en GitHub Actions (Python 3.11; dependencias con
+   versión fija en requirements.txt). No requiere que el jurado instale nada:
+   corre por cron (diario ~6 a.m. y mensual), en cada push a main, o manual.
+   Etapas, en orden: descargar → validar → limpiar → integrar → analizar →
+   visualizar → fuentes SIATA/DANE/SIVIGILA/RIPS → base de conocimiento →
+   publicar. También es reproducible en local (ver instrucciones.txt).
 
 4. EJECUTARLO
-   Para verlo: abre los 3 enlaces de la sección 5 en el navegador.
-   Para correr el proceso en tu PC (opcional, requiere Python 3.11):
-     pip install -r requirements.txt
-     python scripts/01_descargar.py
-     python scripts/07_construir_kb.py
+   Ver la automatización y sus ejecuciones (check ✓ = corrió bien):
+     https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
 
 5. QUÉ DEBE VER
-   a) El sitio web con un mapa de Medellín que cambia de color por tema y
-      13 categorías con su análisis:
-      https://bienestarmedellinia.github.io/vitalmed/
-   b) El proceso que corre solo: filas con un check (✓) = salió bien:
-      https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
-   c) Los resultados que genera (tablas y gráficas):
+   a) En Actions: ejecuciones del "pipeline-principal" con check (✓).
+   b) Resultados que produce (tablas y gráficas):
       https://github.com/bienestarmedellinia/vitalmed/tree/main/outputs
+   c) En el portal: el mapa por territorio, las 13 categorías con su análisis
+      y el hallazgo (La Candelaria, mayor tasa de mortalidad 2022).
 
 6. DATOS Y FUENTES
-   Datos reales y oficiales de Medellín: MEData, ECV, SIATA, DANE, SIVIGILA
-   y RIPS. Enlaces y licencias detallados en instrucciones.txt (sección 6).
+   Datos reales y oficiales de Medellín: MEData (obligatoria), ECV, SIATA, DANE,
+   SIVIGILA y RIPS. Enlaces, fechas y licencias: instrucciones.txt §6.
 
 7. USO DE IA
-   Kiro CLI (asistente de programación) apoyó el desarrollo. El sitio web
-   NO usa IA al navegar: solo muestra las cifras reales del proceso.
+   Kiro CLI (asistente de programación) apoyó el desarrollo. El portal es
+   determinista: no usa modelos de lenguaje al navegar; solo muestra las cifras
+   reales que calcula el pipeline.
 
 8. CONTACTO
    Walter Andrés Tabares (líder) · waltertabares31943@correo.itm.edu.co
