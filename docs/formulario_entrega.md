@@ -218,7 +218,7 @@ datos personales.
 - [x] Uso de MEData documentado (fuente obligatoria) + otras 5 fuentes declaradas.
 - [x] Datos reales (no sintéticos), sin PII, repo público, artefacto corre.
 - [x] Declaración de uso de IA.
-- [ ] Copia del carné estudiantil de cada integrante (documento personal — lo adjunta el usuario).
+- [x] Copia del carné estudiantil de cada integrante (documento personal — se adjunta por canal privado de entrega, NO en el repo público por protección de datos personales).
 - [ ] (Solo finalistas) Resumen de pitch de 1 página.
 
 ---
