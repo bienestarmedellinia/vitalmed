@@ -1,115 +1,21 @@
-INSTRUCCIONES - Bienestar Medellín IA (Medellín, Bienestar Basado en Datos)
+INSTRUCCIONES - Bienestar Medellín IA (Vitalmed)
 Equipo: MCC GLOBAL SOLUTIONS · Hackathon de Datos 2026
 
-====================================================================
-INICIO RÁPIDO (3 pasos · solo abrir enlaces en el navegador)
-====================================================================
-No necesitas instalar nada, ni crear cuenta, ni saber programar.
-Copia cada enlace, pégalo en el navegador (Chrome, Edge, etc.) y mira.
-
-En una frase: nuestro proyecto es un PIPELINE (un proceso automático, como una
-"fábrica de datos") que, solo, recoge información oficial de salud y bienestar de
-Medellín y la convierte en un sitio web fácil de explorar. Los 3 pasos te muestran:
-(1) el sitio web, (2) que el pipeline trabaja solo, y (3) lo que produce.
-
-------------------------------------------------------------
-PASO 1 · El sitio web (lo que ve el público)
-------------------------------------------------------------
-Enlace:  https://bienestarmedellinia.github.io/vitalmed/
-
-Se abre una página web. Baja con el mouse y explora: hay un mapa de Medellín que
-cambia de color según el tema que elijas (empleo, aire, salud, deporte, cultura…),
-y tarjetas con 13 categorías, cada una con un análisis detallado que permite entender
-qué pasa con ese indicador, cómo ha cambiado en el tiempo y cómo se distribuye entre
-los territorios, con las cifras y la fuente a la vista. La idea que queremos mostrar:
-el bienestar NO es igual en todos los barrios de la ciudad.
-No tienes que hacer nada más que mirar y hacer clic donde te llame la atención.
-
-------------------------------------------------------------
-PASO 2 · El PIPELINE que trabaja solo (la automatización)
-------------------------------------------------------------
-Abre este enlace:
-   https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
-
-Verás una lista. Cada fila es una vez que el proceso se ejecutó por sí mismo.
-
-Qué comprobar (30 segundos):
-   1. Mira el símbolo al inicio de cada fila.
-      - Si es un CHECK (✓, se ve verde) = esa ejecución salió bien.
-      - Si fuera una X roja = habría fallado.
-   2. Verás varias filas con check, en distintas fechas.
-
-Eso es todo lo que necesitas: varias filas con check significan que el proceso se
-ejecuta solo, una y otra vez, sin que nadie lo opere a mano. Eso es un "pipeline automático".
-
-¿Quieres ver por dentro una ejecución? (opcional):
-   1. Haz clic sobre el pipeline-principal de la primera fila.
-   2. En la pantalla que se abre, haz clic en la palabra "pipeline".
-   3. Verás la lista de tareas que hizo, en orden: descargar, validar, limpiar,
-      integrar, analizar, generar gráficos, procesar las otras fuentes (aire, DANE,
-      SIVIGILA, RIPS) y armar los resultados. Cada tarea tiene su check (aquí dentro
-      el check se ve gris; también significa "hecho correctamente").
-
-------------------------------------------------------------
-PASO 3 · Lo que el pipeline produce (los resultados)
-------------------------------------------------------------
-Enlace:  https://github.com/bienestarmedellinia/vitalmed/tree/main/outputs
-
-Se abren unas carpetas ("graficos", "kb", "tablas"). Son los archivos de resultados
-que el pipeline genera solo cada vez que se ejecuta: tablas de cifras y gráficas. Puedes
-entrar a "graficos" y hacer clic en una imagen para verla. Eso confirma que el
-proyecto no es solo un dibujo bonito, sino datos reales producidos por el proceso.
-
-¿Eso es todo? Sí. Con esos 3 enlaces viste el sitio web, comprobaste que el proceso
-trabaja solo, y viste lo que produce. Lo que sigue más abajo es el detalle técnico
-(para quien quiera revisar fuentes, licencias o correrlo en su propio computador).
-====================================================================
-
---- DETALLE TÉCNICO (para quien quiera profundizar) ---
-
 1. QUÉ ES
-   Pipeline automático que descarga datos oficiales de 6 fuentes (MEData, ECV, SIATA,
-   DANE, SIVIGILA y RIPS), valida, integra y analiza la salud y el bienestar por
-   comuna de Medellín.
-   Combina mortalidad e intento de suicidio por comuna (MEData) en un índice de
-   priorización territorial, y reporta la calidad del aire (PM2.5, SIATA) como
-   contexto ambiental por estación; la ECV aporta la llave y cobertura territorial.
-   Carga la totalidad de las series oficiales disponibles: las 10 capas de salud
-   de MEData por comuna (2008-2022), la serie histórica de indicadores sociales de
-   la ECV (2007-2022), el PM2.5 de SIATA (años completos 2020-2025) y tres fuentes
-   nacionales de salud (DANE Estadísticas Vitales, SIVIGILA/INS y RIPS/MinSalud), y
-   calcula los factores asociados (correlaciones entre territorios). Incluye un
-   observatorio web interactivo que presenta los resultados SOLO con las cifras del
-   pipeline (cálculo determinista, sin modelos de lenguaje en tiempo de ejecución).
+   Un pipeline de datos automatizado que descarga, valida, integra y analiza
+   datos oficiales de salud y bienestar de Medellín (6 fuentes) por territorio.
+   Como valor agregado, publica un portal web (observatorio) que visualiza sus
+   resultados: mapa interactivo, 13 categorías y el hallazgo principal.
 
-2. PROBARLO EN LÍNEA (no requiere cuenta ni iniciar sesión)
-   Repositorio:  https://github.com/bienestarmedellinia/vitalmed
-
-   a) PIPELINE AUTOMÁTICO (modalidad principal) — ver que corre solo y genera salida:
-      - Historial de ejecuciones (EVIDENCIA de la automatización), abrir:
-          https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
-        Ahí se ve la lista de ejecuciones del workflow "pipeline-principal" con su estado
-        (verde = éxito), fecha y duración (~3-4 min). Cada ejecución, al abrirla, muestra
-        las etapas en orden y guarda el artefacto descargable "resultados-ecv".
-      - Disparadores configurados (abrir el YAML, acredita que corre SIN intervención):
-          https://github.com/bienestarmedellinia/vitalmed/blob/main/.github/workflows/pipeline.yml
-        on: push a main · workflow_dispatch (ejecución manual) · schedule (automático):
-        una ejecución diaria (~6:00 a.m. hora Colombia) y una el día 1 de cada mes.
-      - Resultados publicados por el pipeline (se actualizan en cada ejecución):
-          https://github.com/bienestarmedellinia/vitalmed/tree/main/outputs
-        (outputs/tablas/hallazgo.json, analisis_mortalidad_comuna.csv, outputs/graficos/*.png)
-      NOTA: el botón "Run workflow" (ejecución manual en vivo) solo aparece para usuarios
-      con permiso de escritura e iniciados sesión; por eso, en la sustentación es el EQUIPO
-      quien lanza una ejecución en vivo. Sin iniciar sesión, el jurado igual verifica la
-      automatización con el historial de ejecuciones y los disparadores del YAML anteriores.
-
-   b) VISUALIZACIÓN (valor agregado) — abrir el producto, sin instalar nada:
-      Portal web / observatorio:  https://bienestarmedellinia.github.io/vitalmed/
-      Explorador de datos (tablas y descargas CSV):  https://bienestarmedellinia.github.io/vitalmed/datos.html
-      El portal CONSUME los resultados del pipeline (docs/knowledge_base.json y docs/datos/),
-      que el commit automático del workflow mantiene actualizados.
+2. PROBARLO EN LÍNEA
+   Portal web (observatorio):  https://bienestarmedellinia.github.io/vitalmed/
+   Explorador de datos (tablas + CSV):  https://bienestarmedellinia.github.io/vitalmed/datos.html
+   No requiere instalar nada, ni cuenta, ni iniciar sesión.
 
 3. ENTORNO
+   El pipeline se ejecuta ÚNICAMENTE en GitHub Actions (servidores de GitHub);
+   el jurado no instala nada ni necesita su computador. Corre por cron (diario
+   ~6 a.m. y mensual, hora Colombia), en cada push a main, o de forma manual.
    Lenguaje: Python 3.11
    Pipeline (requirements.txt, versiones fijas):
      pandas==2.2.3 · openpyxl==3.1.5 · requests==2.32.3 · PyYAML==6.0.2
@@ -120,56 +26,34 @@ trabaja solo, y viste lo que produce. Lo que sigue más abajo es el detalle téc
      openai==1.54.3 (solo mejora la redacción; la API key es OPCIONAL y está apagada)
 
 4. EJECUTARLO
-   Vía 1 (el EQUIPO, con sesión y permiso) - Ejecutar en vivo en GitHub Actions:
-     Abrir https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
-     -> botón "Run workflow" (arriba a la derecha) -> rama main -> "Run workflow".
-     Corre completo en los servidores de GitHub; al terminar en verde, los resultados
-     quedan commiteados en outputs/ y docs/, y disponibles como artefacto "resultados-ecv".
-     (El jurado, sin iniciar sesión, verifica lo mismo con el historial de ejecuciones y
-      los disparadores del YAML indicados en el punto 2a.)
+   Ver la automatización y sus ejecuciones (check ✓ = corrió bien):
+     https://github.com/bienestarmedellinia/vitalmed/actions/workflows/pipeline.yml
 
-   Vía 2 - Pipeline completo en local (requiere Python 3.11 y buena RAM/red; NO en equipos
-   de poca memoria: las bases ECV son grandes). Ejecutar los pasos EN ESTE ORDEN:
-     pip install -r requirements.txt
-     python scripts/01_descargar.py       # 1) descarga de las fuentes oficiales -> data/raw/
-     python scripts/03_validar.py         # 2) valida la llave territorial (16 comunas + 5 corregimientos)
-     python scripts/02_limpiar.py         # 3) homologa la variable territorial por año (p_006/P_007/A.7)
-     python scripts/04_integrar.py        # 4) tabla agregada por territorio -> outputs/tablas/
-     python scripts/05_analizar.py        # 5) hallazgo, ranking, correlaciones e índice de priorización
-     python scripts/06_visualizar.py      # 6) gráficos PNG + diagrama del pipeline
-     python scripts/08_siata.py           # 6b) PM2.5 por estación (SIATA)
-     python scripts/10_dane_eevv.py       # 6c) mortalidad mensual por causa + edad (DANE)
-     python scripts/11_sivigila.py        # 6d) series semanales ESI-IRAG e intento de suicidio (SIVIGILA/INS)
-     python scripts/12_rips.py            # 6e) morbilidad anual por CIE-10 (RIPS/MinSalud)
-     python scripts/13_mapa_hero.py       # 6f) mapa SVG de los 21 territorios (GeoMedellín) -> docs/
-     python scripts/14_foto_hero.py       # 6g) foto del banner (Wikimedia, CC BY-SA) -> docs/
-     python scripts/07_construir_kb.py    # 7) construye knowledge_base.json + datos abiertos (docs/datos/)
-     python scripts/09_guia_entrega.py    # 7b) genera ficha_hallazgos.pdf (datos del equipo en equipo.yml)
-     python asistente/test_motor.py       # 8) pruebas del motor (19/19, incluye paridad JS/Python)
+   Ver el log / trazabilidad paso a paso de una ejecución (ej. una fila que dice
+   "pipeline succeeded 7 hours ago in 3m 44s"):
+     1. Abrir la URL anterior.
+     2. Clic en el primer "pipeline-principal" de la lista.
+     3. En la pantalla siguiente, dentro del recuadro "pipeline.yml", clic en el
+        botón "pipeline".
+     4. Se muestra el detalle paso a paso de toda la ejecución del job.
+   Nota: las horas que muestra GitHub están en UTC; para hora local reste 5 horas
+   (GMT-5, America/Bogotá).
 
-   Vía 3 - Solo el motor determinista por línea de comandos (liviano, no procesa datos):
-     python asistente/app.py --cli "¿Qué comunas priorizar en salud?"
-
-5. QUÉ DEBE VER (criterios de éxito)
-   - Pipeline en Actions (Vía 1): el run "pipeline-principal" termina en VERDE con todas las
-     etapas OK, en este orden: Descargar -> Validar ("VALIDACIÓN OK: llave territorial
-     consistente") -> Limpiar -> Integrar -> Analizar -> Visualizar -> SIATA -> DANE ->
-     SIVIGILA -> RIPS -> mapa -> foto -> Construir KB -> PDF -> Pruebas del motor (19/19).
-     Al final, el commit automático "chore(outputs) ... [skip ci]" actualiza outputs/,
-     docs/knowledge_base.json, docs/datos/ y ficha_hallazgos.pdf. Tiempo típico ~3-4 min.
-   - Pipeline en local (Vía 2): se generan outputs/tablas/hallazgo.json y los gráficos
-     en outputs/graficos/; test_motor.py imprime "19/19".
-   - Portal (Visualización): al abrir la URL se ven la pregunta de investigación, un
-     observatorio del bienestar MULTIDIMENSIONAL (empleo, alimentación, aire, salud
-     física y mental, deporte, cultura…) con 13 categorías y su análisis técnico, el
-     mapa interactivo (coropleta por indicador + red de hallazgos), el flujo del método
-     y la transparencia de datos. El mensaje es la DESIGUALDAD territorial del bienestar;
-     la brecha de mortalidad (La Candelaria 4,58 veces la de Santa Elena) es UNO de los
-     ejemplos, no el único. La fecha "última actualización" coincide con el último run.
-   - Motor (Vía 3): ante "¿qué comuna priorizar?", responde "La Candelaria,
-     1325.6 defunciones por 100.000 hab. (2022)" con su evidencia y fuente.
+5. QUÉ DEBE VER
+   a) En Actions: ejecuciones del "pipeline-principal" con check (✓).
+   b) Resultados que produce (tablas y gráficas):
+      https://github.com/bienestarmedellinia/vitalmed/tree/main/outputs
+   c) Portal (Visualización): al abrir la URL se ven la pregunta de investigación, un
+      observatorio del bienestar MULTIDIMENSIONAL (empleo, alimentación, aire, salud
+      física y mental, deporte, cultura…) con 13 categorías y su análisis técnico, el
+      mapa interactivo (coropleta por indicador + red de hallazgos), el flujo del método
+      y la transparencia de datos. El mensaje es la DESIGUALDAD territorial del bienestar;
+      la brecha de mortalidad (La Candelaria 4,58 veces la de Santa Elena) es UNO de los
+      ejemplos, no el único. La fecha "última actualización" coincide con el último run.
 
 6. DATOS Y FUENTES
+   Todas son fuentes oficiales y datos reales de Medellín. El pipeline las descarga
+   desde la fuente; solo se publican tablas agregadas por comuna, sin datos personales.
    - ECV · Encuesta de Calidad de Vida (microdatos) · Alcaldía de Medellín
      https://www.medellin.gov.co/es/centro-documental/encuesta-calidad-de-vida/
      Licencia: CC BY 4.0 según la ficha MEData de la misma encuesta (id
@@ -184,14 +68,14 @@ trabaja solo, y viste lo que produce. Lo que sigue más abajo es el detalle téc
      publicado desde junio de 2019) · Valle de Aburrá
      https://siata.gov.co/IDEAM/
      Condiciones: datos validados publicados por SIATA (ver su sitio)
-   - MEData · Secretaría de Salud, servicio "VC_Datos_Enfermedades"
+   - MEData (OBLIGATORIA) · Secretaría de Salud, servicio "VC_Datos_Enfermedades"
      Las 10 capas por comuna: mortalidad (2012-2022), intento de suicidio
      (2013-2022), natalidad, dengue, hepatitis A, parotiditis, tosferina,
      tuberculosis pulmonar, varicela (2008-2022) y violencia de género (2013-2022).
      MEData no publica estas capas por comuna después de 2022 (verificado nov 2026).
      Servicio: https://www.medellin.gov.co/servidormapas/rest/services/salud_protec_soc/VC_Datos_Enfermedades/MapServer
      Portal:   https://medata.app.medellin.gov.co/
-     Licencia: Atribución 4.0 Internacional (CC BY 4.0).
+     Fecha de consulta: 6 nov. 2026. Licencia: Atribución 4.0 Internacional (CC BY 4.0).
        - Mortalidad: verificada en su ficha MEData (id 1-026-22-000161,
          Secretaría de Salud, cobertura desde 2012).
        - Intento de suicidio: verificada en su ficha MEData (id 1-026-22-000146,
@@ -216,8 +100,6 @@ trabaja solo, y viste lo que produce. Lo que sigue más abajo es el detalle téc
    Nota metodológica: DANE, SIVIGILA y RIPS están a nivel de MUNICIPIO (Medellín), no
    por comuna, y con periodicidad distinta (mensual/semanal/anual); se muestran por
    separado, no se mezclan ni se atribuyen a comunas. 2020-2021 reflejan la COVID-19.
-   Los microdatos NO se publican; el pipeline los descarga desde la fuente.
-   Solo se publican tablas agregadas por comuna, sin datos personales.
 
 7. USO DE IA
    Herramientas y para qué se usó cada una:
@@ -228,8 +110,7 @@ trabaja solo, y viste lo que produce. Lo que sigue más abajo es el detalle téc
      (asistente/motor.py): todas las cifras, textos e interpretaciones salen
      SIEMPRE de un motor determinista de reglas que las recupera del knowledge
      base generado por el pipeline. No inventan datos. El portal NO consulta
-     modelos de lenguaje en tiempo de ejecución ni envía datos a terceros al
-     navegar.
+     modelos de lenguaje en tiempo de ejecución ni envía datos a terceros al navegar.
    - Opcional, desactivado por defecto: asistente/llm.py puede usar un modelo de
      OpenAI (gpt-4o-mini por defecto) SOLO si existe OPENAI_API_KEY, y solo para
      redactar con más fluidez una respuesta que el motor ya calculó. No genera
