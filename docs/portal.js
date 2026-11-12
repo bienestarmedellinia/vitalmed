@@ -1205,9 +1205,9 @@
   let IMPG = {};   // implicaciones de gestión curadas por clave (array de líneas)
   let CONCG = {};  // conclusión ejecutiva curada por clave
   const PASOS = [
-    { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py",
-      desc: "Baja las fuentes principales únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia. Las fuentes de salud nacional (DANE, SIVIGILA, RIPS) se incorporan en un paso posterior.",
-      entra: ["ECV 2022–2025 (Alcaldía de Medellín)", "SIATA · PM2.5 validado 2024–2025", "MEData · VC_Datos_Enfermedades (mortalidad, intento de suicidio, natalidad)"],
+    { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py · 10_dane_eevv.py · 11_sivigila.py · 12_rips.py",
+      desc: "Baja las seis fuentes oficiales del proyecto únicamente desde las URLs del manifiesto sources.yml y los portales de datos abiertos. No modifica ni interpreta nada: solo descarga y registra la procedencia. Las tres primeras las baja 01_descargar.py; las de salud nacional (DANE, SIVIGILA, RIPS) tienen su propio script y se procesan en el paso «Salud nacional».",
+      entra: ["ECV 2022–2025 (Alcaldía de Medellín)", "SIATA · PM2.5 validado 2020–2025 (Valle de Aburrá)", "MEData · VC_Datos_Enfermedades (Secretaría de Salud de Medellín)", "DANE · Estadísticas Vitales (mortalidad mensual por causa)", "SIVIGILA · INS (ESI-IRAG e intento de suicidio)", "RIPS · MinSalud (morbilidad anual)"],
       sale: ["data/raw/ (no se publica)", "manifiesto de descarga con la procedencia"], garantia: "Datos reales, nunca sintéticos." },
     { ico: "✅", n: "Validar", script: "scripts/03_validar.py",
       desc: "Comprueba que la llave territorial sea consistente entre años y cubra los 21 territorios (16 comunas + 5 corregimientos). Si una base no cumple, el pipeline se detiene y el fallo queda visible.",
