@@ -17,10 +17,12 @@ on:
   workflow_dispatch:        # ejecución manual desde la pestaña Actions
   schedule:
     - cron: "0 7 1 * *"     # día 1 de cada mes (datos SIATA mensuales)
-    - cron: "0 11 * * *"    # TEMPORAL (hackathon): diario ~6:00 a.m. Colombia (11:00 UTC),
-                            # para que el jurado vea ejecuciones recientes. Los datos son
-                            # anuales/mensuales; esto demuestra la automatización, no trae
-                            # datos nuevos a diario. Revertir a solo el cron mensual tras la entrega.
+    - cron: "17 8 * * *"    # TEMPORAL (hackathon): diario 08:17 UTC = 3:17 a.m. Colombia.
+                            # Madrugada + minuto no redondo para que la cola de Actions lo
+                            # retrase lo menos posible y salga temprano (los schedules de
+                            # Actions no son puntuales; :00 y horas pico sufren más retraso).
+                            # Demuestra la automatización, no trae datos nuevos a diario.
+                            # Revertir a solo el cron mensual tras la final.
 
 jobs:
   pipeline:
