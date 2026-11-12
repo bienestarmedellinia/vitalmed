@@ -1206,7 +1206,7 @@
   let CONCG = {};  // conclusión ejecutiva curada por clave
   const PASOS = [
     { ico: "⬇️", n: "Descargar", script: "scripts/01_descargar.py",
-      desc: "Baja los datos únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia.",
+      desc: "Baja las fuentes principales únicamente desde las URLs oficiales del manifiesto sources.yml. No modifica ni interpreta nada: solo descarga y registra la procedencia. Las fuentes de salud nacional (DANE, SIVIGILA, RIPS) se incorporan en un paso posterior.",
       entra: ["ECV 2022–2025 (Alcaldía de Medellín)", "SIATA · PM2.5 validado 2024–2025", "MEData · VC_Datos_Enfermedades (mortalidad, intento de suicidio, natalidad)"],
       sale: ["data/raw/ (no se publica)", "manifiesto de descarga con la procedencia"], garantia: "Datos reales, nunca sintéticos." },
     { ico: "✅", n: "Validar", script: "scripts/03_validar.py",
@@ -1231,6 +1231,12 @@
       desc: "Extrae el PM2.5 de los ZIP mensuales de SIATA y lo agrega por estación y año, exigiendo ≥ 75 % de datos válidos. No atribuye PM2.5 a comunas.",
       entra: ["ZIP mensuales de SIATA"], sale: ["outputs/tablas/siata_pm25_estacion.csv"], garantia: "Se reporta por estación, con su advertencia metodológica.",
       vivo: (k) => { const pm = (k.indicadores || {}).pm25_siata; return pm && pm.ranking ? `${pm.ranking.length} estaciones con dato en ${pm.anio}.` : null; } },
+    { ico: "🏥", n: "Salud nacional", script: "scripts/10_dane_eevv.py · 11_sivigila.py · 12_rips.py",
+      desc: "Incorpora tres fuentes de salud nacional a nivel municipio de Medellín, agregadas sin microdatos: mortalidad mensual por causa CIE-10 (DANE Estadísticas Vitales), series semanales ESI-IRAG e intento de suicidio (SIVIGILA · INS) y morbilidad anual respiratoria y mental (RIPS · MinSalud). Cada script descarga de su portal oficial y escribe directo a tablas.",
+      entra: ["DANE · Estadísticas Vitales (ZIP)", "SIVIGILA · INS (datos.gov.co)", "RIPS · MinSalud (datos.gov.co)"],
+      sale: ["outputs/tablas/mortalidad_dane_mensual.csv", "outputs/tablas/sivigila_semanal.csv", "outputs/tablas/rips_anual.csv"],
+      garantia: "Nivel municipio, no comuna; se muestran por separado, no se mezclan ni se atribuyen a comunas.",
+      vivo: (k) => { const d = (k.indicadores || {}).mortalidad_dane; return d && d.anios && d.anios.length ? `Mortalidad DANE por causa, años ${d.anios[0]}–${d.anios[d.anios.length - 1]}.` : null; } },
     { ico: "🧠", n: "Knowledge base", script: "scripts/07_construir_kb.py",
       desc: "Consolida todo en un único JSON que alimenta este portal y el asistente. El asistente solo lee ese archivo: nunca vuelve a tocar los microdatos.",
       entra: ["Tablas y hallazgo del análisis"], sale: ["outputs/kb/knowledge_base.json", "docs/knowledge_base.json (portal)"], garantia: "El asistente no puede inventar cifras: solo recupera las del KB.",
