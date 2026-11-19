@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-11-18 17:19",
+ "generado_utc": "2026-11-19 17:26",
  "archivos": [
   {
    "archivo": "indicadores_por_territorio.csv",
@@ -44,7 +44,7 @@
   {
    "archivo": "rips_anual.csv",
    "descripcion": "Atenciones anuales RIPS en Medellín (MinSalud) por gran grupo CIE-10: respiratorias (J) y trastornos mentales (F). Contexto, nivel municipal.",
-   "filas": 26
+   "filas": 13
   },
   {
    "archivo": "catalogo_indicadores.csv",
