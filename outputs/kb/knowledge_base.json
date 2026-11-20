@@ -3,7 +3,7 @@
     "proyecto": "Medellín, Bienestar Basado en Datos",
     "descripcion": "Knowledge base del asistente de inteligencia territorial. Todas las cifras provienen del pipeline reproducible; el asistente no inventa datos.",
     "territorios_oficiales": 21,
-    "generado_utc": "2026-11-19 17:26"
+    "generado_utc": "2026-11-20 17:01"
   },
   "indicadores": {
     "hallazgo_mortalidad": {
@@ -1029,7 +1029,7 @@
         "2023": 12,
         "2024": 12,
         "2025": 11,
-        "2026": 9
+        "2026": 10
       },
       "criterio": "Media anual por estación con >= 9 meses válidos (cada mes con >= 75% de horas válidas). Año completo: >= 9 meses publicados."
     },
@@ -2716,6 +2716,21 @@
       "periodicidad": "anual",
       "advertencia": "Contexto de carga de morbilidad (no serie para cruce con PM2.5). Caída 2020-2021 por COVID/subregistro.",
       "serie": {
+        "respiratorias (J00-J99)": {
+          "2009": 1126811,
+          "2010": 1343825,
+          "2011": 1704607,
+          "2012": 1016987,
+          "2013": 534430,
+          "2014": 713078,
+          "2015": 784390,
+          "2016": 916016,
+          "2017": 909920,
+          "2018": 1740658,
+          "2019": 1433908,
+          "2020": 356456,
+          "2021": 421559
+        },
         "trastornos mentales (F00-F99)": {
           "2009": 138843,
           "2010": 325142,
